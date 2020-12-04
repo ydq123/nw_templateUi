@@ -1,0 +1,500 @@
+@charset "UTF-8";
+.yw-btn {
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  padding: 0 10px;
+  font-size: 14px;
+  line-height: 30px;
+  height: 32px;
+  border-radius: 4px;
+  outline: none; }
+  .yw-btn:disabled {
+    color: #999;
+    cursor: not-allowed;
+    border-color: #ddd;
+    background: #eee; }
+  .yw-btn-default {
+    color: #333;
+    border-color: #ddd;
+    background: #fff;
+    font-weight: 400; }
+  .yw-btn-success {
+    color: #fff;
+    border-color: #20d08c;
+    background: #20d08c;
+    font-weight: 400; }
+    .yw-btn-success:hover {
+      background-color: #2bde99;
+      border-color: #2bde99; }
+    .yw-btn-success:active {
+      background-color: #1fc786;
+      border-color: #1fc786; }
+    .yw-btn-success:disabled:hover, .yw-btn-success:disabled:active {
+      color: #999;
+      cursor: not-allowed;
+      border-color: #ddd;
+      background: #eee; }
+  .yw-btn-error {
+    color: #fff;
+    border-color: #e91a1a;
+    background: #e91a1a;
+    font-weight: 400; }
+    .yw-btn-error:hover {
+      background-color: #eb3131;
+      border-color: #eb3131; }
+    .yw-btn-error:active {
+      background-color: #e31616;
+      border-color: #e31616; }
+    .yw-btn-error:disabled:hover, .yw-btn-error:disabled:active {
+      color: #999;
+      cursor: not-allowed;
+      border-color: #ddd;
+      background: #eee; }
+  .yw-btn-warning {
+    color: #fff;
+    border-color: #ffb200;
+    background: #ffb200;
+    font-weight: 400; }
+    .yw-btn-warning:hover {
+      background-color: #ffba1a;
+      border-color: #ffba1a; }
+    .yw-btn-warning:active {
+      background-color: #f5ab00;
+      border-color: #f5ab00; }
+    .yw-btn-warning:disabled:hover, .yw-btn-warning:disabled:active {
+      color: #999;
+      cursor: not-allowed;
+      border-color: #ddd;
+      background: #eee; }
+  .yw-btn-info {
+    color: #fff;
+    border-color: #005ff1;
+    background: #005ff1;
+    font-weight: 400; }
+    .yw-btn-info:hover {
+      background-color: #0c6bff;
+      border-color: #0c6bff; }
+    .yw-btn-info:active {
+      background-color: #005be7;
+      border-color: #005be7; }
+    .yw-btn-info:disabled:hover, .yw-btn-info:disabled:active {
+      color: #999;
+      cursor: not-allowed;
+      border-color: #ddd;
+      background: #eee; }
+  .yw-btn-small {
+    padding: 0 5px;
+    font-size: 12px;
+    line-height: 20px;
+    height: 24px; }
+  .yw-btn-medium {
+    padding: 0 20px;
+    font-size: 14px;
+    line-height: 34px;
+    height: 36px; }
+  .yw-btn-large {
+    padding: 0 28px;
+    font-size: 14px;
+    line-height: 38px;
+    height: 40px; }
+  .yw-btn-circle {
+    border-radius: 28px; }
+  .yw-btn-rectangle {
+    border-radius: 0px; }
+
+.yw-modal {
+  color: #333333; }
+  .yw-modal-mask {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-color: rgba(55, 55, 55, 0.6);
+    height: 100%; }
+  .yw-modal-warp {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background: white;
+    transform: translate(-50%, -50%);
+    padding: 40px;
+    box-sizing: border-box;
+    text-align: left; }
+  .yw-modal-full {
+    width: 100% !important;
+    height: 100%; }
+    .yw-modal-full .yw-modal-footer {
+      position: absolute;
+      bottom: 40px;
+      right: 40px; }
+  .yw-modal-cancel {
+    position: absolute;
+    right: 20px;
+    top: 0px;
+    font-size: 30px;
+    font-weight: 100;
+    cursor: pointer; }
+  .yw-modal-title {
+    font-weight: 700;
+    font-size: 22px;
+    text-align: center;
+    margin: 10px 0; }
+  .yw-modal-body {
+    margin: 30px 0px; }
+  .yw-modal-footer {
+    text-align: right; }
+
+/* 主题字体颜色 */
+/* 全局背景颜色 */
+:export {
+  nw_pageBg: #f5f5f5;
+  nw_pageCol: #1E87F0;
+  menuText: #bfcbd9;
+  nw_menuActiveText: #409EFF;
+  nw_subMenuActiveText: #f4f4f5;
+  nw_menuBg: #304156;
+  nw_menuHover: #263445;
+  nw_subMenuBg: #1f2d3d;
+  nw_subMenuHover: #001528;
+  nw_sideBarWidth: 210px; }
+
+/* 带居中的宽高 */
+/* 正方形 */
+/* 边角弧度 */
+/* 自动换行+缺省... */
+/* 按钮 字体颜色 背景颜色 透明度  */
+/* 背景颜色 字体颜色 边线颜色 边角弧度 */
+/* 按钮 宽度 高度 边角弧度 */
+/* 过度属性-旋转  初始角度，结束角度 触发变量名 过低时间*/
+/* 动画-上下跳动 动画名，动画持续时间，百分之0 百分之25 百分之50y轴的位置 缩放的效果（1.1,0.9）  */
+/* 带居中的宽高 */
+/* 正方形 */
+/* 边角弧度 */
+/* 自动换行+缺省... */
+/* 按钮 字体颜色 背景颜色 透明度  */
+/* 背景颜色 字体颜色 边线颜色 边角弧度 */
+/* 按钮 宽度 高度 边角弧度 */
+/* 过度属性-旋转  初始角度，结束角度 触发变量名 过低时间*/
+/* 动画-上下跳动 动画名，动画持续时间，百分之0 百分之25 百分之50y轴的位置 缩放的效果（1.1,0.9）  */
+.nw_text_zt {
+  color: #1E87F0 !important;
+  /* 主题字体颜色 */ }
+
+/* 图标 */
+.nw_text_0769CB {
+  color: #0769CB !important;
+  /* 图标/区分辅助  */ }
+
+.nw_text_00ABBD {
+  color: #00ABBD !important;
+  /* 图标/区分辅助 */ }
+
+.nw_text_F65C09 {
+  color: #F65C09 !important;
+  /* 图标/区分辅助  */ }
+
+.nw_text_925AD3 {
+  color: #925AD3 !important;
+  /* 图标/区分辅助  */ }
+
+.nw_text_E21F0C {
+  color: #E21F0C !important;
+  /* 图标/区分辅助 -错误/警告提示 */ }
+
+.nw_text_FFC417 {
+  color: #FFC417 !important;
+  /* 图标/区分辅助 -警告提示 */ }
+
+.nw_text_36B21D {
+  color: #36B21D !important;
+  /* 图标/区分辅助-操作成功 */ }
+
+/* 文字颜色 */
+.nw_text_26 {
+  color: #262626 !important;
+  /* 一级文本-标题*/ }
+
+.nw_text_59 {
+  color: #595959 !important;
+  /* 二级文本-正文内容*/ }
+
+.nw_text_8C {
+  color: #8C8C8C !important;
+  /* 三级文本-说明文字*/ }
+
+.nw_text_FF {
+  color: #FFFFFF !important;
+  /* 反白一级文本-正文*/ }
+
+.nw_text_B3 {
+  color: #B3B3B3 !important;
+  /* 反白二级文本-正文*/ }
+
+.nw_text_80 {
+  color: #808080 !important;
+  /* 反白三级文本-正文*/ }
+
+.nw_text_126CFD {
+  color: #126CFD !important;
+  /* 可交互文字链接信息*/ }
+
+.nw_text_B4 {
+  color: #B4B4B4 !important;
+  /* 禁用文字-白底*/ }
+
+.nw_text_99 {
+  color: #999999 !important;
+  /* 禁用文字-灰底*/ }
+
+/* 字体大小 */
+/*
+f24-页面级标题大小,
+f20-普通标题,
+f16-子标题,
+f14-正文,
+f12-辅助说明
+*/
+.nw_f24 {
+  font-size: 0.64rem !important; }
+
+.nw_f20 {
+  font-size: 0.53333rem !important; }
+
+.nw_f16 {
+  font-size: 0.42667rem !important; }
+
+.nw_f15 {
+  font-size: 0.4rem !important; }
+
+.nw_f14 {
+  font-size: 0.37333rem !important; }
+
+.nw_f12 {
+  font-size: 0.32rem !important; }
+
+/* 主题背景色 */
+.nw_bag_zt {
+  background-color: #1E87F0 !important; }
+
+/* 背景色 */
+.nw_bag_F5 {
+  background-color: #F5F5F5 !important; }
+
+.nw_bag_E5 {
+  background-color: #E5E5E5 !important; }
+
+.nw_bag_61 {
+  background-color: #616161 !important; }
+
+/* 边框色 */
+.nw_bod_D8 {
+  border: 1px solid #D8D8D8 !important; }
+
+/* 图片图标大小 */
+.nw_img_wh16 {
+  width: 0.42667rem;
+  height: 0.42667rem; }
+
+.nw_img_wh24 {
+  width: 0.64rem;
+  height: 0.64rem; }
+
+.nw_img_wh32 {
+  width: 0.85333rem;
+  height: 0.85333rem; }
+
+.nw_img_wh48 {
+  width: 1.28rem;
+  height: 1.28rem; }
+
+.nw_img_wh80 {
+  width: 2.13333rem;
+  height: 2.13333rem; }
+
+/* 按钮 */
+/* 底部	按钮 外包围*/
+.nw_bottom_button {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  padding: 0.53333rem 0.8rem;
+  -moz-box-shadow: 0px -0.16rem 0.21333rem rgba(0, 0, 0, 0.03);
+  -webkit-box-shadow: 0px -0.16rem 0.21333rem rgba(0, 0, 0, 0.03);
+  box-shadow: 0px -0.16rem 0.21333rem rgba(0, 0, 0, 0.03);
+  font-size: 0.90667rem; }
+
+.nw_buttom_100vw_88 {
+  height: 1.17333rem;
+  width: 100vw;
+  border-radius: 0rem;
+  text-align: center;
+  line-height: 1.17333rem; }
+
+.nw_buttom_250_88 {
+  height: 1.17333rem;
+  width: 3.33333rem;
+  border-radius: 0.21333rem;
+  text-align: center;
+  line-height: 1.17333rem; }
+
+/* 带居中的宽高 */
+/* 正方形 */
+/* 边角弧度 */
+/* 自动换行+缺省... */
+/* 按钮 字体颜色 背景颜色 透明度  */
+/* 背景颜色 字体颜色 边线颜色 边角弧度 */
+/* 按钮 宽度 高度 边角弧度 */
+/* 过度属性-旋转  初始角度，结束角度 触发变量名 过低时间*/
+/* 动画-上下跳动 动画名，动画持续时间，百分之0 百分之25 百分之50y轴的位置 缩放的效果（1.1,0.9）  */
+.yw-moduletop {
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 44px;
+  z-index: 99; }
+  .yw-moduletop .top-input {
+    padding: 15px; }
+    .yw-moduletop .top-input .input-box {
+      border-radius: 5px;
+      height: 30px;
+      line-height: 30px;
+      background: white; }
+  .yw-moduletop .top-tab {
+    width: 100%; }
+    .yw-moduletop .top-tab .tab-list {
+      position: relative;
+      min-width: 100%;
+      overflow-x: scroll;
+      white-space: nowrap; }
+      .yw-moduletop .top-tab .tab-list .tab-item {
+        height: 42px;
+        line-height: 42px; }
+      .yw-moduletop .top-tab .tab-list .tab-border {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        border-radius: 10px; }
+      .yw-moduletop .top-tab .tab-list .tab-number {
+        position: absolute;
+        bottom: 14px;
+        display: inline-block;
+        height: 15px;
+        line-height: 15px;
+        margin-left: 30px;
+        padding: 0 7px;
+        background-color: #f15747;
+        border-radius: 7px;
+        font-size: 10px;
+        color: #ffffff; }
+
+.task-top-input {
+  width: 100%;
+  height: 30px;
+  border-radius: 5px; }
+
+.task-top-sreen {
+  height: 40px;
+  background-color: #fff; }
+
+.task-top-sreen-btn {
+  border-left: 1px solid #f0eeee; }
+  .task-top-sreen-btn i {
+    -moz-transition: all 0.3s;
+    -moz-transform: rotate(0deg);
+    -webkit-transition: all 0.3s;
+    -webkit-transform: rotate(0deg); }
+    .task-top-sreen-btn i.showRotate {
+      -moz-transform: rotate(180deg);
+      -webkit-transform: rotate(180deg); }
+
+.sreen-item {
+  border-radius: 2px;
+  color: #666; }
+
+.sreen-item-cur {
+  color: #1e87f0;
+  background-color: #c1dcf7;
+  border-color: #c1dcf7; }
+
+.sreen-time {
+  border: solid 1px #dcdcdc;
+  border-left: none; }
+
+.sreen-item-time {
+  border-left: solid 1px #dcdcdc; }
+
+.sreen-item-time-cur {
+  background-color: #1e87f0; }
+
+.borderRadius_2 {
+  border-radius: 2px; }
+
+.tab-list {
+  position: relative;
+  min-width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap; }
+  .tab-list .tab-item {
+    height: 44px;
+    line-height: 44px; }
+  .tab-list .tab-border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    border-radius: 10px; }
+
+.tab-list-autoHeight {
+  position: relative;
+  min-width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap; }
+  .tab-list-autoHeight .tab-border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    border-radius: 10px; }
+
+.tab-list-border {
+  position: relative;
+  min-width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap; }
+  .tab-list-border .tab-item {
+    height: 44px;
+    line-height: 44px; }
+  .tab-list-border .tab-border {
+    position: absolute;
+    bottom: 0;
+    height: 3px;
+    border-radius: 6px; }
+  .tab-list-border .tab-number {
+    position: absolute;
+    bottom: 14px;
+    display: inline-block;
+    height: 15px;
+    line-height: 15px;
+    margin-left: 2px;
+    padding: 0 7px;
+    background-color: #f15747;
+    border-radius: 7px;
+    font-size: 10px;
+    color: #ffffff; }
+
+.tab-list-scrollX {
+  width: 100vw;
+  height: 44px;
+  white-space: nowrap;
+  overflow: hidden;
+  overflow-x: scroll;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  -webkit-overflow-scrolling: touch; }
+  .tab-list-scrollX .tab-list::-webkit-scrollbar {
+    display: none; }
