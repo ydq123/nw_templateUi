@@ -1,6 +1,4 @@
 @charset "UTF-8";
-// @import "../../fonts/iconfont.css";
-// @import "../../fonts/ionicons.css";
 $browser-default-font-size: 37.5px !default;
 $text-red:#f2214d;
 $round: 0!default;
@@ -16,19 +14,19 @@ $black:#4A4A4A;
  $b97:#b976e8;
  $d287:#287df5;
 
-@function nw_r($px) {
+@function r($px) {
     @return $px / $browser-default-font-size * 1rem;
 }
 @function nw_pxTorem($px) {
     @return $px / $browser-default-font-size * 1rem;
 }
-@mixin nw_rounded($amount) {
+@mixin rounded($amount) {
     -moz-border-radius: $amount;
     -webkit-border-radius: $amount;
     border-radius: $amount;
 }
 
-@mixin nw_pxRadius($color, $radius) {
+@mixin pxRadius($color, $radius) {
     border: 1px solid $color;
     @include rounded($radius);
     content: " ";
@@ -43,7 +41,7 @@ $black:#4A4A4A;
     transform-origin: 0 0;
 }
 
-@mixin nw_pxBorderLeftRight($color, $position) {
+@mixin pxBorderLeftRight($color, $position) {
     content: " ";
     position: absolute;
     #{$position}: 0;
@@ -58,7 +56,7 @@ $black:#4A4A4A;
     transform: scaleX(0.5);
 }
 // 下边线
-@mixin nw_pxBorderTopBottom($color, $position) {
+@mixin pxBorderTopBottom($color, $position) {
     content: " ";
     position: absolute;
     left: 0;
@@ -73,7 +71,7 @@ $black:#4A4A4A;
     transform: scaleY(0.5);
 }
 
-@mixin nw_pxBorder($color) {
+@mixin pxBorder($color) {
     content: '';
     position: absolute;
     top: 0;
@@ -89,7 +87,7 @@ $black:#4A4A4A;
     transform-origin: left top;
 }
 // 上边线
-@mixin nw_pxBorderTopBom($color, $position) {
+@mixin pxBorderTopBom($color, $position) {
     content: '';
     position: absolute;
     #{$position}: 0;
@@ -102,7 +100,7 @@ $black:#4A4A4A;
     transform-origin: 0 0;
 }
 
-@mixin nw_inputPlaceholder($key, $value) {
+@mixin inputPlaceholder($key, $value) {
     input::-webkit-input-placeholder,
     textarea::-webkit-input-placeholder {
         #{$key}: $value;
@@ -121,7 +119,7 @@ $black:#4A4A4A;
     }
 }
 /* 带居中的宽高 */
-@mixin nw_WHLH($width, $height) {
+@mixin WHLH($width, $height) {
     width: $width;
     height: $height;
     text-align: center;
@@ -134,7 +132,7 @@ $black:#4A4A4A;
     height: $width;
 }
 
-@mixin nw_autoCenter {
+@mixin autoCenter {
     top: 0;
     left: 0;
     bottom: 0;
@@ -142,24 +140,24 @@ $black:#4A4A4A;
     margin: auto;
 }
 /* 边角弧度 */
-@mixin nw_rounder-side($tl, $tr, $bl, $br) {
+@mixin rounder-side($tl, $tr, $bl, $br) {
     -moz-border-radius: $tl $tr $bl $br;
     -webkit-border-radius: $tl $tr $bl $br;
     border-radius: $tl $tr $bl $br;
 }
 
-@mixin nw_buttonRadius($tl) {
+@mixin buttonRadius($tl) {
     -moz-border-radius: $tl;
     -webkit-border-radius: $tl;
     border-radius: $tl;
 }
 
-@mixin nw_height($height) {
+@mixin height($height) {
     height: $height;
     line-height: $height;
 }
 
-@mixin nw_prefixer ($property, $value, $prefixes) {
+@mixin prefixer ($property, $value, $prefixes) {
     @each $prefix in $prefixes {
         @if $prefix==webkit and $prefix-for-webkit==true {
             -webkit-#{$property}: $value;
@@ -182,12 +180,12 @@ $black:#4A4A4A;
     }
 }
 
-@mixin nw_skewX($degrees) {
+@mixin skewX($degrees) {
     @include prefixer(transform, skewX($degrees), webkit moz o ms spec);
     -webkit-backface-visibility: hidden;
 }
 /* 自动换行+缺省... */
-@mixin nw_wordEllipsisNum($lineNum) {
+@mixin wordEllipsisNum($lineNum) {
     word-break: break-all;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -196,13 +194,13 @@ $black:#4A4A4A;
     -webkit-line-clamp: $lineNum;
 }
 
-@mixin nw_wordEllipsis() {
+@mixin wordEllipsis() {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-@mixin nw_triangleArrowup($tb, $lr, $color) {
+@mixin triangleArrowup($tb, $lr, $color) {
     border-top: $tb solid transparent;
     border-bottom: $tb solid $color;
     border-left: $lr solid transparent;
@@ -210,7 +208,7 @@ $black:#4A4A4A;
 }
 
 //switch button
-@mixin nw_switch_code($width, $height, $background) {
+@mixin switch_code($width, $height, $background) {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -269,7 +267,7 @@ $black:#4A4A4A;
 }
 
 //select button
-@mixin nw_checkbox_core($color, $WH, $round) {
+@mixin checkbox_core($color, $WH, $round) {
     font-family: "Ionicons";
     font-style: normal;
     vertical-align: middle;
@@ -329,7 +327,7 @@ $black:#4A4A4A;
 }
 
 //radio button
-@mixin nw_radio_core($background, $WH) {
+@mixin radio_core($background, $WH) {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -373,7 +371,7 @@ $black:#4A4A4A;
     }
 }
 
-@mixin nw_round_close($fontSize) {
+@mixin round_close($fontSize) {
     position: relative;
     display: inline-block;
     font-family: "Ionicons";
@@ -403,7 +401,7 @@ $black:#4A4A4A;
     }
 }
 
-@mixin nw_checkbox_custom($fontFamily, $fontSize, $content, $contentChecked, $color, $colorChecked) {
+@mixin checkbox_custom($fontFamily, $fontSize, $content, $contentChecked, $color, $colorChecked) {
     font-family: $fontFamily;
     font-style: normal;
     vertical-align: middle;
@@ -437,13 +435,13 @@ $black:#4A4A4A;
     }
 }
 /* 按钮 字体颜色 背景颜色 透明度  */
-@mixin nw_bt_status($color,$rgba1,$rgba2,$rgba3,$rgba4){
+@mixin bt_status($color,$rgba1,$rgba2,$rgba3,$rgba4){
 	background: rgba($rgba1, $rgba2, $rgba3, $rgba4)!important;
 	color: $color !important;
 	border: solid 1px $color;
 }
 /* 背景颜色 字体颜色 边线颜色 边角弧度 */
-@mixin nw_bt_status1($rgba,$color,$border,$radius){
+@mixin bt_status1($rgba,$color,$border,$radius){
 	background:$rgba!important;
 	color: $color !important;
 	border: solid 1px $border !important;
@@ -458,7 +456,7 @@ $black:#4A4A4A;
 	line-height: $h;
 }
 /* 过度属性-旋转  初始角度，结束角度 触发变量名 过低时间*/
-@mixin nw_transformRotate($inDeg,$onDeg,$statusName,$time){
+@mixin transformRotate($inDeg,$onDeg,$statusName,$time){
 	transform: rotate(#{$inDeg}deg);
 	transition: all #{$time}s;
 	&.#{$statusName} {
@@ -466,7 +464,7 @@ $black:#4A4A4A;
 	}
 }
 /* 动画-上下跳动 动画名，动画持续时间，百分之0 百分之25 百分之50y轴的位置 缩放的效果（1.1,0.9）  */
-@mixin nw_animationTranslateY($animationName,$time,$y0,$y25,$y50,$scaleX,$scaleY){
+@mixin animationTranslateY($animationName,$time,$y0,$y25,$y50,$scaleX,$scaleY){
 	animation: #{$animationName} #{$time}s linear infinite;
   @keyframes #{$animationName} {
     0% {

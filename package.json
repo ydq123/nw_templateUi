@@ -1,7 +1,7 @@
 {
-  "name": "nw_templateUi",
+  "name": "nwtemplate",
   "description": "A components of pc base on vue2.X",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "author": "nw",
   "main": "dist/nwTemplateUi.js",
   "license": "MIT",
