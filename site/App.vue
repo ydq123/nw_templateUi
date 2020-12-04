@@ -1,8 +1,14 @@
 <template>
 	<div id="app">
+		<van-button type="primary">主要按钮</van-button>
+<van-button type="info">信息按钮</van-button>
+<van-button type="default">默认按钮</van-button>
+<van-button type="warning">警告按钮</van-button>
+<van-button type="danger">危险按钮</van-button>
 		<!-- <nw-button @click="show3 = true" size="large">large</nw-button> -->
 		<!-- <nw-modal @on-ok="show3 = false" @on-cancel="show3 = false" :width="300" :isShow="show3"></nw-modal> -->
-		<nw-module-top @click="show3 = true" size="large"></nw-module-top>
+		<!-- <nw-module-top @click="show3 = true" size="large"></nw-module-top> -->
+		<nw-uploader></nw-uploader>
 	</div>
 </template>
 
