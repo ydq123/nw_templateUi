@@ -135,3 +135,7 @@ f12-辅助说明
 .nw_buttom_250_88 {
 	@include nw_buttom_w_h_b(nw_pxTorem(125px), nw_pxTorem(44px), nw_pxTorem(8px));
 }
+
+.nw_buttom_125_44 {
+	@include nw_buttom_w_h_b(nw_pxTorem(125px), nw_pxTorem(44px), nw_pxTorem(8px));
+}
