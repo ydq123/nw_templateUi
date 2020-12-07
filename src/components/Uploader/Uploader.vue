@@ -25,16 +25,21 @@
 </template>
 
 <script>
-	// import {
-	// 	tabMinxin
-	// } from "@/mixin/tabMinxin.js";
+	import {
+		tabMinxin
+	} from "@/mixin/tabMinxin.js";
+	import aa from "@/moduleAPI/baseUrl.js"
 	// import {
 	// 	uploadAttachmentFile2
 	// } from "@/moduleAPI/atm.js";
 	// import setData from '@/moduleAPI/setData';
 	export default {
-		// mixins: [tabMinxin],
+		mixins: [tabMinxin],
 		props: {
+			baseUrl: {
+				type: String, //是否需要预览
+				default: ''
+			},
 			previewCompoment: {
 				type: Boolean, //是否需要预览
 				default: true
@@ -169,13 +174,18 @@
 				deep: true,
 				handler: function(newval, oldval) {
 					if (newval.objId) {
+						console.log('-----------------------');
+						console.log(newval.objId);
 						this.getAttchmentList(newval.objId); //获取已上传附件列表
 					}
 				}
 			}
 		},
 		mounted() {
+			aa.baseUrl = this.baseUrl;
+			console.log(aa);
 			this.lookFileArr = this.lookFileArr2;
+			this.$toast.success('成功文案');
 		},
 		computed: {
 			imageList: function() {
@@ -271,7 +281,7 @@
 			},
 			/* 处理视频 ，文档*/
 			clVideoFcun: function(item, checkObj) {
-				var baseUpUrl = setData.ZS_BASS_URL || 'http://172.16.68.42:80';
+				var baseUpUrl = this.baseUrl;
 				var filePath = baseUpUrl + '/web/api/top/atm/attachment/downloadAttachment?attachmentId=' + item.attachmentId +
 					'&.' + item.fileType;
 				this.lookFileArr.push({
@@ -323,7 +333,7 @@
 			},
 			/* 处理文档 */
 			clFlieFun: function(item, checkObj) {
-				var baseUpUrl = setData.ZS_BASS_URL || 'http://172.16.68.42:80';
+				var baseUpUrl = this.baseUrl;
 				var filePath = baseUpUrl + '/web/api/top/atm/attachment/downloadAttachment?attachmentId=' + item.attachmentId +
 					'&.' + item.fileType;
 				this.lookFileArr.push({
@@ -386,6 +396,7 @@
 			//选择附件
 			selectFileUpload: function() {
 				var _this = this;
+				// console.log(this.myJssdk);
 				/* 0: 默认值，拍照/摄像/相册选择，终端弹出选择框 1: 仅相册选择 直接打开相册
 				2: 拍摄 拍照和摄像都支持 直接弹出拍摄界面 3: 仅拍照 直接打开拍照界面 4: 仅摄像 直接打开摄像界面*/
 				this.myJssdk.shoot({
@@ -475,10 +486,11 @@
 					}
 				};
 				var parStr = JSON.stringify(obj);
+				let accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJhY2NvdW50IjoiaHVhbmd4aXVob25nQGh6LmdkLmNzZy5jbiIsInVzZXJJZCI6IkJCNjIwQzJBRTk1RDQzMkU5RkM0N0NFQTM4REQ4ODE4IiwiZW1wbG95ZWVJZCI6IkY1MEE0MUJFQzRBRTRCNzk4RkI5MTU3RjlDOTdDNTY3IiwiZW1wbG95ZWVOYW1lIjoi6buE56eA57qiIiwib3JnSWQiOiI4YTE2ODI4YzYwYzBlMTZiMDE2MGRhNDQ3YWM5MDY4MiIsIm9yZ0NvZGUiOiIwMzEzMjg0MDAxMDIiLCJvcmdOYW1lIjoi6JCl6YWN57u85ZCI5LqM54-tIiwidGhpcmRTeXN0ZW1OYW1lIjoiSkFEUCIsInNhcEhyVXNlcklkIjoiOEU4RjRDNzkxOTFDQzA3MkUwNDMwQTk3NTAxM0MwNzIiLCJzYXBIck9yZ0lkIjoiZGJkNjQ5ZDI0MjZjNGU3NTgwZmEyYzIxZDRhMjM0NmYiLCJzeXN0ZW1OYW1lIjoibnVsbCIsInN1YiI6Ium7hOengOe6oiIsImlhdCI6MTYwNzMwOTA5MSwiZXhwIjoxNjA3MzEwODkxLCJyZWZyZXNoSW50ZXJ2YWwiOjMwLCJqdGkiOiJlMWI5MzU3OS05ODYwLTRlNTctODEwYi0xNzEwZGJlNWI5ZDQiLCJ0VXNlckNvZGUiOiJkd2dscHQiLCJ0QWNjVG9rZW4iOiJleUpoYkdjaU9pSklVekkxTmlKOS5leUowVlhObGNrTnZaR1VpT2lKa2QyZHNjSFFpTENKbGVIQWlPakUyTURjek5qVTRNREFzSW1semN5STZJbXBoWkhCTWIyZHBiaUo5Ll9WVjZfREx3aVVBZ1NWZTZTSEFhUHJKdEpTRVMzbGZQUGhsNm9IRDN3NUEifQ.4srJS7Pz3g6IRPTffOlVKoPEeMCVrSOzR5a2F68rNpnB0NhLIh8C5VOS1jXP7Vaf-4oC2DgG3GmoVPsD0o10Cg";
 				var headers = JSON.stringify({
-					'access-token': this.$store.getters.jdapUserInfo.token
+					'access-token': accessToken
 				})
-				var baseUpUrl = setData.ZS_BASS_URL || 'http://172.16.68.42:80';
+				var baseUpUrl = this.baseUrl;
 				this.myJssdk.uploadMedia({
 					url: baseUpUrl + '/web/upload/api/top/atm/restClient/uploadAttachmentFile',
 					fileurl: itmeUpData.path,
@@ -487,9 +499,11 @@
 					filekey: 'file',
 					success(data) {
 						var dataType = typeof data;
+						console.log(dataType);
 						if (dataType == 'string') {
 							data = JSON.parse(data)
 						}
+						console.log(data);
 						console.log(333333333333)
 						console.log(data)
 						if (data) {

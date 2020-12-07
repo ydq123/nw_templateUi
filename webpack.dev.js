@@ -1,6 +1,5 @@
 var path = require('path')
 var webpack = require('webpack')
-
 module.exports = {
   entry: './site/main.js',// 开发时项目入口
   // entry: './src/lib/index.js', // 打包发布时入口
@@ -57,7 +56,18 @@ module.exports = {
     extensions: ['*', '.js', '.vue', '.json']
   },
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+    host: '0.0.0.0',
+    proxy: {
+      '/apiUrl': {
+        target: 'http://172.16.68.42:80',//将defaultSettings.baseApi印射为/apiUrl
+        changeOrigin: true,//是否开启跨域代理
+        secure: true,//https==true,http=false
+        pathRewrite: {
+          '^/apiUrl': ''   //需要rewrite的,
+        }
+      }
+    }
   },
   devtool: '#eval-source-map'  // 生成map文件方便调试
 }
