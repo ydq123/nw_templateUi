@@ -29,12 +29,12 @@ export const tabMinxin = {
 		}
 	},
 	mounted() {
-		this.tabPageData = this.$tabPageData(); //接受页面参数
-		if (this.$store.getters.jdapUserInfo.userInfo) {
-			var jdapUserInfo = localStorage.getItem("userInfo");
-			// console.info(jdapUserInfo);
-			this.$store.commit("setJdapUserInfo", jdapUserInfo);
-		}
+		// this.tabPageData = this.$tabPageData(); //接受页面参数
+		// if (this.$store.getters.jdapUserInfo.userInfo) {
+		// 	var jdapUserInfo = localStorage.getItem("userInfo");
+		// 	// console.info(jdapUserInfo);
+		// 	this.$store.commit("setJdapUserInfo", jdapUserInfo);
+		// }
 	},
 	
 	methods: {

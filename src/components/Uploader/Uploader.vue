@@ -28,7 +28,6 @@
 	import {
 		tabMinxin
 	} from "@/mixin/tabMinxin.js";
-	import aa from "@/moduleAPI/baseUrl.js"
 	// import {
 	// 	uploadAttachmentFile2
 	// } from "@/moduleAPI/atm.js";
@@ -37,7 +36,15 @@
 		mixins: [tabMinxin],
 		props: {
 			baseUrl: {
-				type: String, //是否需要预览
+				type: String, //真实开发ip地址
+				default: ''
+			},
+			proxyUrl: {
+				type: String, //开发环境代理地址
+				default: ''
+			},
+			accessToken: {
+				type: String, //token
 				default: ''
 			},
 			previewCompoment: {
@@ -153,6 +160,7 @@
 		},
 		data() {
 			return {
+				uploaderFun: null,
 				startPosition: 0,
 				showPreview: false,
 				videoPng: require("@/assets/image/fileTypeImg/video.png"),
@@ -170,20 +178,36 @@
 			lookFileArr2: function(va1, va2) {
 				this.lookFileArr = this.lookFileArr2;
 			},
+			baseUrl:function(newval,oldval) {
+				// console.log('newval'+newval);
+				// console.log('oldval'+oldval);
+				if(newval) {
+					window.baseUrl = newval;
+				}
+			},
+			proxyUrl: function(newval, oldval) {
+				if(newval) {
+					window.proxyUrl = newval;
+				}
+				this.uploaderFun = require('./upload.js').default;
+			},
 			fileInfo: {
 				deep: true,
 				handler: function(newval, oldval) {
 					if (newval.objId) {
-						console.log('-----------------------');
-						console.log(newval.objId);
 						this.getAttchmentList(newval.objId); //获取已上传附件列表
 					}
 				}
 			}
 		},
+		created() {
+			if(this.baseUrl || this.proxyUrl) {
+				window.baseUrl = this.baseUrl;
+				window.proxyUrl = this.proxyUrl;
+				this.uploaderFun = require('./upload.js').default;
+			}
+		},
 		mounted() {
-			aa.baseUrl = this.baseUrl;
-			console.log(aa);
 			this.lookFileArr = this.lookFileArr2;
 			this.$toast.success('成功文案');
 		},
@@ -258,8 +282,8 @@
 					objId: this.fileInfo.objId
 				};
 				let _this = this;
-				this.lookFileArr2 = [];
-				this.$tabAttchmentList(params, function(res) {
+				// this.lookFileArr2 = [];
+				this.uploaderFun.$tabAttchmentList(params, function(res) {
 					console.log(res);
 					if (res && res.length > 0) {
 						res.forEach(item => {
@@ -305,7 +329,7 @@
 			/* 处理图片 */
 			clImgFun: function(item, checkObj) {
 				let _this = this;
-				_this.$tabDownloadAttachment(item.attachmentId, function(res) {
+				this.uploaderFun.$tabDownloadAttachment(item.attachmentId, function(res) {
 					if (res) {
 						var blob = new Blob([res]);
 						var imageUrl = window.URL.createObjectURL(blob);
@@ -375,7 +399,7 @@
 						}
 					};
 					this.$textLoading("加载中");
-					this.$tabDeleteAttachmentById(params, function(res) {
+					this.uploaderFun.$tabDeleteAttachmentById(params, function(res) {
 						if (res) {
 							_this.$textHid();
 							var retArr = _this.$baseArrFilter(_this.lookFileArr, 'index', index, false);
@@ -486,9 +510,8 @@
 					}
 				};
 				var parStr = JSON.stringify(obj);
-				let accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJhY2NvdW50IjoiaHVhbmd4aXVob25nQGh6LmdkLmNzZy5jbiIsInVzZXJJZCI6IkJCNjIwQzJBRTk1RDQzMkU5RkM0N0NFQTM4REQ4ODE4IiwiZW1wbG95ZWVJZCI6IkY1MEE0MUJFQzRBRTRCNzk4RkI5MTU3RjlDOTdDNTY3IiwiZW1wbG95ZWVOYW1lIjoi6buE56eA57qiIiwib3JnSWQiOiI4YTE2ODI4YzYwYzBlMTZiMDE2MGRhNDQ3YWM5MDY4MiIsIm9yZ0NvZGUiOiIwMzEzMjg0MDAxMDIiLCJvcmdOYW1lIjoi6JCl6YWN57u85ZCI5LqM54-tIiwidGhpcmRTeXN0ZW1OYW1lIjoiSkFEUCIsInNhcEhyVXNlcklkIjoiOEU4RjRDNzkxOTFDQzA3MkUwNDMwQTk3NTAxM0MwNzIiLCJzYXBIck9yZ0lkIjoiZGJkNjQ5ZDI0MjZjNGU3NTgwZmEyYzIxZDRhMjM0NmYiLCJzeXN0ZW1OYW1lIjoibnVsbCIsInN1YiI6Ium7hOengOe6oiIsImlhdCI6MTYwNzMwOTA5MSwiZXhwIjoxNjA3MzEwODkxLCJyZWZyZXNoSW50ZXJ2YWwiOjMwLCJqdGkiOiJlMWI5MzU3OS05ODYwLTRlNTctODEwYi0xNzEwZGJlNWI5ZDQiLCJ0VXNlckNvZGUiOiJkd2dscHQiLCJ0QWNjVG9rZW4iOiJleUpoYkdjaU9pSklVekkxTmlKOS5leUowVlhObGNrTnZaR1VpT2lKa2QyZHNjSFFpTENKbGVIQWlPakUyTURjek5qVTRNREFzSW1semN5STZJbXBoWkhCTWIyZHBiaUo5Ll9WVjZfREx3aVVBZ1NWZTZTSEFhUHJKdEpTRVMzbGZQUGhsNm9IRDN3NUEifQ.4srJS7Pz3g6IRPTffOlVKoPEeMCVrSOzR5a2F68rNpnB0NhLIh8C5VOS1jXP7Vaf-4oC2DgG3GmoVPsD0o10Cg";
 				var headers = JSON.stringify({
-					'access-token': accessToken
+					'access-token': this.accessToken
 				})
 				var baseUpUrl = this.baseUrl;
 				this.myJssdk.uploadMedia({
