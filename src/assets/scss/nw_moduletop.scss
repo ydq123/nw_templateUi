@@ -4,11 +4,11 @@
 	width: 100%;
 	height: auto;
 	position: fixed;
-	top: 44px;
+	// top: 44px;
 	z-index: 99;
 	
 	.top-input {
-		padding: 15px;
+		padding: 10px;
 		.input-box {
 			border-radius: 5px;
 			height: 30px;
@@ -16,52 +16,24 @@
 			background: white;
 		}
 	}
-		
-	.top-tab {
-		width: 100%;
-		
-		.tab-list {
-			position: relative;
-			min-width: 100%;
-			overflow-x: scroll;
-			white-space: nowrap;
-		
-			.tab-item {
-				height: 42px;
-				line-height: 42px;
-			}
-		
-			.tab-border {
-				position: absolute;
-				bottom: 0;
-				left: 0;
-				height: 3px;
-				border-radius: 10px;
-			}
-		
-			.tab-number {
-				position: absolute;
-				bottom: 14px;
-				display: inline-block;
-				height: 15px;
-				line-height: 15px;
-				margin-left: 30px;
-				padding: 0 7px;
-				background-color: #f15747;
-				border-radius: 7px;
-				font-size: 10px;
-				color: #ffffff;
-			}
-		}
-	}
 	
 }
 
-// 搜索栏
-.task-top-input {
-  width: 100%;
-  height: 30px;
-  border-radius: 5px;
+.zdc{
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.5);
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+.zIndex9{
+	z-index: 9 !important;
+}
+
+.zIndex999{
+	z-index: 999 !important;
 }
 
 // 筛选栏
@@ -166,6 +138,7 @@
   .tab-item {
     height: 44px;
     line-height: 44px;
+	flex: 1;
   }
 
   .tab-border {
@@ -206,3 +179,53 @@
     display: none;
   }
 }
+// 右侧弹框
+		.sreen-warp {
+			position: fixed;
+			z-index: 9999!important;
+			top: 0;
+			right: 0;
+			width: 80%;
+			height: 100%;
+			padding-top: 44px;
+			padding-bottom: 65px;
+			overflow: hidden;
+
+			.sreen-box {
+				width: 100%;
+				height: 100%;
+				overflow: scroll;
+			}
+
+			.bottom_button {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				width: 100%;
+			}
+		}
+
+		.sreen-item {
+			border-radius: 4px;
+			color: #666;
+		}
+
+		.sreen-item-cur {
+			color: #1e87f0;
+			background-color: #c1dcf7;
+			border-color: #c1dcf7;
+		}
+
+		.sreen-time {
+			border: solid 1px #dcdcdc;
+			border-left: none;
+		}
+
+		.sreen-item-time {
+			border-left: solid 1px #dcdcdc;
+		}
+
+		.sreen-item-time-cur {
+			background-color: #1e87f0;
+		}
