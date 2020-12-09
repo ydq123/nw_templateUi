@@ -1,6 +1,6 @@
 # nw-template-ui
 
-> 基于Vue2.x的前端组件库
+> 南网秘密小组件库
 
 # 项目目录
 ``` bash
@@ -28,12 +28,6 @@
 ```bash
   npm install
 ```
-or
-
-```bash
-  yarn
-```
-
 ## Serve with hot reload at localhost:8080
 
 ```bash
@@ -48,3 +42,8 @@ or
   npm run build
 ```
 
+## uploader附件上传组件重点解释
+### 必传参数分别有	baseUrl: "", proxyUrl: "", proxyIp: "", accessToken: "", lookFileArr2: [], fileInfo: {}
+### baseUrl为真实开发ip地址，即为build上线后使用的地址，与下面代理地址、代理ip不可共存。开发时此参数传空。
+### proxyUrl为开发环境代理地址,非IP，代理例如('/api')，目的是方便在本地开发时可以配置使用；
+### proxyIp为开发环境代理地址（IP），光有代理地址没有真实ip不行（上传附件需要用到）；

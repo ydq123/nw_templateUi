@@ -5,7 +5,7 @@
 		<!-- <nw-modal @on-ok="show3 = false" @on-cancel="show3 = false" :width="300" :isShow="show3"></nw-modal> -->
     <!-- <nw-module-top :isSort="true" :isSreen="true" :mTop="0" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList" @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen"></nw-module-top>  -->
 		<nw-test></nw-test>
-    <nw-uploader :fileInfo="fileInfo" :lookFileArr2="lookFileArr2" :baseUrl="baseUrl" :proxyUrl="proxyUrl" :accessToken="accessToken"></nw-uploader>
+    <nw-uploader :fileInfo="fileInfo" :lookFileArr2="lookFileArr2" :baseUrl="baseUrl" :proxyUrl="proxyUrl" :proxyIp="proxyIp" :accessToken="accessToken"></nw-uploader>
   </div>
 </template>
 
@@ -24,6 +24,7 @@ export default {
 			baseUrl: "",
 			proxyUrl: "",
 			accessToken: "",
+			proxyIp: "",
 			lookFileArr2: [],
       fileInfo: {},
       msg: "Welcome to nw-template-ui",
@@ -183,9 +184,10 @@ export default {
 			jobTypeCode: "SP_SS_HID_RECORD_FIND",
 			objId: "8A27048FFC18434EAE5C1727C28BCD51"
 		};
-		this.baseUrl = '';
+		this.baseUrl = 'http://172.16.68.42:80';
 		this.proxyUrl = '/apiUrl';
-		this.accessToken = 'eyJhbGciOiJIUzUxMiJ9.eyJhY2NvdW50IjoiaHVhbmd4aXVob25nQGh6LmdkLmNzZy5jbiIsInVzZXJJZCI6IkJCNjIwQzJBRTk1RDQzMkU5RkM0N0NFQTM4REQ4ODE4IiwiZW1wbG95ZWVJZCI6IkY1MEE0MUJFQzRBRTRCNzk4RkI5MTU3RjlDOTdDNTY3IiwiZW1wbG95ZWVOYW1lIjoi6buE56eA57qiIiwib3JnSWQiOiI4YTE2ODI4YzYwYzBlMTZiMDE2MGRhNDQ3YWM5MDY4MiIsIm9yZ0NvZGUiOiIwMzEzMjg0MDAxMDIiLCJvcmdOYW1lIjoi6JCl6YWN57u85ZCI5LqM54-tIiwidGhpcmRTeXN0ZW1OYW1lIjoiSkFEUCIsInNhcEhyVXNlcklkIjoiOEU4RjRDNzkxOTFDQzA3MkUwNDMwQTk3NTAxM0MwNzIiLCJzYXBIck9yZ0lkIjoiZGJkNjQ5ZDI0MjZjNGU3NTgwZmEyYzIxZDRhMjM0NmYiLCJzeXN0ZW1OYW1lIjoibnVsbCIsInN1YiI6Ium7hOengOe6oiIsImlhdCI6MTYwNzMwOTA5MSwiZXhwIjoxNjA3MzEwODkxLCJyZWZyZXNoSW50ZXJ2YWwiOjMwLCJqdGkiOiJlMWI5MzU3OS05ODYwLTRlNTctODEwYi0xNzEwZGJlNWI5ZDQiLCJ0VXNlckNvZGUiOiJkd2dscHQiLCJ0QWNjVG9rZW4iOiJleUpoYkdjaU9pSklVekkxTmlKOS5leUowVlhObGNrTnZaR1VpT2lKa2QyZHNjSFFpTENKbGVIQWlPakUyTURjek5qVTRNREFzSW1semN5STZJbXBoWkhCTWIyZHBiaUo5Ll9WVjZfREx3aVVBZ1NWZTZTSEFhUHJKdEpTRVMzbGZQUGhsNm9IRDN3NUEifQ.4srJS7Pz3g6IRPTffOlVKoPEeMCVrSOzR5a2F68rNpnB0NhLIh8C5VOS1jXP7Vaf-4oC2DgG3GmoVPsD0o10Cg';
+		this.proxyIp = "http://172.16.68.42:80";
+		this.accessToken = 'eyJhbGciOiJIUzUxMiJ9.eyJhY2NvdW50IjoiaHVhbmd4aXVob25nQGh6LmdkLmNzZy5jbiIsInVzZXJJZCI6IkJCNjIwQzJBRTk1RDQzMkU5RkM0N0NFQTM4REQ4ODE4IiwiZW1wbG95ZWVJZCI6IkY1MEE0MUJFQzRBRTRCNzk4RkI5MTU3RjlDOTdDNTY3IiwiZW1wbG95ZWVOYW1lIjoi6buE56eA57qiIiwib3JnSWQiOiI4YTE2ODI4YzYwYzBlMTZiMDE2MGRhNDQ3YWM5MDY4MiIsIm9yZ0NvZGUiOiIwMzEzMjg0MDAxMDIiLCJvcmdOYW1lIjoi6JCl6YWN57u85ZCI5LqM54-tIiwidGhpcmRTeXN0ZW1OYW1lIjoiSkFEUCIsInNhcEhyVXNlcklkIjoiOEU4RjRDNzkxOTFDQzA3MkUwNDMwQTk3NTAxM0MwNzIiLCJzYXBIck9yZ0lkIjoiZGJkNjQ5ZDI0MjZjNGU3NTgwZmEyYzIxZDRhMjM0NmYiLCJzeXN0ZW1OYW1lIjoibnVsbCIsInN1YiI6Ium7hOengOe6oiIsImlhdCI6MTYwNzUwMjY1OSwiZXhwIjoxNjA3NTA0NDU5LCJyZWZyZXNoSW50ZXJ2YWwiOjMwLCJqdGkiOiI4YTVhZjc5Mi1jODIxLTQ2MzAtOGFlNi0yODE4NDU5NDk3MzgifQ.bj914e1KG_pLVFO2j80q3w13q6uur1831lx6iq63qMQ1GoyScqhhaCgG-wOwHFg7N3jX-3NqmQPR4lc_Dw9iWA';
   },
   methods: {
     showSize(item) {

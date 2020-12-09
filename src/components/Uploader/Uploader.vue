@@ -40,7 +40,11 @@
 				default: ''
 			},
 			proxyUrl: {
-				type: String, //开发环境代理地址
+				type: String, //开发环境代理地址非IP('/api')
+				default: ''
+			},
+			proxyIp: {
+				type: String, //开发环境代理地址（IP）
 				default: ''
 			},
 			accessToken: {
@@ -179,8 +183,8 @@
 				this.lookFileArr = this.lookFileArr2;
 			},
 			baseUrl:function(newval,oldval) {
-				// console.log('newval'+newval);
-				// console.log('oldval'+oldval);
+				console.log('newval'+newval);
+				console.log('oldval'+oldval);
 				if(newval) {
 					window.baseUrl = newval;
 				}
@@ -305,7 +309,7 @@
 			},
 			/* 处理视频 ，文档*/
 			clVideoFcun: function(item, checkObj) {
-				var baseUpUrl = this.baseUrl;
+				var baseUpUrl = this.baseUrl || this.proxyIp;
 				var filePath = baseUpUrl + '/web/api/top/atm/attachment/downloadAttachment?attachmentId=' + item.attachmentId +
 					'&.' + item.fileType;
 				this.lookFileArr.push({
@@ -357,7 +361,7 @@
 			},
 			/* 处理文档 */
 			clFlieFun: function(item, checkObj) {
-				var baseUpUrl = this.baseUrl;
+				var baseUpUrl = this.baseUrl || this.proxyIp;
 				var filePath = baseUpUrl + '/web/api/top/atm/attachment/downloadAttachment?attachmentId=' + item.attachmentId +
 					'&.' + item.fileType;
 				this.lookFileArr.push({
@@ -513,7 +517,10 @@
 				var headers = JSON.stringify({
 					'access-token': this.accessToken
 				})
-				var baseUpUrl = this.baseUrl;
+				console.log(this.accessToken);
+				console.log(this.baseUrl);
+				console.log(this.proxyUrl);
+				var baseUpUrl = this.baseUrl || this.proxyIp;
 				this.myJssdk.uploadMedia({
 					url: baseUpUrl + '/web/upload/api/top/atm/restClient/uploadAttachmentFile',
 					fileurl: itmeUpData.path,
