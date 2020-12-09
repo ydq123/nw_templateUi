@@ -1,9 +1,8 @@
 <template>
 	<div class="p0 m0">
-		<img :src="dltPng" />
-		<img :src="dltPng2" />
-		<img :src="dltPng3" />
-		<img :src="dltPng4" />
+		<img src="@/assets/image/fileTypeImg/video.png" />
+		<img src="../../assets/image/dlt.png" />
+		<hr>
 		</div>
 </template>
 
@@ -22,9 +21,9 @@
 				uploaderFun: null,
 				startPosition: 0,
 				showPreview: false,
-				videoPng: require("@/assets/image/fileTypeImg/video.png"),
-				dltPng: require("@/assets/image/dlt.png"),
-				dltPng2: require("../../assets/image/dlt.png"),
+				videoPng: `${require("@/assets/image/fileTypeImg/video.png")}`,
+				dltPng: `${require("@/assets/image/dlt.png")}`,
+				dltPng2: `${require("../../assets/image/dlt.png")}`,
 				dltPng3: require("@/assets/image/dlt.png"),
 				dltPng4: require("@/assets/image/dlt.png"),
 				upFileArr: [],

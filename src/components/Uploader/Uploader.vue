@@ -14,7 +14,7 @@
 				<div class="pathName column ju-c al-c" v-show="fileItem.pathName&&fileItem.status==3">
 					<div class="text-center clamp1 f10 text-white">{{fileItem.pathName}}</div>
 				</div>
-				<img @click.stop="dltFile(fileIndex, fileItem)" v-show="deletable" class="imgdlt" :src="dltPng" />
+				<img @click.stop="dltFile(fileIndex, fileItem)" v-show="deletable" class="imgdlt" src="@/assets/image/dlt.png" />
 			</div>
 			<div v-if="showUpload" class="fill_Upimg_list_item bg-eee column al-c ju-c" m="click" @click="selectFileUpload">
 				<i class="iconfont icon-jia1 f32 graydf"></i>
