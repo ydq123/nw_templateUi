@@ -28,10 +28,6 @@
 	import {
 		tabMinxin
 	} from "@/mixin/tabMinxin.js";
-	// import {
-	// 	uploadAttachmentFile2
-	// } from "@/moduleAPI/atm.js";
-	// import setData from '@/moduleAPI/setData';
 	export default {
 		mixins: [tabMinxin],
 		props: {
@@ -213,7 +209,6 @@
 		},
 		mounted() {
 			this.lookFileArr = this.lookFileArr2;
-			this.$toast.success('成功文案');
 		},
 		computed: {
 			imageList: function() {

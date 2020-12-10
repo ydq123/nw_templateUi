@@ -11,13 +11,12 @@ import {
 import {
 	aUiMinxin,
 } from './aUiMinxin.js'
-// import baseOrgCodeArr from '../assets/a_orgCodeData.js'; //部门code数据
-import {
-	uploader,
-	downloadAttachmentByAttachmentId,
-	getAttchmentByObjId,
-	deleteAttachmentById
-} from '@/moduleAPI/atm.js'
+// import {
+// 	uploader,
+// 	downloadAttachmentByAttachmentId,
+// 	getAttchmentByObjId,
+// 	deleteAttachmentById
+// } from '@/moduleAPI/atm.js'
 export const tabMinxin = {
 	mixins: [baseMinxin, vantMixin, myJsSdkMixin, aUiMinxin], //混入公共类
 	data() {
