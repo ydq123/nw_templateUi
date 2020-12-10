@@ -1,6 +1,6 @@
 <template>
 	<div class="p0 m0">
-		<div class="row al-c ju-f fl-w">
+		<div class="flex al-c ju-f fl-w">
 			<div @click="ylTap(fileIndex, fileItem)" class="fill_Upimg_list_item" :style="{'background-image':'url('+ fileItem.fmImg +')'}"
 			 v-for="(fileItem,fileIndex) in lookFileArr" :key="fileIndex">
 				<div class="pathStatus column ju-c al-c f10 text-white" v-show="fileItem.status==1||fileItem.status==2">

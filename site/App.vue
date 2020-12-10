@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+		<van-icon name="chat-o" color="#1989fa" />
+<van-icon name="chat-o" color="#07c160" />
+
     <nw-button size="large">large</nw-button>
    	<!-- <nw-button @click="show3 = true" size="large">large</nw-button> -->
 		<!-- <nw-modal @on-ok="show3 = false" @on-cancel="show3 = false" :width="300" :isShow="show3"></nw-modal> -->
@@ -184,10 +187,10 @@ export default {
 			jobTypeCode: "SP_SS_HID_RECORD_FIND",
 			objId: "8A27048FFC18434EAE5C1727C28BCD51"
 		};
-		this.baseUrl = 'http://172.16.68.42:80';
+		this.baseUrl = '';
 		this.proxyUrl = '/apiUrl';
 		this.proxyIp = "http://172.16.68.42:80";
-		this.accessToken = 'eyJhbGciOiJIUzUxMiJ9.eyJhY2NvdW50IjoiaHVhbmd4aXVob25nQGh6LmdkLmNzZy5jbiIsInVzZXJJZCI6IkJCNjIwQzJBRTk1RDQzMkU5RkM0N0NFQTM4REQ4ODE4IiwiZW1wbG95ZWVJZCI6IkY1MEE0MUJFQzRBRTRCNzk4RkI5MTU3RjlDOTdDNTY3IiwiZW1wbG95ZWVOYW1lIjoi6buE56eA57qiIiwib3JnSWQiOiI4YTE2ODI4YzYwYzBlMTZiMDE2MGRhNDQ3YWM5MDY4MiIsIm9yZ0NvZGUiOiIwMzEzMjg0MDAxMDIiLCJvcmdOYW1lIjoi6JCl6YWN57u85ZCI5LqM54-tIiwidGhpcmRTeXN0ZW1OYW1lIjoiSkFEUCIsInNhcEhyVXNlcklkIjoiOEU4RjRDNzkxOTFDQzA3MkUwNDMwQTk3NTAxM0MwNzIiLCJzYXBIck9yZ0lkIjoiZGJkNjQ5ZDI0MjZjNGU3NTgwZmEyYzIxZDRhMjM0NmYiLCJzeXN0ZW1OYW1lIjoibnVsbCIsInN1YiI6Ium7hOengOe6oiIsImlhdCI6MTYwNzUwMjY1OSwiZXhwIjoxNjA3NTA0NDU5LCJyZWZyZXNoSW50ZXJ2YWwiOjMwLCJqdGkiOiI4YTVhZjc5Mi1jODIxLTQ2MzAtOGFlNi0yODE4NDU5NDk3MzgifQ.bj914e1KG_pLVFO2j80q3w13q6uur1831lx6iq63qMQ1GoyScqhhaCgG-wOwHFg7N3jX-3NqmQPR4lc_Dw9iWA';
+		this.accessToken = 'eyJhbGciOiJIUzUxMiJ9.eyJhY2NvdW50IjoiaHVhbmd4aXVob25nQGh6LmdkLmNzZy5jbiIsInVzZXJJZCI6IkJCNjIwQzJBRTk1RDQzMkU5RkM0N0NFQTM4REQ4ODE4IiwiZW1wbG95ZWVJZCI6IkY1MEE0MUJFQzRBRTRCNzk4RkI5MTU3RjlDOTdDNTY3IiwiZW1wbG95ZWVOYW1lIjoi6buE56eA57qiIiwib3JnSWQiOiI4YTE2ODI4YzYwYzBlMTZiMDE2MGRhNDQ3YWM5MDY4MiIsIm9yZ0NvZGUiOiIwMzEzMjg0MDAxMDIiLCJvcmdOYW1lIjoi6JCl6YWN57u85ZCI5LqM54-tIiwidGhpcmRTeXN0ZW1OYW1lIjoiSkFEUCIsInNhcEhyVXNlcklkIjoiOEU4RjRDNzkxOTFDQzA3MkUwNDMwQTk3NTAxM0MwNzIiLCJzYXBIck9yZ0lkIjoiZGJkNjQ5ZDI0MjZjNGU3NTgwZmEyYzIxZDRhMjM0NmYiLCJzeXN0ZW1OYW1lIjoibnVsbCIsInN1YiI6Ium7hOengOe6oiIsImlhdCI6MTYwNzU2NDQzOSwiZXhwIjoxNjA3NTY2MjM5LCJyZWZyZXNoSW50ZXJ2YWwiOjMwLCJqdGkiOiJlYjhhOGIxNS0zN2M4LTQzNjgtOTE4Mi01ZDUyMGQ3YTE5Y2EifQ.2itN5t26qMtskcksnvgWryHL2Qz3fw6fxv2q0wfxRHbzQ-28uDPWWw9UX34Nwy8_dav12d9bc2VhoDoSJrcMXQ';
   },
   methods: {
     showSize(item) {
