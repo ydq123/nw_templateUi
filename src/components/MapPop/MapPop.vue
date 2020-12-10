@@ -59,8 +59,8 @@
 				</div>
 				<div class="f14" v-for="(val,Mindex) in mapSwith" :key="Mindex">
 					<div class="bg-f5 pr20 pl20 pb10 pt10 text-left">{{ val.mlTitle }}</div>
-					<div class="row al-c ju-b pr20 pl20 pt10 pb10" v-for="(Lval,Lindex) in val.mlList" :key="Lindex">
-						<div class="row al-c">
+					<div class="map-row al-c ju-b pr20 pl20 pt10 pb10" v-for="(Lval,Lindex) in val.mlList" :key="Lindex">
+						<div class="map-row al-c">
 							<div class="map-deng" v-if="Lval.dengCol" :class="[Lval.dengCol == 1?'map-deng-red':'',Lval.dengCol == 2?'map-deng-yellow':'',Lval.dengCol == 3?'map-deng-green':'',Lval.dengCol == 4?'map-deng-f5':'']"></div>
 							<span class="ml5">{{ Lval.text }}</span>
 						</div>
