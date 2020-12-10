@@ -37,6 +37,17 @@
 	z-index: 999 !important;
 }
 
+.module-width-33{
+	width: 33.3%;
+	float: left;
+	position: relative;
+}
+
+.module-row{
+	display: flex;
+	flex-direction: row;
+}
+
 // 筛选栏
 .task-top-sreen {
   height: 40px;

@@ -90,7 +90,7 @@
 					<div class="tab-border bg-287" :style="activeBarStyle" ref="activeBar"></div>
 				</div>
 			</div>
-			<div class="row task-top-sreen borderTopE8">
+			<div class="module-row task-top-sreen borderTopE8">
 				<div class="flex-1 text-left gray6 pl15 f16 verticle-center">{{'共' + tabList[curTabIndex].number + '条记录'}}</div>
 				<div class="task-top-sreen-btn pl15 pr15 verticle-center" m="click" @click="changeSort" v-if="isSort">
 					<span class="f16 mr5 gray6">排序</span>
@@ -104,7 +104,7 @@
 			<!-- 排序 -->
 			<div v-if="sortData.showPop" class="bg-white">
 				<div v-for="(sortItem, sortIndex) in sortData.list" :key="sortIndex">
-					<div class="f16 p15 gray3 borderTopE8 row" @click="changeSortItem(sortIndex)">
+					<div class="f16 p15 gray3 borderTopE8 module-row" @click="changeSortItem(sortIndex)">
 						<div class="flex-1 text-left">{{sortItem.text}}</div>
 						<i class="iconfont ml5 gray287 icon-gou" v-if="curTabIndex==0&&sortIndex==sortData.dbIndex||curTabIndex==1&&sortIndex==sortData.ybIndex"></i>
 					</div>
@@ -131,7 +131,7 @@
 					<div v-for="(sItem,sIndex) in sreenData.sreenDoneItem" :key="sIndex">
 						<div class="p15 f16 text-black text-left borderTopE8">{{ sItem.itemTitle }}</div>
 						<div class="clearfix pl15">
-							<div v-for="(value,index) in sItem.sreenList" :key="index" class="text-center col-xs-4" @click="changSreenItem(sIndex,index)">
+							<div v-for="(value,index) in sItem.sreenList" :key="index" class="text-center module-width-33" @click="changSreenItem(sIndex,index)">
 								<div class="sreen-item border_1_dc f14 pt10 pb10 pl15 pr15 mr15 mb15" :class="[value.isSelect ? 'sreen-item-cur' : '']">
 									{{value.text}}
 								</div>
@@ -142,7 +142,7 @@
 
 				<!--  选择时间
 				<div class="p15 f16 text-black text-left borderTopE8">开票日期</div>
-				<div class="ml15 mr15 pt15 pb15 row f15 verticle-center bg-white" @click="showDate5 = true" m="click">
+				<div class="ml15 mr15 pt15 pb15 module-row f15 verticle-center bg-white" @click="showDate5 = true" m="click">
 					<div class="gray6 mr15">开始时间:</div>
 					<div class="flex-1">
 						<div class="gray9 text-right" v-if="!startTime3.time">请选择</div>
@@ -152,7 +152,7 @@
 				</div>
 				 -->
 			</div>
-			<div class="bottom_button bg-white row ju-b f14 p15">
+			<div class="bottom_button bg-white module-row ju-b f14 p15">
 				<div class="nw_buttom_125_44 bg-f5 border_1_dc gray3" @click="resetScreen">重置</div>
 				<div class="nw_buttom_125_44 bg-287 text-white" @click="submitScreen">确定</div>
 			</div>
