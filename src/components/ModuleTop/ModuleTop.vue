@@ -119,7 +119,7 @@
 					<div v-for="(sItem,sIndex) in sreenData.sreenTodoItem" :key="sIndex">
 						<div class="p15 f16 text-black text-left borderTopE8">{{ sItem.itemTitle }}</div>
 						<div class="clearfix pl15">
-							<div v-for="(value,index) in sItem.sreenList" :key="index" class="text-center col-xs-4" @click="changSreenItem(sIndex,index)">
+							<div v-for="(value,index) in sItem.sreenList" :key="index" class="text-center module-width-33" @click="changSreenItem(sIndex,index)">
 								<div class="sreen-item border_1_dc f14 pt10 pb10 pl15 pr15 mr15 mb15" :class="[value.isSelect ? 'sreen-item-cur' : '']">
 									{{value.text}}
 								</div>
