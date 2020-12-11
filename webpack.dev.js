@@ -65,7 +65,8 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    host: '0.0.0.0',
+    host: 'localhost',
+    port: 8086,
     proxy: {
       '/apiUrl': {
         target: 'http://172.16.68.42:80',//将defaultSettings.baseApi印射为/apiUrl
