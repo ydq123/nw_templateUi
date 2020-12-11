@@ -18,6 +18,10 @@ Vue.prototype.myJssdk = new EimMobileJsSdk();
 /* 有赞UI */
 import '@/plugin/vant/vant_init.js'; //初始化
 
+/* 跨页面通讯 */
+import across from '@/utils/across.js'; //跨页面通讯
+Vue.prototype.$across = across;
+
 Vue.use(nwVue)
 new Vue({
   el: '#app',

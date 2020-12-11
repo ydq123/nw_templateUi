@@ -78,7 +78,7 @@
 		display: 'MapPop地图弹窗',
 		data() {
 			return {
-				showPop: true,
+				showPop: this.isMapPop,
 				radios: this.mapList,
 				mapSwith: this.switchList
 			}

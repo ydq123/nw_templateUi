@@ -5,6 +5,7 @@ import Uploader from './Uploader/Uploader.vue'
 import Test from './Test/Test.vue'
 import MapPop from './MapPop/MapPop.vue'
 import BotButton from './BotButton/BotButton.vue'
+import UnitPop from './UnitPop/UnitPop.vue'
 
 export {
     Button,
@@ -13,5 +14,6 @@ export {
     Uploader,
     Test,
 	MapPop,
-	BotButton
+	BotButton,
+	UnitPop
 }
