@@ -3,9 +3,9 @@ import request from '@/moduleAPI/request.js';
 // 请求头
 // const myQqt1 = setData.ZS_BASS_URL||'/hiddenDanger'; //隐患-自定义请求头-本地开发写法
 // const myQqt1 = 'http://172.16.68.42:80' || '/apiUrl'; //隐患-自定义请求头-本地开发写法
-console.log(window.NW_BASEURL);
-console.log(window.NW_PROXYURL);
-const myQqt1 = window.NW_BASEURL || window.NW_PROXYURL || 'moduleIp'; //隐患-自定义请求头-本地开发写法
+console.log('NW_BASEURL='+window.NW_BASEURL);
+console.log('NW_PROXYURL='+window.NW_PROXYURL);
+const myQqt1 = window.NW_BASEURL || window.NW_PROXYURL || '/moduleIp'; //隐患-自定义请求头-本地开发写法
 console.log('myQqt1===='+myQqt1);
 //const myQqt1 = '/'; //操作票-自定义请求头-本地开发写法
 

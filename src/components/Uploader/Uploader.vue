@@ -37,7 +37,7 @@
 			},
 			NW_PROXYURL: {
 				type: String, //开发环境代理地址非IP('/api')
-				default: ''
+				default: window.NW_BASEURL
 			},
 			proxyIp: {
 				type: String, //开发环境代理地址（IP）
