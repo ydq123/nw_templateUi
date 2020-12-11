@@ -5,7 +5,7 @@
     <nw-module-top :isSort="true" :isSreen="true" :mTop="0" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList" @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen"></nw-module-top>
     <!-- <nw-test></nw-test> -->
     <hr style="margin-top:20px">
-    <nw-uploader :fileInfo="fileInfo" :lookFileArr2="lookFileArr2" :baseUrl="baseUrl" :proxyUrl="proxyUrl" :proxyIp="proxyIp" :accessToken="accessToken"></nw-uploader>
+    <nw-uploader :fileInfo="fileInfo" :proxyIp="proxyIp"></nw-uploader>
     <hr style="margin-top:20px">
     <h1 class="mt20" @click="$router.push('checkPerson')">测试打开新页面</h1>
     <hr style="margin-top:20px">
@@ -17,11 +17,9 @@ export default {
   name: "demoPage",
   data() {
     return {
-      baseUrl: "",
-      proxyUrl: "",
-      accessToken: "",
-      proxyIp: "",
-      lookFileArr2: [],
+      NW_BASEURL: "",
+      NW_PROXYURL: "",
+      proxyIp: "http://172.16.68.42:80",
       fileInfo: {},
       msg: "Welcome to nw-template-ui",
       show1: false,
@@ -183,11 +181,9 @@ export default {
       jobTypeCode: "SP_SS_HID_RECORD_FIND",
       objId: "8A27048FFC18434EAE5C1727C28BCD51"
     };
-    this.baseUrl = "";
-    this.proxyUrl = "/apiUrl";
-    this.proxyIp = "http://172.16.68.42:80";
-    this.accessToken =
-      "eyJhbGciOiJIUzUxMiJ9.eyJhY2NvdW50IjoiaHVhbmd4aXVob25nQGh6LmdkLmNzZy5jbiIsInVzZXJJZCI6IkJCNjIwQzJBRTk1RDQzMkU5RkM0N0NFQTM4REQ4ODE4IiwiZW1wbG95ZWVJZCI6IkY1MEE0MUJFQzRBRTRCNzk4RkI5MTU3RjlDOTdDNTY3IiwiZW1wbG95ZWVOYW1lIjoi6buE56eA57qiIiwib3JnSWQiOiI4YTE2ODI4YzYwYzBlMTZiMDE2MGRhNDQ3YWM5MDY4MiIsIm9yZ0NvZGUiOiIwMzEzMjg0MDAxMDIiLCJvcmdOYW1lIjoi6JCl6YWN57u85ZCI5LqM54-tIiwidGhpcmRTeXN0ZW1OYW1lIjoiSkFEUCIsInNhcEhyVXNlcklkIjoiOEU4RjRDNzkxOTFDQzA3MkUwNDMwQTk3NTAxM0MwNzIiLCJzYXBIck9yZ0lkIjoiZGJkNjQ5ZDI0MjZjNGU3NTgwZmEyYzIxZDRhMjM0NmYiLCJzeXN0ZW1OYW1lIjoibnVsbCIsInN1YiI6Ium7hOengOe6oiIsImlhdCI6MTYwNzU2NDQzOSwiZXhwIjoxNjA3NTY2MjM5LCJyZWZyZXNoSW50ZXJ2YWwiOjMwLCJqdGkiOiJlYjhhOGIxNS0zN2M4LTQzNjgtOTE4Mi01ZDUyMGQ3YTE5Y2EifQ.2itN5t26qMtskcksnvgWryHL2Qz3fw6fxv2q0wfxRHbzQ-28uDPWWw9UX34Nwy8_dav12d9bc2VhoDoSJrcMXQ";
+    // this.NW_BASEURL = "";
+    // this.NW_PROXYURL = "";
+    // this.proxyIp = ""; 
   },
   methods: {
     showSize(item) {

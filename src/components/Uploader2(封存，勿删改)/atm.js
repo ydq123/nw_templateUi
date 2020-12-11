@@ -1,9 +1,10 @@
 
-import request from './request.js';
+import request from '@/moduleAPI/request.js'; 
 // 请求头
 // const myQqt1 = setData.ZS_BASS_URL||'/hiddenDanger'; //隐患-自定义请求头-本地开发写法
 // const myQqt1 = 'http://172.16.68.42:80' || '/apiUrl'; //隐患-自定义请求头-本地开发写法
-const myQqt1 = '/apiUrl'; //隐患-自定义请求头-本地开发写法
+const myQqt1 = window.baseUrl || window.proxyUrl; //隐患-自定义请求头-本地开发写法
+console.log('myQqt1===='+myQqt1);
 //const myQqt1 = '/'; //操作票-自定义请求头-本地开发写法
 
 // 附件上传接口

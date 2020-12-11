@@ -2,27 +2,6 @@
 
 > 南网秘密小组件库
 
-# 项目目录
-``` bash
-.
-├── dist                         # 压缩后文件目录
-├── site                         # 项目结构目录
-│   ├── App.vue                  # 单页应用父组件          
-│   └── main.js                  # 单页应用启动入口文件
-├── src                           # 开发目录
-│   ├── assets                    # 静态文件：scss/image
-│   ├── components                # 存放共用组件库
-│   ├── index.js                  # 全局注册组件插件
-│   └── style.js                  # 导入scss
-├── index.html
-├── package.json                  # 依赖管理
-├── webpack.dev.js                #项目启动配置文件：npm run dev
-├── webpack.config.js             #项目打包配置文件：npm run build
-└── README.md                     #README
-```
-
-# Usage
-
 ## Install dependencies
 
 ```bash
@@ -42,8 +21,45 @@
   npm run build
 ```
 
-## uploader附件上传组件重点解释
-### 必传参数分别有	baseUrl: "", proxyUrl: "", proxyIp: "", accessToken: "", lookFileArr2: [], fileInfo: {}
-### baseUrl为真实开发ip地址，即为build上线后使用的地址，与下面代理地址、代理ip不可共存。开发时此参数传空。
-### proxyUrl为开发环境代理地址,非IP，代理例如('/api')，目的是方便在本地开发时可以配置使用；
-### proxyIp为开发环境代理地址（IP），光有代理地址没有真实ip不行（上传附件需要用到）；
+## 手把手教你用
+
+```bash
+  import "nwtemplate/dist/nwTemplateUi.css";
+  import nwtemplate from 'nwtemplate';
+  Vue.use(nwtemplate);
+```
+
+### uploader附件上传组件重点解释
+~~参数分别有	NW_BASEURL: "", NW_PROXYUL: "", proxyIp: "", accessToken: "", lookFileArr2: [], fileInfo: {}
+NW_BASEURL为真实开发ip地址，即为build上线后使用的地址，与下面代理地址、代理ip不可共存。开发时此参数传空。
+NW_PROXYUL为开发环境代理地址,非IP，代理例如('/api')，目的是方便在本地开发时可以配置使用；
+proxyIp为开发环境代理地址（IP），光有代理地址没有真实ip不行（上传附件需要用到）；~~
+
+#### 必须要做的事:
+  1. 在需要使用该库的项目下文件夹moduleAPI下必须要有个setData.js，该js文件里必须...（参考项目scyyd_module）
+  2. 在项目登录的时候必须手动挂载NW_BASEURL，NW_PROXYUL（非必传）到window变量下。
+
+#### NW_BASEURL为上线地址（开发环境可不传正式环境必传）；
+#### NW_PROXYUL为代理地址（字符串如：'/api'）;如不传默认为'/moduleIp'，意味着你的项目代理地址必须是'/moduleIp';
+#### proxyIp为开发环境下的后端调试的ip地址；如不传无法在开发环境下进行上传功能测试
+
+#### 在vant_tab下使用附件预览会出现bug，解决方法-->
+  1. 传参previewCompoment为false
+  2. 页面要这样来
+  ```javascript
+  <!-- 在页面根目录下插入这句代码 -->
+  <van-image-preview v-model="showPreview" :images="imageList" :startPosition="startPosition"></van-image-preview>
+  <!-- 在data定义这些参数 -->
+      showPreview: false,
+      imageList: [],
+      startPosition: 0,
+  <!-- 在该页面挂载该监听 -->
+  	  let _this =this;
+      _this.$across.$on("changePreview", function(data) {
+        console.log(1111111111111);
+        _this.imageList = data.imageList;
+        _this.showPreview = data.showPreview;
+        _this.startPosition = data.startPosition;
+      });
+  ```
+
