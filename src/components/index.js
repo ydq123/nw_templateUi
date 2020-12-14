@@ -7,6 +7,7 @@ import MapPop from './MapPop/MapPop.vue'
 import BotButton from './BotButton/BotButton.vue'
 import UnitPop from './UnitPop/UnitPop.vue'
 import OpenWin from './OpenWin/OpenWin.vue'
+import FixedHeader from './FixedHeader/FixedHeader.vue'
 
 export {
     Button,
@@ -17,5 +18,6 @@ export {
 	MapPop,
 	BotButton,
 	UnitPop,
-	OpenWin
+    OpenWin,
+    FixedHeader
 }

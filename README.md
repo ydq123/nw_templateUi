@@ -2,11 +2,6 @@
 
 > 南网秘密小组件库
 
-## Install dependencies
-
-```bash
-  npm install
-```
 ## Serve with hot reload at localhost:8080
 
 ```bash
@@ -62,4 +57,23 @@ proxyIp为开发环境代理地址（IP），光有代理地址没有真实ip不
         _this.startPosition = data.startPosition;
       });
   ```
+
+####FixedHeader组件使用
+```brash
+<!--第一种--使用示例如下 直接自己全新定义 -->
+  <nw-FixedHeader>
+    <div slot="default">
+      <div class="header">
+        <div class="left-btn">取消222</div>
+        <div class="header-txt">标题标题222</div>
+        <div class="right-content">4526</div>
+      </div>
+    </div>
+  </nw-FixedHeader>
+<!-- 第二种--使用示例如下 title传进来，自己定义left和right内容，也可以不传，有默认内容 自个斟酌-->
+  <nw-FixedHeader title="徐徐噶">
+    <div slot="left"><i class="pl10 iconfont icon-huitui"></i></div>
+    <div slot="right"><i class="pr10 iconfont icon-qianjin"></i></div>
+  </nw-FixedHeader>
+```
 
