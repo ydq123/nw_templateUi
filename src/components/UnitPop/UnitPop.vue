@@ -50,7 +50,7 @@
 						</div>
 					</div>
 					<div class="noData" v-if="unitList.length == 0 && isSearchBox">
-						<img src="../../assets/image/nullData.png" />
+						<img src="../../assets/images/nullData.png" />
 						<p>暂无数据</p>
 					</div>
 					
