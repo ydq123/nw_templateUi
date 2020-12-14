@@ -39,7 +39,7 @@
 					<i class="iconfont f16 icon-shanchu3 text-red" @click="delPersonnelBtn(index)"></i>
 				</div>
 				<div class="person-noData" v-if="curNodeList.length <= 0">
-					<img src="../assets/image/nullData.png" />
+					<img src="../assets/images/nullData.png" />
 					<p>暂无数据</p>
 				</div>
 			</div>
@@ -59,7 +59,7 @@
 			</van-list>
 			<div class="person-noData" v-if="taskInfo.nodeList.length <= 0">
 				<!-- <img :src="nullData" alt="" /> -->
-				<img src="../assets/image/nullData.png" />
+				<img src="../assets/images/nullData.png" />
 				<p>暂无数据</p>
 			</div>
 			<div class="person-bottom_button p10 bg-white person-row ju-b f16 width-100 fw boxt003" v-if="taskInfo.nodeList.length > 0 && isType == 1">
