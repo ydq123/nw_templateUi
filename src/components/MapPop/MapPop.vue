@@ -99,13 +99,13 @@
 					},
 					{
 						label: "影像地图",
-						value: "4",
+						value: "1",
 						key: require('@/assets/images/mapImg/layer_pic2.png'),
 						isChecked: false,
 					},
 					{
 						label: "栅格地图",
-						value: "5",
+						value: "1",
 						key: require('@/assets/images/mapImg/layer_pic3.png'),
 						isChecked: false,
 					},

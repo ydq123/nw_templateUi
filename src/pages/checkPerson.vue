@@ -297,7 +297,7 @@
 <style scoped lang="scss">
 	@import "../assets/scss/nw_tool.scss";
 	.checkPerson {
-		height: 100%;
+		// height: 100%;
 		background-color: #f5f5f5;
 	}
 

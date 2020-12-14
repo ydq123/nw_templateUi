@@ -76,8 +76,8 @@
 
 <script>
 	export default {
-		name: 'MapPop',
-		display: 'MapPop地图弹窗',
+		name: 'BotButton',
+		display: 'BotButton模块底部按钮',
 		data() {
 			return {
 				zhuyaoBtn: this.zyBtn,
