@@ -1,9 +1,9 @@
 <template>
   <div id="demoPage" style="padding-top:100px">
-    <nw-FixedHeader title="徐徐噶">
+    <nw-fixed-header title="徐徐噶">
       <div slot="left"><i class="pl10 iconfont icon-huitui"></i></div>
       <div slot="right"><i class="pr10 iconfont icon-qianjin"></i></div>
-    </nw-FixedHeader>
+    </nw-fixed-header>
     <nw-button @click="unitPop = true" size="large">large</nw-button>
     <nw-modal @on-ok="show3 = false" @on-cancel="show3 = false" :width="300" :isShow="show3"></nw-modal>
     <nw-module-top :isSort="true" :isSreen="true" :mTop="0" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList" @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen"></nw-module-top>
@@ -14,6 +14,8 @@
     <h1 class="mt20" @click="$router.push({name:'checkPerson',query:{type:1,userInfo:userInfo}})">测试打开新页面</h1>
     <hr style="margin-top:20px">
 		<nw-unit-pop :popShow="unitPop" :popUserInfo="userInfo" @overlay="testOverlay"></nw-unit-pop>
+    <!-- 悬浮球 -->
+    <nw-float-menu :menuArr="menuArr" @menuClick="menuClickTap"></nw-float-menu>
   </div>
 </template>
 
@@ -36,6 +38,29 @@ export default {
       show4: false,
       size: "",
       vConsole: null,
+      menuArr: [
+        {
+          name: "菜单一",
+          iconName: "",
+          iColorName: "",
+          iconColor: "",
+          imgName: require("@/assets/images/center.png")
+        },
+        {
+          name: "菜单二",
+          iconName: "",
+          iconColor: "",
+          iColorName: "",
+          imgName: require("@/assets/images/center.png")
+        },
+        {
+          name: "菜单二",
+          iconName: "",
+          iconColor: "",
+          iColorName: "",
+          imgName: require("@/assets/images/center.png")
+        }
+      ],
       testTabList: [
         {
           title: "123",
@@ -212,7 +237,6 @@ export default {
     };
   },
   mounted() {
-	 
     this.fileInfo = {
       jobTypeCode: "SP_SS_HID_RECORD_FIND",
       objId: "8A27048FFC18434EAE5C1727C28BCD51"
@@ -221,15 +245,15 @@ export default {
     this.proxyUrl = "/apiUrl";
     this.proxyIp = "http://172.16.68.42:80";
     this.accessToken =
-      "eyJhbGciOiJIUzUxMiJ9.eyJhY2NvdW50IjoiaHVhbmd4aXVob25nQGh6LmdkLmNzZy5jbiIsInVzZXJJZCI6IkJCNjIwQzJBRTk1RDQzMkU5RkM0N0NFQTM4REQ4ODE4IiwiZW1wbG95ZWVJZCI6IkY1MEE0MUJFQzRBRTRCNzk4RkI5MTU3RjlDOTdDNTY3IiwiZW1wbG95ZWVOYW1lIjoi6buE56eA57qiIiwib3JnSWQiOiI4YTE2ODI4YzYwYzBlMTZiMDE2MGRhNDQ3YWM5MDY4MiIsIm9yZ0NvZGUiOiIwMzEzMjg0MDAxMDIiLCJvcmdOYW1lIjoi6JCl6YWN57u85ZCI5LqM54-tIiwidGhpcmRTeXN0ZW1OYW1lIjoiSkFEUCIsInNhcEhyVXNlcklkIjoiOEU4RjRDNzkxOTFDQzA3MkUwNDMwQTk3NTAxM0MwNzIiLCJzYXBIck9yZ0lkIjoiZGJkNjQ5ZDI0MjZjNGU3NTgwZmEyYzIxZDRhMjM0NmYiLCJzeXN0ZW1OYW1lIjoibnVsbCIsInN1YiI6Ium7hOengOe6oiIsImlhdCI6MTYwNzU2NDQzOSwiZXhwIjoxNjA3NTY2MjM5LCJyZWZyZXNoSW50ZXJ2YWwiOjMwLCJqdGkiOiJlYjhhOGIxNS0zN2M4LTQzNjgtOTE4Mi01ZDUyMGQ3YTE5Y2EifQ.2itN5t26qMtskcksnvgWryHL2Qz3fw6fxv2q0wfxRHbzQ-28uDPWWw9UX34Nwy8_dav12d9bc2VhoDoSJrcMXQ";
+      "eyJhbGciOiJIUzUxMiJ9.eyJhY2NvdW50IjoiaHVhbmd4aXVob25nQGh6LmdkLmNzZy5jbiIsInVzZXJJZCI6IkJCNjIwQzJBRTk1RDQzMkU5RkM0N0NFQTM4REQ4ODE4IiwiZW1wbG95ZWVJZCI6IkY1MEE0MUJFQzRBRTRCNzk4RkI5MTU3RjlDOTdDNTY3IiwiZW1wbG95ZWVOYW1lIjoi6buE56eA57qiIiwib3JnSWQiOiI4YTE2ODI4YzYwYzBlMTZiMDE2MGRhNDQ3YWM5MDY4MiIsIm9yZ0NvZGUiOiIwMzEzMjg0MDAxMDIiLCJvcmdOYW1lIjoi6JCl6YWN57u85ZCI5LqM54-tIiwidGhpcmRTeXN0ZW1OYW1lIjoiSkFEUCIsInNhcEhyVXNlcklkIjoiOEU4RjRDNzkxOTFDQzA3MkUwNDMwQTk3NTAxM0MwNzIiLCJzYXBIck9yZ0lkIjoiZGJkNjQ5ZDI0MjZjNGU3NTgwZmEyYzIxZDRhMjM0NmYiLCJzeXN0ZW1OYW1lIjoibnVsbCIsInN1YiI6Ium7hOengOe6oiIsImlhdCI6MTYwNzkzOTA5NiwiZXhwIjoxNjA3OTQwODk2LCJyZWZyZXNoSW50ZXJ2YWwiOjMwLCJqdGkiOiJhOGZhNmZjOS1hZGJiLTQ5ZjUtODgzYi0zMDExMzFlZmNjYmYifQ.F-ShR0zVQEEtX0Q06MxjVqnlQJq-PhX1MaakZK3dLEs31ODa4oFZ6-J6cPvqN6pp8d-cnJEMMhpjbRnF_1uNwA";
 	var _this = this;
 	  _this.$bus.$on("testAccectFun", function(data) {
 	  	_this.testAccectFun(data);
 	  });
   },
   methods: {
-    aa() {
-      console.log('------------');
+    menuClickTap: function(obj) {
+      console.log(obj);
     },
 	  testAccectFun(data){
 		  console.log('跨页面',JSON.stringify(data));
@@ -267,4 +291,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+</style>

@@ -10,7 +10,7 @@
 		</div>
 		<div :style="{'z-index':zIndex}" class="pb20 pl20 pr20  round-20 dialog-content menuArr" ref="cancel" :class="{ show: showCancel }">
 			<div @click="showCancel=!showCancel" class="row  fl-w" :class="[menuArr.length>3?'ju-b':'ju-a']">
-				<div @click.stop="menuItmeTap(index)" class="column al-c mt20" v-for="(itme,index) in menuArr">
+				<div @click.stop="menuItmeTap(index)" class="column al-c mt20 ml5 mr5" v-for="(itme,index) in menuArr">
 					<slot name="menuItme">
 						<slot name="menuImg">
 							<i v-if="itme.iconName" class="iconfont text-white" :class="[itme.iconColor?itme.iconColor:'text-white',itme.iconSize?itme.iconSize:mrIcoSize,itme.iconName]"></i>
@@ -183,13 +183,7 @@
 					this.moveDiv.style.left = this.xPum + 'px';
 					this.moveDiv.style.top = this.yPum + 'px';
 					//阻止页面的滑动默认事件；如果碰到滑动问题，1.2 请注意是否获取到 touchmove
-					document.addEventListener(
-						'touchmove',
-						function() {
-							event.preventDefault();
-						},
-						false
-					);
+					window.addEventListener('touchmove', e => e.preventDefault())
 				}
 			},
 			//鼠标释放时候的函数
@@ -210,24 +204,29 @@
 				}
 				this.showCancel = false;
 			}
-
 		}
 	};
 </script>
 <style scoped lang="scss">
+@import "../../assets/scss/nw_tool.scss";
 	.xuanfu {
 		position: fixed;
-		width: 48px;
-		height: 48px;
+		width: r(48px);
+		height: r(48px);
 		right: 0;
-		bottom: 30px;
+		bottom: r(30px);
 		border-radius: 50%;
 
 		.xuanfuImg {
-			width: 48px;
-			height: 48px;
+			width: r(48px);
+			height: r(48px);
 		}
 	}
+
+/* 边角做圆 */
+.round-20{
+	border-radius: r(20px)
+}
 
 	.dialog-content {
 		transition: 0.3s ease;
@@ -239,15 +238,14 @@
 			transform: translateY(-50%) scale(1);
 		}
 	}
-
 	.menuArr {
 		position: fixed;
 		width: 80vw;
 		background: rgba(0, 0, 0, 0.5);
 
 		.menuArrImg {
-			height: 40px;
-			width: 40px;
+			height: nw_pxTorem(40px);
+			width: nw_pxTorem(40px);
 		}
 
 		.menuArrSpan {}

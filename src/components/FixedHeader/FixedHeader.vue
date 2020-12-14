@@ -47,6 +47,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../assets/scss/nw_tool.scss";
 //顶部返回导航
 .top-fixed {
   width: 100%;
@@ -64,19 +65,19 @@ export default {
     width: 100%;
   }
   .header {
-    line-height: 44px !important;
-    height: 44px !important;
+    line-height: r(44px) !important;
+    height: r(44px) !important;
     position: relative;
     display: flex;
     justify-items: center;
     align-items: center;
   }
   .left-btn {
-    padding: 0 15px !important;
+    padding: 0 r(15px) !important;
     color: #333333;
     position: absolute;
     left: 0px;
-    height: 44px !important;
+    height: r(44px) !important;
     top: 50%;
     display: flex;
     justify-items: center;
@@ -96,12 +97,12 @@ export default {
     }
   }
   .right-btn {
-    font-size: 12px;
-    padding: 0 15px;
+    font-size: r(12px);
+    padding: 0 r(15px);
     color: #272727;
     position: absolute;
     right: 0px;
-    height: 42px;
+    height: r(42px);
     top: 50%;
     display: flex;
     justify-items: center;
@@ -111,8 +112,8 @@ export default {
     -webkit-transform: translateY(-50%);
     .iconfont {
       display: block;
-      width: 20px;
-      height: 20px;
+      width: r(20px);
+      height: r(20px);
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
@@ -126,26 +127,26 @@ export default {
     white-space: nowrap;
     // flex: 1;
     //      display: inline-block;
-    font-size: 16px !important;
+    font-size: r(16px) !important;
     font-weight: bold;
     color: #212121;
-    line-height: 23px;
+    line-height: r(23px);
   }
   .right-word {
-    font-size: 7px;
+    font-size: r(7px);
     color: #4a4a4a;
     position: absolute;
-    right: 10px;
+    right: r(10px);
   }
   .top-fixed-shadow {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.17);
+    box-shadow: 0 r(2px) r(4px) rgba(0, 0, 0, 0.17);
   }
   &.top-fixed-shadow {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.17);
+    box-shadow: 0 r(2px) r(4px) rgba(0, 0, 0, 0.17);
   }
   .back-icon {
-    width: 10px;
-    height: 18px;
+    width: r(10px);
+    height: r(18px);
   }
 }
 
@@ -157,9 +158,9 @@ export default {
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
-  height: 44px;
-  line-height: 44px;
-  width: 60px;
+  height: r(44px);
+  line-height: r(44px);
+  width: r(60px);
   top: 50%;
   transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
