@@ -50,7 +50,7 @@
 						</div>
 					</div>
 					<div class="noData" v-if="unitList.length == 0 && isSearchBox">
-						<img src="~@/assets/image/nullData.png" alt="" />
+						<img src="../../assets/image/nullData.png" />
 						<p>暂无数据</p>
 					</div>
 					
@@ -200,8 +200,8 @@
 			},
 			// 初始化
 			init: function() {
-				console.log("unitpop------this.popUserInfo:::",this.popUserInfo);
-				console.log("unitpop------this.userInfo:::",this.userInfo);
+				console.log("unitpop------this.popUserInfo:::",JSON.stringify(this.popUserInfo));
+				console.log("unitpop------this.userInfo:::",JSON.stringify(this.userInfo));
 				this.getUserUnit();
 				this.showPop = this.popShow;
 				console.log("选择单位弹窗");

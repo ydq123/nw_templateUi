@@ -1,14 +1,14 @@
 <template>
 	<div class="checkPerson">
 		<div class="header-f bg-white">
-			<div class="h44 bg-f5 borderButtomE8 row al-c ju-b pl15 pr15">
+			<div class="h44 bg-f5 borderButtomE8 person-row al-c ju-b pl15 pr15">
 				<div class="left-btn" @click="$router.go(-1)">
 					<i class="iconfont icon-houtui gray6 f18"></i>
 				</div>
 				<div class="header-txt f16">选择人员</div>
 				<div class=""></div>
 			</div>
-			<div class="row al-c" @click="showPop = true">
+			<div class="person-row al-c" @click="showPop = true">
 				<div id="tabList" class="tab-list-scrollX bg-white f16 gray6 p15 mr30 border verticle-center">
 					<div class="" v-for="(tabItem,tabIndex) in tabList" :key="tabIndex">
 						<span :class="[tabIndex==currentTab?'gray6 mr15':'gray287']" v-html="tabItem.dangerSubType"></span>
@@ -20,7 +20,7 @@
 				</div>
 			</div>
 			<div class="bg-f5 pl15 pr15 pt10 pb10">
-				<div class="bg-white pt10 pb10 gray9 radius-5" @click="$tabOpenWin('operation_searchPersonnel', param)">
+				<div class="bg-white pt10 pb10 gray9 radius-5 f15" @click="$tabOpenWin('operation_searchPersonnel', param)">
 					<i class="iconfont icon-sousuo f15 ml5 mr5 gray9"></i>
 					搜索
 				</div>
@@ -32,14 +32,14 @@
 		<!-- 多选人员弹窗 -->
 		<van-popup v-model="showPicker2" round :style="{ width: '80%', height: '75%' }">
 			<div class="pt20 pb20">
-				<div class="p15 borderButtomE8 f16 row al-c" v-for="(value,index) in curNodeList" :key="index">
+				<div class="p15 borderButtomE8 f16 person-row al-c" v-for="(value,index) in curNodeList" :key="index">
 					<div class="flex-1">
 						{{value.dangerSubType}}
 					</div>
 					<i class="iconfont f16 icon-shanchu3 text-red" @click="delPersonnelBtn(index)"></i>
 				</div>
 				<div class="person-noData" v-if="curNodeList.length <= 0">
-					<!-- <img :src="require('@/assets/image/nullData.png')" alt="" /> -->
+					<img src="../assets/image/nullData.png" />
 					<p>暂无数据</p>
 				</div>
 			</div>
@@ -49,7 +49,7 @@
 			<van-list v-model="taskInfo.loading" :finished="taskInfo.finished" :finished-text="taskInfo.nodeList.length > 0 ? '没有更多数据了' : ''"
 			 @load="onLoad">
 				<van-pull-refresh v-model="taskInfo.refreshing" @refresh="onRefresh">
-					<div class="p15 bg-white row ju-b al-c f16 borderTopE8" @click="selectCurNode(nodeIndex)" :class="{'borderTopE8':nodeIndex!=0}"
+					<div class="p15 bg-white person-row ju-b al-c f16 borderTopE8" @click="selectCurNode(nodeIndex)" :class="{'borderTopE8':nodeIndex!=0}"
 					 v-for="(nodeItme,nodeIndex) in taskInfo.nodeList" :key="nodeIndex" >
 						<i class="iconfont f16 mr10" :class="[nodeItme.status ? 'icon-gou1 gray287' : 'icon-1 gray6']" @click.stop="selectCurNode(nodeIndex)"></i>
 						<div class="flex-1 gray3 text-overflow text-left">{{nodeItme.dangerSubType}}</div>
@@ -58,14 +58,15 @@
 				</van-pull-refresh>
 			</van-list>
 			<div class="person-noData" v-if="taskInfo.nodeList.length <= 0">
-				<!-- <img :src="require('@/assets/image/nullData.png')" alt="" /> -->
+				<!-- <img :src="nullData" alt="" /> -->
+				<img src="../assets/image/nullData.png" />
 				<p>暂无数据</p>
 			</div>
-			<div class="person-bottom_button p10 bg-white row ju-b f16 width-100 fw boxt003" v-if="taskInfo.nodeList.length > 0 && isType == 1">
+			<div class="person-bottom_button p10 bg-white person-row ju-b f16 width-100 fw boxt003" v-if="taskInfo.nodeList.length > 0 && isType == 1">
 				<div class="nw_buttom_354_44 bg-287 text-white"  @click="submitCurNode">确定</div>
 			</div>
-			<div class="person-bottom_button p10 bg-white row ju-b f16 width-100 fw boxt003" v-if="taskInfo.nodeList.length > 0 && isType == 2">
-				<div class="gray287 row al-c "  @click="showPicker2 = true">已选择: {{ curNodeList.length }}人</div>
+			<div class="person-bottom_button p10 bg-white person-row ju-b f16 width-100 fw boxt003" v-if="taskInfo.nodeList.length > 0 && isType == 2">
+				<div class="gray287 person-row al-c "  @click="showPicker2 = true">已选择: {{ curNodeList.length }}人</div>
 				<div class="nw_buttom_125_44 bg-287 text-white"  @click="submitCurNode">确定</div>
 			</div>
 		</div>
@@ -293,8 +294,8 @@
 	};
 </script>
 
-<style scoped lang='scss'>
-	/* @import "../../assets/scss/nw_tool.scss"; */
+<style scoped lang="scss">
+	@import "../assets/scss/nw_tool.scss";
 	.checkPerson {
 		height: 100%;
 		background-color: #f5f5f5;
@@ -315,7 +316,11 @@
 	}
 
 	.h44 {
-		height: 44px;
+		height: r(44px);
+	}
+	.person-row{
+		display: flex;
+		flex-direction: row;
 	}
 
 	.person-bottom_button {
@@ -327,7 +332,7 @@
 	}
 
 	.radius-5 {
-		border-radius: 5px;
+		border-radius: r(5px);
 	}
 
 	.pos-r {
@@ -335,17 +340,17 @@
 	}
 
 	.pt140 {
-		padding-top: 80px;
+		padding-top: r(80px);
 	}
 
 	.radius-8 {
-		border-radius: 8px;
+		border-radius: r(8px);
 	}
 
 	.tab-list-scrollX {
 		position: relative;
 		width: 100vw;
-		height: 44px;
+		height: r(44px);
 		white-space: nowrap;
 		overflow: hidden;
 		overflow-x: scroll;
@@ -365,30 +370,30 @@
 	
 	/*没有数据*/
 	.person-noData {
-		padding-top: 120px;
+		padding-top: r(120px);
 		text-align: center;
 		color: #b5b5b5;
-		font-size: 30px;
+		font-size: r(30px);
 		img {
-			width: 250px;
+			width: r(250px);
 			margin: 0 auto;
 		}
 		.button {
-			font-size: 30px;
-			min-width: 160px;
-			height: 60px;
-			padding: 0 56px;
-			line-height: 60px;
-			border-radius: 60px;
+			font-size: r(30px);
+			min-width: r(160px);
+			height: r(60px);
+			padding: 0 r(56px);
+			line-height: r(60px);
+			border-radius: r(60px);
 			background: #a22423;
 			color: #fff;
 			border-width: 1px;
 		}
 		p {
-			margin: 40px 0 56px;
+			margin: r(40px) 0 r(56px);
 		}
 		i {
-			font-size: 56px;
+			font-size: r(56px);
 		}
 	}
 	
