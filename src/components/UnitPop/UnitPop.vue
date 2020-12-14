@@ -1,4 +1,5 @@
 <!-- 选择单位弹窗
+	<nw-unit-pop :popShow="unitPop" :popUserInfo="userInfo" @overlay="testOverlay"></nw-unit-pop>
 	// 修改 选择单位弹窗样式开始
 	// popW: '', //弹窗宽度
 	// popH: '', //弹窗高度
@@ -455,5 +456,104 @@
 </script>
 
 <style scoped lang="scss">
-	@import "../../assets/scss/nw_unitpop.scss";
+	@import "../../assets/scss/nw_tool.scss";
+	.yw-unitpop{
+		.unit-row{
+			display: flex;
+			flex-direction: row;
+		}
+		
+		.pb65{
+			padding-bottom: r(65px);
+		}
+		.pt88{
+			padding-top: r(88px);
+		}
+		
+		.input-box {
+			width: 100%;
+			transition: all 0.5s;
+			
+			.left-btn {
+				left: -1.1rem;
+			}
+			
+			/* 顶部搜索 */
+			.task-top-input {
+				width: 80%;
+				height: r(30px);
+				border-radius: r(5px);
+			}
+		}
+		.pop-top{
+			height: r(44px);
+			top: r(44px);
+			width: 100%;
+			.top-w{
+				width: 90%;
+				height: r(30px);
+				border-radius: r(5px);
+			}
+		}
+		.unit-bottom_button {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			width: 100%;
+		}
+		.unit-pop{
+			height: auto;
+			.unit-pop-h{
+				height: 100%;
+				.unit-pop-hs{
+					height: 100%;
+				}
+			}
+		}
+		.pos-f {
+			position: fixed !important;
+			z-index: 999;
+		}
+		.pt88{
+			padding-top: r(88px);
+		}
+		
+		.pop-tab {
+			height: 100%;
+			overflow: auto;
+		
+			.bottom_button {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				width: 100%;
+			}
+		}
+		
+		.pos-r {
+			position: relative;
+		}
+		
+		.radius-8 {
+			border-radius: r(8px);
+		}
+		
+		.pop-tab-list-scrollX {
+			position: relative;
+			width: 100%;
+			height: r(44px);
+			white-space: nowrap;
+			overflow: hidden;
+			overflow-x: scroll;
+			-webkit-backface-visibility: hidden;
+			-webkit-perspective: 1000;
+			-webkit-overflow-scrolling: touch;
+		
+			.tab-list::-webkit-scrollbar {
+				display: none;
+			}
+		}
+	}
 </style>

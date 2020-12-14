@@ -9,11 +9,11 @@
 	text-align: center;
 	
 	.top-input {
-		padding: 10px;
+		padding: r(10px);
 		.input-box {
-			border-radius: 5px;
-			height: 30px;
-			line-height: 30px;
+			border-radius: r(5px);
+			height: r(30px);
+			line-height: r(30px);
 			background: white;
 		}
 	}
@@ -50,7 +50,7 @@
 
 // 筛选栏
 .task-top-sreen {
-  height: 40px;
+  height: r(40px);
   background-color: #fff;
 }
 
@@ -106,16 +106,16 @@
   white-space: nowrap;
 
   .tab-item {
-    height: 44px;
-    line-height: 44px;
+    height: r(44px);
+    line-height: r(44px);
   }
 
   .tab-border {
     position: absolute;
     bottom: 0;
     left: 0;
-    height: 3px;
-    border-radius: 10px;
+    height: r(3px);
+    border-radius: r(10px);
   }
 }
 
@@ -135,8 +135,8 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    height: 3px;
-    border-radius: 10px;
+    height: r(3px);
+    border-radius: r(10px);
   }
 }
 
@@ -148,8 +148,8 @@
   white-space: nowrap;
 
   .tab-item {
-    height: 44px;
-    line-height: 44px;
+    height: r(44px);
+    line-height: r(44px);
 	flex: 1;
   }
 
@@ -157,21 +157,21 @@
     position: absolute;
     bottom: 0;
     // left: 0;
-    height: 3px;
-    border-radius: 6px;
+    height: r(3px);
+    border-radius: r(6px);
   }
 
   .tab-number {
     position: absolute;
-    bottom: 14px;
+    bottom: r(14px);
     display: inline-block;
-    height: 15px;
-    line-height: 15px;
-    margin-left: 2px;
-    padding: 0 7px;
+    height: r(15px);
+    line-height: r(15px);
+    margin-left: r(2px);
+    padding: 0 r(7px);
     background-color: #f15747;
-    border-radius: 7px;
-    font-size: 10px;
+    border-radius: r(7px);
+    font-size: r(10px);
     color: #ffffff;
   }
 }
@@ -179,7 +179,7 @@
 // 一行展示，横向滚动的tab栏
 .tab-list-scrollX {
   width: 100vw;
-  height: 44px;
+  height: r(44px);
   white-space: nowrap;
   overflow: hidden;
   overflow-x: scroll;
@@ -199,8 +199,8 @@
 			right: 0;
 			width: 80%;
 			height: 100%;
-			padding-top: 44px;
-			padding-bottom: 65px;
+			padding-top: r(44px);
+			padding-bottom: r(65px);
 			overflow: hidden;
 
 			.sreen-box {
@@ -219,7 +219,7 @@
 		}
 
 		.sreen-item {
-			border-radius: 4px;
+			border-radius: r(4px);
 			color: #666;
 		}
 

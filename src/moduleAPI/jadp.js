@@ -2,7 +2,7 @@ import request from './request.js';
 // 请求头
 // const myQqt1 = setData.ZS_BASS_URL||'/hiddenDanger'; //隐患-自定义请求头-本地开发写法
 // const myQqt1 = 'http://172.16.68.42:80' || '/apiUrl'; //隐患-自定义请求头-本地开发写法
-const myQqt1 = '/apiUrl'; //隐患-自定义请求头-本地开发写法
+const myQqt1 = window.NW_BASEURL || window.NW_PROXYURL || '/moduleIp'; //隐患-自定义请求头-本地开发写法
 //const myQqt1 = '/'; //操作票-自定义请求头-本地开发写法
 
 // 登录接口

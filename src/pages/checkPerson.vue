@@ -39,7 +39,7 @@
 					<i class="iconfont f16 icon-shanchu3 text-red" @click="delPersonnelBtn(index)"></i>
 				</div>
 				<div class="person-noData" v-if="curNodeList.length <= 0">
-					<img src="~@/assets/image/nullData.png" alt="" />
+					<!-- <img :src="require('@/assets/image/nullData.png')" alt="" /> -->
 					<p>暂无数据</p>
 				</div>
 			</div>
@@ -58,7 +58,7 @@
 				</van-pull-refresh>
 			</van-list>
 			<div class="person-noData" v-if="taskInfo.nodeList.length <= 0">
-				<img src="~@/assets/image/nullData.png" alt="" />
+				<!-- <img :src="require('@/assets/image/nullData.png')" alt="" /> -->
 				<p>暂无数据</p>
 			</div>
 			<div class="person-bottom_button p10 bg-white row ju-b f16 width-100 fw boxt003" v-if="taskInfo.nodeList.length > 0 && isType == 1">
@@ -294,6 +294,7 @@
 </script>
 
 <style scoped lang='scss'>
+	/* @import "../../assets/scss/nw_tool.scss"; */
 	.checkPerson {
 		height: 100%;
 		background-color: #f5f5f5;
