@@ -1,5 +1,9 @@
 <template>
   <div id="demoPage" style="padding-top:100px">
+    <nw-FixedHeader title="徐徐噶">
+      <div slot="left"><i class="pl10 iconfont icon-huitui"></i></div>
+      <div slot="right"><i class="pr10 iconfont icon-qianjin"></i></div>
+    </nw-FixedHeader>
     <nw-button @click="unitPop = true" size="large">large</nw-button>
     <nw-modal @on-ok="show3 = false" @on-cancel="show3 = false" :width="300" :isShow="show3"></nw-modal>
     <nw-module-top :isSort="true" :isSreen="true" :mTop="0" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList" @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen"></nw-module-top>
@@ -224,6 +228,9 @@ export default {
 	  });
   },
   methods: {
+    aa() {
+      console.log('------------');
+    },
 	  testAccectFun(data){
 		  console.log('跨页面',JSON.stringify(data));
 	  },
