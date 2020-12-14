@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 // 全局基础样式
-import '@/assets/index.scss'
+import '@/assets/scss/all.scss'
 /* 引入自定义iocn */
 import '@/assets/fonts/iconfont.css';
 // 
@@ -19,8 +19,8 @@ Vue.prototype.myJssdk = new EimMobileJsSdk();
 import '@/plugin/vant/vant_init.js'; //初始化
 
 /* 跨页面通讯 */
-import across from '@/utils/across.js'; //跨页面通讯
-Vue.prototype.$across = across;
+import bus from '@/utils/bus.js'; //跨页面通讯
+Vue.prototype.$bus = bus;
 
 Vue.use(nwVue)
 new Vue({

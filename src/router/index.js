@@ -1,27 +1,11 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import routes from './routerConfig.js'
 
 Vue.use(VueRouter);
 
-const routes = [{
-    path: '/',
-    redirect: '/demoPage',
-  },
-  {
-    path: '/demoPage',
-    name: 'demoPage',
-    component: () => import( /* webpackChunkName: "about" */ '../pages/demoPage.vue'),
-  },
-  {
-    path: '/checkPerson',
-    name: 'checkPerson',
-    component: () => import( /* webpackChunkName: "about" */ '../pages/checkPerson.vue'),
-  },
-];
-
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
+  base: './',
   routes,
 });
 

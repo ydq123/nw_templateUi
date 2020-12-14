@@ -55,7 +55,7 @@ proxyIp为开发环境代理地址（IP），光有代理地址没有真实ip不
       startPosition: 0,
   <!-- 在该页面挂载该监听 -->
   	  let _this =this;
-      _this.$across.$on("changePreview", function(data) {
+      _this.$bus.$on("changePreview", function(data) {
         console.log(1111111111111);
         _this.imageList = data.imageList;
         _this.showPreview = data.showPreview;

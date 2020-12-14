@@ -270,9 +270,9 @@
 					}
 					data.curNodeItemlist = this.curNodeList;
 				}
-				this.$across.$emit('testAccectFun', data);
+				this.$bus.$emit('testAccectFun', data);
 				console.log("跨页面通讯回调data" + JSON.stringify(data));
-				// this.$across.$emit('', data);
+				// this.$bus.$emit('', data);
 				// this.$tabBack(-1);
 				this.$router.go(-1);
 			},
