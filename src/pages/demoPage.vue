@@ -16,6 +16,20 @@
 		<nw-unit-pop :popShow="unitPop" :popUserInfo="userInfo" @overlay="testOverlay"></nw-unit-pop>
     <!-- 悬浮球 -->
     <nw-float-menu :menuArr="menuArr" @menuClick="menuClickTap"></nw-float-menu>
+    <!-- 动画加载中 -->
+    <nw-inside-loading>
+      <div slot="loadingImg">
+        <van-icon name="shrink" />
+      </div>
+      <!-- <div slot="loadingText">
+       <span>获取数据中...</span>
+      </div> -->
+    </nw-inside-loading>
+    <!-- 暂无数据占位图 -->
+    <nw-null-data>
+			<div slot="nullImg"><img src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2771978851,2906984932&fm=26&gp=0.jpg" alt="" /></div>
+			<div slot="nullText">123</div>
+		</nw-null-data>
   </div>
 </template>
 
@@ -24,6 +38,8 @@ export default {
   name: "demoPage",
   data() {
     return {
+
+      aa:false,
 		unitPop:false,
       baseUrl: "",
       proxyUrl: "",

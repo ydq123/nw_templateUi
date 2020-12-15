@@ -77,9 +77,35 @@ proxyIp为开发环境代理地址（IP），光有代理地址没有真实ip不
   </nw-FixedHeader>
 ```
 
+####自定义InsideLoading加载中组件使用
+```brash
+<!-- 调用示例-->
+   <!--普通用法-->
+    <nw-inside-loading> </nw-inside-loading>
+    <!--替换插槽-->
+    <nw-inside-loading>
+      <div slot="loadingImg">
+        <van-icon name="shrink" />
+      </div>
+      <label slot="loadingText">
+       <span>获取数据中...</span>
+      </label>
+    </nw-inside-loading>
+```
 
 
-------------------------------------------------------------------------------------------------------------
+####无数据占位图组件使用
+```brash
+<!-- 调用示例-->
+   <!--普通用法-->
+    <nw-null-data></nw-null-data>
+    <!--替换插槽-->
+    <nw-null-data>
+			<div slot="nullImg"><img src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2771978851,2906984932&fm=26&gp=0.jpg" alt="" /></div>
+			<div slot="nullText">123</div>
+		</nw-null-data>
+```
+======================================================================================================
 
 ####BotButton底部按钮组件使用方法
 ```brash

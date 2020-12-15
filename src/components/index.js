@@ -8,6 +8,8 @@ import BotButton from './BotButton/BotButton.vue'
 import UnitPop from './UnitPop/UnitPop.vue'
 import FixedHeader from './FixedHeader/FixedHeader.vue'
 import FloatMenu from './FloatMenu/FloatMenu.vue'
+import InsideLoading from './InsideLoading/InsideLoading.vue'
+import NullData from './NullData/NullData.vue'
 
 export {
     Button,
@@ -19,5 +21,7 @@ export {
 	BotButton,
 	UnitPop,
     FixedHeader,
-    FloatMenu
+    FloatMenu,
+    InsideLoading,
+    NullData
 }
