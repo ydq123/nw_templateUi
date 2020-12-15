@@ -315,7 +315,7 @@ resetScreen// moduletop模块筛选重置
 自定义方法例子：testResetScreen() { console.log('moduletop模块筛选重置'); },
 ```
 
-####ModuleTop模块头部组件使用方法
+####UnitPop模块组件使用方法
 ```brash
 <!-- 标签，存在默认值， -->
 <nw-unit-pop :popShow="false" :popUserInfo="userInfo" @overlay="testOverlay" />
@@ -330,13 +330,6 @@ resetScreen// moduletop模块筛选重置
 		"account": "maojiajie",
 		"shortSpell": "mjj",
 		"fullSpell": "maojiajie",
-		"state": 1,
-		"jobStatus": 0,
-		"employeeStatus": 0,
-		"sortOrder": 0,
-		"sex": 0,
-		"createTime": 1586763073000,
-		"marriage": 0,
 		"orgId": "1589BAA87C11BD64E053380F0A0A54B2",
 		"orgName": "广州天河供电局",
 		"nameFullPath": "中国南方电网有限责任公司/广州供电局有限公司/广州天河供电局",
@@ -345,13 +338,11 @@ resetScreen// moduletop模块筛选重置
 		"orgStructureId": "A",
 		"unitOid": "1589BAA87C11BD64E053380F0A0A54B2",
 		"unitOname": "广州天河供电局",
-		"orgLevel": 3,
-		"orgType": 5,
 		"unitCode": "030120",
 		"shortOrgName": "天河"
 	}
 <!-- 方法说明 -->
 overlay,//关闭弹窗
-testOverlay
+自定义方法例子：testOverlay(data) { console.log(data); },
 
 ```

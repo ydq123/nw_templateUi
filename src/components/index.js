@@ -10,6 +10,7 @@ import FloatMenu from './FloatMenu/FloatMenu.vue' //悬浮球组件
 import InsideLoading from './InsideLoading/InsideLoading.vue' //动画加载中组件
 import NullData from './NullData/NullData.vue' //无数据占位组件
 import PopupFilter from './PopupFilter/PopupFilter.vue' //右侧弹出筛选组件
+import TopInput from './TopInput/TopInput.vue' //搜索组件
 
 export {
     Button,
@@ -23,5 +24,6 @@ export {
     FloatMenu,
     InsideLoading,
     NullData,
-    PopupFilter
+    PopupFilter,
+	TopInput
 }
