@@ -48,17 +48,17 @@
  -->
 <template>
 	<div class="yw-botbut">
-		<div class="p10 bg-white" v-if="zhuyaoBtn.btnType">
+		<div class="p10 bg-white boxs" v-if="zhuyaoBtn.btnType">
 			<div @click="zyCliBtn" class="btn btn-width-100" :style="{color:zhuyaoBtn.color,backgroundColor:zhuyaoBtn.bgcolor,fontSize:zhuyaoBtn.fsize}">{{ zhuyaoBtn.text }}</div>
 		</div>
-		<div class="p10 bg-white" v-if="ciyaoBtn.btnType">
+		<div class="p10 bg-white boxs" v-if="ciyaoBtn.btnType">
 			<div @click="cyCliBtn" class="btn btn-width-100 cybtn" :style="{color:ciyaoBtn.color,fontSize:ciyaoBtn.fsize}">{{ ciyaoBtn.text }}</div>
 		</div>
-		<div class="p10 bg-white flex-d" v-if="twoBtn.btnType">
+		<div class="p10 bg-white flex-d boxs" v-if="twoBtn.btnType">
 			<div @click="towCyCliBtn" class="btn btn-width-100 cybtn mr5" :style="{color:twoBtn.ciyaoBtn.color,fontSize:twoBtn.ciyaoBtn.fsize}">{{ twoBtn.ciyaoBtn.text }}</div>
 			<div @click="towZyCliBtn" class="btn btn-width-100 ml5" :style="{color:twoBtn.zhuyaoBtn.color,backgroundColor:twoBtn.zhuyaoBtn.bgcolor,fontSize:twoBtn.zhuyaoBtn.fsize}">{{ twoBtn.zhuyaoBtn.text }}</div>
 		</div>
-		<div class="p10 bg-white flex-d" v-if="iconBtn.btnType">
+		<div class="p10 bg-white flex-d boxs" v-if="iconBtn.btnType">
 			<div class="btn btn-width-100 mr5 btn-row btn-al-c btn-ju-a">
 				<div @click="cliIconItemBtn(item)" class="" v-for="(item,index) in iconBtn.iconList" :key="index">
 					<div class="">
@@ -202,6 +202,9 @@
 		z-index: 8;
 		text-align: center;
 		width: 100%;
+	}
+	.boxs{
+		box-shadow: r(10px) r(10px) r(10px) r(10px) rgba(0,0,0,0.2);
 	}
 	.btn{
 		height: r(44px);

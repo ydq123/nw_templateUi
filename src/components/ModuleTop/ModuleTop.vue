@@ -1,7 +1,6 @@
 <!-- ModuleTop模块头部组件使用方法
 	<nw-module-top :isSort="true" :isSreen="true" :mTop="0" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList" @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen"></nw-module-top> 
 	ModuleTop模块头部组件参数
-	mTop: 44,//距离头部高度
 	tabList: [
 		{
 			title: "已办",
@@ -72,14 +71,16 @@
  -->
 <template>
 	<div>
-		<div class="yw-moduletop nw_bag_F5" :style="{top:mTop+'px'}">
-			<!-- 搜索框 -->
-			<div class="top-input">
-				<div class="input-box" @click="inputTopBtn">
-					<i class="iconfont icon-sousuo nw_f14 nw_text_99"></i>
-					<span class="nw_f14 nw_text_99">搜索</span>
+		<div class="yw-moduletop nw_bag_F5">
+			<slot name="topInput">
+				<!-- 搜索框 -->
+				<div class="top-input">
+					<div class="input-box" @click="inputTopBtn">
+						<i class="iconfont icon-sousuo nw_f14 nw_text_99"></i>
+						<span class="nw_f14 nw_text_99">搜索</span>
+					</div>
 				</div>
-			</div>
+			</slot>
 			<!-- tab -->
 			<div class="tab-box width-100 borderButtomE8">
 				<div class="tab-list-border verticle-center bg-white f16">
@@ -90,17 +91,19 @@
 					<div class="tab-border bg-287" :style="activeBarStyle" ref="activeBar"></div>
 				</div>
 			</div>
-			<div class="module-row task-top-sreen borderTopE8">
-				<div class="flex-1 text-left gray6 pl15 f16 verticle-center">{{'共' + tabList[curTabIndex].number + '条记录'}}</div>
-				<div class="task-top-sreen-btn pl15 pr15 verticle-center" m="click" @click="changeSort" v-if="isSort">
-					<span class="f16 mr5 gray6">排序</span>
-					<i class="iconfont icon-qianjin-copy f10 gray9" :class="{'showRotate': sortData.showPop}"></i>
+			<slot name="taskSreenSort">
+				<div class="module-row task-top-sreen borderTopE8">
+					<div class="flex-1 text-left gray6 pl15 f16 verticle-center">{{'共' + tabList[curTabIndex].number + '条记录'}}</div>
+					<div class="task-top-sreen-btn pl15 pr15 verticle-center" m="click" @click="changeSort" v-if="isSort">
+						<span class="f16 mr5 gray6">排序</span>
+						<i class="iconfont icon-qianjin-copy f10 gray9" :class="{'showRotate': sortData.showPop}"></i>
+					</div>
+					<div class="task-top-sreen-btn pl15 pr15 verticle-center" m="click" @click="changeSreen" v-if="isSreen">
+						<span class="f16 mr5 gray6">筛选</span>
+						<i class="iconfont icon-shaixuan1 f10 gray9"></i>
+					</div>
 				</div>
-				<div class="task-top-sreen-btn pl15 pr15 verticle-center" m="click" @click="changeSreen" v-if="isSreen">
-					<span class="f16 mr5 gray6">筛选</span>
-					<i class="iconfont icon-shaixuan1 f10 gray9"></i>
-				</div>
-			</div>
+			</slot>
 			<!-- 排序 -->
 			<div v-if="sortData.showPop" class="bg-white">
 				<div v-for="(sortItem, sortIndex) in sortData.list" :key="sortIndex">
@@ -111,7 +114,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="zdc" v-show="showPop" :class="[sortData.showPop?'zIndex9':'zIndex999']" @click.stop="zdcBtnShow"></div>
+		<div class="" v-show="showPop" :class="[sortData.showPop?'sortzdc':'sreenzdc']" @click.stop="zdcBtnShow"></div>
 		<!-- 筛选 -->
 		<div class="sreen-warp bg-white" :class="[sreenData.showPop?'showBgcW':'']">
 			<div class="sreen-box">
@@ -188,10 +191,6 @@
 			}
 		},
 		props: {
-			mTop: { // 距离头部高度
-				type: Number,
-				default: 44
-			},
 			tabList: { // tab数组
 				type: Array,
 				default: () => [{

@@ -61,7 +61,8 @@
 					<div class="bg-f5 pr20 pl20 pb10 pt10 text-left">{{ val.mlTitle }}</div>
 					<div class="map-row al-c ju-b pr20 pl20 pt10 pb10" v-for="(Lval,Lindex) in val.mlList" :key="Lindex">
 						<div class="map-row al-c">
-							<div class="map-deng" v-if="Lval.dengCol" :class="[Lval.dengCol == 1?'map-deng-red':'',Lval.dengCol == 2?'map-deng-yellow':'',Lval.dengCol == 3?'map-deng-green':'',Lval.dengCol == 4?'map-deng-f5':'']"></div>
+							<!-- :class="[Lval.dengCol == 1?'map-deng-red':'',Lval.dengCol == 2?'map-deng-yellow':'',Lval.dengCol == 3?'map-deng-green':'',Lval.dengCol == 4?'map-deng-f5':'']" -->
+							<div class="map-deng" v-if="Lval.dengCol" :style="{backgroundColor:Lval.dengCol}"></div>
 							<span class="ml5">{{ Lval.text }}</span>
 						</div>
 						<van-switch v-model="Lval.status" />
@@ -119,24 +120,24 @@
 						mlType: 'dj',
 						mlList: [
 							{
-								dengCol: 1,
+								dengCol: '#fa3a3d',
 								text: '紧急',
-								status: false
+								status: false,
 							},
 							{
-								dengCol: 2,
+								dengCol: '#f9d501',
 								text: '重大',
-								status: false
+								status: false,
 							},
 							{
-								dengCol: 3,
+								dengCol: '#00ee8e',
 								text: '一般',
-								status: false
+								status: false,
 							},
 							{
-								dengCol: 4,
+								dengCol: '#f5f5f5',
 								text: '其他',
-								status: false
+								status: false,
 							}
 						]
 					},
@@ -152,16 +153,6 @@
 								text: '已超期',
 								status: false
 							},
-						]
-					},
-					{
-						mlTitle: '地图显示',
-						mlType: 'dtxs',
-						mlList: [
-							{
-								text: '未消缺',
-								status: false
-							}
 						]
 					}
 				]

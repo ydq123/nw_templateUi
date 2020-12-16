@@ -3,9 +3,9 @@
 .yw-moduletop {
 	width: 100%;
 	height: auto;
-	position: fixed;
+	// position: fixed;
 	// top: 44px;
-	z-index: 99;
+	// z-index: 99;
 	text-align: center;
 	.top-input {
 		padding: r(10px);
@@ -19,21 +19,20 @@
 
 }
 
-.zdc {
+.sreenzdc {
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.5);
 	position: fixed;
 	top: 0;
 	left: 0;
+	z-index: 999;
 }
 
-.zIndex9 {
-	z-index: 9 !important;
-}
-
-.zIndex999 {
-	z-index: 999 !important;
+.sortzdc {
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.5);
 }
 
 .module-width-33 {

@@ -370,16 +370,16 @@
 	
 	/*没有数据*/
 	.person-noData {
-		padding-top: r(120px);
+		padding-top: r(140px);
 		text-align: center;
 		color: #b5b5b5;
-		font-size: r(30px);
+		font-size: r(15px);
 		img {
-			width: r(250px);
+			width: r(200px);
 			margin: 0 auto;
 		}
 		.button {
-			font-size: r(30px);
+			font-size: r(15px);
 			min-width: r(160px);
 			height: r(60px);
 			padding: 0 r(56px);
