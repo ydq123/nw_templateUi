@@ -1,11 +1,10 @@
 <template>
   <div id="demoPage" style="padding-top:100px">
-    <nw-fixed-header title="徐徐噶">
-      <div slot="left"><i class="pl10 iconfont icon-huitui"></i></div>
-      <div slot="right"><i class="pr10 iconfont icon-qianjin"></i></div>
+    <nw-fixed-header title="徐徐噶" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
+      <div slot="page-bottmo">
+      </div>
     </nw-fixed-header>
-    <nw-button @click="unitPop = true" size="large">large</nw-button>
-    <nw-modal @on-ok="show3 = false" @on-cancel="show3 = false" :width="300" :isShow="show3"></nw-modal>
+    <nw-button size="large"><h1 @click="aa">sssss</h1></nw-button>
     <nw-module-top :isSort="true" :isSreen="true" :mTop="0" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList" @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen"></nw-module-top>
     <!-- <nw-test></nw-test> -->
     <hr style="margin-top:20px">
@@ -30,6 +29,7 @@
 			<div slot="nullImg"><img src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2771978851,2906984932&fm=26&gp=0.jpg" alt="" /></div>
 			<div slot="nullText">123</div>
 		</nw-null-data>
+    <nw-PopupFilter v-model="popupState"></nw-PopupFilter>
   </div>
 </template>
 
@@ -38,9 +38,9 @@ export default {
   name: "demoPage",
   data() {
     return {
-
-      aa:false,
-		unitPop:false,
+      testval: '',
+      popupState: false,
+		  unitPop:false,
       baseUrl: "",
       proxyUrl: "",
       accessToken: "",
@@ -60,14 +60,14 @@ export default {
           iconName: "",
           iColorName: "",
           iconColor: "",
-          imgName: require("@/assets/images/center.png")
+          imgName: require("../assets/images/center.png")
         },
         {
           name: "菜单二",
           iconName: "",
           iconColor: "",
           iColorName: "",
-          imgName: require("@/assets/images/center.png")
+          imgName: require("../assets/images/center.png")
         },
         {
           name: "菜单二",
@@ -268,6 +268,19 @@ export default {
 	  });
   },
   methods: {
+    backHandle() {
+      console.log('头部返回');
+    },
+    ClockHandle() {
+      console.log('右上角三点');
+    },
+    HomeHandle() {
+      console.log('右上角圆点');
+    },
+    aa() {
+      this.popupState = true;
+      console.log(this.popupState);
+    },
     menuClickTap: function(obj) {
       console.log(obj);
     },
