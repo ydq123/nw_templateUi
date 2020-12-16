@@ -74,7 +74,7 @@ export default {
           iconName: "",
           iconColor: "",
           iColorName: "",
-          imgName: require("@/assets/images/center.png")
+          imgName: require("../assets/images/center.png")
         }
       ],
       testTabList: [
