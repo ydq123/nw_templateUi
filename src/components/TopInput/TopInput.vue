@@ -73,7 +73,7 @@
 		props: {
 			mTop: { // 距离头部高度
 				type: Number,
-				default: 44
+				default: 0
 			},
 			isSort: { // 控制显示排序按钮，默认为true：显示
 				type: Boolean,

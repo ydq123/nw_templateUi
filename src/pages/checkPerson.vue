@@ -20,7 +20,7 @@
 				</div>
 			</div>
 			<div class="bg-f5 pl15 pr15 pt10 pb10">
-				<div class="bg-white pt10 pb10 gray9 radius-5 f15 text-center" @click="$tabOpenWin('operation_searchPersonnel', param)">
+				<div class="bg-white pt10 pb10 gray9 radius-5 f15 text-center">
 					<i class="iconfont icon-sousuo f15 ml5 mr5 gray9"></i>
 					搜索
 				</div>
