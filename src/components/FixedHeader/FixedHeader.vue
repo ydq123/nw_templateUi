@@ -18,7 +18,6 @@
           </div>
         </slot>
       </div>
-      <slot name="page-bottmo"></slot>
     </slot>
     <slot name="page-bottmo"></slot>
     <!--第一种--使用示例如下 直接自己全新定义 -->
