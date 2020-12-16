@@ -1,33 +1,45 @@
 <template>
-  <div class="top-fixed bg-white" id="header" :style="'padding-top:' + '0px ;'">
+  <div class="top-fixed" id="header" :style="'padding-top:' + '0px ;'">
     <slot name="default">
       <div class="header">
         <slot name="left">
-          <div class="left-btn"><i class="iconfont icon-huitui"></i></div>
+          <div class="left-btn" @click="headBack">
+            <i class="iconfont icon-houtui"></i>
+          </div>
         </slot>
         <slot name="center">
           <div class="header-txt">{{ title }}</div>
         </slot>
         <slot name="right">
-          <div class="right-content">更多</div>
+          <!-- <div class="right-content">更多</div> -->
+          <div class="right-content">
+            <div @click="threeClock"></div>
+            <div @click="backHome"></div>
+          </div>
         </slot>
       </div>
+      <slot name="page-bottmo"></slot>
     </slot>
+    <slot name="page-bottmo"></slot>
     <!--第一种--使用示例如下 直接自己全新定义 -->
-    <!-- <nw-FixedHeader>
+    <!-- <nw-FixedHeader @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
       <div slot="default">
 				<div class="header">
 					<div class="left-btn">取消222</div>
 					<div class="header-txt">标题标题222</div>
 					<div class="right-content">4526</div>
 				</div>
+        <div slot="page-bottmo">需要固定在头部的其他东西</div>
 			</div>
     </nw-FixedHeader> -->
     <!-- 第二种--使用示例如下 title传进来，自己定义left和right内容，也可以不传，有默认内容 自个斟酌-->
-    <!-- <nw-FixedHeader title="徐徐噶">
+    <!-- <nw-FixedHeader title="徐徐噶" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
       <div slot="left"><i class="pl10 iconfont icon-huitui"></i></div>
       <div slot="right"><i class="pr10 iconfont icon-qianjin"></i></div>
+      <div slot="page-bottmo">需要固定在头部的其他东西</div>
     </nw-FixedHeader> -->
+    <!-- methods说明 -->
+    <!-- headBackeHandle---点击左上角返回按钮事件  threeClockHandle---点击右上角三点按钮事件 backHomeHandle---点击右上角⚪点按钮事件-->
   </div>
 </template>
 
@@ -42,7 +54,17 @@ export default {
   },
   mixins: [tabMinxin], //混入公共类
   name: "fixed-header",
-  methods: {}
+  methods: {
+    threeClock() {
+      this.$emit("threeClockHandle");
+    },
+    backHome() {
+      this.$emit("backHomeHandle");
+    },
+    headBack() {
+      this.$emit("headBackeHandle");
+    }
+  }
 };
 </script>
 
@@ -51,7 +73,7 @@ export default {
 //顶部返回导航
 .top-fixed {
   width: 100%;
-  background: #fff;
+  background: transparent;
   position: fixed;
   top: 0;
   z-index: 102;
@@ -65,6 +87,7 @@ export default {
     width: 100%;
   }
   .header {
+    background: #fff;
     line-height: r(44px) !important;
     height: r(44px) !important;
     position: relative;
@@ -154,19 +177,20 @@ export default {
 .right-content {
   position: absolute;
   right: 0;
-  // background-image: url("~@/assets/images/publicImg/top_rigth.png");
+  background-image: url("~@/assets/images/top_rigth.png");
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
   height: r(44px);
   line-height: r(44px);
-  width: r(60px);
+  width: r(86px);
   top: 50%;
   transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
   transform-origin: 0 0;
   -webkit-transform-origin: 0 0;
   div {
+    float: left;
     width: 50% !important;
     height: 100% !important;
   }
