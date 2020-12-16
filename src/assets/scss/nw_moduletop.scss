@@ -1,243 +1,244 @@
 @charset "UTF-8";
 @import 'nw_tool';
-.yw-moduletop{
+.yw-moduletop {
 	width: 100%;
 	height: auto;
 	position: fixed;
 	// top: 44px;
 	z-index: 99;
 	text-align: center;
-	
 	.top-input {
-		padding: 10px;
+		padding: r(10px);
 		.input-box {
-			border-radius: 5px;
-			height: 30px;
-			line-height: 30px;
+			border-radius: r(5px);
+			height: r(30px);
+			line-height: r(30px);
 			background: white;
 		}
 	}
-	
+
 }
 
-.zdc{
+.zdc {
 	width: 100%;
 	height: 100%;
-	background-color: rgba(0,0,0,0.5);
+	background-color: rgba(0, 0, 0, 0.5);
 	position: fixed;
 	top: 0;
 	left: 0;
 }
 
-.zIndex9{
+.zIndex9 {
 	z-index: 9 !important;
 }
 
-.zIndex999{
+.zIndex999 {
 	z-index: 999 !important;
 }
 
-.module-width-33{
-	width: 33.3%;
+.module-width-33 {
+	// width: 33.3%;
 	float: left;
 	position: relative;
 }
 
-.module-row{
+.module-row {
 	display: flex;
 	flex-direction: row;
 }
 
 // 筛选栏
 .task-top-sreen {
-  height: 40px;
-  background-color: #fff;
+	height: r(40px);
+	background-color: #fff;
 }
 
 .task-top-sreen-btn {
-  border-left: 1px solid rgb(240, 238, 238);
-
-  i {
-    -moz-transition: all 0.3s;
-    -moz-transform: rotate(0deg);
-    -webkit-transition: all 0.3s;
-    -webkit-transform: rotate(0deg);
-
-    &.showRotate {
-      -moz-transform: rotate(180deg);
-      -webkit-transform: rotate(180deg);
-    }
-  }
+	border-left: 1px solid rgb(240, 238, 238);
+	i {
+		-moz-transition: all 0.3s;
+		-moz-transform: rotate(0deg);
+		-webkit-transition: all 0.3s;
+		-webkit-transform: rotate(0deg);
+		&.showRotate {
+			-moz-transform: rotate(180deg);
+			-webkit-transform: rotate(180deg);
+		}
+	}
 }
-
 .sreen-item {
-  border-radius: 2px;
-  color: #666;
+	border-radius: 2px;
+	color: #666;
 }
 
 .sreen-item-cur {
-  color: #1e87f0;
-  background-color: #c1dcf7;
-  border-color: #c1dcf7;
+	color: #1e87f0;
+	background-color: #c1dcf7;
+	border-color: #c1dcf7;
 }
 
 .sreen-time {
-  border: solid 1px #dcdcdc;
-  border-left: none;
+	border: solid 1px #dcdcdc;
+	border-left: none;
 }
 
 .sreen-item-time {
-  border-left: solid 1px #dcdcdc;
+	border-left: solid 1px #dcdcdc;
 }
 
 .sreen-item-time-cur {
-  background-color: #1e87f0;
+	background-color: #1e87f0;
 }
 
 .borderRadius_2 {
-  border-radius: 2px;
+	border-radius: 2px;
 }
 
 // 限制高度的tab
 .tab-list {
-  position: relative;
-  min-width: 100%;
-  overflow-x: scroll;
-  white-space: nowrap;
+	position: relative;
+	min-width: 100%;
+	overflow-x: scroll;
+	white-space: nowrap;
+	.tab-item {
+		height: r(44px);
+		line-height: r(44px);
+	}
 
-  .tab-item {
-    height: 44px;
-    line-height: 44px;
-  }
-
-  .tab-border {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 3px;
-    border-radius: 10px;
-  }
+	.tab-border {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		height: r(3px);
+		border-radius: r(10px);
+	}
 }
 
 // 不限制高度的tab
 .tab-list-autoHeight {
-  position: relative;
-  min-width: 100%;
-  overflow-x: scroll;
-  white-space: nowrap;
+	position: relative;
+	min-width: 100%;
+	overflow-x: scroll;
+	white-space: nowrap;
 
-  .tab-item {
-    // height: 42px;
-    // line-height: 42px;
-  }
+	.tab-item {
+		// height: 42px;
+		// line-height: 42px;
+	}
 
-  .tab-border {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 3px;
-    border-radius: 10px;
-  }
+	.tab-border {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		height: r(3px);
+		border-radius: r(10px);
+	}
 }
 
 // 限定高度，底线自定义大小的tab
 .tab-list-border {
-  position: relative;
-  min-width: 100%;
-  overflow-x: scroll;
-  white-space: nowrap;
+	position: relative;
+	min-width: 100%;
+	overflow-x: scroll;
+	white-space: nowrap;
 
-  .tab-item {
-    height: 44px;
-    line-height: 44px;
-	flex: 1;
-  }
+	.tab-item {
+		height: r(44px);
+		line-height: r(44px);
+		flex: 1;
+	}
 
-  .tab-border {
-    position: absolute;
-    bottom: 0;
-    // left: 0;
-    height: 3px;
-    border-radius: 6px;
-  }
+	.tab-border {
+		position: absolute;
+		bottom: 0;
+		// left: 0;
+		height: r(3px);
+		border-radius: r(6px);
+	}
 
-  .tab-number {
-    position: absolute;
-    bottom: 14px;
-    display: inline-block;
-    height: 15px;
-    line-height: 15px;
-    margin-left: 2px;
-    padding: 0 7px;
-    background-color: #f15747;
-    border-radius: 7px;
-    font-size: 10px;
-    color: #ffffff;
-  }
+	.tab-number {
+		position: absolute;
+		bottom: r(14px);
+		display: inline-block;
+		height: r(15px);
+		line-height: r(15px);
+		margin-left: r(2px);
+		padding: 0 r(7px);
+		background-color: #f15747;
+		border-radius: r(7px);
+		font-size: r(10px);
+		color: #ffffff;
+	}
 }
 
 // 一行展示，横向滚动的tab栏
 .tab-list-scrollX {
-  width: 100vw;
-  height: 44px;
-  white-space: nowrap;
-  overflow: hidden;
-  overflow-x: scroll;
-  -webkit-backface-visibility: hidden;
-  -webkit-perspective: 1000;
-  -webkit-overflow-scrolling: touch;
-
-  .tab-list::-webkit-scrollbar {
-    display: none;
-  }
+	width: 100vw;
+	height: r(44px);
+	white-space: nowrap;
+	overflow: hidden;
+	overflow-x: scroll;
+	-webkit-backface-visibility: hidden;
+	-webkit-perspective: 1000;
+	-webkit-overflow-scrolling: touch;
+	.tab-list::-webkit-scrollbar {
+		display: none;
+	}
 }
+
 // 右侧弹框
-		.sreen-warp {
-			position: fixed;
-			z-index: 9999!important;
-			top: 0;
-			right: 0;
-			width: 80%;
-			height: 100%;
-			padding-top: 44px;
-			padding-bottom: 65px;
-			overflow: hidden;
+.sreen-warp {
+	position: fixed;
+	z-index: 9999 !important;
+	top: 0;
+	right: 0;
+	width: 0%;
+	height: 100%;
+	padding-top: r(44px);
+	padding-bottom: r(65px);
+	overflow: hidden;
+	transition: all 500ms;
+	
+	&.showBgcW {
+		width: 80%;
+	}
 
-			.sreen-box {
-				width: 100%;
-				height: 100%;
-				overflow: scroll;
-			}
+	.sreen-box {
+		width: 100%;
+		height: 100%;
+		overflow: scroll;
+	}
 
-			.bottom_button {
-				position: absolute;
-				bottom: 0;
-				left: 0;
-				right: 0;
-				width: 100%;
-			}
-		}
+	.bottom_button {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		width: 100%;
+	}
+}
 
-		.sreen-item {
-			border-radius: 4px;
-			color: #666;
-		}
 
-		.sreen-item-cur {
-			color: #1e87f0;
-			background-color: #c1dcf7;
-			border-color: #c1dcf7;
-		}
+.sreen-item {
+	border-radius: r(4px);
+	color: #666;
+}
 
-		.sreen-time {
-			border: solid 1px #dcdcdc;
-			border-left: none;
-		}
+.sreen-item-cur {
+	color: #1e87f0;
+	background-color: #c1dcf7;
+	border-color: #c1dcf7;
+}
 
-		.sreen-item-time {
-			border-left: solid 1px #dcdcdc;
-		}
+.sreen-time {
+	border: solid 1px #dcdcdc;
+	border-left: none;
+}
 
-		.sreen-item-time-cur {
-			background-color: #1e87f0;
-		}
+.sreen-item-time {
+	border-left: solid 1px #dcdcdc;
+}
+
+.sreen-item-time-cur {
+	background-color: #1e87f0;
+}

@@ -68,12 +68,12 @@ module.exports = {
     host: 'localhost',
     port: 8086,
     proxy: {
-      '/apiUrl': {
+      '/moduleIp': {
         target: 'http://172.16.68.42:80',//将defaultSettings.baseApi印射为/apiUrl
         changeOrigin: true,//是否开启跨域代理
         secure: true,//https==true,http=false
         pathRewrite: {
-          '^/apiUrl': ''   //需要rewrite的,
+          '^/moduleIp': ''   //需要rewrite的,
         }
       }
     }

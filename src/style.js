@@ -1,1 +1,1 @@
-require('./assets/index.scss')
+require('./assets/scss/all.scss')

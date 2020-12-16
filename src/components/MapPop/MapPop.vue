@@ -4,7 +4,7 @@
 	mapList: [{ // 地图底图数组
 			label: "标准地图",
 			value: "1",
-			key: require('@/assets/image/mapImg/layer_pic1.png'),
+			key: require('@/assets/images/mapImg/layer_pic1.png'),
 			isChecked: true,
 		},
 	],
@@ -78,7 +78,7 @@
 		display: 'MapPop地图弹窗',
 		data() {
 			return {
-				showPop: true,
+				showPop: this.isMapPop,
 				radios: this.mapList,
 				mapSwith: this.switchList
 			}
@@ -94,19 +94,19 @@
 					{
 						label: "标准地图",
 						value: "1",
-						key: require('@/assets/image/mapImg/layer_pic1.png'),
+						key: require('@/assets/images/mapImg/layer_pic1.png'),
 						isChecked: true,
 					},
 					{
 						label: "影像地图",
-						value: "4",
-						key: require('@/assets/image/mapImg/layer_pic2.png'),
+						value: "1",
+						key: require('@/assets/images/mapImg/layer_pic2.png'),
 						isChecked: false,
 					},
 					{
 						label: "栅格地图",
-						value: "5",
-						key: require('@/assets/image/mapImg/layer_pic3.png'),
+						value: "1",
+						key: require('@/assets/images/mapImg/layer_pic3.png'),
 						isChecked: false,
 					},
 				]

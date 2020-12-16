@@ -76,8 +76,8 @@
 
 <script>
 	export default {
-		name: 'MapPop',
-		display: 'MapPop地图弹窗',
+		name: 'BotButton',
+		display: 'BotButton模块底部按钮',
 		data() {
 			return {
 				zhuyaoBtn: this.zyBtn,
@@ -194,5 +194,52 @@
 </script>
 
 <style scoped lang="scss">
-	@import "../../assets/scss/nw_botbutton.scss";
+	@import "../../assets/scss/nw_tool.scss";
+	.yw-botbut{
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		z-index: 8;
+		text-align: center;
+		width: 100%;
+	}
+	.btn{
+		height: r(44px);
+		line-height: r(44px);
+		border-radius: r(8px);
+		white-space :nowrap; /*让文字不换行*/
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+	// 主要按钮
+	.zybtn{
+		color: white;
+		background-color: #1E87F0;
+	}
+	// 次要按钮
+	.cybtn{
+		// color: #262626;
+		border: 1px solid #d8d8d8;
+	}
+	.btn-width-100{
+		width: 100%;
+	}
+	.flex-d{
+		display: flex;
+		justify-content: space-around;
+	}
+	.btn-row{
+		display: flex;
+		flex-direction: row;
+	}
+	.btn-al-c{
+		align-items: center;
+	}
+	.btn-ju-c{
+		justify-content: center;
+	}
+	.btn-ju-a{
+		justify-content: space-around;
+	}
 </style>

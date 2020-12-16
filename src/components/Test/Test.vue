@@ -1,6 +1,6 @@
 <template>
   <div class="p0 m0">
-    <img src="@/assets/image/fileTypeImg/video.png" />
+    <img src="@/assets/images/fileTypeImg/video.png" />
   </div>
 </template>
 
@@ -12,11 +12,11 @@ export default {
       uploaderFun: null,
       startPosition: 0,
       showPreview: false,
-      videoPng: `${require("@/assets/image/fileTypeImg/video.png")}`,
-      dltPng: `${require("@/assets/image/dlt.png")}`,
-      dltPng2: `${require("../../assets/image/dlt.png")}`,
-      dltPng3: require("@/assets/image/dlt.png"),
-      dltPng4: require("@/assets/image/dlt.png"),
+      videoPng: `${require("@/assets/images/fileTypeImg/video.png")}`,
+      dltPng: `${require("@/assets/images/dlt.png")}`,
+      dltPng2: `${require("../../assets/images/dlt.png")}`,
+      dltPng3: require("@/assets/images/dlt.png"),
+      dltPng4: require("@/assets/images/dlt.png"),
       upFileArr: [],
       lookFileArr: []
     };

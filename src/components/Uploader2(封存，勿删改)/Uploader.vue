@@ -31,13 +31,13 @@
 	export default {
 		mixins: [tabMinxin],
 		props: {
-			NW_BASEURL: {
+			baseUrl: {
 				type: String, //真实开发ip地址
-				default: window.NW_BASEURL
+				default: ''
 			},
-			NW_PROXYURL: {
+			proxyUrl: {
 				type: String, //开发环境代理地址非IP('/api')
-				default: window.NW_BASEURL
+				default: ''
 			},
 			proxyIp: {
 				type: String, //开发环境代理地址（IP）
@@ -45,7 +45,7 @@
 			},
 			accessToken: {
 				type: String, //token
-				default: window.accessToken
+				default: ''
 			},
 			previewCompoment: {
 				type: Boolean, //是否需要预览
@@ -178,21 +178,19 @@
 			lookFileArr2: function(va1, va2) {
 				this.lookFileArr = this.lookFileArr2;
 			},
-			// NW_BASEURL:function(newval,oldval) {
-			// 	console.log('newval'+newval);
-			// 	console.log('oldval'+oldval);
-			// 	if(newval) {
-			// 		window.NW_BASEURL = newval;
-			// 	}
-			// },
-			// NW_PROXYURL: function(newval, oldval) {
-			// 		console.log('11111');
-			// 	if(newval) {
-			// 		console.log('11111');
-			// 		window.NW_PROXYURL = newval;
-			// 	}
-			// 	this.uploaderFun = require('./upload.js').default;
-			// },
+			baseUrl:function(newval,oldval) {
+				console.log('newval'+newval);
+				console.log('oldval'+oldval);
+				if(newval) {
+					window.baseUrl = newval;
+				}
+			},
+			proxyUrl: function(newval, oldval) {
+				if(newval) {
+					window.proxyUrl = newval;
+				}
+				this.uploaderFun = require('./upload.js').default;
+			},
 			fileInfo: {
 				deep: true,
 				handler: function(newval, oldval) {
@@ -203,11 +201,11 @@
 			}
 		},
 		created() {
-			if(this.NW_BASEURL || this.NW_PROXYURL) {
-				window.NW_BASEURL = this.NW_BASEURL;
-				window.NW_PROXYURL = this.NW_PROXYURL;
+			if(this.baseUrl || this.proxyUrl) {
+				window.baseUrl = this.baseUrl;
+				window.proxyUrl = this.proxyUrl;
+				this.uploaderFun = require('./upload.js').default;
 			}
-			this.uploaderFun = require('./upload.js').default;
 		},
 		mounted() {
 			this.lookFileArr = this.lookFileArr2;
@@ -306,7 +304,7 @@
 			},
 			/* 处理视频 ，文档*/
 			clVideoFcun: function(item, checkObj) {
-				var baseUpUrl = this.NW_BASEURL || this.proxyIp;
+				var baseUpUrl = this.baseUrl || this.proxyIp;
 				var filePath = baseUpUrl + '/web/api/top/atm/attachment/downloadAttachment?attachmentId=' + item.attachmentId +
 					'&.' + item.fileType;
 				this.lookFileArr.push({
@@ -358,7 +356,7 @@
 			},
 			/* 处理文档 */
 			clFlieFun: function(item, checkObj) {
-				var baseUpUrl = this.NW_BASEURL || this.proxyIp;
+				var baseUpUrl = this.baseUrl || this.proxyIp;
 				var filePath = baseUpUrl + '/web/api/top/atm/attachment/downloadAttachment?attachmentId=' + item.attachmentId +
 					'&.' + item.fileType;
 				this.lookFileArr.push({
@@ -514,10 +512,10 @@
 				var headers = JSON.stringify({
 					'access-token': this.accessToken
 				})
-				// console.log(this.accessToken);
-				// console.log(this.NW_BASEURL);
-				// console.log(this.NW_PROXYURL);
-				var baseUpUrl = this.NW_BASEURL || this.proxyIp;
+				console.log(this.accessToken);
+				console.log(this.baseUrl);
+				console.log(this.proxyUrl);
+				var baseUpUrl = this.baseUrl || this.proxyIp;
 				this.myJssdk.uploadMedia({
 					url: baseUpUrl + '/web/upload/api/top/atm/restClient/uploadAttachmentFile',
 					fileurl: itmeUpData.path,

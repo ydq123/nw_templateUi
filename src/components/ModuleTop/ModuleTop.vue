@@ -113,7 +113,7 @@
 		</div>
 		<div class="zdc" v-show="showPop" :class="[sortData.showPop?'zIndex9':'zIndex999']" @click.stop="zdcBtnShow"></div>
 		<!-- 筛选 -->
-		<div class="sreen-warp bg-white" v-if="sreenData.showPop">
+		<div class="sreen-warp bg-white" :class="[sreenData.showPop?'showBgcW':'']">
 			<div class="sreen-box">
 				<div v-if="curTabIndex == 0">
 					<div v-for="(sItem,sIndex) in sreenData.sreenTodoItem" :key="sIndex">
