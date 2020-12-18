@@ -1,5 +1,23 @@
 <!-- ModuleTop模块头部组件使用方法
-	<nw-module-top :isSort="true" :isSreen="true" :mTop="0" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList" @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen"></nw-module-top> 
+	<nw-module-top :isSort="true" :isSreen="true" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList" @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen"></nw-module-top> 
+	结合nw-fixed-header使用（带搜索和排序筛选）
+	<nw-fixed-header title="头部标题" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
+		<div slot="page-bottmo">
+			<nw-module-top :isSort="true" :isSreen="true" :mTop="0" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList"
+			 @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen"
+			 @resetScreen="testResetScreen"></nw-module-top>
+		</div>
+	</nw-fixed-header>
+	结合nw-fixed-header使用 插槽（slot="topInput"：隐藏搜索，slot="taskSreenSort"：隐藏排序筛选）
+	<nw-fixed-header title="头部标题" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
+		<div slot="page-bottmo">
+			<nw-module-top :isSort="true" :isSreen="true" :mTop="0" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList">
+				<div slot="topInput"></div>
+				<div slot="taskSreenSort"></div>
+			</nw-module-top>
+		</div>
+	</nw-fixed-header>
+	
 	ModuleTop模块头部组件参数
 	tabList: [
 		{

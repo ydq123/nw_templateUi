@@ -230,10 +230,26 @@ zdcBtnShow,// 遮挡层关闭地图弹窗
 ####ModuleTop模块头部组件使用方法
 ```brash
 <!-- 标签，存在默认值， -->
-<nw-module-top :isSort="true" :isSreen="true" :mTop="0" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList" @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen" />
+	<nw-module-top :isSort="true" :isSreen="true" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList" @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen"></nw-module-top> 
+	结合nw-fixed-header使用（带搜索和排序筛选）
+	<nw-fixed-header title="头部标题" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
+		<div slot="page-bottmo">
+			<nw-module-top :isSort="true" :isSreen="true" :mTop="0" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList"
+			 @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen"
+			 @resetScreen="testResetScreen"></nw-module-top>
+		</div>
+	</nw-fixed-header>
+	结合nw-fixed-header使用 插槽（slot="topInput"：隐藏搜索，slot="taskSreenSort"：隐藏排序筛选）
+	<nw-fixed-header title="头部标题" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
+		<div slot="page-bottmo">
+			<nw-module-top :isSort="true" :isSreen="true" :mTop="0" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList">
+				<div slot="topInput"></div>
+				<div slot="taskSreenSort"></div>
+			</nw-module-top>
+		</div>
+	</nw-fixed-header>
 
 <!-- poros数据说明 -->
-	mTop: 44,//距离头部高度
 	tabList,// 头部tab数组
 	data参数例子：testTabList: [
 		{
@@ -348,5 +364,37 @@ resetScreen// moduletop模块筛选重置
 <!-- 方法说明 -->
 overlay,//关闭弹窗
 自定义方法例子：testOverlay(data) { console.log(data); },
+
+```
+
+####checkPerson选择人员使用方法
+```brash
+<!-- 打开页面传参说明 -->
+	userInfo:{ 
+		"employeeId": "A9C0B502210946C5BD52494CD5442492",
+		"userId": "AEEEE802803749E1841C857240F0C3B5",
+		"employeeName": "毛嘉杰",
+		"account": "maojiajie",
+		"shortSpell": "mjj",
+		"fullSpell": "maojiajie",
+		"orgId": "1589BAA87C11BD64E053380F0A0A54B2",
+		"orgName": "广州天河供电局",
+		"nameFullPath": "中国南方电网有限责任公司/广州供电局有限公司/广州天河供电局",
+		"orgCode": "080020",
+		"sapHROrgId": "8816B370FB4A0B82E0440018FE2DCEF4",
+		"orgStructureId": "A",
+		"unitOid": "1589BAA87C11BD64E053380F0A0A54B2",
+		"unitOname": "广州天河供电局",
+		"unitCode": "030120",
+		"shortOrgName": "天河"
+	}
+	obj:{
+		name: 'checkPerson',//选择人员页面名
+		query: {
+			type: 1,//单选或多选；1：单选；2：多选
+			userInfo: this.userInfo,//当前登录人信息
+			exeMun: ''//跨页面方法名，自定义（需要在接收页面挂载）
+		}
+	}
 
 ```
