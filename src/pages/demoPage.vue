@@ -42,6 +42,7 @@
 		</div>
 		<!-- <div slot="botIconSlot"></div> -->
 	</nw-folding-box>
+	<nw-bot-button></nw-bot-button>
   </div>
 </template>
 
