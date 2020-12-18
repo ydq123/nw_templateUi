@@ -109,6 +109,99 @@ proxyIp为开发环境代理地址（IP），光有代理地址没有真实ip不
 			<div slot="nullText">123</div>
 		</nw-null-data>
 ```
+
+
+####右侧弹出层组件使用
+```brash
+<!-- 调用示例-->
+   <!--普通用法-->
+    <nw-PopupFilter v-model="popupState" @resetScreen="" @submitScreen=""></nw-PopupFilter>
+    <!--替换插槽-->
+    <nw-PopupFilter>
+      <div slot="popup-content">
+        123
+      </div>
+      <div slot="popup-btn">
+        123
+      </div>
+    </nw-PopupFilter>
+		<!-- 事件说明 -->
+		resetScreen--重置
+		submitScreen--确定
+		<!-- 参数说明 -->
+		popupState--显示隐患该组件-默认为false
+		popupWidth--弹出层宽度-默认为‘80%’
+		choiceColor--选中类型的颜色-默认为'#287df5'
+		popupData--弹出层数据结构-👇
+		<!-- popupData数据结构 -->
+		[
+        {
+          type: "type",
+          name: "类型选择",
+          node: true,
+          isMultiple: false,
+          list: [
+            {
+              name: "便电压",
+              check: false
+            },
+            {
+              name: "便电压2",
+              check: false
+            },
+            {
+              name: "便电压3",
+              check: false
+            },
+            {
+              name: "便电压4",
+              check: false
+            }
+          ]
+        },
+        {
+          type: "time",
+          name: "时间选择",
+          node: true,
+          list: [
+            {
+              name: "开始时间1",
+              value: ""
+            },
+            {
+              name: "结束时间",
+              value: ""
+            },
+            {
+              name: "竣工时间",
+              value: ""
+            }
+          ]
+        },
+        {
+          type: "goPage",
+          name: "右箭头选择",
+          node: true,
+          list: [
+            {
+              name: "隐患类型1",
+              handle: "aa",
+              value: ""
+            },
+            {
+              name: "隐患类型2",
+              handle: "bb",
+              value: ""
+            },
+            {
+              name: "隐患类型3",
+              handle: "cc",
+              value: ""
+            }
+          ]
+        }
+      ]
+```
 ======================================================================================================
 
 ####BotButton底部按钮组件使用方法

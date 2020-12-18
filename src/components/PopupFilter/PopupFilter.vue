@@ -6,8 +6,8 @@
       position="right"
       :style="{ width: `${popupWidth}`, height: '100%' }"
     >
-      <slot name="default">
-        <div class="pos-r text-hidden h100 pb60">
+      <div class="pos-r text-hidden h100 pb60">
+        <slot name="popup-content">
           <div class="popup-content pb15 pl15 pr15 h100">
             <div v-for="(popupItem, popupIndex) in popupData" :key="popupIndex">
               <div class="choiceType" v-if="popupItem.type == 'type'">
@@ -94,24 +94,24 @@
               </div>
             </div>
           </div>
-          <slot name="popup-btn">
-            <div class="popup-btn bg-white flex ju-b f14 p15 pos-a line-t">
-              <div
-                class="nw_buttom_125_44 bg-f5 border_1_dc gray3"
-                @click="resetScreen"
-              >
-                重置
-              </div>
-              <div
-                class="nw_buttom_125_44 bg-287 text-white"
-                @click="submitScreen"
-              >
-                确定
-              </div>
+        </slot>
+        <slot name="popup-btn">
+          <div class="popup-btn bg-white flex ju-b f14 p15 pos-a line-t">
+            <div
+              class="nw_buttom_125_44 bg-f5 border_1_dc gray3"
+              @click="resetScreen"
+            >
+              重置
             </div>
-          </slot>
-        </div>
-      </slot>
+            <div
+              class="nw_buttom_125_44 bg-287 text-white"
+              @click="submitScreen"
+            >
+              确定
+            </div>
+          </div>
+        </slot>
+      </div>
     </van-popup>
 
     <van-popup v-model="showChoiceTime" position="bottom">
@@ -125,7 +125,17 @@
     </van-popup>
   </div>
 </template>
-
+ <!-- 调用示例-->
+    <!--
+    普通用法
+    <nw-PopupFilter v-model="popupState"></nw-PopupFilter>
+    替换插槽
+    <nw-PopupFilter>
+      <div slot="popup-content">
+        123
+      </div>
+    </nw-PopupFilter>
+    -->
 <script>
 import { baseMinxin } from "@/mixin/baseMinxin.js";
 export default {

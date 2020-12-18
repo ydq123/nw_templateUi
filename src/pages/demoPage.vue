@@ -30,7 +30,12 @@
 			<div slot="nullText">123</div>
 		</nw-null-data>
     <nw-PopupFilter v-model="popupState">
-      <div name="popup-btn">132</div>
+      <div slot="popup-content">
+        123456
+      </div>
+      <div slot="popup-btn">
+        123456
+      </div>
     </nw-PopupFilter>
 	<nw-folding-box>
 		<!-- <div slot="topRIconSlot"></div> -->
