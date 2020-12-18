@@ -29,7 +29,9 @@
 			<div slot="nullImg"><img src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2771978851,2906984932&fm=26&gp=0.jpg" alt="" /></div>
 			<div slot="nullText">123</div>
 		</nw-null-data>
-    <nw-PopupFilter v-model="popupState"></nw-PopupFilter>
+    <nw-PopupFilter v-model="popupState">
+      <div name="popup-btn">132</div>
+    </nw-PopupFilter>
 	<nw-folding-box>
 		<!-- <div slot="topRIconSlot"></div> -->
 		<div slot="boxCenten">
