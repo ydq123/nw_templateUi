@@ -30,6 +30,18 @@
 			<div slot="nullText">123</div>
 		</nw-null-data>
     <nw-PopupFilter v-model="popupState"></nw-PopupFilter>
+	<nw-folding-box>
+		<!-- <div slot="topRIconSlot"></div> -->
+		<div slot="boxCenten">
+			<div>123123132</div>
+			<div>123123132</div>
+			<div>123123132</div>
+			<div>123123132</div>
+			<nw-textput-box></nw-textput-box>
+			<nw-status-label></nw-status-label>
+		</div>
+		<!-- <div slot="botIconSlot"></div> -->
+	</nw-folding-box>
   </div>
 </template>
 

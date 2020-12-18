@@ -90,7 +90,7 @@
 			zyBtn: { // 主要按钮配置项
 				type: Object,
 				default: ()=> ({
-					btnType: true,
+					btnType: false,
 					text: '主要按钮',
 					color: 'white',
 					bgcolor: '#1E87F0',
@@ -100,7 +100,7 @@
 			cyBtn: { // 次要按钮配置项
 				type: Object,
 				default: ()=> ({
-					btnType: true,
+					btnType: false,
 					text: '次要按钮',
 					color: '#262626',
 					fsize: '16px'
@@ -109,7 +109,7 @@
 			twoZCyBtn: { // 等分要按钮配置项
 				type: Object,
 				default: ()=> ({
-					btnType: true,
+					btnType: false,
 					zhuyaoBtn: {
 						text: '发送',
 						color: 'white',
@@ -126,7 +126,7 @@
 			zIconBtn: { // icon按钮配置项
 				type: Object,
 				default: ()=> ({
-					btnType: true,
+					btnType: false,
 					iconList: [{
 							icon: 'icon-jinyongqingkuang',
 							iconText: '哈哈1',
