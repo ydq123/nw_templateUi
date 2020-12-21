@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import clipboard2 from "@/plugin/clipboard.min.js";
 export default {
   data() {
     return {};
@@ -77,18 +76,14 @@ export default {
   },
   methods: {
     copyHandle() {
-      var clipboard = new clipboard2(".copy-btn");
-      clipboard.on("success", e => {
-        this.$toast("复制成功");
-        // 释放内存
-        clipboard.destroy();
-      });
-      clipboard.on("error", e => {
-        // 不支持复制
-        this.$toast("复制失败，请重新复制");
-        //console.log('该浏览器不支持自动复制')
-        // 释放内存
-        clipboard.destroy();
+      this.myJssdk.clipBoard({
+        text: document.getElementById("codeNum").innerText,
+        success (data) {
+          this.$toast(data);
+        },
+        fail (data) {
+          this.$toast(data);
+        }
       });
     }
   },

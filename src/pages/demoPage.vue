@@ -4,7 +4,10 @@
       <div slot="page-bottmo">
       </div>
     </nw-fixed-header>
+    <hr>
+    <h2>头部详情简介</h2>
     <nwtop-introduce></nwtop-introduce>
+    <hr>
 	<nw-tab-widget></nw-tab-widget>
     <nw-button size="large"><h1 @click="aa">sssss</h1></nw-button>
     <nw-module-top :isSort="true" :isSreen="true" :mTop="0" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList" @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen"></nw-module-top>
