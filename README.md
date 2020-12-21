@@ -114,20 +114,27 @@ proxyIp为开发环境代理地址（IP），光有代理地址没有真实ip不
 ####右侧弹出层组件使用
 ```brash
 <!-- 调用示例-->
-   <!--普通用法-->
+   	<!--普通用法-->
     <nw-PopupFilter v-model="popupState" @resetScreen="" @submitScreen=""></nw-PopupFilter>
+
     <!--替换插槽-->
     <nw-PopupFilter>
+		<!-- 上部内容替换使用 -->
       <div slot="popup-content">
         123
       </div>
+		<!-- 下部内容替换使用 -->
       <div slot="popup-btn">
         123
       </div>
+		<!-- 全部替换 -->
+		<div>不用所有的默认内容，自己重新定义的内容</div>
     </nw-PopupFilter>
+
 		<!-- 事件说明 -->
 		resetScreen--重置
 		submitScreen--确定
+
 		<!-- 参数说明 -->
 		popupState--显示隐患该组件-默认为false
 		popupWidth--弹出层宽度-默认为‘80%’
