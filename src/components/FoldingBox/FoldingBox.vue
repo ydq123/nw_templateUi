@@ -42,12 +42,19 @@
 		display: 'FoldingBox折叠框组件',
 		data() {
 			return {
-				showBox: true,
-				showBs: true,
+				showBox: this.foldShowBox,
+				showBs: this.foldShowBs,
 			}
 		},
 		props: {
-			
+			foldShowBox: { //显示折叠层，默认为true显示，false隐藏
+				type: Boolean,
+				default: true
+			},
+			foldShowBs: { //显示折叠层标题左侧标签，默认为true显示，false隐藏
+				type: Boolean,
+				default: true
+			}
 		},
 		computed: {
 

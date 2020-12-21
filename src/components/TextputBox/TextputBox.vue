@@ -59,7 +59,7 @@
 					valueLength: 500,
 					isDisabled: false,//禁止输入；默认为false可输入，true禁止输入
 					placeholderTxt: '请输入',//输入框提示语
-					iconCla: 'icon-shanchu3 gray9 f15 pl5',//icon
+					iconCla: 'icon-dingwei gray287 f15 pl5',//icon
 				})
 			}
 		},

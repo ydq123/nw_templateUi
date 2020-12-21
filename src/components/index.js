@@ -15,6 +15,7 @@ import FoldingBox from './FoldingBox/FoldingBox.vue' //折叠框组件
 import TextputBox from './TextputBox/TextputBox.vue' //文本输入框组件
 import StatusLabel from './StatusLabel/StatusLabel.vue' //状态标签组件
 import topIntroduce from './topIntroduce/topIntroduce.vue' //详情页顶部简介
+import TabWidget from './TabWidget/TabWidget.vue' //多状态tab组件
 
 export {
     Button,
@@ -33,5 +34,6 @@ export {
 	FoldingBox,
 	TextputBox,
 	StatusLabel,
-	topIntroduce
+	topIntroduce,
+	TabWidget
 }

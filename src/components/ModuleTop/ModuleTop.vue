@@ -191,7 +191,6 @@
 				showSreenPop: false,
 				detailData: null,
 				removeEvenStatus: true,
-				mySwipe: null, // 轮播图
 				curTabIndex: 0, //导航栏index
 				curTabIndexCP: 0,
 				activeBarX: 0,
