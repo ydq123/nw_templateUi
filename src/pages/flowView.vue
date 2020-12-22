@@ -80,7 +80,7 @@
 <script>
 	import {
 		queryAllTrackByProcessInsId
-	} from "@/moduleAPI/bpms.js"
+	} from "../moduleAPI/bpms.js"
 	import { tabMinxin } from "@/mixin/tabMinxin.js";
 	export default {
 		name: "flowView",
