@@ -220,6 +220,7 @@ proxyIp为开发环境代理地址（IP），光有代理地址没有真实ip不
 			{
         orderNumber: "GPL-2020-1020-LIMITED", //单号
         copyText: "复制", //展示的复制文本
+				status: 1, 1-绿色，2-黄色，3-蓝色
         showCopy: true, //是否展示复制功能
         statusValue: ["审核中", "处理中"], //状态
         statusColor: "#fff", //状态字体颜色

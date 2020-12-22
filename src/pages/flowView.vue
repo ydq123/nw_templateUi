@@ -169,7 +169,7 @@
 	.hiddenDanger_page_wrap {
 		height: 100%;
 		background-color: #f5f5f5;
-		overflow: hidden;
+		// overflow: hidden;
 	}
 
 	.f15 {
