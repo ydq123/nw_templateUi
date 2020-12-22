@@ -18,7 +18,7 @@ export default {
     return {};
   },
   mounted() {
-    this.vConsole = new vConsole();
+    // this.vConsole = new vConsole();
   },
   methods: {}
 };

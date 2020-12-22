@@ -106,15 +106,18 @@
 			</slot>
 			<!-- 可多选折叠滑动tab -->
 			<slot name="tabScrollX">
-				<div class="tab-scrollX-box width-100 borderButtomE8 tabwidget-row bg-white pb10">
-					<div class="tabwidget-row al-c f16 pl15" :class="[showTabPop?'tab-list-autoHeight':'tab-list-scrollX']">
-						<div @click="changeScrollXTab(XIndex)" class="mt10" v-for="(XItem,XIndex) in tabScrollXList" :key="XIndex">
+				<div class="tab-scrollX-box width-100 borderButtomE8 bg-white" :class="[showTabPop?'':'tabwidget-row al-c pb15 pt15']">
+					<div class="tabwidget-row al-c f16 pl15" :class="[showTabPop?'tab-list-autoHeight':'tab-list-scrollX pr15']">
+						<div @click="changeScrollXTab(XIndex)" :class="[showTabPop?'mt15':'']" v-for="(XItem,XIndex) in tabScrollXList" :key="XIndex">
 							<span class="lh200 f14 pt5 pb5 pl10 pr10 mr15 borRadius-2" :class="[XItem.status?statusBoxY:statusBoxN]">{{XItem.title}}</span>
 						</div>
 					</div>
-					<div class="tab-scroll-x pl5 pr15 verticle-center" @click="showTabPop=!showTabPop">
-						<i class="iconfont icon-qianjin-copy f10 gray9" :class="{'showTabRotate': showTabPop}"></i>
+					<div class="tabwidget-row al-c ml15 mr15" :class="[showTabPop?'ju-c pt10 pb15 showTabRotate':'']" @click="showTabPop=!showTabPop">
+						<i class="iconfont icon-qianjin-copy f10 gray9"></i>
 					</div>
+					<!-- <div class="tab-scroll-x pl5 pr15 verticle-center" @click="showTabPop=!showTabPop">
+						<i class="iconfont icon-qianjin-copy f10 gray9" :class="{'showTabRotate': showTabPop}"></i>
+					</div> -->
 				</div>
 			</slot>
 			<!-- 带icon可滑动tab -->
@@ -124,7 +127,8 @@
 						<div @click="changeSXIconTab(CIndex)" class="pt10 pb10" :class="[curISXTabIndex == CIndex?statusY : statusN]"
 						 v-for="(CItem,CIndex) in tabSCIconList" :key="CIndex">
 							<div>
-								<i class="iconfont" :class="[CItem.icon,CItem.iconCla]"></i>
+								<i class="iconfont" :class="[CItem.icon,CItem.iconCla]" v-if="CItem.icon"></i>
+								<!-- <img :src="CItem.imgSrc" :class="[CItem.imgWH.length>0?CItem.imgWH:'img-wh-cla']" v-if="CItem.imgSrc" /> -->
 							</div>
 							<span class="lh200 f12 mt5 pl10 pr10">{{CItem.title}}</span>
 						</div>
@@ -268,37 +272,51 @@
 				default: () => [{
 						title: "待办1",
 						icon: 'icon-qianjin-copy',
-						iconCla: 'f14'
+						iconCla: 'f14',
+						imgSrc: '../../assets/images/center.png',
+						imgWH: ''
 					},
 					{
 						title: "待办11",
 						icon: 'icon-qianjin-copy',
-						iconCla: 'f14'
+						iconCla: 'f14',
+						imgSrc: '../../assets/images/center.png',
+						imgWH: ''
 					},
 					{
 						title: "待办111",
 						icon: 'icon-qianjin-copy',
-						iconCla: 'f14'
+						iconCla: 'f14',
+						imgSrc: '../../assets/images/center.png',
+						imgWH: ''
 					},
 					{
 						title: "待办1111",
 						icon: 'icon-qianjin-copy',
-						iconCla: 'f14'
+						iconCla: 'f14',
+						imgSrc: '../../assets/images/center.png',
+						imgWH: ''
 					},
 					{
 						title: "待办11111",
 						icon: 'icon-qianjin-copy',
-						iconCla: 'f14'
+						iconCla: 'f14',
+						imgSrc: '../../assets/images/center.png',
+						imgWH: ''
 					},
 					{
 						title: "待办1111111",
 						icon: 'icon-qianjin-copy',
-						iconCla: 'f14'
+						iconCla: 'f14',
+						imgSrc: '../../assets/images/center.png',
+						imgWH: ''
 					},
 					{
 						title: "待办11111111",
 						icon: 'icon-qianjin-copy',
-						iconCla: 'f14'
+						iconCla: 'f14',
+						imgSrc: '../../assets/images/center.png',
+						imgWH: ''
 					}
 				]
 			},
@@ -389,6 +407,10 @@
 		width: 100%;
 		text-align: center;
 	}
+	.img-wh-cla{
+		width: r(40px);
+		height: r(40px);
+	}
 
 	.tabwidget-row {
 		display: flex;
@@ -452,7 +474,7 @@
 
 	// 一行展示，横向滚动的tab栏
 	.tab-list-scrollX {
-		width: 90vw;
+		width: 100vw;
 		white-space: nowrap;
 		overflow: hidden;
 		overflow-x: scroll;
@@ -475,6 +497,11 @@
 	.txt-1e8 {
 		color: #1E87F0;
 	}
+	
+	.showTabRotate {
+		-moz-transform: rotate(180deg);
+		-webkit-transform: rotate(180deg);
+	}
 
 	.tab-scroll-x {
 		position: absolute;
@@ -486,11 +513,11 @@
 			-moz-transform: rotate(0deg);
 			-webkit-transition: all 0.3s;
 			-webkit-transform: rotate(0deg);
-
-			&.showTabRotate {
-				-moz-transform: rotate(180deg);
-				-webkit-transform: rotate(180deg);
-			}
+			
+			// &.showTabRotate {
+			// 	-moz-transform: rotate(180deg);
+			// 	-webkit-transform: rotate(180deg);
+			// }
 		}
 	}
 </style>
