@@ -1,6 +1,6 @@
 <template>
 	<div class="p0 m0">
-		<div class="flex al-c ju-f fl-w">
+		<div class="flex al-c ju-f fl-w" :class="classArr">
 			<div @click="ylTap(fileIndex, fileItem)" class="fill_Upimg_list_item" :style="{'background-image':'url('+ fileItem.fmImg +')'}"
 			 v-for="(fileItem,fileIndex) in lookFileArr" :key="fileIndex">
 				<div class="pathStatus column ju-c al-c f10 text-white" v-show="fileItem.status==1||fileItem.status==2">
@@ -82,7 +82,7 @@
 			},
 			classArr: {
 				type: Array,
-				default: () => ["pt20", "pb20", "bg-white"]
+				default: () => ["pl10", "pb10","pt10", "pr10", "bg-white"]
 			},
 			videoTypeArr: {
 				type: Array,
