@@ -28,7 +28,7 @@ export const tabMinxin = {
 		}
 	},
 	mounted() {
-		// this.tabPageData = this.$tabPageData(); //接受页面参数
+		this.tabPageData = this.$tabPageData(); //接受页面参数
 		// if (this.$store.getters.jdapUserInfo.userInfo) {
 		// 	var jdapUserInfo = localStorage.getItem("userInfo");
 		// 	// console.info(jdapUserInfo);
@@ -271,13 +271,11 @@ export const tabMinxin = {
 		/*
 		接受页面传递过来的参数
 		*/
-		$tabPageData: function() {
+		$tabPageData: function(obj) {
 			var query = this.$route.query;
 			var queryStatus = this.$baseIsEmptyObject(query); //判断是否是空对象
-
 			var params = this.$route.params;
 			var paramsStatus = this.$baseIsEmptyObject(params); //判断是否是空对象
-
 			if (!paramsStatus) {
 				return params;
 			} else if (!queryStatus) {
