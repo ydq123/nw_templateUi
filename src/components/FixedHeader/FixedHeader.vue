@@ -58,10 +58,12 @@ export default {
       this.$emit("threeClockHandle");
     },
     backHome() {
-      this.$emit("backHomeHandle");
+      // this.$emit("backHomeHandle");
+      this.$tabBackHome('root_tab');
     },
     headBack() {
-      this.$emit("headBackeHandle");
+      this.$tabBack(-1);
+      // this.$emit("headBackeHandle");
     }
   }
 };

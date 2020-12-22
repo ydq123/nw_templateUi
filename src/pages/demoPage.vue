@@ -36,10 +36,7 @@
       </div> -->
     </nw-inside-loading>
     <!-- 暂无数据占位图 -->
-    <nw-null-data>
-			<div slot="nullImg"><img src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2771978851,2906984932&fm=26&gp=0.jpg" alt="" /></div>
-			<div slot="nullText">123</div>
-		</nw-null-data>
+    <nw-null-data></nw-null-data>
     <nw-PopupFilter v-model="popupState"></nw-PopupFilter>
 	<nw-folding-box>
 		<!-- <div slot="topRIconSlot"></div> -->
