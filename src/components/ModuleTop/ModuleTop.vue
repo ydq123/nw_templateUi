@@ -339,9 +339,11 @@
 			},
 			// 显示隐藏筛选
 			changeSreen: function() {
-				this.sreenData.showPop = !this.sreenData.showPop;
-				this.sortData.showPop = false;
-				this.showPop = true;
+				console.log('changeSreen');
+				this.$emit('changeSreen');
+				// this.sreenData.showPop = !this.sreenData.showPop;
+				// this.sortData.showPop = false;
+				// this.showPop = true;
 			},
 			//选中筛选
 			changSreenItem: function(sIndex, item) {
