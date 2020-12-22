@@ -240,6 +240,18 @@ proxyIp为开发环境代理地址（IP），光有代理地址没有真实ip不
         ]
       }
 ```
+
+
+####公共流程页面打开方式
+```brash
+	openFlowView() {
+		this.$router.push({name:'flowView',params:{processId: 'SP_WTICKET_SUB',processInsId: 'b6e89edaae0f4cbd89289f55030f0750_515'}})
+	}
+	<!-- 参数 -->
+	processId:'必传',
+	processInsId:'必传',
+	pageTitle:'非必传'
+```
 ======================================================================================================
 
 ####BotButton底部按钮组件使用方法
