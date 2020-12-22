@@ -14,6 +14,8 @@
 		<!-- <div slot="taskSreenSort"></div> -->
 	</nw-top-input>
     <nw-button size="large"><h1 @click="aa">sssss</h1></nw-button>
+    <hr>
+    <nw-button size="large"><h1 @click="openFlowView">打开流程</h1></nw-button>
     <nw-module-top :isSort="true" :isSreen="true" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList" @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen"></nw-module-top>
     <!-- <nw-test></nw-test> -->
     <hr style="margin-top:20px">
@@ -305,6 +307,9 @@ export default {
     aa() {
       this.popupState = true;
       console.log(this.popupState);
+    },
+    openFlowView() {
+      this.$router.push({name:'flowView',params:{processId: 'SP_WTICKET_SUB',processInsId: 'b6e89edaae0f4cbd89289f55030f0750_515'}})
     },
     menuClickTap: function(obj) {
       console.log(obj);
