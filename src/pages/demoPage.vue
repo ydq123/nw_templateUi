@@ -1,5 +1,5 @@
 <template>
-	<div id="demoPage" style="padding-top:100px;padding-bottom: 80px;">
+	<div id="demoPage" class="bg-white" style="padding-top:75px;padding-bottom: 80px;">
 		<!-- 页面头部组件 -->
 		<nw-fixed-header title="头部导航" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
 			<div slot="page-bottmo"></div>
@@ -9,36 +9,48 @@
 			<div slot="topInput"></div>
 			<!-- <div slot="taskSreenSort"></div> -->
 		</nw-top-input>
-		<h2 class="mt15 mb10">tab切换组件（带筛选、排序）</h2>
+		<h2 class="pt15 pb10 bg-f5">tab切换组件（带筛选、排序）</h2>
 		<nw-module-top :isSort="true" :isSreen="true" @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab"
 		 @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen">
 		</nw-module-top>
-    
-    <button><h1 @click="openFlowView">流程页面组件</h1></button>
-		<h2 class="mt15 mb10">详情页顶部简介</h2>
+		<h2 class="pt15 pb10 bg-f5" @click="openFlowView">打开流程页面组件</h2>
+		<h2 class="pt15 pb10 bg-f5">详情页顶部简介</h2>
 		<nwtop-introduce></nwtop-introduce>
-		<h2 class="mt15 mb10">多状态tab组件</h2>
+		<h2 class="pt15 pb10 bg-f5">多状态tab组件</h2>
 		<nw-tab-widget></nw-tab-widget>
-		<h2 class="mt15 mb10">动画加载中组件</h2>
+		<h2 class="pt15 pb10 bg-f5">动画加载中组件</h2>
 		<nw-inside-loading />
-		<h2 class="mt15 mb10">无数据占位组件</h2>
+		<h2 class="pt15 pb10 bg-f5">无数据占位组件</h2>
 		<nw-null-data class="bg-f5">
 			<p slot='nullText'>123</p>
 		</nw-null-data>
-		<h2 class="mt15 mb10">附件上传组件</h2>
+		<h2 class="pt15 pb10 bg-f5">附件上传组件</h2>
 		<nw-uploader :fileInfo="fileInfo" :lookFileArr2="lookFileArr2" :baseUrl="baseUrl" :proxyUrl="proxyUrl" :proxyIp="proxyIp"
 		 :accessToken="accessToken"></nw-uploader>
-		<h2 class="mt15 mb10">折叠框组件</h2>
+		<h2 class="pt15 pb10 bg-f5">折叠框组件</h2>
 		<nw-folding-box>
 			<!-- <div slot="topRIconSlot"></div> -->
 			<div slot="boxCenten">
-				<h2 class="mt15 mb10">文本输入框组件</h2>
-				<nw-textput-box></nw-textput-box>
-				<h2 class="mt15 mb10">状态标签组件</h2>
-				<nw-status-label></nw-status-label>
+				1121313123
 			</div>
 			<!-- <div slot="botIconSlot"></div> -->
 		</nw-folding-box>
+		<h2 class="pt15 pb10 bg-f5">状态标签组件</h2>
+		<div class="p15">
+			<nw-status-label></nw-status-label>
+		</div>
+		<h2 class="pt15 pb10 bg-f5">文本输入框组件</h2>
+		<div class="">
+			<div class="pl15 pr15">
+				<nw-textput-box :txtBoxObj="txtBoxObj1"></nw-textput-box>
+			</div>
+			<div class="pl15 pr15">
+				<nw-textput-box :txtBoxObj="txtBoxObj2"></nw-textput-box>
+			</div>
+			<div class="pl15 pr15">
+				<nw-textput-box :txtBoxObj="txtBoxObj3"></nw-textput-box>
+			</div>
+		</div>
 		<!-- 地图筛选弹框组件 -->
 		<nw-map-pop :isMapPop="mapPop" @checkTheme="testCheckTheme"  @zdcBtnShow="testZdcBtnShow"></nw-map-pop>
 		<!-- 选择组织--组件 -->
@@ -48,7 +60,7 @@
 		<!-- 悬浮球组件 -->
 		<nw-float-menu :menuArr="menuArr" @menuClick="menuClickTap"></nw-float-menu>
 		<!-- 底部按钮组件 -->
-		<nw-bot-button :zyBtn="dbZyBtn" :cyBtn="dbCyBtn" :twoZCyBtn="dbTwoZCyBtn" :zIconBtn="botbtnobj" @cliIconRBtn="testCliIconRBtn" @cliIconItemBtn="testCliIconItemBtn" />
+		<nw-bot-button :zyBtn="dbZyBtn" :cyBtn="dbCyBtn" :twoZCyBtn="dbTwoZCyBtn" :zIconBtn="botbtnobj" @cliIconRBtn="testCliIconRBtn" @cliIconItemBtn="testCliIconItemBtn" ></nw-bot-button>
 	</div>
 </template>
 
@@ -57,6 +69,36 @@
 		name: "demoPage",
 		data() {
 			return {
+				txtBoxObj1:{
+					showBox: 1,// 判断文本框类型 1左右布局；2上下布局；3上下布局（有输入内容长度）
+					boxBs: true,// 判断是否显示标识
+					titleTxt:'标题',
+					searchValue: '',
+					valueLength: 500,
+					isDisabled: false,//禁止输入；默认为false可输入，true禁止输入
+					placeholderTxt: '请输入',//输入框提示语
+					iconCla: 'icon-dingwei gray287 f15 pl5',//icon
+				},
+				txtBoxObj2:{
+					showBox: 2,// 判断文本框类型 1左右布局；2上下布局；3上下布局（有输入内容长度）
+					boxBs: true,// 判断是否显示标识
+					titleTxt:'标题',
+					searchValue: '',
+					valueLength: 500,
+					isDisabled: false,//禁止输入；默认为false可输入，true禁止输入
+					placeholderTxt: '请输入',//输入框提示语
+					iconCla: '',//icon
+				},
+				txtBoxObj3:{
+					showBox: 3,// 判断文本框类型 1左右布局；2上下布局；3上下布局（有输入内容长度）
+					boxBs: true,// 判断是否显示标识
+					titleTxt:'标题',
+					searchValue: '',
+					valueLength: 500,
+					isDisabled: false,//禁止输入；默认为false可输入，true禁止输入
+					placeholderTxt: '请输入',//输入框提示语
+					iconCla: '',//icon
+				},
 				popupState: false,
 				unitPop: false,
 				mapPop: false,

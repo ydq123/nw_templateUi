@@ -54,7 +54,7 @@
 				default: ()=>({
 					showBox: 1,// 判断文本框类型 1左右布局；2上下布局；3上下布局（有输入内容长度）
 					boxBs: true,// 判断是否显示标识
-					titleTxt:'标题标题标题标题',
+					titleTxt:'标题标题标题标题标题',
 					searchValue: '',
 					valueLength: 500,
 					isDisabled: false,//禁止输入；默认为false可输入，true禁止输入

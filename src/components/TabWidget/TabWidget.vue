@@ -109,7 +109,7 @@
 				<div class="tab-scrollX-box width-100 borderButtomE8 tabwidget-row bg-white pb10">
 					<div class="tabwidget-row al-c f16 pl15" :class="[showTabPop?'tab-list-autoHeight':'tab-list-scrollX']">
 						<div @click="changeScrollXTab(XIndex)" class="mt10" v-for="(XItem,XIndex) in tabScrollXList" :key="XIndex">
-							<span class="lh200 f12 pt5 pb5 pl10 pr10 mr15 borRadius-2" :class="[XItem.status?statusBoxY:statusBoxN]">{{XItem.title}}</span>
+							<span class="lh200 f14 pt5 pb5 pl10 pr10 mr15 borRadius-2" :class="[XItem.status?statusBoxY:statusBoxN]">{{XItem.title}}</span>
 						</div>
 					</div>
 					<div class="tab-scroll-x pl5 pr15 verticle-center" @click="showTabPop=!showTabPop">
@@ -307,7 +307,7 @@
 			activeBarStyle: function() {
 				var left = this.activeBarWidth / 2 - 15; // 15是线宽度的一半
 				if (this.curTabIndex == 0 || this.curTabIndex == 2) {
-					left = this.activeBarWidth / 2 - 10;
+					left = this.activeBarWidth / 2 - 15;
 				}
 				return {
 					transition: "all 300ms",
