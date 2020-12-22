@@ -13,6 +13,8 @@
 		<nw-module-top :isSort="true" :isSreen="true" @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab"
 		 @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen">
 		</nw-module-top>
+    
+    <button><h1 @click="openFlowView">流程页面组件</h1></button>
 		<h2 class="mt15 mb10">详情页顶部简介</h2>
 		<nwtop-introduce></nwtop-introduce>
 		<h2 class="mt15 mb10">多状态tab组件</h2>
@@ -180,6 +182,9 @@
 			}
 		},
 		methods: {
+      openFlowView() {
+        this.$router.push({name:'flowView',params:{processId: 'SP_WTICKET_SUB',processInsId: 'b6e89edaae0f4cbd89289f55030f0750_515'}})
+      },
 			menuClickTap(data){
 				console.log('menuClickTap', JSON.stringify(data));
 			},

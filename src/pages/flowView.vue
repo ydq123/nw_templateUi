@@ -29,15 +29,15 @@
 								<!-- nodeItme.colStatus -->
 								<label  v-if="nodeItme.colStatus?nodeItme.colStatus:colIndex==0"
 								 v-for="(colItme,colIndex) in nodeItme.colTransTrackInfo">
-									<div class="row al-c" >
+									<div class="flex al-c" >
 										<div class="flex-1" >
 											<div class="mb20" >
-												<div class="row ju-b mb5">
+												<div class="flex ju-b mb5">
 													<div class="f15 fw">{{nodeItme.curNodeName}}</div>
 													<div>{{colItme.actorName}}</div>
 													<div class="f13 txt-666">{{$baseTimeFormat("-", ":", true, colItme.overTime)}}</div>
 												</div>
-												<div class="row al-c f13 txt-666">
+												<div class="flex al-c f13 txt-666">
 													<div class="mr5 text-overflow txt-nowrap pr5">
 														意见：{{colItme.msg||'同意'}}
 													</div>
@@ -52,7 +52,7 @@
 										</div>
 									</div>
 								</label>
-								<div @click="nodeItme.colStatus=!nodeItme.colStatus" class="txt-1e8 f13 row" 
+								<div @click="nodeItme.colStatus=!nodeItme.colStatus" class="txt-1e8 f13 flex" 
 								v-if="nodeItme.colTransTrackInfo.length>1">
 									<div class="mr5">
 										{{nodeItme.colStatus?'收起':'更多'}}
@@ -169,6 +169,7 @@
 	.hiddenDanger_page_wrap {
 		height: 100%;
 		background-color: #f5f5f5;
+		overflow: hidden;
 	}
 
 	.f15 {
