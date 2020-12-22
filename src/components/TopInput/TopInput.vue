@@ -1,5 +1,18 @@
 <!-- TopInput模块头部组件使用方法
-
+	搜索按钮
+	<nw-top-input>
+		<div slot="taskSreenSort"></div>
+		<div slot="fousInput"></div>
+	</nw-top-input>
+	搜索输入框带排序和筛选
+	<nw-top-input>
+		<div slot="topInput"></div>
+	</nw-top-input>
+	搜索输入框
+	<nw-top-input>
+		<div slot="topInput"></div>
+		<div slot="taskSreenSort"></div>
+	</nw-top-input>
 	TopInput模块头部组件参数
 	isSort: true, // 控制显示排序按钮，默认为true：显示
 	isSreen: true, // 控制显示筛选按钮，默认为true：显示
@@ -119,6 +132,7 @@
 			searchValue: function(val){
 				if(val){
 					console.log('val:',val);
+					this.fousSearch();
 				}
 			}
 		},
@@ -128,11 +142,13 @@
 		methods: {
 			// 取消按钮
 			cancellBtn: function(){
+				console.log('cancellBtn');
 				this.$emit('cancellBtn');
 			},
 			// 监听搜索内容
 			fousSearch: function(){
-				
+				console.log('fousSearch');
+				this.$emit('fousSearch',this.searchValue);
 			},
 			// 手机键盘回车键
 			inputSearch: function() {
@@ -156,6 +172,7 @@
 				this.showPop = !this.showPop;
 			},
 			changeSreen: function() {
+				console.log('changeSreen');
 				this.$emit('changeSreen');
 			},
 			//选择排序类型
@@ -183,7 +200,7 @@
 	.yw-topinput {
 		position: fixed;
 		left: 0;
-		z-index: 99;
+		z-index: 999;
 		text-align: center;
 		width: 100%;
 	}

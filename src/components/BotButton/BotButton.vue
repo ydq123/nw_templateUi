@@ -5,13 +5,13 @@
 		text: '主要按钮', //  按钮文案
 		color: 'white', // 按钮文案颜色
 		bgcolor: '#1E87F0',//  按钮背景颜色
-		fsize: '16px' // 字体大小
+		fsize: 'f14' // 字体大小
 	},
 	cyBtn: { // 次要按钮配置项
 		btnType: true,
 		text: '次要按钮',
 		color: '#262626',
-		fsize: '16px'
+		fsize: 'f14'
 	},
 	twoZCyBtn: { // 等分要按钮配置项
 		btnType: true,
@@ -19,12 +19,12 @@
 			text: '发送',
 			color: 'white',
 			bgcolor: '#1E87F0',
-			fsize: '16px'
+			fsize: 'f14'
 		},
 		ciyaoBtn: {
 			text: '保存',
 			color: '#262626',
-			fsize: '16px'
+			fsize: 'f14'
 		},
 	},
 	zIconBtn: { // icon按钮配置项
@@ -32,8 +32,8 @@
 		iconList: [{
 				icon: 'icon-jinyongqingkuang', // icon名称
 				iconText: '哈哈1', // icon文案
-				iconSize: '14px', // icon大小
-				textSize: '14px', // 文案大小
+				iconSize: 'f14', // icon大小
+				textSize: 'f14', // 文案大小
 				iconColor: '', // icon颜色
 				textColor: '' // icon文案颜色
 			},
@@ -42,7 +42,7 @@
 			text: '终结',
 			color: 'white',
 			bgcolor: '#1E87F0',
-			fsize: '16px'
+			fsize: 'f14'
 		},
 	},
  -->

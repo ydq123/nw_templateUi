@@ -37,9 +37,9 @@
  -->
 <template>
 	<div class="yw-mappop nw_bag_F5">
-		<div class="zdc zIndex999" @click.stop="zdcBtnShow" v-show="showPop"></div>
+		<div class="zdc zIndex999" @click.stop="zdcBtnShow" v-show="showMapPop"></div>
 		<!-- 筛选 -->
-		<div class="sreen-warp bg-white" v-show="showPop">
+		<div class="sreen-warp bg-white" :class="[showMapPop?'':'showBgcW']">
 			<div class="sreen-box">
 				<div class="layer-item layer-theme">
 					<div class="bg-f5 pr20 pl20 pb10 pt10 f14 text-left">地图类型</div>
@@ -79,7 +79,7 @@
 		display: 'MapPop地图弹窗',
 		data() {
 			return {
-				showPop: this.isMapPop,
+				showMapPop: false,
 				radios: this.mapList,
 				mapSwith: this.switchList
 			}
@@ -87,7 +87,7 @@
 		props: {
 			isMapPop: { // 控制显示地图弹窗
 				type: Boolean,
-				default: true
+				default: false
 			},
 			mapList: { // 地图底图数组
 				type: Array,
@@ -159,8 +159,12 @@
 			},
 		},
 		watch: {
-			showPop: function() {
-				if (!this.showPop) {
+			showMapPop: function() {
+				this.$emit('update:isMapPop', this.showMapPop);
+			},
+			isMapPop: function() {
+				this.showMapPop = this.isMapPop;
+				if (!this.isMapPop) {
 					document.body.style.overflow = '';
 				} else {
 					document.body.style.overflow = 'hidden';
@@ -186,7 +190,7 @@
 			},
 			// 遮挡层隐藏
 			zdcBtnShow: function() {
-				this.showPop = false;
+				this.showMapPop = false;
 				var data = {
 					mapList: []
 				};

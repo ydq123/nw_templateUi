@@ -2,15 +2,19 @@
   <div id="demoPage" style="padding-top:100px">
     <nw-fixed-header title="徐徐噶" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
       <div slot="page-bottmo">
+		  
       </div>
     </nw-fixed-header>
-    <hr>
-    <h2>头部详情简介</h2>
+	<h2>头部详情简介</h2>
     <nwtop-introduce></nwtop-introduce>
-    <hr>
 	<nw-tab-widget></nw-tab-widget>
+	<nw-map-pop :isMapPop="mapPop" @zdcBtnShow="mapPop=false"></nw-map-pop>
+	<nw-top-input :mTop="44">
+		<div slot="topInput"></div>
+		<!-- <div slot="taskSreenSort"></div> -->
+	</nw-top-input>
     <nw-button size="large"><h1 @click="aa">sssss</h1></nw-button>
-    <nw-module-top :isSort="true" :isSreen="true" :mTop="0" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList" @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen"></nw-module-top>
+    <nw-module-top :isSort="true" :isSreen="true" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList" @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen"></nw-module-top>
     <!-- <nw-test></nw-test> -->
     <hr style="margin-top:20px">
     <nw-uploader :fileInfo="fileInfo" :lookFileArr2="lookFileArr2" :baseUrl="baseUrl" :proxyUrl="proxyUrl" :proxyIp="proxyIp" :accessToken="accessToken"></nw-uploader>
@@ -59,6 +63,7 @@ export default {
       testval: '',
       popupState: false,
 		  unitPop:false,
+		mapPop: false,
       baseUrl: "",
       proxyUrl: "",
       accessToken: "",
@@ -241,33 +246,7 @@ export default {
           }
         ]
       },
-	  userInfo: {
-	  		"employeeId": "A9C0B502210946C5BD52494CD5442492",
-	  		"userId": "AEEEE802803749E1841C857240F0C3B5",
-	  		"employeeName": "毛嘉杰",
-	  		"account": "maojiajie",
-	  		"shortSpell": "mjj",
-	  		"fullSpell": "maojiajie",
-	  		"state": 1,
-	  		"jobStatus": 0,
-	  		"employeeStatus": 0,
-	  		"sortOrder": 0,
-	  		"sex": 0,
-	  		"createTime": 1586763073000,
-	  		"marriage": 0,
-	  		"orgId": "1589BAA87C11BD64E053380F0A0A54B2",
-	  		"orgName": "广州天河供电局",
-	  		"nameFullPath": "中国南方电网有限责任公司/广州供电局有限公司/广州天河供电局",
-	  		"orgCode": "080020",
-	  		"sapHROrgId": "8816B370FB4A0B82E0440018FE2DCEF4",
-	  		"orgStructureId": "A",
-	  		"unitOid": "1589BAA87C11BD64E053380F0A0A54B2",
-	  		"unitOname": "广州天河供电局",
-	  		"orgLevel": 3,
-	  		"orgType": 5,
-	  		"unitCode": "030120",
-	  		"shortOrgName": "天河"
-	  	}, //当前登录人信息
+	  userInfo: {}, //当前登录人信息
     };
   },
   mounted() {
@@ -284,6 +263,34 @@ export default {
 	  _this.$bus.$on("testAccectFun", function(data) {
 	  	_this.testAccectFun(data);
 	  });
+	  
+	_this.userInfo = {
+		"employeeId": "A9C0B502210946C5BD52494CD5442492",
+		"userId": "AEEEE802803749E1841C857240F0C3B5",
+		"employeeName": "毛嘉杰",
+		"account": "maojiajie",
+		"shortSpell": "mjj",
+		"fullSpell": "maojiajie",
+		"state": 1,
+		"jobStatus": 0,
+		"employeeStatus": 0,
+		"sortOrder": 0,
+		"sex": 0,
+		"createTime": 1586763073000,
+		"marriage": 0,
+		"orgId": "1589BAA87C11BD64E053380F0A0A54B2",
+		"orgName": "广州天河供电局",
+		"nameFullPath": "中国南方电网有限责任公司/广州供电局有限公司/广州天河供电局",
+		"orgCode": "080020",
+		"sapHROrgId": "8816B370FB4A0B82E0440018FE2DCEF4",
+		"orgStructureId": "A",
+		"unitOid": "1589BAA87C11BD64E053380F0A0A54B2",
+		"unitOname": "广州天河供电局",
+		"orgLevel": 3,
+		"orgType": 5,
+		"unitCode": "030120",
+		"shortOrgName": "天河"
+	}
   },
   methods: {
     backHandle() {

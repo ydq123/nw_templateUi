@@ -4,7 +4,7 @@
 	width: 100%;
 	height: auto;
 	position: fixed;
-	z-index: 99;
+	z-index: 999;
 	
 }
 
@@ -43,6 +43,11 @@
 	padding-top: r(44px);
 	padding-bottom: r(20px);
 	overflow: hidden;
+	transition: all 500ms;
+	
+	&.showBgcW {
+		margin-right: -100%;
+	}
 	
 	.sreen-box {
 		width: 100%;

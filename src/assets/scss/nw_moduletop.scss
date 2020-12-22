@@ -191,7 +191,7 @@
 	z-index: 9999 !important;
 	top: 0;
 	right: 0;
-	width: 0%;
+	width: 80%;
 	height: 100%;
 	padding-top: r(44px);
 	padding-bottom: r(65px);
@@ -199,7 +199,7 @@
 	transition: all 500ms;
 	
 	&.showBgcW {
-		width: 80%;
+		margin-right: -100%;
 	}
 
 	.sreen-box {

@@ -387,6 +387,7 @@
 
 	.yw-tabwidget {
 		width: 100%;
+		text-align: center;
 	}
 
 	.tabwidget-row {
