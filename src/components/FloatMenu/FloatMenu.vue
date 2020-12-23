@@ -31,10 +31,10 @@
 
 <script>
 	import {
-		tabMinxin
-	} from '@/mixin/tabMinxin.js';
+		NWtabMinxin
+	} from '@/mixin/NWtabMinxin.js';
 	export default {
-		mixins: [tabMinxin], //混入公共类
+		mixins: [NWtabMinxin], //混入公共类
 		props: {
 			zIndex: {
 				type: Number,

@@ -15,6 +15,7 @@
 			 @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen">
 			</nw-module-top>
 		</div>
+		<van-button @click="openWorkFlow">打开工作流</van-button>
 		<div class="bg-white mt20 pb20">
 			<h2 class="pt15 pb10 borderButtomE8 grayfa6470">详情页顶部简介</h2>
 			<nwtop-introduce></nwtop-introduce>
@@ -84,8 +85,12 @@
 </template>
 
 <script>
+	import {
+		NWtabMinxin
+	} from "@/mixin/NWtabMinxin.js";
 	export default {
 		name: "demoPage",
+		mixins: [NWtabMinxin],
 		data() {
 			return {
 				txtBoxObj1: {
@@ -265,6 +270,18 @@
 			};
 		},
 		methods: {
+			openWorkFlow() {
+				// return  this.$toast.success(123456);
+				this.$msgThenCatch({msg: '嘻嘻哈哈',title: '提示'},this.aa,this.bb);
+				return
+				this.$router.push({name:'demo_workflow'});
+			},
+			aa() {
+				console.log('aaaaaa');
+			},
+			bb() {
+				console.log('bbbbb');
+			},
 			menuClickTap(data) {
 				console.log("menuClickTap", JSON.stringify(data));
 			},

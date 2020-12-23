@@ -139,7 +139,7 @@
     </nw-PopupFilter>
     -->
 <script>
-import { baseMinxin } from "@/mixin/baseMinxin.js";
+import { NWbaseMinxin } from "@/mixin/NWbaseMinxin.js";
 export default {
   data() {
     return {
@@ -148,7 +148,7 @@ export default {
       currentDate: new Date()
     };
   },
-  mixins: [baseMinxin],
+  mixins: [NWbaseMinxin],
   model: {
     prop: "popupState",
     event: "input"

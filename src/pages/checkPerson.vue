@@ -79,11 +79,11 @@
 		search
 	} from "@/moduleAPI/jadp.js";
 	import {
-		tabMinxin
-	} from "@/mixin/tabMinxin.js";
+		NWtabMinxin
+	} from "@/mixin/NWtabMinxin.js";
 	export default {
 		name: "checkPerson",
-		mixins: [tabMinxin],
+		mixins: [NWtabMinxin],
 		data() {
 			return {
 				param: {},

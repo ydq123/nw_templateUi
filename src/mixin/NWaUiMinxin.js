@@ -1,5 +1,5 @@
 /* 按钮-混入 */
-export const aUiMinxin = {
+export const NWaUiMinxin = {
   data() {
     return {
 

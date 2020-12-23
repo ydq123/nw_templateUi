@@ -35,5 +35,5 @@ export {
 	TextputBox,
 	StatusLabel,
 	topIntroduce,
-	TabWidget
+    TabWidget,
 }

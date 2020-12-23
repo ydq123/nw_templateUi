@@ -1,5 +1,5 @@
 /* 按钮-混入 */
-export const baseMinxin = {
+export const NWbaseMinxin = {
 	data() {
 		return {
 

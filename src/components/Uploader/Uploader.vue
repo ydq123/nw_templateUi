@@ -26,10 +26,10 @@
 
 <script>
 	import {
-		tabMinxin
-	} from "@/mixin/tabMinxin.js";
+		NWtabMinxin
+	} from "@/mixin/NWtabMinxin.js";
 	export default {
-		mixins: [tabMinxin],
+		mixins: [NWtabMinxin],
 		props: {
 			NW_BASEURL: {
 				type: String, //真实开发ip地址

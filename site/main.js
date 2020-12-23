@@ -8,7 +8,9 @@ import '@/assets/fonts/iconfont.css';
 import 'lib-flexible/flexible.js'
 import nwVue from '@'
 import EimMobileJsSdk from 'eimjssdk'
+
 import router from '@/router';
+import '@/plugin/workFlow/workflowConfig';//引入工作流
 
 
 
@@ -21,6 +23,8 @@ import '@/plugin/vant/vant_init.js'; //初始化
 /* 跨页面通讯 */
 import bus from '@/utils/bus.js'; //跨页面通讯
 Vue.prototype.$bus = bus;
+
+
 
 Vue.use(nwVue)
 new Vue({

@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { tabMinxin } from "@/mixin/tabMinxin.js";
+import { NWtabMinxin } from "@/mixin/NWtabMinxin.js";
 export default {
   props: {
     title: {
@@ -51,7 +51,7 @@ export default {
       default: "默认标题"
     }
   },
-  mixins: [tabMinxin], //混入公共类
+  mixins: [NWtabMinxin], //混入公共类
   name: "fixed-header",
   methods: {
     threeClock() {
