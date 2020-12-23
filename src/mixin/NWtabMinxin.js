@@ -14,12 +14,6 @@ import {
 import {
 	NWbpmsMinxin,
 } from './NWbpmsMinxin.js'
-// import {
-// 	uploader,
-// 	downloadAttachmentByAttachmentId,
-// 	getAttchmentByObjId,
-// 	deleteAttachmentById
-// } from '../moduleAPI/atm.js'
 export const NWtabMinxin = {
 	mixins: [NWbaseMinxin, NWvantMixin, NWmyJsSdkMixin, NWaUiMinxin,NWbpmsMinxin], //混入公共类
 	data() {
@@ -39,81 +33,6 @@ export const NWtabMinxin = {
 		// }
 	},
 	methods: {
-		// 附件上传方法
-		$tabUploadFile(file, params, callback) {
-			file.status = "uploading";
-			file.message = "上传中...";
-			const formData = new FormData(); // 声明一个FormData对象
-			formData.append("file", file.file);
-			formData.append("param", JSON.stringify(params));
-			uploader(formData)
-				.then(res => {
-					callback(res);
-				})
-				.catch(err => {
-					callback(err);
-				});
-		},
-		// 附件下载--后端返回文件流格式
-		$tabDownloadAttachment(id, callback) {
-			let params = {
-				attachmentId: id
-			};
-			downloadAttachmentByAttachmentId(params)
-				.then(res => {
-					callback(res)
-				})
-				.catch(err => {
-					callback(err);
-				});
-		},
-		// 获取附件列表以及下载列表图片展示在页面
-		$tabAttchmentList(params, callback) {
-			getAttchmentByObjId(params)
-				.then(res => {
-					callback(res);
-				})
-				.catch(err => {
-					callback(err);
-				});
-		},
-		// 删除附件
-		$tabDeleteAttachmentById(params, callback) {
-			deleteAttachmentById(params)
-				.then(res => {
-					callback(res);
-				})
-				.catch(err => {
-					callback(err);
-				});
-		},
-		$tabClickInit: function() {
-			$('body').on('touchstart', '[m="click"]', function(e) {
-				var e = e || window.event;
-				$(this).addClass('click-active');
-			});
-			$('body').on('touchmove', '[m="click"]', function(e) {
-				var e = e || window.event;
-				$(this).removeClass('click-active')
-			});
-			$('body').on('touchend', '[m="click"]', function(e) {
-				var e = e || window.event;
-				$(this).removeClass('click-active')
-			});
-
-			$('body').on('touchstart', '[m="btn"]', function(e) {
-				var e = e || window.event;
-				$(this).addClass('btn-active');
-			});
-			$('body').on('touchmove', '[m="btn"]', function(e) {
-				var e = e || window.event;
-				$(this).removeClass('btn-active')
-			});
-			$('body').on('touchend', '[m="btn"]', function(e) {
-				var e = e || window.event;
-				$(this).removeClass('btn-active')
-			});
-		},
 		/* 自定义网络请求*/
 		$myAjax: function(obj) {
 			let {
@@ -283,7 +202,33 @@ export const NWtabMinxin = {
 				return obj || '';
 			}
 		},
+		$tabClickInit: function() {
+			$('body').on('touchstart', '[m="click"]', function(e) {
+				var e = e || window.event;
+				$(this).addClass('click-active');
+			});
+			$('body').on('touchmove', '[m="click"]', function(e) {
+				var e = e || window.event;
+				$(this).removeClass('click-active')
+			});
+			$('body').on('touchend', '[m="click"]', function(e) {
+				var e = e || window.event;
+				$(this).removeClass('click-active')
+			});
 
+			$('body').on('touchstart', '[m="btn"]', function(e) {
+				var e = e || window.event;
+				$(this).addClass('btn-active');
+			});
+			$('body').on('touchmove', '[m="btn"]', function(e) {
+				var e = e || window.event;
+				$(this).removeClass('btn-active')
+			});
+			$('body').on('touchend', '[m="btn"]', function(e) {
+				var e = e || window.event;
+				$(this).removeClass('btn-active')
+			});
+		},
 	},
 	computed: {
 
