@@ -20,7 +20,7 @@
 				</div>
 			</div>
 			<div class="bg-f5 pl15 pr15 pt10 pb10">
-				<div class="bg-white pt10 pb10 gray9 radius-5 f15 text-center" @click="$tabOpenWin('operation_searchPersonnel', param)">
+				<div class="bg-white pt10 pb10 gray9 radius-5 f15 text-center">
 					<i class="iconfont icon-sousuo f15 ml5 mr5 gray9"></i>
 					搜索
 				</div>
@@ -79,11 +79,11 @@
 		search
 	} from "@/moduleAPI/jadp.js";
 	import {
-		tabMinxin
-	} from "@/mixin/tabMinxin.js";
+		NWtabMinxin
+	} from "../mixin/NWtabMinxin.js";
 	export default {
 		name: "checkPerson",
-		mixins: [tabMinxin],
+		mixins: [NWtabMinxin],
 		data() {
 			return {
 				param: {},
@@ -271,10 +271,9 @@
 					}
 					data.curNodeItemlist = this.curNodeList;
 				}
-				this.$bus.$emit('testAccectFun', data);
-				console.log("跨页面通讯回调data" + JSON.stringify(data));
-				// this.$bus.$emit('', data);
-				// this.$tabBack(-1);
+				// this.$bus.$emit('person', data);
+				var name = this.param.exeMun;
+				this.$across.$emit(name, data);
 				this.$router.go(-1);
 			},
 			onLoad() {
@@ -370,16 +369,16 @@
 	
 	/*没有数据*/
 	.person-noData {
-		padding-top: r(120px);
+		padding-top: r(140px);
 		text-align: center;
 		color: #b5b5b5;
-		font-size: r(30px);
+		font-size: r(15px);
 		img {
-			width: r(250px);
+			width: r(200px);
 			margin: 0 auto;
 		}
 		.button {
-			font-size: r(30px);
+			font-size: r(15px);
 			min-width: r(160px);
 			height: r(60px);
 			padding: 0 r(56px);

@@ -1,5 +1,6 @@
 /* 按钮-混入 */
-export const myJsSdkMixin = {
+// import setData from '@/moduleAPI/setData';
+export const NWmyJsSdkMixin = {
 	data() {
 		return {
 
@@ -29,14 +30,14 @@ export const myJsSdkMixin = {
 										name: ret.result[0].info,
 										status: true
 									}
-									callback || callback(obj)
+									callback(obj)
 								} else {
 									/* 无资质 */
 									var obj = {
 										name: '',
 										status: false
 									};
-									callback || callback(obj)
+									callback(obj)
 								}
 							} else {
 								/* 无资质 */
@@ -44,7 +45,7 @@ export const myJsSdkMixin = {
 									name: '',
 									status: false
 								};
-								callback || callback(obj)
+								callback(obj)
 							}
 						} else {
 							/* 无资质 */
@@ -52,7 +53,7 @@ export const myJsSdkMixin = {
 								name: '',
 								status: false
 							};
-							callback || callback(obj)
+							callback(obj)
 						}
 
 					}).catch(err => {
@@ -60,7 +61,7 @@ export const myJsSdkMixin = {
 							name: '',
 							status: false
 						};
-						callback || callback(obj)
+						callback(obj)
 					});
 				},
 				() => {
@@ -68,21 +69,29 @@ export const myJsSdkMixin = {
 						name: '',
 						status: false
 					};
-					callback || callback(obj)
+					callback(obj)
 				});
 		},
 		/* 获取文件大小 */
 		$sdkGetFileLength: function(url, callback) {
-			cordova.plugins.FaceDetectPlugin.getFileLength({
-					filePath: url
-				}, (fileLength) => {
-					console.log('funFileSize:' + fileLength)
-					callback || callback(fileLength);
-				},
-				(err) => {
-					console.log('获取文件长度失败' + err);
-					callback || callback(false);
-				});
+			this.myJssdk.callMobileJsSdk(
+				'file/info', {
+					path: url,
+					success(data) {
+						var dataType = typeof data;
+						if (dataType == 'string') {
+							data = JSON.parse(data)
+						}
+						data['status'] = true;
+						callback(data);
+					},
+					fail(error) {
+						console.log(error);
+						error['status'] = false;
+						callback(error);
+					}
+				}
+			);
 		},
 		/* 物理返回键监听*/
 		$sdkCallMobile: function() {
@@ -95,6 +104,7 @@ export const myJsSdkMixin = {
 					// console.log(_this.$route.name)
 					if (_this.$route.meta.moduleName == 'root') {
 						if (_this.$route.name != 'root_tab') {
+							_this.$textHid();//关闭加载提示框
 							_this.$tabBack(-1);
 						} else {
 							_this.$msgThenCatch('确定要退出程序吗？', function(res) {
@@ -103,7 +113,8 @@ export const myJsSdkMixin = {
 						}
 
 					} else {
-						_this.$tabWxBack(-1);
+						_this.$textHid();//关闭加载提示框
+						_this.$tabBack(-1);
 					}
 				},
 				success(res2) {
@@ -139,7 +150,7 @@ export const myJsSdkMixin = {
 					imagePath: '', // 签名照片的路径
 					imageStr: '' //签名照片base64之后的缩略图数据
 					} */
-					callback || callback({
+					callback({
 						status: true,
 						data: res
 					})
@@ -147,7 +158,7 @@ export const myJsSdkMixin = {
 				},
 				fail(err) {
 					console.info(err)
-					callback || callback({
+					callback({
 						status: false,
 						data: err
 					})
@@ -163,7 +174,7 @@ export const myJsSdkMixin = {
 						'access-token': this.$store.getters.jdapUserInfo.token
 					})
 			} = obj;
-			var baseUpUrl = 'http://172.16.68.42:80';
+			var baseUpUrl = window.NW_BASEURL || 'http://172.16.68.42:80';
 			this.myJssdk.uploadMedia({
 				url: baseUpUrl + '/web/upload/api/top/atm/restClient/uploadAttachmentFile',
 				fileurl: fileurl,
@@ -176,7 +187,7 @@ export const myJsSdkMixin = {
 						data = JSON.parse(data)
 					}
 					console.log(data)
-					callback || callback({
+					callback({
 						status: true,
 						data: data
 					})
@@ -184,12 +195,67 @@ export const myJsSdkMixin = {
 				},
 				fail(data) {
 					/* 上传失败 */
-					callback || callback({
+					callback({
 						status: false,
 						data: data
 					})
 				}
 			})
+		},
+		/* 下载附件 callMobileJsSdk*/
+		$sdkDownload: function(url,callback1,callback2) {
+			console.log(url)
+			/* success:文件绝对路径
+				fail：失败信息
+					progresscallback：进度值0-100  */
+			// 附件下载通用方法示例 /storage/emulated/0/deviceid.txt
+			this.myJssdk.callMobileJsSdk(
+				'file/download',
+				{
+					headers: JSON.stringify({
+						'access-token': this.$store.getters.jdapUserInfo.token
+					}),
+					params:JSON.stringify({
+						'url': url,
+					}),
+					url: url,
+					path: '',//下载地址
+					success(data) {
+						console.log(11111);
+						console.log(data);
+						callback1({
+							status: true,
+							data: data
+						});
+					},
+					fail(error) {
+						console.log(222);
+						console.log(error);
+						callback1({
+							status: false,
+							data: error
+						});
+					},
+					progresscallback(progress) {
+						console.log(333333);
+						console.log(progress);
+							// callback2(progress);
+					}
+				});
+		},
+		/* 文件预览 */
+		$sdkQuicklook:function(url,callback){
+			this.myJssdk.callMobileJsSdk(
+				'file/quicklook', {
+					title: 'write',
+					urlOrPath: url,
+					success(data) {
+						callback({status:true,msg:'文档预览成功'});
+					},
+					fail(error) {
+						callback({status:false,msg:error});
+					}
+				});
 		},
 		/* 本地缓存操作 */
 		$sdkKvSync: function(obj, callBack) {
@@ -231,8 +297,34 @@ export const myJsSdkMixin = {
 				}
 			});
 		},
-
-
+		/* 获取安全距离 
+		{
+		    "left": 40,//px
+		    "top": 40,//px
+		    "right": 40,//px
+		    "bottom":80//px
+		}
+		*/
+		$sdkSafearea:function(callBack){
+			
+			this.myJssdk.callMobileJsSdk(
+			  'system/safearea', 
+			  {
+			    success (data) {
+			      callBack({
+					  status:true,
+					  data:data
+				  })
+			    },
+			    fail (error) {
+					callBack({
+						status:false,
+						data:error
+					})
+			    }
+			  }
+			);
+		}
 
 
 

@@ -11,6 +11,11 @@ import InsideLoading from './InsideLoading/InsideLoading.vue' //动画加载中�
 import NullData from './NullData/NullData.vue' //无数据占位组件
 import PopupFilter from './PopupFilter/PopupFilter.vue' //右侧弹出筛选组件
 import TopInput from './TopInput/TopInput.vue' //搜索组件
+import FoldingBox from './FoldingBox/FoldingBox.vue' //折叠框组件
+import TextputBox from './TextputBox/TextputBox.vue' //文本输入框组件
+import StatusLabel from './StatusLabel/StatusLabel.vue' //状态标签组件
+import topIntroduce from './topIntroduce/topIntroduce.vue' //详情页顶部简介
+import TabWidget from './TabWidget/TabWidget.vue' //多状态tab组件
 
 export {
     Button,
@@ -25,5 +30,10 @@ export {
     InsideLoading,
     NullData,
     PopupFilter,
-	TopInput
+	TopInput,
+	FoldingBox,
+	TextputBox,
+	StatusLabel,
+	topIntroduce,
+    TabWidget,
 }

@@ -1,24 +1,21 @@
 /* 按钮-混入 */
 import {
-	baseMinxin,
-} from './baseMinxin.js'
+	NWbaseMinxin,
+} from './NWbaseMinxin.js'
 import {
-	vantMixin,
-} from './vantMixin.js'
+	NWvantMixin,
+} from './NWvantMixin.js'
 import {
-	myJsSdkMixin,
-} from './myJsSdkMixin.js'
+	NWmyJsSdkMixin,
+} from './NWmyJsSdkMixin.js'
 import {
-	aUiMinxin,
-} from './aUiMinxin.js'
-// import {
-// 	uploader,
-// 	downloadAttachmentByAttachmentId,
-// 	getAttchmentByObjId,
-// 	deleteAttachmentById
-// } from '@/moduleAPI/atm.js'
-export const tabMinxin = {
-	mixins: [baseMinxin, vantMixin, myJsSdkMixin, aUiMinxin], //混入公共类
+	NWaUiMinxin,
+} from './NWaUiMinxin.js'
+import {
+	NWbpmsMinxin,
+} from './NWbpmsMinxin.js'
+export const NWtabMinxin = {
+	mixins: [NWbaseMinxin, NWvantMixin, NWmyJsSdkMixin, NWaUiMinxin,NWbpmsMinxin], //混入公共类
 	data() {
 		return {
 			tabPageData: '',
@@ -28,92 +25,14 @@ export const tabMinxin = {
 		}
 	},
 	mounted() {
-		// this.tabPageData = this.$tabPageData(); //接受页面参数
+		this.tabPageData = this.$tabPageData(); //接受页面参数
 		// if (this.$store.getters.jdapUserInfo.userInfo) {
 		// 	var jdapUserInfo = localStorage.getItem("userInfo");
 		// 	// console.info(jdapUserInfo);
 		// 	this.$store.commit("setJdapUserInfo", jdapUserInfo);
 		// }
 	},
-	
 	methods: {
-		// 附件上传方法
-		$tabUploadFile(file, params, callback) {
-			file.status = "uploading";
-			file.message = "上传中...";
-			const formData = new FormData(); // 声明一个FormData对象
-			formData.append("file", file.file);
-			formData.append("param", JSON.stringify(params));
-			uploader(formData)
-				.then(res => {
-					callback(res);
-				})
-				.catch(err => {
-					callback(err);
-				});
-		},
-		// 附件下载--后端返回文件流格式
-		$tabDownloadAttachment(id, callback) {
-			let params = {
-				attachmentId: id
-			};
-			downloadAttachmentByAttachmentId(params)
-				.then(res => {
-					callback(res)
-				})
-				.catch(err => {
-					callback(err);
-				});
-		},
-		// 获取附件列表以及下载列表图片展示在页面
-		$tabAttchmentList(params, callback) {
-			getAttchmentByObjId(params)
-				.then(res => {
-					console.log('success');
-					callback(res);
-				})
-				.catch(err => {
-					console.log('fail');
-					callback(err);
-				});
-		},
-		// 删除附件
-		$tabDeleteAttachmentById(params, callback) {
-			deleteAttachmentById(params)
-				.then(res => {
-					callback(res);
-				})
-				.catch(err => {
-					callback(err);
-				});
-		},
-		$tabClickInit: function() {
-			$('body').on('touchstart', '[m="click"]', function(e) {
-				var e = e || window.event;
-				$(this).addClass('click-active');
-			});
-			$('body').on('touchmove', '[m="click"]', function(e) {
-				var e = e || window.event;
-				$(this).removeClass('click-active')
-			});
-			$('body').on('touchend', '[m="click"]', function(e) {
-				var e = e || window.event;
-				$(this).removeClass('click-active')
-			});
-
-			$('body').on('touchstart', '[m="btn"]', function(e) {
-				var e = e || window.event;
-				$(this).addClass('btn-active');
-			});
-			$('body').on('touchmove', '[m="btn"]', function(e) {
-				var e = e || window.event;
-				$(this).removeClass('btn-active')
-			});
-			$('body').on('touchend', '[m="btn"]', function(e) {
-				var e = e || window.event;
-				$(this).removeClass('btn-active')
-			});
-		},
 		/* 自定义网络请求*/
 		$myAjax: function(obj) {
 			let {
@@ -146,20 +65,10 @@ export const tabMinxin = {
 		},
 
 		/*************************************页面内***********************************/
-		$tabWxBack: function(pageNub, jlRoute) {
-			this.$tabBack(pageNub, jlRoute);
-		},
-		//关闭模块组
-		$tabWxAllDlt: function(pageName, tabPageData, jlRoute) {
-			this.$tabBackHome('');
-		},
-		//关闭当前页-打开到一个新的页面
-		$tabWxToWin: function(winName, pageData, jlRoute) {},
-		$tabWxOpenWin: function(obj, pageData = {}) {
-			this.$tabOpenWin(obj, pageData || {});
-		},
 		//直接返回当前页的上一页，数据全部消息，是个新页面
 		$tabBack: function(nub, dhType) {
+			var keepNameArr = this.$store.getters.pageUrlObj.keepNameArr;
+			var keepLeg = this.$store.getters.pageUrlObj.keepNameArr.length;
 			this.$store.commit('setPageDataObj', {
 				pageSlide: dhType || 'slide-right', //默认后退
 			});
@@ -167,37 +76,44 @@ export const tabMinxin = {
 			var pageNub = -1;
 			if (val == 'number') {
 				//返回上 nub 页
-				pageNub = nub
-			} else if(val == 'string' ){
+				pageNub = nub;
+				var jdzIndex = Math.abs(nub);
+				var winName = keepNameArr[keepLeg - jdzIndex - 1].name;
+			} else if (val == 'string') {
 				/* keepNameArr */
-				var keepNameArr=this.$store.getters.pageUrlObj.keepNameArr;
-				var keepLeg=this.$store.getters.pageUrlObj.keepNameArr.length;
-				var retObj =this.$baseArrExchange(keepNameArr, '', nub);
-				console.log(keepNameArr)
-				console.log(keepLeg)
-				console.log(retObj)
-				console.log(this.$route.meta)
-				pageNub=-(keepLeg-1-Number(retObj.index));
-				console.log(pageNub)
-			}else {
-				this.$tabBackHome('');
+				var winName = nub;
+				var retObj = this.$baseArrExchange(keepNameArr, 'name', winName);
+				pageNub = -(keepLeg - 1 - Number(retObj.index));
+			} else {
+				this.$tabBackHome('root_tab');
 				return
 			}
 			this.$store.commit('setPageUrlObj', {
 				funType: 'keepBack', //删除缓存页面
-				pageNub:pageNub,
+				pageNub: pageNub,
 			});
-			this.$router.back(pageNub);
+			var obj = {
+				name: winName,
+				params: 123
+			};
+			this.$router.push(obj);
+			// this.$router.go(pageNub);
 		},
 		$tabBackHome: function(winName, dhType) {
 			this.$store.commit('setPageUrlObj', {
 				funType: 'keepBackArr', //删除缓存页面
-				pageNub:0,
+				pageNub: 0,
+				winName:winName||'root_tab',
 			});
-			this.jcOpenWin({
-				winName: winName || 'root_tab',
-				dhType: 'slide-bottom'
+			this.$store.commit('setPageDataObj', {
+				pageSlide: 'slide-bottom', //默认前进
 			});
+			var obj = {
+				name: winName || 'root_tab',
+				params: '123'
+			};
+			this.$router.push(obj);
+
 		},
 		/* 路由跳转
 		to:要去页面的name 或者path
@@ -213,8 +129,8 @@ export const tabMinxin = {
 				var winName = obj;
 			};
 			/* 记录 */
-			
-			
+
+
 			this.jcOpenWin(obj, pageData);
 		},
 		$tabSetkeepName: function(winName, moduleName) {
@@ -242,7 +158,7 @@ export const tabMinxin = {
 			});
 			this.$store.commit('setPageUrlObj', {
 				funType: 'keepPush', //新增缓存页面
-				winName:winName,
+				winName: winName,
 			});
 			var val = this.$baseIsTypeof(pageData); //判断类型number、string、boolean、undefined、null、arr，obj、function
 			if (val == 'number' || val == 'boolean' || val == 'string' || val == 'arr') {
@@ -271,7 +187,7 @@ export const tabMinxin = {
 		/*
 		接受页面传递过来的参数
 		*/
-		$tabPageData: function() {
+		$tabPageData: function(obj) {
 			var query = this.$route.query;
 			var queryStatus = this.$baseIsEmptyObject(query); //判断是否是空对象
 
@@ -286,7 +202,33 @@ export const tabMinxin = {
 				return obj || '';
 			}
 		},
+		$tabClickInit: function() {
+			$('body').on('touchstart', '[m="click"]', function(e) {
+				var e = e || window.event;
+				$(this).addClass('click-active');
+			});
+			$('body').on('touchmove', '[m="click"]', function(e) {
+				var e = e || window.event;
+				$(this).removeClass('click-active')
+			});
+			$('body').on('touchend', '[m="click"]', function(e) {
+				var e = e || window.event;
+				$(this).removeClass('click-active')
+			});
 
+			$('body').on('touchstart', '[m="btn"]', function(e) {
+				var e = e || window.event;
+				$(this).addClass('btn-active');
+			});
+			$('body').on('touchmove', '[m="btn"]', function(e) {
+				var e = e || window.event;
+				$(this).removeClass('btn-active')
+			});
+			$('body').on('touchend', '[m="btn"]', function(e) {
+				var e = e || window.event;
+				$(this).removeClass('btn-active')
+			});
+		},
 	},
 	computed: {
 
@@ -326,21 +268,12 @@ export const tabMinxin = {
 	/* 进入页面前-复原导航条*/
 	beforeRouteEnter(to, from, next) {
 		next(vm => {
-			// if(to.name!='root_tab'){
-			// var leg = vm.$store.getters.pageUrlObj[to.meta.moduleName].length;
-			// if (leg > 0) {
-			// 	if (vm.$store.getters.pageUrlObj[to.meta.moduleName][leg - 1]['scrollY'] > 0) {
-			// 		setTimeout(function() {
-			// 			window.scroll(0, vm.$store.getters.pageUrlObj[to.meta.moduleName][leg - 1]['scrollY'] || 0);
-			// 		}, 90)
-			// 	}
-			// } else {
-			// 	setTimeout(function() {
-			// 		window.scroll(0, 0);
-			// 	}, 90)
-			// }
-			// }
-
+			setTimeout(function() {
+				var leg = vm.$store.getters.pageUrlObj.keepNameArr.length;
+				if (vm.$store.getters.pageUrlObj.keepNameArr[leg - 1]['scrollY'] > 0) {
+					window.scroll(0, vm.$store.getters.pageUrlObj.keepNameArr[leg - 1]['scrollY'] || 0);
+				}
+			}, 100)
 		});
 	},
 }

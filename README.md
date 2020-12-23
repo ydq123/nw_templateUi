@@ -61,20 +61,24 @@ proxyIp为开发环境代理地址（IP），光有代理地址没有真实ip不
 ####FixedHeader组件使用
 ```brash
 <!--第一种--使用示例如下 直接自己全新定义 -->
-  <nw-FixedHeader>
-    <div slot="default">
-      <div class="header">
-        <div class="left-btn">取消222</div>
-        <div class="header-txt">标题标题222</div>
-        <div class="right-content">4526</div>
-      </div>
-    </div>
-  </nw-FixedHeader>
+  <nw-FixedHeader @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
+      <div slot="default">
+				<div class="header">
+					<div class="left-btn">取消222</div>
+					<div class="header-txt">标题标题222</div>
+					<div class="right-content">4526</div>
+				</div>
+        <div slot="page-bottmo">需要固定在头部的其他东西</div>
+			</div>
+    </nw-FixedHeader>
 <!-- 第二种--使用示例如下 title传进来，自己定义left和right内容，也可以不传，有默认内容 自个斟酌-->
-  <nw-FixedHeader title="徐徐噶">
-    <div slot="left"><i class="pl10 iconfont icon-huitui"></i></div>
-    <div slot="right"><i class="pr10 iconfont icon-qianjin"></i></div>
-  </nw-FixedHeader>
+  <nw-FixedHeader title="徐徐噶" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
+      <div slot="left"><i class="pl10 iconfont icon-huitui"></i></div>
+      <div slot="right"><i class="pr10 iconfont icon-qianjin"></i></div>
+      <div slot="page-bottmo">需要固定在头部的其他东西</div>
+    </nw-FixedHeader>
+<!-- methods说明 -->
+<!-- headBackeHandle---点击左上角返回按钮事件  threeClockHandle---点击右上角三点按钮事件 backHomeHandle---点击右上角⚪点按钮事件-->
 ```
 
 ####自定义InsideLoading加载中组件使用
@@ -104,6 +108,150 @@ proxyIp为开发环境代理地址（IP），光有代理地址没有真实ip不
 			<div slot="nullImg"><img src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2771978851,2906984932&fm=26&gp=0.jpg" alt="" /></div>
 			<div slot="nullText">123</div>
 		</nw-null-data>
+```
+
+
+####右侧弹出层组件使用
+```brash
+<!-- 调用示例-->
+   	<!--普通用法-->
+    <nw-PopupFilter v-model="popupState" @resetScreen="" @submitScreen=""></nw-PopupFilter>
+
+    <!--替换插槽-->
+    <nw-PopupFilter>
+		<!-- 上部内容替换使用 -->
+      <div slot="popup-content">
+        123
+      </div>
+		<!-- 下部内容替换使用 -->
+      <div slot="popup-btn">
+        123
+      </div>
+		<!-- 全部替换 -->
+		<div>不用所有的默认内容，自己重新定义的内容</div>
+    </nw-PopupFilter>
+
+		<!-- 事件说明 -->
+		resetScreen--重置
+		submitScreen--确定
+
+		<!-- 参数说明 -->
+		popupState--显示隐患该组件-默认为false
+		popupWidth--弹出层宽度-默认为‘80%’
+		choiceColor--选中类型的颜色-默认为'#287df5'
+		popupData--弹出层数据结构-👇
+		<!-- popupData数据结构 -->
+		[
+        {
+          type: "type",
+          name: "类型选择",
+          node: true,
+          isMultiple: false,
+          list: [
+            {
+              name: "便电压",
+              check: false
+            },
+            {
+              name: "便电压2",
+              check: false
+            },
+            {
+              name: "便电压3",
+              check: false
+            },
+            {
+              name: "便电压4",
+              check: false
+            }
+          ]
+        },
+        {
+          type: "time",
+          name: "时间选择",
+          node: true,
+          list: [
+            {
+              name: "开始时间1",
+              value: ""
+            },
+            {
+              name: "结束时间",
+              value: ""
+            },
+            {
+              name: "竣工时间",
+              value: ""
+            }
+          ]
+        },
+        {
+          type: "goPage",
+          name: "右箭头选择",
+          node: true,
+          list: [
+            {
+              name: "隐患类型1",
+              handle: "aa",
+              value: ""
+            },
+            {
+              name: "隐患类型2",
+              handle: "bb",
+              value: ""
+            },
+            {
+              name: "隐患类型3",
+              handle: "cc",
+              value: ""
+            }
+          ]
+        }
+      ]
+```
+
+
+####详情页头部简介组件使用
+```brash
+<!-- 调用示例-->
+<nwtop-introduce></nwtop-introduce>
+
+<!-- 参数说明：接受一个对象，👇 -->
+			{
+        orderNumber: "GPL-2020-1020-LIMITED", //单号
+        copyText: "复制", //展示的复制文本
+				status: 1, 1-绿色，2-黄色，3-蓝色
+        showCopy: true, //是否展示复制功能
+        statusValue: ["审核中", "处理中"], //状态
+        statusColor: "#fff", //状态字体颜色
+        statusBg: "#1e87f0", //状态背景
+        keyValues: [ //需要展示的简介信息--key-value形式
+          {
+            name: "缺陷设备",
+            value: "缺陷设备2号"
+          },
+          {
+            name: "缺陷等级",
+            value: "1v"
+          },
+          {
+            name: "缺陷应完成时间",
+            value: "2020-10-20"
+          }
+        ]
+      }
+```
+
+
+####公共流程页面打开方式
+```brash
+	openFlowView() {
+		this.$router.push({name:'flowView',params:{processId: 'SP_WTICKET_SUB',processInsId: 'b6e89edaae0f4cbd89289f55030f0750_515'}})
+	}
+	<!-- 参数 -->
+	processId:'必传',
+	processInsId:'必传',
+	pageTitle:'非必传'
 ```
 ======================================================================================================
 
@@ -226,10 +374,26 @@ zdcBtnShow,// 遮挡层关闭地图弹窗
 ####ModuleTop模块头部组件使用方法
 ```brash
 <!-- 标签，存在默认值， -->
-<nw-module-top :isSort="true" :isSreen="true" :mTop="0" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList" @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen" />
+	<nw-module-top :isSort="true" :isSreen="true" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList" @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen"></nw-module-top> 
+	结合nw-fixed-header使用（带搜索和排序筛选）
+	<nw-fixed-header title="头部标题" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
+		<div slot="page-bottmo">
+			<nw-module-top :isSort="true" :isSreen="true" :mTop="0" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList"
+			 @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen"
+			 @resetScreen="testResetScreen"></nw-module-top>
+		</div>
+	</nw-fixed-header>
+	结合nw-fixed-header使用 插槽（slot="topInput"：隐藏搜索，slot="taskSreenSort"：隐藏排序筛选）
+	<nw-fixed-header title="头部标题" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
+		<div slot="page-bottmo">
+			<nw-module-top :isSort="true" :isSreen="true" :mTop="0" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList">
+				<div slot="topInput"></div>
+				<div slot="taskSreenSort"></div>
+			</nw-module-top>
+		</div>
+	</nw-fixed-header>
 
 <!-- poros数据说明 -->
-	mTop: 44,//距离头部高度
 	tabList,// 头部tab数组
 	data参数例子：testTabList: [
 		{
@@ -344,5 +508,37 @@ resetScreen// moduletop模块筛选重置
 <!-- 方法说明 -->
 overlay,//关闭弹窗
 自定义方法例子：testOverlay(data) { console.log(data); },
+
+```
+
+####checkPerson选择人员使用方法
+```brash
+<!-- 打开页面传参说明 -->
+	userInfo:{ 
+		"employeeId": "A9C0B502210946C5BD52494CD5442492",
+		"userId": "AEEEE802803749E1841C857240F0C3B5",
+		"employeeName": "毛嘉杰",
+		"account": "maojiajie",
+		"shortSpell": "mjj",
+		"fullSpell": "maojiajie",
+		"orgId": "1589BAA87C11BD64E053380F0A0A54B2",
+		"orgName": "广州天河供电局",
+		"nameFullPath": "中国南方电网有限责任公司/广州供电局有限公司/广州天河供电局",
+		"orgCode": "080020",
+		"sapHROrgId": "8816B370FB4A0B82E0440018FE2DCEF4",
+		"orgStructureId": "A",
+		"unitOid": "1589BAA87C11BD64E053380F0A0A54B2",
+		"unitOname": "广州天河供电局",
+		"unitCode": "030120",
+		"shortOrgName": "天河"
+	}
+	obj:{
+		name: 'checkPerson',//选择人员页面名
+		query: {
+			type: 1,//单选或多选；1：单选；2：多选
+			userInfo: this.userInfo,//当前登录人信息
+			exeMun: ''//跨页面方法名，自定义（需要在接收页面挂载）
+		}
+	}
 
 ```

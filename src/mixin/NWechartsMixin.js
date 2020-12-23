@@ -1,5 +1,5 @@
 /* 百度地图按钮-混入 */
-export const echartsMixin = {
+export const NWechartsMixin = {
   data() {
     return {
       //存储对象

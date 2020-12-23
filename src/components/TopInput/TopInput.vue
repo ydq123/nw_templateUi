@@ -1,7 +1,19 @@
 <!-- TopInput模块头部组件使用方法
-
+	搜索按钮
+	<nw-top-input>
+		<div slot="taskSreenSort"></div>
+		<div slot="fousInput"></div>
+	</nw-top-input>
+	搜索输入框带排序和筛选
+	<nw-top-input>
+		<div slot="topInput"></div>
+	</nw-top-input>
+	搜索输入框
+	<nw-top-input>
+		<div slot="topInput"></div>
+		<div slot="taskSreenSort"></div>
+	</nw-top-input>
 	TopInput模块头部组件参数
-	mTop: 44,//距离头部高度
 	isSort: true, // 控制显示排序按钮，默认为true：显示
 	isSreen: true, // 控制显示筛选按钮，默认为true：显示
 	sortDataList: [ // 排序数组
@@ -15,38 +27,45 @@
 <template>
 	<div>
 		<div class="yw-topinput nw_bag_F5" :style="{top:mTop+'px'}">
-			<!-- 搜索框 -->
-			<!-- <div class="top-input">
-				<div class="input-box" @click="inputTopBtn">
-					<i class="iconfont icon-sousuo nw_f14 nw_text_99"></i>
-					<span class="nw_f14 nw_text_99">搜索</span>
+			<slot name="topInput">
+				<!-- 搜索框按钮 -->
+				<div class="top-input">
+					<div class="input-box" @click="inputTopBtn">
+						<i class="iconfont icon-sousuo nw_f14 nw_text_99"></i>
+						<span class="nw_f14 nw_text_99">搜索</span>
+					</div>
 				</div>
-			</div> -->
-			<div class="top-input input-row al-c">
-				<div class="input-box flex-1 mr15 input-row" @click="inputTopBtn">
-					<i class="iconfont icon-sousuo nw_f14 nw_text_99 ml10 mr5"></i>
-					<input type="text" class="input flex-1 f14" v-model="searchValue" placeholder="搜索" @keypress="inputSearch()" />
-					<i v-if="searchValue.length > 0" class="iconfont icon-shanchu3 f15 pl5 mr5 gray9" @click="cancelSearch"></i>
+			</slot>
+			<slot name="fousInput">
+				<!-- 搜索框 -->
+				<div class="top-input input-row al-c">
+					<div class="input-box flex-1 mr15 input-row" @click="inputTopBtn">
+						<i class="iconfont icon-sousuo nw_f14 nw_text_99 ml10 mr5"></i>
+						<input type="text" class="input flex-1 f14" v-model="searchValue" placeholder="搜索" @keypress="inputSearch()" />
+						<i v-if="searchValue.length > 0" class="iconfont icon-shanchu3 f15 pl5 mr5 gray9" @click="cancelSearch"></i>
+					</div>
+					<div class="txt-1e8 f14" @click="cancellBtn">取消</div>
 				</div>
-				<div class="txt-1e8 f14">取消</div>
-			</div>
-			<div class="input-row input-srot borderTopE8">
-				<div class="flex-1 text-left gray6 pl15 f16 verticle-center">共11条记录</div>
-				<div class="task-top-sreen-btn pl15 pr15 verticle-center" m="click" @click="changeSort" v-if="isSort">
-					<span class="f16 mr5 gray6">排序</span>
-					<i class="iconfont icon-qianjin-copy f10 gray9" :class="{'showRotate': sortData.showPop}"></i>
+			</slot>
+			<slot name="taskSreenSort">
+				<div class="input-row input-srot borderTopE8">
+					<div class="flex-1 text-left gray6 pl15 f16 verticle-center">共11条记录</div>
+					<div class="task-top-sreen-btn pl15 pr15 verticle-center" m="click" @click="changeSort" v-if="isSort">
+						<span class="f16 mr5 gray6">排序</span>
+						<i class="iconfont icon-qianjin-copy f10 gray9" :class="{'showRotate': sortData.showPop}"></i>
+					</div>
+					<div class="task-top-sreen-btn pl15 pr15 verticle-center" m="click" @click="changeSreen" v-if="isSreen">
+						<span class="f16 mr5 gray6">筛选</span>
+						<i class="iconfont icon-shaixuan1 f10 gray9"></i>
+					</div>
 				</div>
-				<div class="task-top-sreen-btn pl15 pr15 verticle-center" m="click" @click="changeSreen" v-if="isSreen">
-					<span class="f16 mr5 gray6">筛选</span>
-					<i class="iconfont icon-shaixuan1 f10 gray9"></i>
-				</div>
-			</div>
+			</slot>
 			<!-- 排序 -->
 			<div v-if="sortData.showPop" class="bg-white">
 				<div v-for="(sortItem, sortIndex) in sortData.list" :key="sortIndex">
 					<div class="f16 p15 gray3 borderTopE8 input-row" @click="changeSortItem(sortIndex)">
 						<div class="flex-1 text-left">{{sortItem.text}}</div>
-						<i class="iconfont ml5 gray287 icon-gou"></i>
+						<i class="iconfont ml5 gray287 icon-gou" v-if="sortIndex==sortData.dtIndex"></i>
 					</div>
 				</div>
 			</div>
@@ -66,6 +85,7 @@
 				//排序数组
 				sortData: {
 					list: this.sortDataList,
+					dtIndex: 0,
 					showPop: false
 				},
 			}
@@ -73,7 +93,7 @@
 		props: {
 			mTop: { // 距离头部高度
 				type: Number,
-				default: 44
+				default: 0
 			},
 			isSort: { // 控制显示排序按钮，默认为true：显示
 				type: Boolean,
@@ -87,7 +107,7 @@
 				type: Array,
 				default: () => [{
 						text: "按日期降序",
-						isSelect: false,
+						isSelect: true,
 						sortType: "desc", //排序类型
 					},
 					{
@@ -108,18 +128,34 @@
 				} else {
 					document.body.style.overflow = 'hidden';
 				}
+			},
+			searchValue: function(val){
+				if(val){
+					console.log('val:',val);
+					this.fousSearch();
+				}
 			}
 		},
 		mounted() {
 
 		},
 		methods: {
+			// 取消按钮
+			cancellBtn: function(){
+				console.log('cancellBtn');
+				this.$emit('cancellBtn');
+			},
+			// 监听搜索内容
+			fousSearch: function(){
+				console.log('fousSearch');
+				this.$emit('fousSearch',this.searchValue);
+			},
 			// 手机键盘回车键
 			inputSearch: function() {
 				if (event.keyCode == 13) {
 					event.preventDefault(); //阻止默认事件
 					if (this.searchValue != '') {
-						
+						this.$emit('inputSearch',this.searchValue);
 					}
 				}
 			},
@@ -136,10 +172,13 @@
 				this.showPop = !this.showPop;
 			},
 			changeSreen: function() {
+				console.log('changeSreen');
 				this.$emit('changeSreen');
 			},
 			//选择排序类型
 			changeSortItem: function(index) {
+				// 待办的点击排序
+				this.sortData.dtIndex = index;
 				var data = {
 					item: this.sortData.list[index]
 				}
@@ -161,7 +200,7 @@
 	.yw-topinput {
 		position: fixed;
 		left: 0;
-		z-index: 99;
+		z-index: 999;
 		text-align: center;
 		width: 100%;
 	}

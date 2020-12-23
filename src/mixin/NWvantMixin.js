@@ -1,5 +1,5 @@
 /* 按钮-混入 */
-export const vantMixin = {
+export const NWvantMixin = {
   data() {
     return {
 
@@ -11,14 +11,14 @@ export const vantMixin = {
       var key = this.$baseIsTypeof(obj);
       if (key == 'obj') {
         var {
-          text = '暂无数据', time = 1500, icon = '', overlay = false, forbidClick = true
+          text = '暂无数据', time = 2000, icon = '', overlay = false, forbidClick = true
         } = obj;
       } else {
         var newObj = {
           text: obj || '暂无数据',
         };
         var {
-          text = '暂无数据', time = 1500, icon = '', overlay = false, forbidClick = true
+          text = '暂无数据', time = 2000, icon = '', overlay = false, forbidClick = true
         } = newObj;
       };
       return this.$toast({
@@ -43,14 +43,14 @@ export const vantMixin = {
       var key = this.$baseIsTypeof(obj);
       if (key == 'obj') {
         var {
-          text = '上传成功', time = 1500, icon = '', overlay = false, forbidClick = true
+          text = '上传成功', time = 2000, icon = '', overlay = false, forbidClick = true
         } = obj;
       } else {
         var newObj = {
           text: obj || '上传成功',
         };
         var {
-          text = '上传成功', time = 1500, icon = '', overlay = false, forbidClick = true
+          text = '上传成功', time = 2000, icon = '', overlay = false, forbidClick = true
         } = newObj;
       };
       return this.$toast({
@@ -68,14 +68,14 @@ export const vantMixin = {
       var key = this.$baseIsTypeof(obj);
       if (key == 'obj') {
         var {
-          text = '服务异常', time = 1500, icon = '', overlay = false, forbidClick = true
+          text = '服务异常', time = 2000, icon = '', overlay = false, forbidClick = true
         } = obj;
       } else {
         var newObj = {
           text: obj || '服务异常',
         };
         var {
-          text = '服务异常', time = 1500, icon = '', overlay = false, forbidClick = true
+          text = '服务异常', time = 2000, icon = '', overlay = false, forbidClick = true
         } = newObj;
       };
       return this.$toast({

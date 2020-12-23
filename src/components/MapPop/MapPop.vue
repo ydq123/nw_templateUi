@@ -37,9 +37,9 @@
  -->
 <template>
 	<div class="yw-mappop nw_bag_F5">
-		<div class="zdc zIndex999" @click.stop="zdcBtnShow" v-show="showPop"></div>
+		<div class="zdc zIndex999" @click.stop="zdcBtnShow" v-show="showMapPop"></div>
 		<!-- 筛选 -->
-		<div class="sreen-warp bg-white" v-show="showPop">
+		<div class="sreen-warp bg-white" :class="[showMapPop?'':'showBgcW']">
 			<div class="sreen-box">
 				<div class="layer-item layer-theme">
 					<div class="bg-f5 pr20 pl20 pb10 pt10 f14 text-left">地图类型</div>
@@ -61,7 +61,8 @@
 					<div class="bg-f5 pr20 pl20 pb10 pt10 text-left">{{ val.mlTitle }}</div>
 					<div class="map-row al-c ju-b pr20 pl20 pt10 pb10" v-for="(Lval,Lindex) in val.mlList" :key="Lindex">
 						<div class="map-row al-c">
-							<div class="map-deng" v-if="Lval.dengCol" :class="[Lval.dengCol == 1?'map-deng-red':'',Lval.dengCol == 2?'map-deng-yellow':'',Lval.dengCol == 3?'map-deng-green':'',Lval.dengCol == 4?'map-deng-f5':'']"></div>
+							<!-- :class="[Lval.dengCol == 1?'map-deng-red':'',Lval.dengCol == 2?'map-deng-yellow':'',Lval.dengCol == 3?'map-deng-green':'',Lval.dengCol == 4?'map-deng-f5':'']" -->
+							<div class="map-deng" v-if="Lval.dengCol" :style="{backgroundColor:Lval.dengCol}"></div>
 							<span class="ml5">{{ Lval.text }}</span>
 						</div>
 						<van-switch v-model="Lval.status" />
@@ -78,7 +79,7 @@
 		display: 'MapPop地图弹窗',
 		data() {
 			return {
-				showPop: this.isMapPop,
+				showMapPop: false,
 				radios: this.mapList,
 				mapSwith: this.switchList
 			}
@@ -86,7 +87,7 @@
 		props: {
 			isMapPop: { // 控制显示地图弹窗
 				type: Boolean,
-				default: true
+				default: false
 			},
 			mapList: { // 地图底图数组
 				type: Array,
@@ -119,24 +120,24 @@
 						mlType: 'dj',
 						mlList: [
 							{
-								dengCol: 1,
+								dengCol: '#fa3a3d',
 								text: '紧急',
-								status: false
+								status: false,
 							},
 							{
-								dengCol: 2,
+								dengCol: '#f9d501',
 								text: '重大',
-								status: false
+								status: false,
 							},
 							{
-								dengCol: 3,
+								dengCol: '#00ee8e',
 								text: '一般',
-								status: false
+								status: false,
 							},
 							{
-								dengCol: 4,
+								dengCol: '#f5f5f5',
 								text: '其他',
-								status: false
+								status: false,
 							}
 						]
 					},
@@ -153,23 +154,17 @@
 								status: false
 							},
 						]
-					},
-					{
-						mlTitle: '地图显示',
-						mlType: 'dtxs',
-						mlList: [
-							{
-								text: '未消缺',
-								status: false
-							}
-						]
 					}
 				]
 			},
 		},
 		watch: {
-			showPop: function() {
-				if (!this.showPop) {
+			showMapPop: function() {
+				this.$emit('update:isMapPop', this.showMapPop);
+			},
+			isMapPop: function() {
+				this.showMapPop = this.isMapPop;
+				if (!this.isMapPop) {
 					document.body.style.overflow = '';
 				} else {
 					document.body.style.overflow = 'hidden';
@@ -195,7 +190,7 @@
 			},
 			// 遮挡层隐藏
 			zdcBtnShow: function() {
-				this.showPop = false;
+				this.showMapPop = false;
 				var data = {
 					mapList: []
 				};

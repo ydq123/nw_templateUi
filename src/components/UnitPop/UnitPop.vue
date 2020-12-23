@@ -49,7 +49,7 @@
 							<!-- <i class="iconfont icon-qianjin gray9 ml10" :class="iconRightSize"></i> -->
 						</div>
 					</div>
-					<div class="noData" v-if="unitList.length == 0 && isSearchBox">
+					<div class="unit-noData" v-if="unitList.length == 0 && isSearchBox">
 						<img src="../../assets/images/nullData.png" />
 						<p>暂无数据</p>
 					</div>
@@ -72,10 +72,10 @@
 		getAllSuperOrgIds
 	} from "@/moduleAPI/jadp.js";
 	import {
-		tabMinxin
-	} from "@/mixin/tabMinxin.js";
+		NWtabMinxin
+	} from "@/mixin/NWtabMinxin.js";
 	export default {
-		mixins: [tabMinxin], //混入公共类
+		mixins: [NWtabMinxin], //混入公共类
 		name: 'UnitPop',
 		props: {
 			popShow: {
@@ -554,6 +554,34 @@
 			.tab-list::-webkit-scrollbar {
 				display: none;
 			}
+		}
+	}
+	/*没有数据*/
+	.unit-noData {
+		padding-top: r(60px);
+		text-align: center;
+		color: #b5b5b5;
+		font-size: r(15px);
+		img {
+			width: r(200px);
+			margin: 0 auto;
+		}
+		.button {
+			font-size: r(15px);
+			min-width: r(160px);
+			height: r(60px);
+			padding: 0 r(56px);
+			line-height: r(60px);
+			border-radius: r(60px);
+			background: #a22423;
+			color: #fff;
+			border-width: 1px;
+		}
+		p {
+			margin: r(40px) 0 r(56px);
+		}
+		i {
+			font-size: r(56px);
 		}
 	}
 </style>
