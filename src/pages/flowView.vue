@@ -81,7 +81,7 @@
 	import {
 		queryAllTrackByProcessInsId
 	} from "../moduleAPI/bpms.js"
-	import { NWtabMinxin } from "@/mixin/NWtabMinxin.js";
+	import { NWtabMinxin } from "../mixin/NWtabMinxin.js";
 	export default {
 		name: "flowView",
 		mixins: [NWtabMinxin],

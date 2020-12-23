@@ -80,7 +80,7 @@
 	} from "@/moduleAPI/jadp.js";
 	import {
 		NWtabMinxin
-	} from "@/mixin/NWtabMinxin.js";
+	} from "../mixin/NWtabMinxin.js";
 	export default {
 		name: "checkPerson",
 		mixins: [NWtabMinxin],

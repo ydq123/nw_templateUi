@@ -15,7 +15,6 @@
 			 @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen">
 			</nw-module-top>
 		</div>
-		<van-button @click="openWorkFlow">打开工作流</van-button>
 		<div class="bg-white mt20 pb20">
 			<h2 class="pt15 pb10 borderButtomE8 grayfa6470">详情页顶部简介</h2>
 			<nwtop-introduce></nwtop-introduce>
@@ -87,7 +86,7 @@
 <script>
 	import {
 		NWtabMinxin
-	} from "@/mixin/NWtabMinxin.js";
+	} from "../mixin/NWtabMinxin.js";
 	export default {
 		name: "demoPage",
 		mixins: [NWtabMinxin],
@@ -237,9 +236,6 @@
 			this.accessToken =
 				"eyJhbGciOiJIUzUxMiJ9.eyJhY2NvdW50IjoiaHVhbmd4aXVob25nQGh6LmdkLmNzZy5jbiIsInVzZXJJZCI6IkJCNjIwQzJBRTk1RDQzMkU5RkM0N0NFQTM4REQ4ODE4IiwiZW1wbG95ZWVJZCI6IkY1MEE0MUJFQzRBRTRCNzk4RkI5MTU3RjlDOTdDNTY3IiwiZW1wbG95ZWVOYW1lIjoi6buE56eA57qiIiwib3JnSWQiOiI4YTE2ODI4YzYwYzBlMTZiMDE2MGRhNDQ3YWM5MDY4MiIsIm9yZ0NvZGUiOiIwMzEzMjg0MDAxMDIiLCJvcmdOYW1lIjoi6JCl6YWN57u85ZCI5LqM54-tIiwidGhpcmRTeXN0ZW1OYW1lIjoiSkFEUCIsInNhcEhyVXNlcklkIjoiOEU4RjRDNzkxOTFDQzA3MkUwNDMwQTk3NTAxM0MwNzIiLCJzYXBIck9yZ0lkIjoiZGJkNjQ5ZDI0MjZjNGU3NTgwZmEyYzIxZDRhMjM0NmYiLCJzeXN0ZW1OYW1lIjoibnVsbCIsInN1YiI6Ium7hOengOe6oiIsImlhdCI6MTYwNzkzOTA5NiwiZXhwIjoxNjA3OTQwODk2LCJyZWZyZXNoSW50ZXJ2YWwiOjMwLCJqdGkiOiJhOGZhNmZjOS1hZGJiLTQ5ZjUtODgzYi0zMDExMzFlZmNjYmYifQ.F-ShR0zVQEEtX0Q06MxjVqnlQJq-PhX1MaakZK3dLEs31ODa4oFZ6-J6cPvqN6pp8d-cnJEMMhpjbRnF_1uNwA";
 			var _this = this;
-			_this.$bus.$on("testAccectFun", function(data) {
-				_this.testAccectFun(data);
-			});
 
 			_this.userInfo = {
 				employeeId: "A9C0B502210946C5BD52494CD5442492",
@@ -270,18 +266,6 @@
 			};
 		},
 		methods: {
-			openWorkFlow() {
-				// return  this.$toast.success(123456);
-				this.$msgThenCatch({msg: '嘻嘻哈哈',title: '提示'},this.aa,this.bb);
-				return
-				this.$router.push({name:'demo_workflow'});
-			},
-			aa() {
-				console.log('aaaaaa');
-			},
-			bb() {
-				console.log('bbbbb');
-			},
 			menuClickTap(data) {
 				console.log("menuClickTap", JSON.stringify(data));
 			},
