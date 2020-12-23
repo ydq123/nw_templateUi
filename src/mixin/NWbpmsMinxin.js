@@ -6,7 +6,7 @@ import Vue from 'vue';
 // 	Toast,
 // 	Dialog
 // } from 'ares-ui';
-import mdpWorkflow from '@/plugin/workFlow/mdp.workflow.umd.min.js';
+import mdpWorkflow from '../plugin/workFlow/mdp.workflow.umd.min.js';
 export const NWbpmsMinxin = {
 	data() {
 		return {
@@ -23,6 +23,7 @@ export const NWbpmsMinxin = {
 			window.NW_BPMSIP = window.NW_BASEURL || '/moduleIp'; //设置平台bpms工作流接口ip
 			// 设置业务窗体方法
 			// 业务必须自定义alert、confirm方法
+			let that = this;
 			mdpWorkflow.setPopup({
 				// 消息提示
 				alert({
@@ -30,14 +31,14 @@ export const NWbpmsMinxin = {
 					message
 				}) {
 					if(type=='correct') {
-						this.$toast.success(message);
+						that.$textThen(message);
 					}else {
-						this.$toast.fail(message);
+						that.$textCatch(message);
 					}
 				},
 				// 确认弹框
 				confirm(message, callbacks) {
-					this.$msgThenCatch({msg: message, title: '提示'},callbacks.onConfirm,callbacks.onCancel);
+					that.$msgThenCatch({msg: message, title: '提示'},callbacks.onConfirm,callbacks.onCancel);
 				},
 			});
 			// 注册到全局使用
