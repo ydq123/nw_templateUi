@@ -4,7 +4,7 @@
       <slot name="loadingImg"><van-icon name="replay"/></slot>
     </div>
     <div class="sxtd mt15">
-      <slot name="loadingText"><span>拼命加载中..</span></slot>
+      <span>{{loadingText}}</span>
     </div>
 
     <!-- 调用示例-->
@@ -16,9 +16,6 @@
       <div slot="loadingImg">
         <van-icon name="shrink" />
       </div>
-      <label slot="loadingText">
-       <span>获取数据中...</span>
-      </label>
     </inside-loading>
     -->
   </div>
@@ -27,9 +24,9 @@
 <script>
 export default {
   props: {
-    insideCode: {
-      type: Number,
-      default: 200
+    loadingText: {
+      type: String,
+      default: '拼命加载中...'
     }
   },
   mixins: [], //混入公共类

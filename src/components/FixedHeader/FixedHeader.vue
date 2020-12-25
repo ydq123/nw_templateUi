@@ -19,7 +19,7 @@
         </slot>
       </div>
     </slot>
-    <slot name="page-bottmo"></slot>
+    <slot name="page-bottom"></slot>
     <!--第一种--使用示例如下 直接自己全新定义 -->
     <!-- <nw-FixedHeader @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
       <div slot="default">
