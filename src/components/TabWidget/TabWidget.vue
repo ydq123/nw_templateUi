@@ -1,6 +1,6 @@
 <!-- TabWidget多状态tab组件
 	等分tab
-	<nw-tab-widget @changeTab="testTabW" @changeScrollXTab="testSXTab" @changeSXIconTab="testSXIcon">
+	<nw-tab-widget :tabWList="testList" @changeTab="testTabW">
 		<div slot="tabScrollX"></div>
 		<div slot="tabIconSX"></div>
 	</nw-tab-widget>
@@ -88,6 +88,12 @@
 			iconCla: 'f14'
 		}
 	]
+		changeTab,// 等分tab导航栏切换，返回data
+		自定义方法例子：testTabW(data) { console.log(data); },
+		changeScrollXTab,// 可多选折叠滑动tab选中，返回data
+		自定义方法例子：testSXTab(data) { console.log(data); },
+		changeSXIconTab,// 带icon可滑动tab切换，返回data
+		自定义方法例子：testSXIcon(data) { console.log(data); },
  -->
 <template>
 	<div class="yw-tabwidget">
@@ -108,7 +114,8 @@
 			<slot name="tabScrollX">
 				<div class="tab-scrollX-box width-100 borderButtomE8 bg-white" :class="[showTabPop?'':'tabwidget-row al-c pb15 pt15']">
 					<div class="tabwidget-row al-c f16 pl15" :class="[showTabPop?'tab-list-autoHeight':'tab-list-scrollX pr15']">
-						<div @click="changeScrollXTab(XIndex)" :class="[showTabPop?'mt15':'']" v-for="(XItem,XIndex) in tabScrollXList" :key="XIndex">
+						<div @click="changeScrollXTab(XIndex)" :class="[showTabPop?'mt15':'']" v-for="(XItem,XIndex) in tabScrollXList"
+						 :key="XIndex">
 							<span class="lh200 f14 pt5 pb5 pl10 pr10 mr15 borRadius-2" :class="[XItem.status?statusBoxY:statusBoxN]">{{XItem.title}}</span>
 						</div>
 					</div>
@@ -341,7 +348,7 @@
 			this.tabCalcBarPosX();
 		},
 		methods: {
-			// 导航栏切换
+			// 等分tab导航栏切换
 			changeTab: function(index) {
 				console.log('changeTab::index::::', index);
 				console.log('changeTab::obj::::', JSON.stringify(this.tabList[index]));
@@ -353,6 +360,7 @@
 				this.curTabIndex = index;
 				this.tabCalcBarPosX();
 			},
+			// 可多选折叠滑动tab选中
 			changeScrollXTab: function(xIndex) {
 				console.log('changeScrollXTab::index::::', xIndex);
 				if (this.tabScrollXStatus) {
@@ -377,6 +385,7 @@
 				}
 				this.$emit('changeScrollXTab', data);
 			},
+			// 带icon可滑动tab切换
 			changeSXIconTab: function(index) {
 				console.log('changeSXIconTab::index::::', index);
 				var data = {
@@ -407,7 +416,8 @@
 		width: 100%;
 		text-align: center;
 	}
-	.img-wh-cla{
+
+	.img-wh-cla {
 		width: r(40px);
 		height: r(40px);
 	}
@@ -497,7 +507,7 @@
 	.txt-1e8 {
 		color: #1E87F0;
 	}
-	
+
 	.showTabRotate {
 		-moz-transform: rotate(180deg);
 		-webkit-transform: rotate(180deg);
@@ -513,7 +523,7 @@
 			-moz-transform: rotate(0deg);
 			-webkit-transition: all 0.3s;
 			-webkit-transform: rotate(0deg);
-			
+
 			// &.showTabRotate {
 			// 	-moz-transform: rotate(180deg);
 			// 	-webkit-transform: rotate(180deg);

@@ -13,6 +13,8 @@
 		<div slot="topInput"></div>
 		<div slot="taskSreenSort"></div>
 	</nw-top-input>
+	参数说明
+	mTop:0,// 距离头部高度
 	TopInput模块头部组件参数
 	isSort: true, // 控制显示排序按钮，默认为true：显示
 	isSreen: true, // 控制显示筛选按钮，默认为true：显示
@@ -29,18 +31,25 @@
 		<div class="yw-topinput nw_bag_F5" :style="{top:mTop+'px'}">
 			<slot name="topInput">
 				<!-- 搜索框按钮 -->
-				<div class="top-input">
+				<div class="top-input" v-if="!topInput">
 					<div class="input-box" @click="inputTopBtn">
 						<i class="iconfont icon-sousuo nw_f14 nw_text_99"></i>
 						<span class="nw_f14 nw_text_99">搜索</span>
+					</div>
+				</div>
+				<div class="top-input input-row al-c" v-show="topInput">
+					<div class="input-box flex-1 input-row">
+						<i class="iconfont icon-sousuo nw_f14 nw_text_99 ml10 mr5" @click="inputTopBtn"></i>
+						<input id="tapInput" type="text" class="input flex-1 f14" v-model="searchValue" placeholder="搜索" @keypress="inputSearch()" />
+						<i v-if="searchValue.length > 0" class="iconfont icon-shanchu3 f15 pl5 mr5 gray9" @click="cancelSearch"></i>
 					</div>
 				</div>
 			</slot>
 			<slot name="fousInput">
 				<!-- 搜索框 -->
 				<div class="top-input input-row al-c">
-					<div class="input-box flex-1 mr15 input-row" @click="inputTopBtn">
-						<i class="iconfont icon-sousuo nw_f14 nw_text_99 ml10 mr5"></i>
+					<div class="input-box flex-1 mr15 input-row">
+						<i class="iconfont icon-sousuo nw_f14 nw_text_99 ml10 mr5" @click="inputTopBtn"></i>
 						<input type="text" class="input flex-1 f14" v-model="searchValue" placeholder="搜索" @keypress="inputSearch()" />
 						<i v-if="searchValue.length > 0" class="iconfont icon-shanchu3 f15 pl5 mr5 gray9" @click="cancelSearch"></i>
 					</div>
@@ -80,6 +89,7 @@
 		display: 'TopInput模块头部组件',
 		data() {
 			return {
+				topInput: false,
 				searchValue: '',
 				showPop: false,
 				//排序数组
@@ -91,6 +101,10 @@
 			}
 		},
 		props: {
+			isTopInput: { // 控制头部搜索点击事件是否显示搜索框，默认为false不显示，true显示
+				type: Boolean,
+				default: false
+			},
 			mTop: { // 距离头部高度
 				type: Number,
 				default: 0
@@ -134,7 +148,7 @@
 					console.log('val:',val);
 					this.fousSearch();
 				}
-			}
+			},
 		},
 		mounted() {
 
@@ -162,8 +176,13 @@
 			cancelSearch: function() {
 				this.searchValue = '';
 			},
+			//头部搜索按钮
 			inputTopBtn: function() {
 				console.log('inputTopBtn');
+				if(this.isTopInput){
+					this.topInput = true;
+					document.getElementById("tapInput").focus();
+				}
 				this.$emit('inputTopBtn');
 			},
 			// 显示隐藏排序
@@ -171,6 +190,7 @@
 				this.sortData.showPop = !this.sortData.showPop;
 				this.showPop = !this.showPop;
 			},
+			// 筛选
 			changeSreen: function() {
 				console.log('changeSreen');
 				this.$emit('changeSreen');

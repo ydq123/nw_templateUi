@@ -49,28 +49,68 @@
 <template>
 	<div class="yw-botbut">
 		<div class="p10 bg-white boxs" v-if="zhuyaoBtn.btnType">
-			<div @click="zyCliBtn" class="btn btn-width-100" :class="zhuyaoBtn.fsize" :style="{color:zhuyaoBtn.color,backgroundColor:zhuyaoBtn.bgcolor}">{{ zhuyaoBtn.text }}</div>
+			<div @click="zyCliBtn" class="btn btn-width-100" :class="[zhuyaoBtn.fsize?zhuyaoBtn.fsize:'f14']"
+			 :style="{color:[zhuyaoBtn.color?zhuyaoBtn.color:'white'],backgroundColor:[zhuyaoBtn.bgcolor?zhuyaoBtn.bgcolor:'#1E87F0']}">{{ zhuyaoBtn.text?zhuyaoBtn.text:'主要按钮' }}</div>
 		</div>
 		<div class="p10 bg-white boxs" v-if="ciyaoBtn.btnType">
-			<div @click="cyCliBtn" class="btn btn-width-100 cybtn" :class="ciyaoBtn.fsize" :style="{color:ciyaoBtn.color}">{{ ciyaoBtn.text }}</div>
+			<div @click="cyCliBtn" class="btn btn-width-100 cybtn" :class="[ciyaoBtn.fsize?ciyaoBtn.fsize:'f14']"
+			 :style="{color:[ciyaoBtn.color?ciyaoBtn.color:'#262626']}">{{ ciyaoBtn.text?ciyaoBtn.text:'次要按钮' }}</div>
 		</div>
 		<div class="p10 bg-white flex-d boxs" v-if="twoBtn.btnType">
-			<div @click="towCyCliBtn" class="btn btn-width-100 cybtn mr5" :class="twoBtn.ciyaoBtn.fsize" :style="{color:twoBtn.ciyaoBtn.color}">{{ twoBtn.ciyaoBtn.text }}</div>
-			<div @click="towZyCliBtn" class="btn btn-width-100 ml5" :class="twoBtn.zhuyaoBtn.fsize" :style="{color:twoBtn.zhuyaoBtn.color,backgroundColor:twoBtn.zhuyaoBtn.bgcolor}">{{ twoBtn.zhuyaoBtn.text }}</div>
+			<div @click="towCyCliBtn" class="btn btn-width-100 cybtn mr5" :class="[twoBtn.ciyaoBtn.fsize?twoBtn.ciyaoBtn.fsize:'f14']"
+			 :style="{color:[twoBtn.ciyaoBtn.color?twoBtn.ciyaoBtn.color:'#262626']}">{{ twoBtn.ciyaoBtn.text?twoBtn.ciyaoBtn.text:'保存' }}</div>
+			<div @click="towZyCliBtn" class="btn btn-width-100 ml5" :class="[twoBtn.zhuyaoBtn.fsize?twoBtn.zhuyaoBtn.fsize:'f14']"
+			 :style="{color:[twoBtn.zhuyaoBtn.color?twoBtn.zhuyaoBtn.color:'white'],backgroundColor:[twoBtn.zhuyaoBtn.bgcolor?twoBtn.zhuyaoBtn.bgcolor:'#1E87F0']}">{{ twoBtn.zhuyaoBtn.text?twoBtn.zhuyaoBtn.text:'发送' }}</div>
 		</div>
 		<div class="p10 bg-white flex-d boxs" v-if="iconBtn.btnType">
 			<div class="btn btn-width-100 mr5 btn-row btn-al-c btn-ju-a">
-				<div @click="cliIconItemBtn(item)" class="" v-for="(item,index) in iconBtn.iconList" :key="index">
-					<div class="">
-						<i class="iconfont" :class="[item.icon,item.iconSize]" :style="{color:item.iconColor}"></i>
+				<div class="btn-width-100 mr5 btn-row btn-al-c btn-ju-a" v-if="iconBtn.iconList.length>3 && iconListLen.length>0">
+					<div v-for="(iItem,iIndex) in iconListLen" :key="iIndex">
+						<div @click="cliIconItemBtn(iItem)">
+							<div class="">
+								<i class="iconfont" :class="[iItem.icon,iItem.iconSize?iItem.iconSize:'f14']" :style="{color:iItem.iconColor}"></i>
+							</div>
+							<div class="mt5" :class="[iItem.textSize?iItem.textSize:'f14']" :style="{color:iItem.textColor}">
+								{{ iItem.iconText }}
+							</div>
+						</div>
 					</div>
-					<div class="mt5" :class="item.textSize" :style="{color:item.textColor}">
+					<div @click="showZdcIconBox = true">
+						<div class="">
+							<i class="iconfont icon-jiedian1 f14"></i>
+						</div>
+						<div class="mt5">
+							更多
+						</div>
+					</div>
+				</div>
+				<div @click="cliIconItemBtn(item)" class="" v-for="(item,index) in iconBtn.iconList" :key="index" v-if="iconBtn.iconList.length<=3">
+					<div class="">
+						<i class="iconfont" :class="[item.icon,item.iconSize?item.iconSize:'f14']" :style="{color:item.iconColor}"></i>
+					</div>
+					<div class="mt5" :class="[item.textSize?item.textSize:'f14']" :style="{color:item.textColor}">
 						{{ item.iconText }}
 					</div>
 				</div>
 			</div>
-			<div @click="cliIconRBtn" class="btn btn-width-100" :class="iconBtn.zhuyaoBtn.fsize" :style="{color:iconBtn.zhuyaoBtn.color,backgroundColor:iconBtn.zhuyaoBtn.bgcolor}">{{ iconBtn.zhuyaoBtn.text }}</div>
+			<div @click="cliIconRBtn" class="btn btn-width-100" :class="[iconBtn.zhuyaoBtn.fsize?iconBtn.zhuyaoBtn.fsize:'f14']"
+			 :style="{color:[iconBtn.zhuyaoBtn.color?iconBtn.zhuyaoBtn.color:'white'],backgroundColor:[iconBtn.zhuyaoBtn.bgcolor?iconBtn.zhuyaoBtn.bgcolor:'#1E87F0']}">{{ iconBtn.zhuyaoBtn.text }}</div>
 		</div>
+		<!-- 底部弹窗 -->
+		<van-popup class="" style="width: auto;" v-model="showZdcIconBox" round position="bottom">
+			<div class="pt15">
+				<div class="btn btn-width-100 btn-hei-au btn-row flex-w">
+					<div class="ml15 pb15" @click="botPopIconBtn(iconItem)" v-for="(iconItem,iconIndex) in iconBtn.iconList" :key="iconIndex">
+						<div class="">
+							<i class="iconfont" :class="[iconItem.icon,iconItem.iconSize?iconItem.iconSize:'f14']" :style="{color:iconItem.iconColor}"></i>
+						</div>
+						<div class="mt5" :class="[iconItem.textSize?iconItem.textSize:'f14']" :style="{color:iconItem.textColor}">
+							{{ iconItem.iconText }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</van-popup>
 	</div>
 </template>
 
@@ -80,6 +120,8 @@
 		display: 'BotButton模块底部按钮',
 		data() {
 			return {
+				iconListLen: [],
+				showZdcIconBox: false,
 				zhuyaoBtn: this.zyBtn,
 				ciyaoBtn: this.cyBtn,
 				twoBtn: this.twoZCyBtn,
@@ -89,7 +131,7 @@
 		props: {
 			zyBtn: { // 主要按钮配置项
 				type: Object,
-				default: ()=> ({
+				default: () => ({
 					btnType: false,
 					text: '主要按钮',
 					color: 'white',
@@ -99,7 +141,7 @@
 			},
 			cyBtn: { // 次要按钮配置项
 				type: Object,
-				default: ()=> ({
+				default: () => ({
 					btnType: false,
 					text: '次要按钮',
 					color: '#262626',
@@ -108,7 +150,7 @@
 			},
 			twoZCyBtn: { // 等分要按钮配置项
 				type: Object,
-				default: ()=> ({
+				default: () => ({
 					btnType: false,
 					zhuyaoBtn: {
 						text: '发送',
@@ -125,7 +167,7 @@
 			},
 			zIconBtn: { // icon按钮配置项
 				type: Object,
-				default: ()=> ({
+				default: () => ({
 					btnType: false,
 					iconList: [{
 							icon: 'icon-jinyongqingkuang',
@@ -150,6 +192,22 @@
 							textSize: 'f14',
 							iconColor: '',
 							textColor: '',
+						},
+						{
+							icon: 'icon-jinyongqingkuang',
+							iconText: '哈哈4',
+							iconSize: 'f14',
+							textSize: 'f14',
+							iconColor: '',
+							textColor: '',
+						},
+						{
+							icon: 'icon-jinyongqingkuang',
+							iconText: '哈哈5',
+							iconSize: 'f14',
+							textSize: 'f14',
+							iconColor: '',
+							textColor: '',
 						}
 					],
 					zhuyaoBtn: {
@@ -164,7 +222,15 @@
 		computed: {
 
 		},
+		mounted() {
+			this.initIconList();
+		},
 		methods: {
+			initIconList: function() {
+				if (this.iconBtn.iconList.length > 3) {
+					this.iconListLen = this.iconBtn.iconList.slice(0, 2);
+				}
+			},
 			// 主要按钮点击事件
 			zyCliBtn: function() {
 				this.$emit("zyCliBtn");
@@ -189,13 +255,18 @@
 			cliIconRBtn: function() {
 				this.$emit("cliIconRBtn");
 			},
+			// 底部更多按钮显示更多icon
+			botPopIconBtn: function(iconItem) {
+				this.$emit("botPopIconBtn", iconItem);
+			},
 		},
 	}
 </script>
 
 <style scoped lang="scss">
 	@import "../../assets/scss/nw_tool.scss";
-	.yw-botbut{
+
+	.yw-botbut {
 		position: fixed;
 		bottom: 0;
 		left: 0;
@@ -203,46 +274,65 @@
 		text-align: center;
 		width: 100%;
 	}
-	.boxs{
-		box-shadow: r(10px) r(10px) r(10px) r(10px) rgba(0,0,0,0.2);
+
+	.boxs {
+		box-shadow: r(10px) r(10px) r(10px) r(10px) rgba(0, 0, 0, 0.2);
 	}
-	.btn{
+
+	.btn {
 		height: r(44px);
 		line-height: r(44px);
 		border-radius: r(8px);
-		white-space :nowrap; /*让文字不换行*/
+		white-space: nowrap;
+		/*让文字不换行*/
 		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
 	}
+
 	// 主要按钮
-	.zybtn{
+	.zybtn {
 		color: white;
 		background-color: #1E87F0;
 	}
+
 	// 次要按钮
-	.cybtn{
+	.cybtn {
 		// color: #262626;
 		border: 1px solid #d8d8d8;
 	}
-	.btn-width-100{
+
+	.btn-width-100 {
 		width: 100%;
 	}
-	.flex-d{
+
+	.flex-d {
 		display: flex;
 		justify-content: space-around;
 	}
-	.btn-row{
+
+	.flex-w {
+		flex-wrap: wrap;
+	}
+
+	.btn-row {
 		display: flex;
 		flex-direction: row;
 	}
-	.btn-al-c{
+
+	.btn-al-c {
 		align-items: center;
 	}
-	.btn-ju-c{
+
+	.btn-ju-c {
 		justify-content: center;
 	}
-	.btn-ju-a{
+
+	.btn-ju-a {
 		justify-content: space-around;
+	}
+
+	.btn-hei-au {
+		height: auto;
 	}
 </style>
