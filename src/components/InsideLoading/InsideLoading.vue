@@ -4,7 +4,7 @@
       <slot name="loadingImg"><van-icon name="replay"/></slot>
     </div>
     <div class="sxtd mt15">
-      <slot name="loadingText"><span>拼命加载中..</span></slot>
+      <span>{{loadingText}}</span>
     </div>
 
     <!-- 调用示例-->
@@ -16,9 +16,6 @@
       <div slot="loadingImg">
         <van-icon name="shrink" />
       </div>
-      <label slot="loadingText">
-       <span>获取数据中...</span>
-      </label>
     </inside-loading>
     -->
   </div>
@@ -27,9 +24,9 @@
 <script>
 export default {
   props: {
-    insideCode: {
-      type: Number,
-      default: 200
+    loadingText: {
+      type: String,
+      default: '拼命加载中...'
     }
   },
   mixins: [], //混入公共类
@@ -38,8 +35,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import "../../assets/scss/nw_tool.scss";
+<style lang="less" scoped>
+@import "../../assets/scss/nw_tool.less";
 .sync-loding {
   // height: 100%;
   text-align: center;
@@ -47,7 +44,7 @@ export default {
 }
 .loadingImg {
   animation: rotate 0.7s linear infinite;
-  font-size: r(70px) !important;
+	.pxToremLess(font-size,70px);
 }
 @keyframes rotate {
   0% {
@@ -71,7 +68,7 @@ export default {
   animation: bounce-up 0.8s linear infinite;
   span {
     //文字间距
-    letter-spacing: r(10px);
+		.pxToremLess(letter-spacing,10px);
   }
 }
 

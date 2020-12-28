@@ -1,15 +1,25 @@
 <!-- TextputBox文本输入框组件
-	<nw-folding-box>
-		<div slot="topRIconSlot"></div>
-		<div slot="boxCenten">
-			<nw-textput-box></nw-textput-box>
-		</div>
-		<div slot="botIconSlot"></div>
-	</nw-folding-box>
+	<nw-textput-box :txtBoxObj="txtBoxObj" @boxValBtn=""></nw-textput-box>
+	
+	参数说明
+	isBotBor: true, // 判断是否显示下滑线
+	txtBoxObj:{
+		showBox: 1,// 判断文本框类型 1左右布局；2上下布局；3上下布局（有输入内容长度），4右箭头布局
+		boxBs: true,// 判断是否显示标识
+		titleTxt:'标题标题标题标题标题',
+		searchValue: '',//输入框内容
+		valueLength: 500,//状态为3的输入框限制长度
+		isDisabled: false,//禁止输入；默认为false可输入，true禁止输入
+		placeholderTxt: '请输入',//输入框提示语
+		iconCla: 'icon-dingwei gray287 f15 pl5',//icon样式
+		boxValue: '',//请选择参数
+		botBor: '',//自定义下划线
+	}
  -->
 <template>
 	<div class="yw-textput bg-white">
-		<div class="textput-row textput-r p15" :class="[isBotBor?'borderButtomE8':boxObj.botBor]" v-if="boxObj.showBox == 1">
+		<!-- 1左右布局 -->
+		<div class="textput-row al-c textput-r p15" :class="[isBotBor?'borderButtomE8':boxObj.botBor]" v-if="boxObj.showBox == 1">
 			<div class="textput-xh" v-if="boxObj.boxBs">*</div>
 			<div class="f16 mr10 text-hc">{{boxObj.titleTxt}}</div>
 			<div class="f16 flex-1 textput-row al-c">
@@ -17,6 +27,7 @@
 				<i class="iconfont" :class="boxObj.iconCla" @click="inputIconBtn"></i>
 			</div>
 		</div>
+		<!-- 2上下布局 -->
 		<div class="textput-r p15" :class="[isBotBor?'borderButtomE8':boxObj.botBor]" v-if="boxObj.showBox == 2">
 			<div class="textput-xh" v-if="boxObj.boxBs">*</div>
 			<div class="f16 pb10">{{boxObj.titleTxt}}</div>
@@ -24,6 +35,7 @@
 				<input class="flex-1" type="text" v-model="boxObj.searchValue" :disabled="boxObj.isDisabled" :placeholder="boxObj.placeholderTxt" />
 			</div>
 		</div>
+		<!-- 3上下布局（有输入内容长度）-->
 		<div class="textput-r p15 bg-white" :class="[isBotBor?'borderButtomE8':boxObj.botBor]" v-if="boxObj.showBox == 3">
 			<div class="textput-xh" v-if="boxObj.boxBs">*</div>
 			<div class="textput-row f16 pb10">
@@ -36,6 +48,7 @@
 				</div>
 			</div>
 		</div>
+		<!-- 4右箭头布局 -->
 		<div class="textput-row textput-r p15" :class="[isBotBor?'borderButtomE8':boxObj.botBor]" v-if="boxObj.showBox == 4">
 			<div class="textput-xh" v-if="boxObj.boxBs">*</div>
 			<div class="f16 mr10 text-hc">{{boxObj.titleTxt}}</div>
@@ -66,14 +79,14 @@
 			txtBoxObj:{
 				type: Object,
 				default: ()=>({
-					showBox: 1,// 判断文本框类型 1左右布局；2上下布局；3上下布局（有输入内容长度）
+					showBox: 1,// 判断文本框类型 1左右布局；2上下布局；3上下布局（有输入内容长度），4右箭头布局
 					boxBs: true,// 判断是否显示标识
 					titleTxt:'标题标题标题标题标题',
-					searchValue: '',
-					valueLength: 500,
+					searchValue: '',//输入框内容
+					valueLength: 500,//状态为3的输入框限制长度
 					isDisabled: false,//禁止输入；默认为false可输入，true禁止输入
 					placeholderTxt: '请输入',//输入框提示语
-					iconCla: 'icon-dingwei gray287 f15 pl5',//icon
+					iconCla: 'icon-dingwei gray287 f15 pl5',//icon样式
 					boxValue: '',//请选择参数
 					botBor: '',//自定义下划线
 					
@@ -84,10 +97,12 @@
 
 		},
 		methods: {
+			// 输入框icon按钮
 			inputIconBtn: function(){
 				console.log('inputIconBtn：：：');
 				this.$emit('inputIconBtn');
 			},
+			// 右箭头点击事件
 			boxValBtn: function(){
 				console.log('boxValBtn：：：');
 				this.$emit('boxValBtn',this.boxObj.boxValue);
@@ -96,8 +111,8 @@
 	}
 </script>
 
-<style scoped lang="scss">
-	@import "../../assets/scss/nw_tool.scss";
+<style scoped lang="less">
+	@import "../../assets/scss/nw_tool.less";
 	.yw-textput{
 		width: 100%;
 		text-align: left;
@@ -111,12 +126,12 @@
 	}
 	.textput-xh{
 		position: absolute;
-		left: r(-8px);
-		margin-top:r(4px);
+		.pxToremLess(left,6px);
+		.pxToremLess(margin-top,4px);
 		color: red;
 	}
 	.text-hc{
 		width: 30%;
-		line-height: r(18px);
+		.pxToremLess(line-height,18px);
 	}
 </style>

@@ -207,25 +207,25 @@
 		}
 	};
 </script>
-<style scoped lang="scss">
-@import "../../assets/scss/nw_tool.scss";
+<style scoped lang="less">
+@import "../../assets/scss/nw_tool.less";
 	.xuanfu {
 		position: fixed;
-		width: r(48px);
-		height: r(48px);
+		.pxToremLess(width,48px);
+  	.pxToremLess(height,48px);
 		right: 0;
-		bottom: r(30px);
+  	.pxToremLess(bottom,30px);
 		border-radius: 50%;
 
 		.xuanfuImg {
-			width: r(48px);
-			height: r(48px);
+			.pxToremLess(width,48px);
+			.pxToremLess(height,48px);
 		}
 	}
 
 /* 边角做圆 */
 .round-20{
-	border-radius: r(20px)
+	.pxToremLess(border-radius,20px);
 }
 
 	.dialog-content {
@@ -244,8 +244,8 @@
 		background: rgba(0, 0, 0, 0.5);
 
 		.menuArrImg {
-			height: nw_pxTorem(40px);
-			width: nw_pxTorem(40px);
+				.pxToremLess(height,40px);
+				.pxToremLess(width,40px);
 		}
 
 		.menuArrSpan {}

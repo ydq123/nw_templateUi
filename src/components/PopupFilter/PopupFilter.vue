@@ -300,9 +300,13 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="less">
+	@import "../../assets/scss/nw_tool.less";
 .h100 {
   height: 100%;
+}
+.ju-e {
+  justify-content: flex-end;
 }
 .popup-container {
   i {
@@ -316,7 +320,7 @@ export default {
   }
   .content {
     .type-item {
-      border-radius: 4px;
+				.pxToremLess(border-radius,4px);
     }
   }
   .popup-btn {

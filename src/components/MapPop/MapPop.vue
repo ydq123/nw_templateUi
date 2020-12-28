@@ -1,39 +1,53 @@
 <!-- MapPop模块组件使用方法
-	<nw-map-pop :isMapPop="true" :mapList="mList" :switchList="sList" @checkTheme="testCheckTheme" @zdcBtnShow="testZdcBtnShow"></nw-map-pop>
-	isMapPop: false,// 控制显示地图弹窗
-	mapList: [{ // 地图底图数组
-			label: "标准地图",
-			value: "1",
-			key: require('@/assets/images/mapImg/layer_pic1.png'),
-			isChecked: true,
-		},
-	],
-	switchList: [{ // 状态数组
-			mlTitle: '等级',
-			mlType: 'dj',
-			mlList: [{
-				dengCol: 1,
-				text: '紧急',
-				status: false
-			}, ]
-		},
-		{
-			mlTitle: '状态',
-			mlType: 'zt',
-			mlList: [{
-				text: '即将超期',
-				status: false
-			}, ]
-		},
-		{
-			mlTitle: '地图显示',
-			mlType: 'dtxs',
-			mlList: [{
-				text: '未消缺',
-				status: false
-			}]
-		}
-	],
+	
+	MapPop
+	组件场景描述：用与地图模式弹窗
+	组件基础使用描述：地图模式页面右侧边弹窗
+	<nw-map-pop :isMapPop="mapPop" :mapList="mList" :switchList="sList" @checkTheme="testCheckTheme" @zdcBtnShow="testZdcBtnShow"></nw-map-pop>
+	参数说明：
+	    isMapPop,// 控制显示地图弹窗
+		isMapPop参数示例：mapPop:false
+		mapList,// 地图底图数组，有默认数据
+		isMapPop参数示例：mList: [{ 
+				label: "标准地图",//地图名称
+				value: "1",//地图光标样式 ，值为2为选中样式
+				key: require('@/assets/images/mapImg/layer_pic1.png'),//地图图片
+				isChecked: true,//判断是否选中
+			},
+		]
+		switchList,// 状态数组
+		switchList参数示例：sList:[{ 
+				mlTitle: '等级',//标题说明
+				mlType: 'dj',//自定义状态，可用于逻辑判断
+				mlList: [{
+					dengCol: 1,// 注：非必传  警示灯，1：紧急，2：重大，3：一般，4：其他
+					text: 'xx单',// 说明
+					status: false//按钮判断，建议默认为false，有需要可为true
+				}, ]
+			},
+			{
+				mlTitle: '状态',
+				mlType: 'zt',
+				mlList: [{
+					text: '即将超期',
+					status: false
+				}, ]
+			},
+			{
+				mlTitle: '地图显示',
+				mlType: 'dtxs',
+				mlList: [{
+					text: '未消缺',
+					status: false
+				}]
+			}
+		]
+	
+	方法说明：
+	checkTheme,// 地图样式切换，返回当前选中的数据
+	checkTheme自定义方法例子：testCheckTheme(data){ console.log('地图样式切换：', data); }
+	zdcBtnShow,// 遮挡层关闭地图弹窗，返回打开开关的数据
+	zdcBtnShow自定义方法例子：testZdcBtnShow(data){ console.log('遮挡层关闭地图弹窗：', data); }
  -->
 <template>
 	<div class="yw-mappop nw_bag_F5">
@@ -211,6 +225,6 @@
 	}
 </script>
 
-<style scoped lang="scss">
-	@import "../../assets/scss/nw_mappop.scss";
+<style scoped lang="less">
+	@import "../../assets/scss/nw_mappop.less";
 </style>

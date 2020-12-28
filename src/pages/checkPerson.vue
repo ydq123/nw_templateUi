@@ -293,8 +293,8 @@
 	};
 </script>
 
-<style scoped lang="scss">
-	@import "../assets/scss/nw_tool.scss";
+<style scoped lang="less">
+	@import "../assets/scss/nw_tool.less";
 	.checkPerson {
 		// height: 100%;
 		background-color: #f5f5f5;
@@ -315,7 +315,7 @@
 	}
 
 	.h44 {
-		height: r(44px);
+				.pxToremLess(height,44px);
 	}
 	.person-row{
 		display: flex;
@@ -331,7 +331,7 @@
 	}
 
 	.radius-5 {
-		border-radius: r(5px);
+				.pxToremLess(border-radius,5px);
 	}
 
 	.pos-r {
@@ -339,17 +339,17 @@
 	}
 
 	.pt140 {
-		padding-top: r(140px);
+				.pxToremLess(padding-top,140px);
 	}
 
 	.radius-8 {
-		border-radius: r(8px);
+		.pxToremLess(border-radius,8px);
 	}
 
 	.tab-list-scrollX {
 		position: relative;
 		width: 100vw;
-		height: r(44px);
+		.pxToremLess(height,44px);
 		white-space: nowrap;
 		overflow: hidden;
 		overflow-x: scroll;
@@ -369,30 +369,33 @@
 	
 	/*没有数据*/
 	.person-noData {
-		padding-top: r(140px);
+		.pxToremLess(padding-top,140px);
 		text-align: center;
 		color: #b5b5b5;
-		font-size: r(15px);
+		.pxToremLess(font-size,15px);
 		img {
-			width: r(200px);
+		.pxToremLess(width,200px);
 			margin: 0 auto;
 		}
 		.button {
-			font-size: r(15px);
-			min-width: r(160px);
-			height: r(60px);
-			padding: 0 r(56px);
-			line-height: r(60px);
-			border-radius: r(60px);
+		.pxToremLess(font-size,15px);
+		.pxToremLess(min-width,160px);
+		.pxToremLess(height,60px);
+		.pxToremLess(padding,56px);
+		.pxToremLess(line-height,60px);
+		.pxToremLess(border-radius,60px);
 			background: #a22423;
 			color: #fff;
-			border-width: 1px;
+		.pxToremLess(border-width,1px);
 		}
 		p {
-			margin: r(40px) 0 r(56px);
+			.pxToremLess(margin-top,40px);
+			.pxToremLess(margin-bottom,0);
+			.pxToremLess(margin-left,56px);
+			.pxToremLess(margin-right,0);
 		}
 		i {
-			font-size: r(56px);
+			.pxToremLess(font-size,56px);
 		}
 	}
 	

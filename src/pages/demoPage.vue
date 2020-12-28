@@ -2,7 +2,6 @@
 	<div id="demoPage" class="bg-f5" style="padding-top:75px;padding-bottom: 180px;">
 		<!-- 页面头部组件 -->
 		<nw-fixed-header title="头部导航" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
-			<div slot="page-bottmo"></div>
 		</nw-fixed-header>
 		<!-- 头部搜索组件 -->
 		<nw-top-input :mTop="44" @changeSreen="topInputChangeSreen">

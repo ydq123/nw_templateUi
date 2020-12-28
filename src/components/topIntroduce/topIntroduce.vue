@@ -104,7 +104,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="less">
 // 标签
 .danger-mark {
   padding: 4px 6px;

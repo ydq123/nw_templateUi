@@ -65,8 +65,8 @@
 	}
 </script>
 
-<style scoped lang="scss">
-	@import "../../assets/scss/nw_tool.scss";
+<style scoped lang="less">
+	@import "../../assets/scss/nw_tool.less";
 	.yw-folding{
 		width: 100%;
 		text-align: left;
@@ -87,12 +87,12 @@
 		transform: rotate(180deg);
 	}
 	.borc-l-1e8{
-		border-left: r(3px) solid #1E87F0;
+		border-left: 0.08rem solid #1E87F0;
 	}
 	.txt-1e8{
 		color: #1E87F0;
 	}
 	.boxs{
-		box-shadow: r(10px) r(10px) r(10px) r(10px) rgba(0,0,0,0.2);
+		box-shadow: 0.62rem 0.62rem 0.62rem 0.62rem rgba(0,0,0,0.2);
 	}
 </style>

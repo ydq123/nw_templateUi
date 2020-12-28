@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 // 全局基础样式
-import '@/assets/scss/all.scss'
+import '@/assets/scss/all.less'
 /* 引入自定义iocn */
 import '@/assets/fonts/iconfont.css';
 // 
