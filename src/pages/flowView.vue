@@ -165,7 +165,7 @@
 	};
 </script>
 
-<style scoped lang='scss'>
+<style scoped lang="less">
 	.hiddenDanger_page_wrap {
 		height: 100%;
 		background-color: #f5f5f5;

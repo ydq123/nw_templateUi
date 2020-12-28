@@ -26,7 +26,7 @@
     methods: {}
   };
 </script>
-<style lang="scss" scoped>
+<style lang="less" scoped>
   .nullData {
     // height: 100%;
     text-align: center;

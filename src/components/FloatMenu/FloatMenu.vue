@@ -207,11 +207,11 @@
 		}
 	};
 </script>
-<style scoped lang="scss">
-@import "../../assets/scss/nw_tool.scss";
+<style scoped lang="less">
+@import "../../assets/scss/nw_tool.less";
 	.xuanfu {
 		position: fixed;
-		width: r(48px);
+		.pxToremLess(width,48px);
 		height: r(48px);
 		right: 0;
 		bottom: r(30px);

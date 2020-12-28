@@ -8,7 +8,7 @@
             </slot>
           </div>
         <slot name="center">
-          <div class="header-txt">{{ title }}</div>
+          <div class="header-txt f16">{{ title }}</div>
         </slot>
         <slot name="right">
           <!-- <div class="right-content">更多</div> -->
@@ -69,8 +69,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import "../../assets/scss/nw_tool.scss";
+<style lang="less" scoped>
+@import "../../assets/scss/nw_tool.less";
 //顶部返回导航
 .top-fixed {
   width: 100%;
@@ -89,8 +89,8 @@ export default {
   }
   .header {
     background: #fff;
-    line-height: r(44px) !important;
-    height: r(44px) !important;
+    .pxToremLess(line-height,44px );
+    .pxToremLess(height,44px);
     position: relative;
     display: flex;
     justify-items: center;
@@ -149,12 +149,9 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    // flex: 1;
-    //      display: inline-block;
-    font-size: r(16px) !important;
     font-weight: bold;
     color: #212121;
-    line-height: r(23px);
+		.pxToremLess(line-height,23px);
   }
   .right-word {
     font-size: r(7px);

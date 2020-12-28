@@ -35,8 +35,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import "../../assets/scss/nw_tool.scss";
+<style lang="less" scoped>
+@import "../../assets/scss/nw_tool.less";
 .sync-loding {
   // height: 100%;
   text-align: center;

@@ -300,7 +300,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="less">
 .h100 {
   height: 100%;
 }

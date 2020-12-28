@@ -263,8 +263,8 @@
 	}
 </script>
 
-<style scoped lang="scss">
-	@import "../../assets/scss/nw_tool.scss";
+<style scoped lang="less">
+	@import "../../assets/scss/nw_tool.less";
 
 	.yw-botbut {
 		position: fixed;
@@ -276,13 +276,13 @@
 	}
 
 	.boxs {
-		box-shadow: r(10px) r(10px) r(10px) r(10px) rgba(0, 0, 0, 0.2);
+		box-shadow: 0.7rem 0.7rem 0.7rem 0.7rem rgba(0, 0, 0, 0.2);
 	}
 
 	.btn {
-		height: r(44px);
-		line-height: r(44px);
-		border-radius: r(8px);
+		.pxToremLess(height,44px);
+		.pxToremLess(line-height,44px);
+		.pxToremLess(border-radius,8px);
 		white-space: nowrap;
 		/*让文字不换行*/
 		overflow: hidden;

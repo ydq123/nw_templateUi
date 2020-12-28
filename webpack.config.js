@@ -24,10 +24,10 @@ module.exports = {
         ],
       },
       {
-        test: /\.scss$/,
+        test: /\.less$/,
         use: ExtractTextPlugin.extract({
           fallback: 'vue-style-loader',
-          use: ['css-loader', 'sass-loader']
+          use: ['css-loader', 'less-loader']
         })
       },
       {

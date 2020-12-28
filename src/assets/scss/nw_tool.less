@@ -1,34 +1,38 @@
 @charset "UTF-8";
-$browser-default-font-size: 37.5px !default;
-$text-red:#f2214d;
-$round: 0!default;
-$prefix-for-webkit: true !default;
-$prefix-for-mozilla: true !default;
-$prefix-for-microsoft: true !default;
-$prefix-for-opera: true !default;
-$prefix-for-spec: true !default; 
-$pink:#FF7372;
-$black:#4A4A4A;
- $fa6:#fa6470;
- $ff9:#ff9b26;
- $b97:#b976e8;
- $d287:#287df5;
+@browser-default-font-size: 75px !default;
+@flexible-font-size:75px;
+@text-red:#f2214d;
+@round: 0!default;
+@prefix-for-webkit: true !default;
+@prefix-for-mozilla: true !default;
+@prefix-for-microsoft: true !default;
+@prefix-for-opera: true !default;
+@prefix-for-spec: true !default;
+@pink:#FF7372;
+@black:#4A4A4A;
+ @fa6:#fa6470;
+ @ff9:#ff9b26;
+ @b97:#b976e8;
+ @d287:#287df5;
 
-@function r($px) {
-    @return $px / $browser-default-font-size * 1rem;
+.r(@px) {
+   @return  @px / @browser-default-font-size * 1rem;
 }
-@function nw_pxTorem($px) {
-    @return $px / $browser-default-font-size * 1rem;
+.pxTorem(@px) {
+   @return  @px / @browser-default-font-size * 1rem;
 }
-@mixin rounded($amount) {
-    -moz-border-radius: $amount;
-    -webkit-border-radius: $amount;
-    border-radius: $amount;
+.pxToremLess(@name,@px) {
+  @{name} : unit((@px*2/@flexible-font-size),rem);
+}
+.rounded(@amount) {
+    -moz-border-radius: @amount;
+    -webkit-border-radius: @amount;
+    border-radius: @amount;
 }
 
-@mixin pxRadius($color, $radius) {
-    border: 1px solid $color;
-    @include rounded($radius);
+.pxRadius(@color, @radius) {
+    border: 1px solid @color;
+    .rounded(@radius);
     content: " ";
     width: 200%;
     height: 200%;
@@ -41,42 +45,42 @@ $black:#4A4A4A;
     transform-origin: 0 0;
 }
 
-@mixin pxBorderLeftRight($color, $position) {
+.pxBorderLeftRight(@color, @position) {
     content: " ";
     position: absolute;
-    #{$position}: 0;
+    @{position}: 0;
     top: 0;
     width: 1px;
     height: 100%;
-    border-#{$position}: 1px solid $color;
-    color: $color;
+    border-@{position}: 1px solid @color;
+    color: @color;
     -webkit-transform-origin: 100% 0;
     transform-origin: 100% 0;
     -webkit-transform: scaleX(0.5);
     transform: scaleX(0.5);
 }
-// 下边线
-@mixin pxBorderTopBottom($color, $position) {
+// 下边线 上边线
+.pxBorderTopBottom(@color, @position) {
     content: " ";
     position: absolute;
     left: 0;
-    #{$position}: 0;
+    @{position}: 0;
     width: 100%;
     height: 1px;
-    border-#{$position}: 1px solid $color;
-    color: $color;
+    border-@{position}: 1px solid @color;
+    color: @color;
     -webkit-transform-origin: 0 0;
     transform-origin: 0 0;
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
 }
 
-@mixin pxBorder($color) {
+.pxBorder(@color) {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    border: 1px solid $color;
+    border: 1px solid @color;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 200%;
@@ -86,53 +90,39 @@ $black:#4A4A4A;
     -webkit-transform-origin: left top;
     transform-origin: left top;
 }
-// 上边线
-@mixin pxBorderTopBom($color, $position) {
-    content: '';
-    position: absolute;
-    #{$position}: 0;
-    background: $color;
-    width: 100%;
-    height: 1px;
-    -webkit-transform: scaleY(0.5);
-    transform: scaleY(0.5);
-    -webkit-transform-origin: 0 0;
-    transform-origin: 0 0;
-}
-
-@mixin inputPlaceholder($key, $value) {
+.inputPlaceholder(@key, @value) {
     input::-webkit-input-placeholder,
     textarea::-webkit-input-placeholder {
-        #{$key}: $value;
+        @{key}: @value;
     }
     input:-moz-placeholder,
     textarea:-moz-placeholder {
-        #{$key}: $value;
+        @{key}: @value;
     }
     input::-moz-placeholder,
     textarea::-moz-placeholder {
-        #{$key}: $value;
+        @{key}: @value;
     }
     input:-ms-input-placeholder,
     textarea:-ms-input-placeholder {
-        #{$key}: $value;
+        @{key}: @value;
     }
 }
 /* 带居中的宽高 */
-@mixin WHLH($width, $height) {
-    width: $width;
-    height: $height;
+.WHLH(@width, @height) {
+    width: @width;
+    height: @height;
     text-align: center;
-    line-height: $height;
+    line-height: @height;
 }
 
 /* 正方形 */
-@mixin nw_WH($width) {
-    width: $width;
-    height: $width;
+.WH(@width) {
+    width: .r(@width) !important;
+    height: .r(@width) !important;
 }
 
-@mixin autoCenter {
+.autoCenter {
     top: 0;
     left: 0;
     bottom: 0;
@@ -140,91 +130,91 @@ $black:#4A4A4A;
     margin: auto;
 }
 /* 边角弧度 */
-@mixin rounder-side($tl, $tr, $bl, $br) {
-    -moz-border-radius: $tl $tr $bl $br;
-    -webkit-border-radius: $tl $tr $bl $br;
-    border-radius: $tl $tr $bl $br;
+.rounder-side(@tl, @tr, @bl, @br) {
+    -moz-border-radius: @tl @tr @bl @br;
+    -webkit-border-radius: @tl @tr @bl @br;
+    border-radius: @tl @tr @bl @br;
 }
 
-@mixin buttonRadius($tl) {
-    -moz-border-radius: $tl;
-    -webkit-border-radius: $tl;
-    border-radius: $tl;
+.buttonRadius(@tl) {
+    -moz-border-radius: @tl;
+    -webkit-border-radius: @tl;
+    border-radius: @tl;
 }
 
-@mixin height($height) {
-    height: $height;
-    line-height: $height;
+.height(@height) {
+    height: @height;
+    line-height: @height;
 }
 
-@mixin prefixer ($property, $value, $prefixes) {
-    @each $prefix in $prefixes {
-        @if $prefix==webkit and $prefix-for-webkit==true {
-            -webkit-#{$property}: $value;
+.prefixer (@property, @value, @prefixes) {
+    @each @prefix in @prefixes {
+        @if @prefix==webkit and @prefix-for-webkit==true {
+            -webkit-@{property}: @value;
         }
-        @else if $prefix==moz and $prefix-for-mozilla==true {
-            -moz-#{$property}: $value;
+        @else if @prefix==moz and @prefix-for-mozilla==true {
+            -moz-@{property}: @value;
         }
-        @else if $prefix==ms and $prefix-for-microsoft==true {
-            -ms-#{$property}: $value;
+        @else if @prefix==ms and @prefix-for-microsoft==true {
+            -ms-@{property}: @value;
         }
-        @else if $prefix==o and $prefix-for-opera==true {
-            -o-#{$property}: $value;
+        @else if @prefix==o and @prefix-for-opera==true {
+            -o-@{property}: @value;
         }
-        @else if $prefix==spec and $prefix-for-spec==true {
-            #{$property}: $value;
+        @else if @prefix==spec and @prefix-for-spec==true {
+            @{property}: @value;
         }
         @else {
-            @warn "Unrecognized prefix: #{$prefix}";
+            @warn "Unrecognized prefix: #{@prefix}";
         }
     }
 }
 
-@mixin skewX($degrees) {
-    @include prefixer(transform, skewX($degrees), webkit moz o ms spec);
+.skewX(@degrees) {
+    .prefixer(transform, skewX(@degrees), webkit moz o ms spec);
     -webkit-backface-visibility: hidden;
 }
 /* 自动换行+缺省... */
-@mixin wordEllipsisNum($lineNum) {
+.wordEllipsisNum(@lineNum) {
     word-break: break-all;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: $lineNum;
+    -webkit-line-clamp: @lineNum;
 }
 
-@mixin wordEllipsis() {
+.wordEllipsis() {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-@mixin triangleArrowup($tb, $lr, $color) {
-    border-top: $tb solid transparent;
-    border-bottom: $tb solid $color;
-    border-left: $lr solid transparent;
-    border-right: $lr solid transparent;
+.triangleArrowup(@tb, @lr, @color) {
+    border-top: @tb solid transparent;
+    border-bottom: @tb solid @color;
+    border-left: @lr solid transparent;
+    border-right: @lr solid transparent;
 }
 
 //switch button
-@mixin switch_code($width, $height, $background) {
+.switch_code(@width, @height, @background) {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     position: relative;
-    width: $width;
-    height: $height;
+    width: @width;
+    height: @height;
     border: 1px solid #d9d9d9;
     outline: 0;
-    border-radius: $height;
+    border-radius: @height;
     // box-sizing: border-box;
     box-sizing: content-box;
     // background: #d9d9d9;
     cursor: pointer;
     &:after {
-        width: $height;
-        height: $height;
+        width: @height;
+        height: @height;
         background-color: #fff;
         box-shadow: 0 2px 5px rgba(0, 0, 0, .4);
         -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, .4);
@@ -236,11 +226,11 @@ $black:#4A4A4A;
         transition: -webkit-transform .3s;
         transition: transform .3s;
         transition: transform .3s, -webkit-transform .3s;
-        border-radius: $height;
+        border-radius: @height;
     }
     &:before {
-        width: $width;
-        height: $height;
+        width: @width;
+        height: @height;
         background-color: #fff;
         content: " ";
         top: 0;
@@ -250,24 +240,24 @@ $black:#4A4A4A;
         transition: -webkit-transform .3s;
         transition: transform .3s;
         transition: transform .3s, -webkit-transform .3s;
-        border-radius: $height/2;
+        border-radius: @height/2;
     }
     &:checked {
-        border-color: $background;
-        background-color: $background;
+        border-color: @background;
+        background-color: @background;
         &:before {
             -webkit-transform: scale(0);
             transform: scale(0);
         }
         &:after {
-            -webkit-transform: translate3d($width - $height,0,0);
-            transform: translate3d($width - $height,0,0);
+            -webkit-transform: translate3d(@width - @height,0,0);
+            transform: translate3d(@width - @height,0,0);
         }
     }
 }
 
 //select button
-@mixin checkbox_core($color, $WH, $round) {
+.checkbox_core(@color, @WH, @round) {
     font-family: "Ionicons";
     font-style: normal;
     vertical-align: middle;
@@ -278,20 +268,20 @@ $black:#4A4A4A;
     appearance: none;
     outline: 0;
     position: relative;
-    width: $WH;
-    height: $WH;
+    width: @WH;
+    height: @WH;
     border: 1px solid #ccc;
     text-align: center;
-    line-height: $WH;
+    line-height: @WH;
     cursor: pointer;
-    @include rounded($round);
+    .rounded(@round);
     &:after {
         display: inline-block;
         content: ' ';
         width: 100%;
         height: 100%;
-        background: $color;
-        @include rounded($round);
+        background: @color;
+        .rounded(@round);
         -webkit-transition: .1s linear;
         transition: .1s linear;
         opacity: 0;
@@ -308,10 +298,10 @@ $black:#4A4A4A;
         opacity: 0;
     }
     &:hover {
-        border-color: $color;
+        border-color: @color;
     }
     &:checked {
-        font-size: $WH+4px;
+        font-size: @WH+4px;
         border: none;
         &:after {
             opacity: 1;
@@ -327,7 +317,7 @@ $black:#4A4A4A;
 }
 
 //radio button
-@mixin radio_core($background, $WH) {
+.radio_core(@background, @WH) {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -336,8 +326,8 @@ $black:#4A4A4A;
     border-radius: 100%;
     border: 1px solid #ccc;
     position: relative;
-    width: $WH;
-    height: $WH;
+    width: @WH;
+    height: @WH;
     font-size: 0;
     text-align: center;
     cursor: pointer;
@@ -347,17 +337,17 @@ $black:#4A4A4A;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
     &:hover {
-        border-color: $background;
+        border-color: @background;
     }
     &:checked {
         background-color: #fff;
-        border-color: $background;
+        border-color: @background;
     }
     &:after {
         content: " ";
         border-radius: 100%;
-        width: $WH*0.5;
-        height: $WH*0.5;
+        width: @WH*0.5;
+        height: @WH*0.5;
         display: inline-block;
         margin-top: 50%;
         transform: translate(0, -50%);
@@ -366,18 +356,18 @@ $black:#4A4A4A;
         -webkit-animation-name: layui-scale-spring;
         animation-name: layui-scale-spring;
         &:after {
-            background-color: $background;
+            background-color: @background;
         }
     }
 }
 
-@mixin round_close($fontSize) {
+.round_close(@fontSize) {
     position: relative;
     display: inline-block;
     font-family: "Ionicons";
     font-style: normal;
     vertical-align: middle;
-    line-height: $fontSize;
+    line-height: @fontSize;
     text-align: center;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -385,24 +375,24 @@ $black:#4A4A4A;
         display: inline-block;
         content: " ";
         background: #d80404;
-        width: $fontSize;
-        height: $fontSize;
-        @include rounded(100%);
+        width: @fontSize;
+        height: @fontSize;
+        .rounded(100%);
     }
     &:before {
         position: absolute;
         display: inline-block;
-        width: $fontSize;
-        height: $fontSize;
+        width: @fontSize;
+        height: @fontSize;
         content: "\f404";
-        font-size: $fontSize;
-        line-height: $fontSize;
+        font-size: @fontSize;
+        line-height: @fontSize;
         color: #fff;
     }
 }
 
-@mixin checkbox_custom($fontFamily, $fontSize, $content, $contentChecked, $color, $colorChecked) {
-    font-family: $fontFamily;
+.checkbox_custom(@fontFamily, @fontSize, @content, @contentChecked, @color, @colorChecked) {
+    font-family: @fontFamily;
     font-style: normal;
     vertical-align: middle;
     text-align: center;
@@ -413,75 +403,75 @@ $black:#4A4A4A;
     appearance: none;
     outline: 0;
     position: relative;
-    width: $fontSize;
-    height: $fontSize;
-    line-height: $fontSize;
+    width: @fontSize;
+    height: @fontSize;
+    line-height: @fontSize;
     &:after {
         display: inline-block;
-        content: $content;
-        color: $color;
-        font-size: $fontSize;
+        content: @content;
+        color: @color;
+        font-size: @fontSize;
         -webkit-transition: .1s linear;
         transition: .1s linear;
     }
     &:checked {
-        font-size: $fontSize;
+        font-size: @fontSize;
         &:after {
-            content: $contentChecked;
-            color: $colorChecked;
+            content: @contentChecked;
+            color: @colorChecked;
             -webkit-transition: .1s linear;
             transition: .1s linear;
         }
     }
 }
 /* 按钮 字体颜色 背景颜色 透明度  */
-@mixin bt_status($color,$rgba1,$rgba2,$rgba3,$rgba4){
-	background: rgba($rgba1, $rgba2, $rgba3, $rgba4)!important;
-	color: $color !important;
-	border: solid 1px $color;
+.bt_status(@color,@rgba1,@rgba2,@rgba3,@rgba4){
+	background: rgba(@rgba1, @rgba2, @rgba3, @rgba4)!important;
+	color: @color !important;
+	border: solid 1px @color;
 }
 /* 背景颜色 字体颜色 边线颜色 边角弧度 */
-@mixin bt_status1($rgba,$color,$border,$radius){
-	background:$rgba!important;
-	color: $color !important;
-	border: solid 1px $border !important;
-	border-radius: $radius !important;
+.bt_status1(@rgba,@color,@border,@radius){
+	background:@rgba!important;
+	color: @color !important;
+	border: solid 1px @border !important;
+	border-radius: @radius !important;
 }
 /* 按钮 宽度 高度 边角弧度 */
-@mixin nw_buttom_w_h_b($w,$h,$b){
-	height:$h;
-	width: $w;
-	border-radius:$b;
+.buttom_w_h_b(@w,@h,@b){
+  .pxToremLess(height,@h);
+  .pxToremLess(width,@w);
+  .pxToremLess(border-radius,@b);
 	text-align: center;
-	line-height: $h;
+  .pxToremLess(line-height,@h);
 }
 /* 过度属性-旋转  初始角度，结束角度 触发变量名 过低时间*/
-@mixin transformRotate($inDeg,$onDeg,$statusName,$time){
-	transform: rotate(#{$inDeg}deg);
-	transition: all #{$time}s;
-	&.#{$statusName} {
-	  transform: rotate(#{$onDeg}deg);
+.transformRotate(@inDeg,@onDeg,@statusName,@time){
+	transform: rotate(unit(@inDeg,deg));
+	transition: all unit(@time,s);
+	&.@{statusName} {
+	  transform: rotate(unit(@onDeg,deg));
 	}
 }
 /* 动画-上下跳动 动画名，动画持续时间，百分之0 百分之25 百分之50y轴的位置 缩放的效果（1.1,0.9）  */
-@mixin animationTranslateY($animationName,$time,$y0,$y25,$y50,$scaleX,$scaleY){
-	animation: #{$animationName} #{$time}s linear infinite;
-  @keyframes #{$animationName} {
+.animationTranslateY(@animationName,@time,@y0,@y25,@y50,@scaleX,@scaleY){
+	animation: @animationName unit(@time,s) linear infinite;
+  @keyframes @animationName {
     0% {
-      transform: translateY($y0);
+      transform: translateY(@y0);
     }
     25% {
-      transform: translateY($y25);
+      transform: translateY(@y25);
     }
     50% {
       /* scale(1.1, 0.9) 收缩效果 */
-      transform: translateY($y50) scale($scaleX,$scaleY);
+      transform: translateY(@y50) scale(@scaleX,@scaleY);
     }
     75% {
-      ransform: translateY($y25);
+      ransform: translateY(@y25);
     }
     100% {
-      transform: translateY($y0);
+      transform: translateY(@y0);
     }
   }
 }

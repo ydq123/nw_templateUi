@@ -65,8 +65,8 @@
 	}
 </script>
 
-<style scoped lang="scss">
-	@import "../../assets/scss/nw_tool.scss";
+<style scoped lang="less">
+	@import "../../assets/scss/nw_tool.less";
 	.yw-folding{
 		width: 100%;
 		text-align: left;

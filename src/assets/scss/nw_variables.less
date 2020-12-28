@@ -1,0 +1,50 @@
+@fz10:0.625rem;
+@fz11:0.6875rem;
+@fz12:0.75rem;
+@fz13:0.8125rem;
+@fz14:0.875rem;
+@fz15:0.9375rem;
+@fz16:1rem;
+@fz17:1.0625rem;
+@fz18:1.125rem;
+
+
+@bg:#f1f5f7; //默认的背景色
+
+/*模拟1px边框线，默认是上边*/
+.line(@d:top){
+  background-image: linear-gradient(180deg, #d9d9d9, #d9d9d9 50%, transparent 50%);
+  background-size: 120% 1px;
+  background-repeat: no-repeat;
+  background-position: @d left;
+}
+
+// sidebar
+@menuText:#bfcbd9;
+@menuActiveText:#409EFF;
+@subMenuActiveText:#f4f4f5; //https://github.com/ElemeFE/element/issues/12951
+
+@menuBg:#304156;
+@menuHover:#263445;
+
+@subMenuBg:#1f2d3d;
+@subMenuHover:#001528;
+/* 主题字体颜色 */
+@pageCol: #287df5;
+/* 全局背景颜色 */
+@pageBg: #f5f5f5;
+@sideBarWidth: 210px;
+
+
+:export {
+  pageBg: @pageBg;
+  pageCol: @pageCol;
+  menuText: @menuText;
+  menuActiveText: @menuActiveText;
+  subMenuActiveText: @subMenuActiveText;
+  menuBg: @menuBg;
+  menuHover: @menuHover;
+  subMenuBg: @subMenuBg;
+  subMenuHover: @subMenuHover;
+  sideBarWidth: @sideBarWidth;
+}

@@ -506,6 +506,6 @@
 	}
 </script>
 
-<style scoped lang="scss">
-	@import "../../assets/scss/nw_moduletop.scss";
+<style scoped lang="less">
+	@import "../../assets/scss/nw_moduletop.less";
 </style>

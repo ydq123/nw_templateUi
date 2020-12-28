@@ -214,8 +214,8 @@
 	}
 </script>
 
-<style scoped lang="scss">
-	@import "../../assets/scss/nw_tool.scss";
+<style scoped lang="less">
+	@import "../../assets/scss/nw_tool.less";
 
 	.yw-topinput {
 		position: fixed;
@@ -226,18 +226,18 @@
 	}
 
 	.top-input {
-		padding: r(10px);
+			.pxToremLess(padding,10px);
 
 		.input-box {
-			border-radius: r(5px);
-			height: r(30px);
-			line-height: r(30px);
-			background: white;
-		}
+			.pxToremLess(border-radius,5px);
+			.pxToremLess(height,30px);
+			.pxToremLess(line-height,30px);
+				background: white;
+			}
 	}
 
 	.input-srot {
-		height: r(40px);
+		.pxToremLess(height,40px);
 		background-color: #fff;
 	}
 

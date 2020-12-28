@@ -63,17 +63,17 @@ export default {
     introduceData: {
       type: Object,
       default:() => ({
-        orderNumber: "GPL-2020-1020-LIMITED",//单号
-        copyText: "复制",//复制按钮文本
-        showCopy: true,//控制复制按钮显示隐藏，默认为true显示；false隐藏
-        status: 1,//标签颜色状态；值为1,2,3
-        statusValue: ["审核中", "处理中"],//标签状态文本
-        statusColor: "#fff",//标签状态文本颜色；注：status字段为0时生效
-        statusBg: "#1e87f0",//标签状态背景颜色；注：status字段为0时生效
-        keyValues: [//内容数组
+        orderNumber: "GPL-2020-1020-LIMITED",
+        copyText: "复制",
+        showCopy: true,
+        status: 1,
+        statusValue: ["审核中", "处理中"],
+        statusColor: "#fff",
+        statusBg: "#1e87f0",
+        keyValues: [
           {
-            name: "缺陷设备",//内容标题
-            value: "缺陷设备2号"//内容说明
+            name: "缺陷设备",
+            value: "缺陷设备2号"
           },
           {
             name: "缺陷等级",
@@ -104,7 +104,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="less">
 // 标签
 .danger-mark {
   padding: 4px 6px;

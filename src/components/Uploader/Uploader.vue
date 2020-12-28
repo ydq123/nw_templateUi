@@ -611,7 +611,7 @@
 	};
 </script>
 
-<style scoped lang='scss'>
+<style scoped lang="less">
 	.fill_Upimg_list_item {
 		position: relative;
 		height: 70px;
