@@ -19,7 +19,7 @@
 <template>
 	<div class="yw-textput bg-white">
 		<!-- 1左右布局 -->
-		<div class="textput-row textput-r p15" :class="[isBotBor?'borderButtomE8':boxObj.botBor]" v-if="boxObj.showBox == 1">
+		<div class="textput-row al-c textput-r p15" :class="[isBotBor?'borderButtomE8':boxObj.botBor]" v-if="boxObj.showBox == 1">
 			<div class="textput-xh" v-if="boxObj.boxBs">*</div>
 			<div class="f16 mr10 text-hc">{{boxObj.titleTxt}}</div>
 			<div class="f16 flex-1 textput-row al-c">
