@@ -44,7 +44,7 @@ export default {
 }
 .loadingImg {
   animation: rotate 0.7s linear infinite;
-  font-size: r(70px) !important;
+	.pxToremLess(font-size,70px);
 }
 @keyframes rotate {
   0% {
@@ -68,7 +68,7 @@ export default {
   animation: bounce-up 0.8s linear infinite;
   span {
     //文字间距
-    letter-spacing: r(10px);
+		.pxToremLess(letter-spacing,10px);
   }
 }
 

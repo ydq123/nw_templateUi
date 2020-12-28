@@ -97,11 +97,14 @@ export default {
     align-items: center;
   }
   .left-btn {
-    padding: 0 r(15px) !important;
+    .pxToremLess(padding-left,15px );
+    .pxToremLess(padding-right,15px);
+    .pxToremLess(padding-top,0 );
+    .pxToremLess(padding-bottom,0);
     color: #333333;
     position: absolute;
     left: 0px;
-    height: r(44px) !important;
+    .pxToremLess(height,44px);
     top: 50%;
     display: flex;
     justify-items: center;
@@ -121,12 +124,15 @@ export default {
     }
   }
   .right-btn {
-    font-size: r(12px);
-    padding: 0 r(15px);
+    .pxToremLess(font-size,12px);
+    .pxToremLess(padding-left,15px);
+    .pxToremLess(padding-right,15px);
+    .pxToremLess(padding-top,0 );
+    .pxToremLess(padding-bottom,0);
     color: #272727;
     position: absolute;
     right: 0px;
-    height: r(42px);
+    .pxToremLess(height,42px);
     top: 50%;
     display: flex;
     justify-items: center;
@@ -136,8 +142,8 @@ export default {
     -webkit-transform: translateY(-50%);
     .iconfont {
       display: block;
-      width: r(20px);
-      height: r(20px);
+    .pxToremLess(width,20px);
+    .pxToremLess(height,20px);
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
@@ -154,20 +160,20 @@ export default {
 		.pxToremLess(line-height,23px);
   }
   .right-word {
-    font-size: r(7px);
+		.pxToremLess(font-size,7px);
     color: #4a4a4a;
     position: absolute;
-    right: r(10px);
+		.pxToremLess(right,10px);
   }
   .top-fixed-shadow {
-    box-shadow: 0 r(2px) r(4px) rgba(0, 0, 0, 0.17);
+    box-shadow: 0 0.15rem 0.20rem rgba(0, 0, 0, 0.17);
   }
   &.top-fixed-shadow {
-    box-shadow: 0 r(2px) r(4px) rgba(0, 0, 0, 0.17);
+    box-shadow: 0 0.15rem 0.20rem rgba(0, 0, 0, 0.17);
   }
   .back-icon {
-    width: r(10px);
-    height: r(18px);
+		.pxToremLess(width,10px);
+		.pxToremLess(height,18px);
   }
 }
 
@@ -179,9 +185,9 @@ export default {
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
-  height: r(44px);
-  line-height: r(44px);
-  width: r(86px);
+  .pxToremLess(width,86px);
+  .pxToremLess(height,44px);
+  .pxToremLess(line-height,44px);
   top: 50%;
   transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
