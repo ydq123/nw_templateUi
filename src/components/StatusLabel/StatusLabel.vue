@@ -27,10 +27,10 @@
 <template>
 	<div class="yw-statuslabel">
 		 <!-- :style="{border: '0.5px solid '+[borVal.status == 0&&borVal.staBorCol&&val.staBorCol!=''?borVal.staBorCol:'#1E87F0']}" -->
-		<span class="pl5 pr5 ptb2 f12 mr5 border pos-r" v-for="(borVal,borIndex) in borList" :key="borIndex"
+		<span class="pl5 pr5 ptb2 f12 mr5 border pos-r" v-for="(borVal,borIndex) in borList" :key="'bor'+borIndex"
 		 :style="{'--borderSolide':borVal.staBorCol,color:borVal.staBorCol}"
 		 >{{borVal.staLabTxt}}</span>
-		<span class="pl5 pr5 ptb2 f12 mr5 border pos-r" v-for="(bgcVal,bgcIndex) in bgcList" :key="bgcIndex"
+		<span class="pl5 pr5 ptb2 f12 mr5 border pos-r" v-for="(bgcVal,bgcIndex) in bgcList" :key="'bgc'+bgcIndex"
 		 :class="[bgcVal.staCal?bgcVal.staCal:'',bgcVal.status==1?'state1':'',bgcVal.status==2?'state2':'',bgcVal.status==3?'state3':'']">{{bgcVal.staLabTxt}}</span>
 	</div>
 </template>
