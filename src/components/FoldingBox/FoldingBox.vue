@@ -87,7 +87,7 @@
 		transform: rotate(180deg);
 	}
 	.borc-l-1e8{
-		border-left: 0.18rem solid #1E87F0;
+		border-left: 0.08rem solid #1E87F0;
 	}
 	.txt-1e8{
 		color: #1E87F0;
