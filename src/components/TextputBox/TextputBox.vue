@@ -126,12 +126,12 @@
 	}
 	.textput-xh{
 		position: absolute;
-		left: r(6px);
-		margin-top:r(4px);
+		.pxToremLess(left,6px);
+		.pxToremLess(margin-top,4px);
 		color: red;
 	}
 	.text-hc{
 		width: 30%;
-		line-height: r(18px);
+		.pxToremLess(line-height,18px);
 	}
 </style>

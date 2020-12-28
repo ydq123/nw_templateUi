@@ -418,8 +418,8 @@
 	}
 
 	.img-wh-cla {
-		width: r(40px);
-		height: r(40px);
+		.pxToremLess(width,40px);
+		.pxToremLess(height,40px);
 	}
 
 	.tabwidget-row {
@@ -428,7 +428,7 @@
 	}
 
 	.borRadius-2 {
-		border-radius: r(2px);
+		.pxToremLess(border-radius,2px);
 	}
 
 	.bgcg-f5 {
@@ -444,8 +444,8 @@
 	.width-30 {
 		float: left;
 		position: relative;
-		min-height: 1px;
 		width: 30% !important;
+		.pxToremLess(min-height,1px);
 	}
 
 	// 限定高度，底线自定义大小的tab
@@ -456,15 +456,15 @@
 		white-space: nowrap;
 
 		.tab-items {
-			height: r(44px);
-			line-height: r(44px);
+			.pxToremLess(height,44px);
+			.pxToremLess(line-height,44px);
 		}
 
 		.tab-border {
 			position: absolute;
 			bottom: 0;
-			height: r(3px);
-			border-radius: r(6px);
+			.pxToremLess(height,3px);
+			.pxToremLess(border-radius,6px);
 		}
 	}
 
@@ -515,8 +515,8 @@
 
 	.tab-scroll-x {
 		position: absolute;
-		right: r(0px);
-		top: r(15px);
+		.pxToremLess(right,0);
+		.pxToremLess(top,15px);
 
 		i {
 			-moz-transition: all 0.3s;

@@ -28,7 +28,7 @@
  -->
 <template>
 	<div>
-		<div class="yw-topinput nw_bag_F5" :style="{top:mTop+'px'}">
+		<div class="yw-topinput bg-f5" :style="{top:mTop+'px'}">
 			<slot name="topInput">
 				<!-- 搜索框按钮 -->
 				<div class="top-input" v-if="!topInput">

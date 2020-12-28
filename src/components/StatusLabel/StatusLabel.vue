@@ -105,8 +105,8 @@
 	}
 
 	.ptb2 {
-		padding-top: r(2px);
-		padding-bottom: r(2px);
+		.pxToremLess(padding-top,2px);
+		.pxToremLess(padding-bottom,2px);
 	}
 
 	.textput-row {
@@ -116,7 +116,7 @@
 
 	.borc-l-1e8 {
 		// border:1px solid #1E87F0;
-		border: r(0.5px) solid #1E87F0;
+		border: 0.03125rem solid #1E87F0;
 		color: #1E87F0;
 	}
 
@@ -142,11 +142,11 @@
 			top: 0;
 			width: 200%;
 			height: 200%;
-			border-radius: 6px;
+			.pxToremLess(border-radius,6px);
 			// border-left: 1px solid #ccc;
 			// border-right: 1px solid #ccc;
-			border-left: 1px solid var(--borderSolide);
-			border-right: 1px solid var(--borderSolide);
+			border-left: 0.0625rem solid var(--borderSolide);
+			border-right: 0.0625rem solid var(--borderSolide);
 			-webkit-transform-origin: 0 0;
 			transform-origin: 0 0;
 			-webkit-transform: scale(0.5);
@@ -160,11 +160,11 @@
 			top: 0;
 			width: 200%;
 			height: 200%;
-			border-radius: 6px;
+			.pxToremLess(border-radius,6px);
 			// border-bottom: 1px solid #ccc;
 			// border-top: 1px solid #ccc;
-			border-bottom: 1px solid var(--borderSolide);
-			border-top: 1px solid var(--borderSolide);
+			border-bottom: 0.0625rem solid var(--borderSolide);
+			border-top: 0.0625rem solid var(--borderSolide);
 			-webkit-transform-origin: 0 0;
 			transform-origin: 0 0;
 			-webkit-transform: scale(0.5);

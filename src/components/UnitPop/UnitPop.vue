@@ -464,10 +464,10 @@
 		}
 		
 		.pb65{
-			padding-bottom: r(65px);
+			.pxToremLess(padding-bottom,65px);
 		}
 		.pt88{
-			padding-top: r(88px);
+			.pxToremLess(padding-top,88px);
 		}
 		
 		.input-box {
@@ -481,18 +481,18 @@
 			/* 顶部搜索 */
 			.task-top-input {
 				width: 80%;
-				height: r(30px);
-				border-radius: r(5px);
+				.pxToremLess(height,30px);
+				.pxToremLess(border-radius,5px);
 			}
 		}
 		.pop-top{
-			height: r(44px);
-			top: r(44px);
+			.pxToremLess(height,44px);
+			.pxToremLess(top,44px);
 			width: 100%;
 			.top-w{
 				width: 90%;
-				height: r(30px);
-				border-radius: r(5px);
+				.pxToremLess(height,30px);
+				.pxToremLess(border-radius,5px);
 			}
 		}
 		.unit-bottom_button {
@@ -516,7 +516,7 @@
 			z-index: 999;
 		}
 		.pt88{
-			padding-top: r(88px);
+			.pxToremLess(padding-top,88px);
 		}
 		
 		.pop-tab {
@@ -537,13 +537,13 @@
 		}
 		
 		.radius-8 {
-			border-radius: r(8px);
+			.pxToremLess(border-radius,8px);
 		}
 		
 		.pop-tab-list-scrollX {
 			position: relative;
 			width: 100%;
-			height: r(44px);
+			.pxToremLess(height,44px);
 			white-space: nowrap;
 			overflow: hidden;
 			overflow-x: scroll;
@@ -558,30 +558,37 @@
 	}
 	/*没有数据*/
 	.unit-noData {
-		padding-top: r(60px);
+		.pxToremLess(padding-top,60px);
+		.pxToremLess(font-size,15px);
 		text-align: center;
 		color: #b5b5b5;
-		font-size: r(15px);
 		img {
-			width: r(200px);
+			.pxToremLess(width,200px);
 			margin: 0 auto;
 		}
 		.button {
-			font-size: r(15px);
-			min-width: r(160px);
-			height: r(60px);
-			padding: 0 r(56px);
-			line-height: r(60px);
-			border-radius: r(60px);
 			background: #a22423;
 			color: #fff;
 			border-width: 1px;
+			.pxToremLess(font-size,15px);
+			.pxToremLess(min-width,160px);
+			.pxToremLess(height,60px);
+			.pxToremLess(line-height,60px);
+			.pxToremLess(width,200px);
+			.pxToremLess(border-radius,60px);
+			.pxToremLess(padding-top,0);
+			.pxToremLess(padding-bottom,0);
+			.pxToremLess(padding-left,56px);
+			.pxToremLess(padding-right,56px);
 		}
 		p {
-			margin: r(40px) 0 r(56px);
+			.pxToremLess(margin-top,40px);
+			.pxToremLess(margin-bottom,0);
+			.pxToremLess(margin-left,56px);
+			.pxToremLess(margin-right,56px);
 		}
 		i {
-			font-size: r(56px);
+			.pxToremLess(font-size,56px);
 		}
 	}
 </style>
