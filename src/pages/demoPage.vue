@@ -5,7 +5,7 @@
 		</nw-fixed-header>
 		<!-- 头部搜索组件 -->
 		<nw-top-input :mTop="44" @changeSreen="topInputChangeSreen">
-			<div slot="topInput"></div>
+			<!-- <div slot="topInput"></div> -->
 			<!-- <div slot="taskSreenSort"></div> -->
 		</nw-top-input>
 		<div class="bg-white mt20 pb20">

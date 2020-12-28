@@ -33,13 +33,13 @@
 				<!-- 搜索框按钮 -->
 				<div class="top-input" v-if="!topInput">
 					<div class="input-box" @click="inputTopBtn">
-						<i class="iconfont icon-sousuo nw_f14 nw_text_99"></i>
-						<span class="nw_f14 nw_text_99">搜索</span>
+						<i class="iconfont icon-sousuo f14 text-99"></i>
+						<span class="f14 text-99">搜索</span>
 					</div>
 				</div>
 				<div class="top-input input-row al-c" v-show="topInput">
 					<div class="input-box flex-1 input-row">
-						<i class="iconfont icon-sousuo nw_f14 nw_text_99 ml10 mr5" @click="inputTopBtn"></i>
+						<i class="iconfont icon-sousuo f14 text-99 ml10 mr5" @click="inputTopBtn"></i>
 						<input id="tapInput" type="text" class="input flex-1 f14" v-model="searchValue" placeholder="搜索" @keypress="inputSearch()" />
 						<i v-if="searchValue.length > 0" class="iconfont icon-shanchu3 f15 pl5 mr5 gray9" @click="cancelSearch"></i>
 					</div>
@@ -49,7 +49,7 @@
 				<!-- 搜索框 -->
 				<div class="top-input input-row al-c">
 					<div class="input-box flex-1 mr15 input-row">
-						<i class="iconfont icon-sousuo nw_f14 nw_text_99 ml10 mr5" @click="inputTopBtn"></i>
+						<i class="iconfont icon-sousuo f14 text-99 ml10 mr5" @click="inputTopBtn"></i>
 						<input type="text" class="input flex-1 f14" v-model="searchValue" placeholder="搜索" @keypress="inputSearch()" />
 						<i v-if="searchValue.length > 0" class="iconfont icon-shanchu3 f15 pl5 mr5 gray9" @click="cancelSearch"></i>
 					</div>
@@ -74,7 +74,7 @@
 				<div v-for="(sortItem, sortIndex) in sortData.list" :key="sortIndex">
 					<div class="f16 p15 gray3 borderTopE8 input-row" @click="changeSortItem(sortIndex)">
 						<div class="flex-1 text-left">{{sortItem.text}}</div>
-						<i class="iconfont ml5 gray287 icon-gou" v-if="sortIndex==sortData.dtIndex"></i>
+						<i class="iconfont pos-a gray287 icon-gou" v-if="sortIndex==sortData.dtIndex"></i>
 					</div>
 				</div>
 			</div>
@@ -223,6 +223,15 @@
 		z-index: 999;
 		text-align: center;
 		width: 100%;
+	}
+	
+	.text-99{
+		color: #999999;
+	}
+	
+	.pos-a{
+		position: absolute;
+		.pxToremLess(right,15px);
 	}
 
 	.top-input {

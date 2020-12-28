@@ -88,10 +88,10 @@
 		<div class="yw-moduletop nw_bag_F5">
 			<slot name="topInput">
 				<!-- 搜索框 -->
-				<div class="top-input">
+				<div class="top-input bg-f5">
 					<div class="input-box" @click="inputTopBtn">
-						<i class="iconfont icon-sousuo nw_f14 nw_text_99"></i>
-						<span class="nw_f14 nw_text_99">搜索</span>
+						<i class="iconfont icon-sousuo f14 text-99"></i>
+						<span class="f14 text-99">搜索</span>
 					</div>
 				</div>
 			</slot>
@@ -123,7 +123,7 @@
 				<div v-for="(sortItem, sortIndex) in sortData.list" :key="sortIndex">
 					<div class="f16 p15 gray3 borderTopE8 module-row" @click="changeSortItem(sortIndex)">
 						<div class="flex-1 text-left">{{sortItem.text}}</div>
-						<i class="iconfont ml5 gray287 icon-gou" v-if="curTabIndex==0&&sortIndex==sortData.dbIndex||curTabIndex==1&&sortIndex==sortData.ybIndex"></i>
+						<i class="iconfont pos-a gray287 icon-gou" v-if="curTabIndex==0&&sortIndex==sortData.dbIndex||curTabIndex==1&&sortIndex==sortData.ybIndex"></i>
 					</div>
 				</div>
 			</div>
