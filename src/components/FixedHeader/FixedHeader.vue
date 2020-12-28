@@ -2,11 +2,11 @@
   <div class="top-fixed" id="header" :style="'padding-top:' + '0px ;'">
     <slot name="default">
       <div class="header">
-        <slot name="left">
           <div class="left-btn" @click="headBack">
-            <i class="iconfont icon-houtui"></i>
+            <slot name="left">
+                <i class="iconfont icon-houtui"></i>
+            </slot>
           </div>
-        </slot>
         <slot name="center">
           <div class="header-txt">{{ title }}</div>
         </slot>
