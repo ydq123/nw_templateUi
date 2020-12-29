@@ -24,7 +24,7 @@
                 </div>
                 <div class="content flex fl-w" v-show="popupItem.node">
                   <div
-                    class="type-item border_1_dc f14 pt10 pb10 pl15 pr15 mr10 mb10"
+                    class="type-item border_1_dc f14 pt8 pb8 pl10 pr10 mr10 mb10"
                     :class="[item.check ? 'text-white' : '']"
                     :style="{ background: item.check ? choiceColor : '' }"
                     v-for="(item, index) in popupItem.list"
@@ -179,7 +179,7 @@ export default {
           isMultiple: false,
           list: [
             {
-              name: "便电压",
+              name: "便电压1",
               check: false
             },
             {

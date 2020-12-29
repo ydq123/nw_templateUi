@@ -64,7 +64,7 @@ export default {
       this.$tabBackHome('root_tab');
     },
     headBack() {
-      this.$tabBack(-1);
+      this.$router.go(-1);
       // this.$emit("headBackeHandle");
     }
   }

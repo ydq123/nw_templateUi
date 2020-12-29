@@ -21,14 +21,14 @@
       >
         <div
           class="danger-mark mr5"
-          :class="stateClass"
+          :class="item.state | stateClass"
           v-for="(item, index) in introduceData.statusValue"
           :key="index"
           :style="
             `background: ${introduceData.statusBg}; color: ${introduceData.statusColor}`
           "
         >
-          {{ item }}
+          {{ item.text }}
         </div>
       </div>
       <div
@@ -48,26 +48,38 @@ export default {
   data() {
     return {};
   },
-  computed: {
-    stateClass() {
-      if(this.introduceData.status == 1) {
-        return 'state1'
-      }else if(this.introduceData.status == 2) {
-        return 'state2'
-      }else if(this.introduceData.status == 3) {
-        return 'state3'
+  filters: {
+    stateClass(val) {
+      if (val == 1) {
+        return "state1";
+      } else if (val == 2) {
+        return "state2";
+      } else if (val == 3) {
+        return "state3";
       }
     }
   },
+  computed: {},
   props: {
     introduceData: {
       type: Object,
-      default:() => ({
+      default: () => ({
         orderNumber: "GPL-2020-1020-LIMITED",
         copyText: "复制",
         showCopy: true,
-        status: 1,
-        statusValue: ["审核中", "处理中"],
+        statusValue: [
+          {
+            text: "待处理"
+          },
+          {
+            state: 2,
+            text: "处理中"
+          },
+          {
+            state: 3,
+            text: "已处理"
+          }
+        ],
         statusColor: "#fff",
         statusBg: "#1e87f0",
         keyValues: [
@@ -91,10 +103,10 @@ export default {
     copyHandle() {
       this.myJssdk.clipBoard({
         text: document.getElementById("codeNum").innerText,
-        success (data) {
+        success(data) {
           this.$toast(data);
         },
-        fail (data) {
+        fail(data) {
           this.$toast(data);
         }
       });
@@ -114,15 +126,15 @@ export default {
   text-align: center;
   &.state1 {
     color: #1ca300 !important;
-    background: #DDF1D9 !important;
+    background: #ddf1d9 !important;
   }
   &.state2 {
     color: #ffc417 !important;
-    background: #FFF6DC !important;
+    background: #fff6dc !important;
   }
   &.state3 {
     color: #1e87f0 !important;
-    background: #DDEDFD !important;
+    background: #ddedfd !important;
   }
 }
 </style>

@@ -25,6 +25,13 @@ export default {
 </script>
 
 <style>
+/* 解决悬浮球导致页面报错 */
+html {
+  height: 100%;
+  box-sizing: border-box;
+	touch-action: pan-y;
+}
+
 #app {
   text-align: center;
   color: #2c3e50;
