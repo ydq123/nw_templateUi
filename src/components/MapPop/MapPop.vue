@@ -105,8 +105,7 @@
 			},
 			mapList: { // 地图底图数组
 				type: Array,
-				default: () => [
-					{
+				default: () => [{
 						label: "标准地图",
 						value: "1",
 						key: require('@/assets/images/mapImg/layer_pic1.png'),
@@ -128,12 +127,10 @@
 			},
 			switchList: { // 状态数组
 				type: Array,
-				default: () => [
-					{
+				default: () => [{
 						mlTitle: '等级',
 						mlType: 'dj',
-						mlList: [
-							{
+						mlList: [{
 								dengCol: '#fa3a3d',
 								text: '紧急',
 								status: false,
@@ -158,8 +155,7 @@
 					{
 						mlTitle: '状态',
 						mlType: 'zt',
-						mlList: [
-							{
+						mlList: [{
 								text: '即将超期',
 								status: false
 							},
@@ -200,7 +196,7 @@
 				// 设置值，以供传递
 				this.radios[index].isChecked = true;
 				var data = this.radios[index];
-				this.$emit("checkTheme",data);
+				this.$emit("checkTheme", data);
 			},
 			// 遮挡层隐藏
 			zdcBtnShow: function() {
@@ -208,8 +204,8 @@
 				var data = {
 					mapList: []
 				};
-				for(var i = 0;i<this.mapSwith.length;i++){
-					for(var e = 0;e<this.mapSwith[i].mlList.length;e++){
+				for (var i = 0; i < this.mapSwith.length; i++) {
+					for (var e = 0; e < this.mapSwith[i].mlList.length; e++) {
 						if (this.mapSwith[i].mlList[e].status) {
 							data.mapList.push({
 								mlTitle: this.mapSwith[i].mlTitle,
@@ -219,12 +215,187 @@
 						}
 					}
 				}
-				this.$emit("zdcBtnShow",data);
+				this.$emit("zdcBtnShow", data);
 			},
 		},
 	}
 </script>
 
 <style scoped lang="less">
-	@import "../../assets/less/nw_mappop.less";
+	@import "../../assets/less/nw_tool.less";
+
+	.yw-mappop {
+		width: 100%;
+		height: auto;
+		position: fixed;
+		z-index: 999;
+
+	}
+
+	.map-row {
+		display: flex;
+		flex-direction: row;
+	}
+
+
+	.zdc {
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.7);
+		position: fixed;
+		top: 0;
+		left: 0;
+	}
+
+	.zIndex9 {
+		z-index: 9 !important;
+	}
+
+	.zIndex999 {
+		z-index: 999 !important;
+	}
+
+
+	// 右侧弹框
+	.sreen-warp {
+		position: fixed;
+		z-index: 9999 !important;
+		top: 0;
+		right: 0;
+		width: 80%;
+		height: 100%;
+		.pxToremLess(padding-top, 44px);
+		.pxToremLess(padding-bottom, 20px);
+		overflow: hidden;
+		transition: all 500ms;
+
+		&.showBgcW {
+			margin-right: -100%;
+		}
+
+		.sreen-box {
+			width: 100%;
+			height: 100%;
+			overflow: scroll;
+		}
+
+	}
+
+	.layer-item {
+
+		.flex {
+			flex-wrap: wrap;
+			color: #121212;
+			background: #fff;
+
+			.item {
+				width: 26%;
+				margin-left: 3.5%;
+				margin-right: 3.5%;
+				height: auto;
+
+				&.selected {
+					color: #2e67d0;
+				}
+			}
+		}
+
+		.name {
+			font-size: calc-size(12);
+			// margin-top: 8px;
+			text-align: center;
+		}
+
+		&.layer-topology {
+			.type_img {
+				.pxToremLess(padding-top, 0);
+				.pxToremLess(padding-bottom, 0);
+				.pxToremLess(padding-left, 10px);
+				.pxToremLess(padding-right, 10px);
+			}
+		}
+
+		&.layer-type {
+			.type_img {
+				.pxToremLess(padding-top, 0);
+				.pxToremLess(padding-bottom, 0);
+				.pxToremLess(padding-left, 8px);
+				.pxToremLess(padding-right, 8px);
+
+				img {
+					border: 1px solid #ddd;
+					.pxToremLess(border-radius, 8px);
+				}
+			}
+		}
+	}
+
+	.layer-theme {
+		.name {
+			.pxToremLess(margin-top, 5px);
+		}
+
+		.theme_img {
+			position: relative;
+			margin: auto;
+
+			background-repeat: no-repeat;
+			background-position: center;
+
+			background-size: cover;
+			overflow: hidden;
+			margin: 0 calc-size(10);
+			height: 62px;
+			border-radius: 8px;
+
+			img {
+				width: 100%;
+				max-width: calc-size(6.5 * 16);
+			}
+
+			.radio {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				.pxToremLess(height, 16px);
+				.pxToremLess(line-height, 16px);
+				text-align: center;
+				background-color: #4784f3;
+
+				span {
+					.pxToremLess(width, 11px);
+					.pxToremLess(height, 9px);
+					display: inline-block;
+				}
+			}
+		}
+
+		.selected .theme_img {
+			box-shadow: inset 0 0 0 3px #4784f3;
+		}
+	}
+
+	/* // 指示灯 */
+	.map-deng {
+		.pxToremLess(width, 10px);
+		.pxToremLess(height, 10px);
+		border-radius: 50%;
+	}
+
+	.map-deng-red {
+		background-color: #fa3a3d;
+	}
+
+	.map-deng-yellow {
+		background-color: #f9d501;
+	}
+
+	.map-deng-green {
+		background-color: #00ee8e;
+	}
+
+	.map-deng-f5 {
+		background-color: #f5f5f5;
+	}
 </style>
