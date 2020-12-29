@@ -10,13 +10,15 @@
         <slot name="center">
           <div class="header-txt f16">{{ title }}</div>
         </slot>
-        <slot name="right">
           <!-- <div class="right-content">更多</div> -->
           <div class="right-content">
-            <div @click="threeClock"></div>
-            <div @click="backHome"></div>
+            <slot name="right">
+                <div class="right-slot-content">
+                  <div @click="threeClock"></div>
+                  <div @click="backHome"></div>
+                </div>
+            </slot>
           </div>
-        </slot>
       </div>
     </slot>
     <slot name="page-bottom"></slot>
@@ -179,24 +181,29 @@ export default {
 
 /* 顶部分享 */
 .right-content {
-  position: absolute;
-  right: 0;
-  background-image: url("~@/assets/images/top_rigth.png");
-  background-size: contain;
-  background-position: center center;
-  background-repeat: no-repeat;
   .pxToremLess(width,86px);
   .pxToremLess(height,44px);
   .pxToremLess(line-height,44px);
+  position: absolute;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
   transform-origin: 0 0;
   -webkit-transform-origin: 0 0;
-  div {
-    float: left;
-    width: 50% !important;
-    height: 100% !important;
+  .right-slot-content {
+    .pxToremLess(width,86px);
+    .pxToremLess(height,44px);
+    .pxToremLess(line-height,44px);
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-image: url("~@/assets/images/top_rigth.png");
+    div {
+      float: left;
+      width: 50% !important;
+      height: 100% !important;
+    }
   }
 }
 </style>
