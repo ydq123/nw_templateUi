@@ -112,7 +112,7 @@
 </script>
 
 <style scoped lang="less">
-	@import "../../assets/scss/nw_tool.less";
+	@import "../../assets/less/nw_tool.less";
 	.yw-textput{
 		width: 100%;
 		text-align: left;

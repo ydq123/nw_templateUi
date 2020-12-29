@@ -294,7 +294,7 @@
 </script>
 
 <style scoped lang="less">
-	@import "../assets/scss/nw_tool.less";
+	@import "../assets/less/nw_tool.less";
 	.checkPerson {
 		// height: 100%;
 		background-color: #f5f5f5;

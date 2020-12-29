@@ -507,5 +507,5 @@
 </script>
 
 <style scoped lang="less">
-	@import "../../assets/scss/nw_moduletop.less";
+	@import "../../assets/less/nw_moduletop.less";
 </style>

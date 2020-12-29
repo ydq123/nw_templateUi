@@ -226,5 +226,5 @@
 </script>
 
 <style scoped lang="less">
-	@import "../../assets/scss/nw_mappop.less";
+	@import "../../assets/less/nw_mappop.less";
 </style>

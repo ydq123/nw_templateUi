@@ -28,7 +28,10 @@
 		</div>
 		<div class="bg-white mt20 pb20">
 			<h2 class="pt15 pb10 borderButtomE8 grayfa6470">无数据占位组件</h2>
-			<nw-null-data class="bg-white mt20 pb20"></nw-null-data>
+			<!-- <nw-null-data class="bg-white mt20 pb20"></nw-null-data> -->
+			<nw-null-data :nullText="'123'">
+			    <div slot="nullImg"><img src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2771978851,2906984932&fm=26&gp=0.jpg" alt="" /></div>
+			</nw-null-data>
 		</div>
 		<div class="bg-white mt20 pb20">
 			<h2 class="pt15 pb10 borderButtomE8 grayfa6470">附件上传组件</h2>
@@ -161,27 +164,28 @@
 						fsize: 'f14'
 					},
 				},
-				menuArr: [{
-						name: "菜单一",
-						iconName: "",
-						iColorName: "",
-						iconColor: "",
-						imgName: require("../assets/images/center.png")
-					},
-					{
-						name: "菜单二",
-						iconName: "",
-						iconColor: "",
-						iColorName: "",
-						imgName: require("../assets/images/center.png")
-					},
-					{
-						name: "菜单二",
-						iconName: "",
-						iconColor: "",
-						iColorName: "",
-						imgName: require("../assets/images/center.png")
-					}
+				menuArr: [
+					// {
+					// 	name: "菜单一",
+					// 	iconName: "",
+					// 	iColorName: "",
+					// 	iconColor: "",
+					// 	imgName: require("../assets/images/center.png")
+					// },
+					// {
+					// 	name: "菜单二",
+					// 	iconName: "",
+					// 	iconColor: "",
+					// 	iColorName: "",
+					// 	imgName: require("../assets/images/center.png")
+					// },
+					// {
+					// 	name: "菜单二",
+					// 	iconName: "",
+					// 	iconColor: "",
+					// 	iColorName: "",
+					// 	imgName: require("../assets/images/center.png")
+					// }
 				],
 				botbtnobj: {
 					// icon按钮配置项
