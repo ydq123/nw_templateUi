@@ -265,15 +265,4 @@ export const NWtabMinxin = {
 			}
 		}
 	},
-	/* 进入页面前-复原导航条*/
-	beforeRouteEnter(to, from, next) {
-		next(vm => {
-			setTimeout(function() {
-				var leg = vm.$store.getters.pageUrlObj.keepNameArr.length;
-				if (vm.$store.getters.pageUrlObj.keepNameArr[leg - 1]['scrollY'] > 0) {
-					window.scroll(0, vm.$store.getters.pageUrlObj.keepNameArr[leg - 1]['scrollY'] || 0);
-				}
-			}, 100)
-		});
-	},
 }
