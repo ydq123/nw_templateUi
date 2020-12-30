@@ -94,7 +94,7 @@
 </script>
 
 <style scoped lang="less">
-	@import "../../assets/scss/nw_tool.less";
+	@import "../../assets/less/nw_tool.less";
 
 	.yw-statuslabel {
 		width: 100%;

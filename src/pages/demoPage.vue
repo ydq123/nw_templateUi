@@ -1,42 +1,42 @@
 <template>
 	<div id="demoPage" class="bg-f5" style="padding-top:75px;padding-bottom: 180px;">
 		<!-- 页面头部组件 -->
-		<nw-fixed-header title="头部导航" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
-		</nw-fixed-header>
+		<nw-fixed-header title="头部导航" @threeClockHandle="ClockHandle"></nw-fixed-header>
 		<!-- 头部搜索组件 -->
 		<nw-top-input :mTop="44" @changeSreen="topInputChangeSreen">
 			<div slot="topInput"></div>
 			<!-- <div slot="taskSreenSort"></div> -->
 		</nw-top-input>
 		<div class="bg-white mt20 pb20">
-			<h2 class="pt15 pb10 borderButtomE8 grayfa6470">tab切换组件（带筛选、排序）</h2>
+			<h2 class="pt15 pb10 borderButtomE8 grayfa6470 f16 text-center">tab切换组件（带筛选、排序）</h2>
 			<nw-module-top :isSort="true" :isSreen="true" @changeSreen="topInputChangeSreen" @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab"
 			 @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen">
 			</nw-module-top>
 		</div>
 		<div class="bg-white mt20 pb20">
-			<h2 class="pt15 pb10 borderButtomE8 grayfa6470">详情页顶部简介</h2>
+			<h2 class="pt15 pb10 borderButtomE8 grayfa6470 f16 text-center">详情页顶部简介</h2>
 			<nwtop-introduce></nwtop-introduce>
 		</div>
 		<div class="bg-white mt20 pb20">
-			<h2 class="pt15 pb10 borderButtomE8 grayfa6470">多状态tab组件</h2>
+			<h2 class="pt15 pb10 borderButtomE8 grayfa6470 f16 text-center">多状态tab组件</h2>
 			<nw-tab-widget></nw-tab-widget>
 		</div>
 		<div class="bg-white mt20 pb20">
-			<h2 class="pt15 pb10 borderButtomE8 grayfa6470">动画加载中组件</h2>
+			<h2 class="pt15 pb10 borderButtomE8 grayfa6470 f16 text-center">动画加载中组件</h2>
 			<nw-inside-loading />
 		</div>
 		<div class="bg-white mt20 pb20">
-			<h2 class="pt15 pb10 borderButtomE8 grayfa6470">无数据占位组件</h2>
-			<nw-null-data class="bg-white mt20 pb20"></nw-null-data>
+			<h2 class="pt15 pb10 borderButtomE8 grayfa6470 f16 text-center">无数据占位组件</h2>
+			<!-- <nw-null-data class="bg-white mt20 pb20"></nw-null-data> -->
+			<nw-null-data :nullText="'123'"></nw-null-data>
 		</div>
 		<div class="bg-white mt20 pb20">
-			<h2 class="pt15 pb10 borderButtomE8 grayfa6470">附件上传组件</h2>
+			<h2 class="pt15 pb10 borderButtomE8 grayfa6470 f16 text-center">附件上传组件</h2>
 			<nw-uploader :fileInfo="fileInfo" :lookFileArr2="lookFileArr2" :baseUrl="baseUrl" :proxyUrl="proxyUrl" :proxyIp="proxyIp"
 			 :accessToken="accessToken"></nw-uploader>
 		</div>
 		<div class="bg-white mt20 pb20">
-			<h2 class="pt15 pb10 borderButtomE8 grayfa6470">折叠框组件</h2>
+			<h2 class="pt15 pb10 borderButtomE8 grayfa6470 f16 text-center">折叠框组件</h2>
 			<nw-folding-box>
 				<!-- <div slot="topRIconSlot"></div> -->
 				<div slot="boxCenten">
@@ -46,13 +46,13 @@
 			</nw-folding-box>
 		</div>
 		<div class="bg-white mt20 pb20">
-			<h2 class="pt15 pb10 borderButtomE8 grayfa6470">状态标签组件</h2>
+			<h2 class="pt15 pb10 borderButtomE8 grayfa6470 f16 text-center">状态标签组件</h2>
 			<div class="p15">
 				<nw-status-label></nw-status-label>
 			</div>
 		</div>
 		<div class="bg-white mt20 pb20">
-			<h2 class="pt15 pb10 borderButtomE8 grayfa6470">文本输入框组件</h2>
+			<h2 class="pt15 pb10 borderButtomE8 grayfa6470 f16 text-center">文本输入框组件</h2>
 			<div class="">
 				<div class="">
 					<nw-textput-box :txtBoxObj="txtBoxObj1"></nw-textput-box>
@@ -161,7 +161,8 @@
 						fsize: 'f14'
 					},
 				},
-				menuArr: [{
+				menuArr: [
+					{
 						name: "菜单一",
 						iconName: "",
 						iColorName: "",

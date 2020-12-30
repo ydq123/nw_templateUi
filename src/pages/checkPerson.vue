@@ -20,7 +20,7 @@
 				</div>
 			</div>
 			<div class="bg-f5 pl15 pr15 pt10 pb10">
-				<div class="bg-white pt10 pb10 gray9 radius-5 f15 text-center">
+				<div class="bg-white pt10 pb10 gray9 radius-5 f15 text-center" @click="openSearchCheckPer">
 					<i class="iconfont icon-sousuo f15 ml5 mr5 gray9"></i>
 					搜索
 				</div>
@@ -50,7 +50,7 @@
 			 @load="onLoad">
 				<van-pull-refresh v-model="taskInfo.refreshing" @refresh="onRefresh">
 					<div class="p15 bg-white person-row ju-b al-c f16 borderTopE8" @click="selectCurNode(nodeIndex)" :class="{'borderTopE8':nodeIndex!=0}"
-					 v-for="(nodeItme,nodeIndex) in taskInfo.nodeList" :key="nodeIndex" >
+					 v-for="(nodeItme,nodeIndex) in taskInfo.nodeList" :key="nodeIndex">
 						<i class="iconfont f16 mr10" :class="[nodeItme.status ? 'icon-gou1 gray287' : 'icon-1 gray6']" @click.stop="selectCurNode(nodeIndex)"></i>
 						<div class="flex-1 gray3 text-overflow text-left">{{nodeItme.dangerSubType}}</div>
 						<!-- <i class="iconfont icon-qianjin gray9 f14 ml10"></i> -->
@@ -63,11 +63,11 @@
 				<p>暂无数据</p>
 			</div>
 			<div class="person-bottom_button p10 bg-white person-row ju-b f16 width-100 fw boxt003" v-if="taskInfo.nodeList.length > 0 && isType == 1">
-				<div class="nw_buttom_354_44 bg-287 text-white"  @click="submitCurNode">确定</div>
+				<div class="nw_buttom_345_44 bg-287 text-white" @click="submitCurNode">确定</div>
 			</div>
 			<div class="person-bottom_button p10 bg-white person-row ju-b f16 width-100 fw boxt003" v-if="taskInfo.nodeList.length > 0 && isType == 2">
-				<div class="gray287 person-row al-c "  @click="showPicker2 = true">已选择: {{ curNodeList.length }}人</div>
-				<div class="nw_buttom_125_44 bg-287 text-white"  @click="submitCurNode">确定</div>
+				<div class="gray287 person-row al-c " @click="showPicker2 = true">已选择: {{ curNodeList.length }}人</div>
+				<div class="nw_buttom_125_44 bg-287 text-white" @click="submitCurNode">确定</div>
 			</div>
 		</div>
 
@@ -125,12 +125,19 @@
 				this.onRefresh();
 				// }
 			},
+			openSearchCheckPer: function(){
+				this.$router.push({
+					name: "searchCheckPerson",
+					params: this.param
+				});
+			},
 			// 初始化，上一页进入或者点击进入下一级或者点击导航栏的时候会重新执行
 			init: function() {
-				this.param = this.$route.query || this.$route.params || {};
+				// this.param = this.$route.query || this.$route.params || {};
+				this.param = this.$tabPageData() || {};
 				this.$nextTick(() => {
 					this.userInfo = this.param.userInfo || {};
-					console.log("uuuuuuu--this.userInfo:::",this.userInfo);
+					console.log("uuuuuuu--this.userInfo:::", this.userInfo);
 				})
 				this.isType = this.param.type; //type值为1：单选；值为2：多选
 				this.curNodeList = this.param.personalList ? this.param.personalList : [];
@@ -294,10 +301,12 @@
 </script>
 
 <style scoped lang="less">
-	@import "../assets/scss/nw_tool.less";
+	@import "../assets/less/nw_tool.less";
+
 	.checkPerson {
 		// height: 100%;
 		background-color: #f5f5f5;
+		text-align: left;
 	}
 
 	.header-f {
@@ -315,9 +324,10 @@
 	}
 
 	.h44 {
-				.pxToremLess(height,44px);
+		.pxToremLess(height, 44px);
 	}
-	.person-row{
+
+	.person-row {
 		display: flex;
 		flex-direction: row;
 	}
@@ -331,7 +341,7 @@
 	}
 
 	.radius-5 {
-				.pxToremLess(border-radius,5px);
+		.pxToremLess(border-radius, 5px);
 	}
 
 	.pos-r {
@@ -339,17 +349,17 @@
 	}
 
 	.pt140 {
-				.pxToremLess(padding-top,140px);
+		.pxToremLess(padding-top, 140px);
 	}
 
 	.radius-8 {
-		.pxToremLess(border-radius,8px);
+		.pxToremLess(border-radius, 8px);
 	}
 
 	.tab-list-scrollX {
 		position: relative;
 		width: 100vw;
-		.pxToremLess(height,44px);
+		.pxToremLess(height, 44px);
 		white-space: nowrap;
 		overflow: hidden;
 		overflow-x: scroll;
@@ -366,37 +376,40 @@
 		position: fixed;
 		right: 0;
 	}
-	
+
 	/*没有数据*/
 	.person-noData {
-		.pxToremLess(padding-top,140px);
+		.pxToremLess(padding-top, 140px);
 		text-align: center;
 		color: #b5b5b5;
-		.pxToremLess(font-size,15px);
+		.pxToremLess(font-size, 15px);
+
 		img {
-		.pxToremLess(width,200px);
+			.pxToremLess(width, 200px);
 			margin: 0 auto;
 		}
+
 		.button {
-		.pxToremLess(font-size,15px);
-		.pxToremLess(min-width,160px);
-		.pxToremLess(height,60px);
-		.pxToremLess(padding,56px);
-		.pxToremLess(line-height,60px);
-		.pxToremLess(border-radius,60px);
+			.pxToremLess(font-size, 15px);
+			.pxToremLess(min-width, 160px);
+			.pxToremLess(height, 60px);
+			.pxToremLess(padding, 56px);
+			.pxToremLess(line-height, 60px);
+			.pxToremLess(border-radius, 60px);
 			background: #a22423;
 			color: #fff;
-		.pxToremLess(border-width,1px);
+			.pxToremLess(border-width, 1px);
 		}
+
 		p {
-			.pxToremLess(margin-top,40px);
-			.pxToremLess(margin-bottom,0);
-			.pxToremLess(margin-left,56px);
-			.pxToremLess(margin-right,0);
+			.pxToremLess(margin-top, 40px);
+			.pxToremLess(margin-bottom, 0);
+			.pxToremLess(margin-left, 56px);
+			.pxToremLess(margin-right, 0);
 		}
+
 		i {
-			.pxToremLess(font-size,56px);
+			.pxToremLess(font-size, 56px);
 		}
 	}
-	
 </style>

@@ -507,5 +507,260 @@
 </script>
 
 <style scoped lang="less">
-	@import "../../assets/scss/nw_moduletop.less";
+	@import "../../assets/less/nw_tool.less";
+	
+	.yw-moduletop {
+		width: 100%;
+		height: auto;
+		// position: fixed;
+		// top: 44px;
+		// z-index: 99;
+		text-align: center;
+		.top-input {
+			.pxToremLess(padding,10px);
+			.pxToremLess(font-size,24px);
+			.input-box {
+				.pxToremLess(border-radius,5px);
+				.pxToremLess(height,30px);
+				background: white;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+		}
+	
+	}
+	.pos-a{
+		position: absolute;
+		.pxToremLess(right,15px);
+	}
+	.text-99{
+		color: #999999;
+	}
+	
+	.sreenzdc {
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.7);
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 999;
+	}
+	
+	.sortzdc {
+		width: 100vw;
+		height: 100vh;
+		background-color: rgba(0, 0, 0, 0.7);
+	}
+	
+	.module-width-33 {
+		// width: 33.3%;
+		float: left;
+		position: relative;
+	}
+	
+	.module-row {
+		display: flex;
+		flex-direction: row;
+	}
+	
+	// 筛选栏
+	.task-top-sreen {
+		.pxToremLess(height,40px);
+		background-color: #fff;
+	}
+	
+	.task-top-sreen-btn {
+		border-left: 1px solid rgb(240, 238, 238);
+		i {
+			-moz-transition: all 0.3s;
+			-moz-transform: rotate(0deg);
+			-webkit-transition: all 0.3s;
+			-webkit-transform: rotate(0deg);
+			&.showRotate {
+				-moz-transform: rotate(180deg);
+				-webkit-transform: rotate(180deg);
+			}
+		}
+	}
+	.sreen-item {
+		border-radius: 2px;
+		color: #666;
+	}
+	
+	.sreen-item-cur {
+		color: #1e87f0;
+		background-color: #c1dcf7;
+		border-color: #c1dcf7;
+	}
+	
+	.sreen-time {
+		border: solid 1px #dcdcdc;
+		border-left: none;
+	}
+	
+	.sreen-item-time {
+		border-left: solid 1px #dcdcdc;
+	}
+	
+	.sreen-item-time-cur {
+		background-color: #1e87f0;
+	}
+	
+	.borderRadius_2 {
+		border-radius: 2px;
+	}
+	
+	// 限制高度的tab
+	.tab-list {
+		position: relative;
+		min-width: 100%;
+		overflow-x: scroll;
+		white-space: nowrap;
+		.tab-item {
+			.pxToremLess(height,44px);
+			.pxToremLess(line-height,44px);
+		}
+	
+		.tab-border {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			.pxToremLess(height,3px);
+			.pxToremLess(border-radius,10px);
+		}
+	}
+	
+	// 不限制高度的tab
+	.tab-list-autoHeight {
+		position: relative;
+		min-width: 100%;
+		overflow-x: scroll;
+		white-space: nowrap;
+	
+		.tab-item {
+			// height: 42px;
+			// line-height: 42px;
+		}
+	
+		.tab-border {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			.pxToremLess(height,3px);
+			.pxToremLess(border-radius,10px);
+		}
+	}
+	
+	// 限定高度，底线自定义大小的tab
+	.tab-list-border {
+		position: relative;
+		min-width: 100%;
+		overflow-x: scroll;
+		white-space: nowrap;
+	
+		.tab-item {
+			.pxToremLess(height,44px);
+			.pxToremLess(line-height,44px);
+			flex: 1;
+		}
+	
+		.tab-border {
+			position: absolute;
+			bottom: 0;
+			// left: 0;
+			.pxToremLess(height,3px);
+			.pxToremLess(border-radius,6px);
+		}
+	
+		.tab-number {
+			position: absolute;
+			.pxToremLess(bottom,14px);
+			display: inline-block;
+			.pxToremLess(line-height,15px);
+			.pxToremLess(height,15px);
+			.pxToremLess(margin-left,2px);
+			.pxToremLess(padding-left,7px);
+			.pxToremLess(padding-right,7px);
+			.pxToremLess(padding-top,0);
+			.pxToremLess(padding-bottom,0);
+			background-color: #f15747;
+			.pxToremLess(border-radius,7px);
+			.pxToremLess(font-size,10px);
+			color: #ffffff;
+		}
+	}
+	
+	// 一行展示，横向滚动的tab栏
+	.tab-list-scrollX {
+		width: 100vw;
+		.pxToremLess(height,44px);
+		white-space: nowrap;
+		overflow: hidden;
+		overflow-x: scroll;
+		-webkit-backface-visibility: hidden;
+		-webkit-perspective: 1000;
+		-webkit-overflow-scrolling: touch;
+		.tab-list::-webkit-scrollbar {
+			display: none;
+		}
+	}
+	
+	// 右侧弹框
+	.sreen-warp {
+		position: fixed;
+		z-index: 9999 !important;
+		top: 0;
+		right: 0;
+		width: 80%;
+		height: 100%;
+		.pxToremLess(padding-top,44px);
+		.pxToremLess(padding-bottom,65px);
+		overflow: hidden;
+		transition: all 500ms;
+		
+		&.showBgcW {
+			margin-right: -100%;
+		}
+	
+		.sreen-box {
+			width: 100%;
+			height: 100%;
+			overflow: scroll;
+		}
+	
+		.bottom_button {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			width: 100%;
+		}
+	}
+	
+	
+	.sreen-item {
+		.pxToremLess(border-radius,4px);
+		color: #666;
+	}
+	
+	.sreen-item-cur {
+		color: #1e87f0;
+		background-color: #c1dcf7;
+		border-color: #c1dcf7;
+	}
+	
+	.sreen-time {
+		border: solid 1px #dcdcdc;
+		border-left: none;
+	}
+	
+	.sreen-item-time {
+		border-left: solid 1px #dcdcdc;
+	}
+	
+	.sreen-item-time-cur {
+		background-color: #1e87f0;
+	}
 </style>

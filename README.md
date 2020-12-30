@@ -19,7 +19,7 @@
 ## 手把手教你用
 
 ```bash
-  import "nwtemplate/dist/nwTemplateUi.css";
+	import "nwtemplate/dist/style.js";
   import nwtemplate from 'nwtemplate';
   Vue.use(nwtemplate);
 ```

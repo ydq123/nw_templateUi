@@ -1,6 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
-const ExtractTextPlugin = require ('extract-text-webpack-plugin')
+// const ExtractTextPlugin = require ('extract-text-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -25,10 +25,11 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'vue-style-loader',
-          use: ['css-loader', 'less-loader']
-        })
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          'less-loader'
+        ],
       },
       {
         test: /\.vue$/,
@@ -76,12 +77,12 @@ if (process.env.NODE_ENV === 'production') {
   module.exports.devtool = '#source-map'
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
-    new ExtractTextPlugin("nwTemplateUi.css",{allChunks: true}),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    }),
+    // new ExtractTextPlugin("nwTemplateUi.css",{allChunks: true}),
+    // new webpack.DefinePlugin({
+    //   'process.env': {
+    //     NODE_ENV: '"production"'
+    //   }
+    // }),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
       compress: {
