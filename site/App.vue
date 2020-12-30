@@ -24,36 +24,13 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less">
+  @import "~@/assets/less/all.less";
 /* 解决悬浮球导致页面报错 */
 html {
   height: 100%;
   box-sizing: border-box;
 	touch-action: pan-y;
-}
-
-#app {
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-  padding-bottom: 200px;
-  padding: 0;
-  margin-left: 0;
-  margin-right: 0;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
 }
 
 .pt48,

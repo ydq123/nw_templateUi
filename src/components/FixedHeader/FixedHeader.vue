@@ -2,9 +2,11 @@
   <div class="top-fixed" id="header" :style="'padding-top:' + '0px ;'">
     <slot name="default">
       <div class="header">
-          <div class="left-btn" @click="headBack">
+          <div class="left-btn" >
             <slot name="left">
-                <i class="iconfont icon-houtui"></i>
+                <div @click="headBack">
+                  <i class="iconfont icon-houtui"></i>
+                </div>
             </slot>
           </div>
         <slot name="center">
@@ -14,8 +16,12 @@
           <div class="right-content">
             <slot name="right">
                 <div class="right-slot-content">
-                  <div @click="threeClock"></div>
-                  <div @click="backHome"></div>
+                  <slot name="right1">
+                    <div @click="threeClock"></div>
+                  </slot>
+                  <slot name="right2">
+                    <div @click="backHome"></div>
+                  </slot>
                 </div>
             </slot>
           </div>
@@ -64,7 +70,7 @@ export default {
       this.$tabBackHome('root_tab');
     },
     headBack() {
-      this.$router.go(-1);
+      this.$tabBack(-1);
       // this.$emit("headBackeHandle");
     }
   }

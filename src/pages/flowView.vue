@@ -1,6 +1,9 @@
 <template>
 	<div class="hiddenDanger_page_wrap pt44">
 		<nw-fixed-header :title="(tabPageData.pageTitle?tabPageData.pageTitle:'')+'流程视图'">
+      <div slot="left" @click="$router.go(-1)">
+        <i class="iconfont icon-houtui"></i>
+      </div>
 		</nw-fixed-header>
 		<div class="p10 " v-if="nodeList.length>0">
 			<div class="borderRadius_10 bg-287 p15">
@@ -52,7 +55,7 @@
 										</div>
 									</div>
 								</label>
-								<div @click="nodeItme.colStatus=!nodeItme.colStatus" class="txt-1e8 f13 flex" 
+								<div @click="nodeItme.colStatus=!nodeItme.colStatus" class="txt-1e8 f13 flex"
 								v-if="nodeItme.colTransTrackInfo.length>1">
 									<div class="mr5">
 										{{nodeItme.colStatus?'收起':'更多'}}
@@ -69,11 +72,11 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div @click="getFlowData">
 			<nw-null-data class="mt100"  v-if="nodeList.length==0"></nw-null-data>
 		</div>
-		
+
 	</div>
 </template>
 
@@ -102,7 +105,7 @@
 			this.initFun();
 		},
 		methods: {
-			
+
 		initFun: function() {
 			this.getFlowData();
 		},
@@ -145,7 +148,7 @@
 					}
 				})
 				.catch(error => {
-					console.log(err);
+					console.log(error);
 					this.$textHid();
 				});
 

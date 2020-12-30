@@ -1,7 +1,8 @@
 <template>
 	<div id="demoPage" class="bg-f5" style="padding-top:75px;padding-bottom: 180px;">
 		<!-- 页面头部组件 -->
-		<nw-fixed-header title="头部导航" @threeClockHandle="ClockHandle"></nw-fixed-header>
+		<nw-fixed-header title="头部导航" @threeClockHandle="ClockHandle">
+    </nw-fixed-header>
 		<!-- 头部搜索组件 -->
 		<nw-top-input :mTop="44" @changeSreen="topInputChangeSreen">
 			<div slot="topInput"></div>

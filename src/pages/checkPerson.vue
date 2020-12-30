@@ -22,7 +22,7 @@
 			<div class="bg-f5 pl15 pr15 pt10 pb10">
 				<div class="bg-white pt10 pb10 gray9 radius-5 f15 text-center" @click="openSearchCheckPer">
 					<i class="iconfont icon-sousuo f15 ml5 mr5 gray9"></i>
-					搜索
+					<span>搜索</span>
 				</div>
 			</div>
 		</div>
@@ -97,7 +97,7 @@
 					refreshing: false,
 				},
 				tabList: [], // 头部导航
-				dataItem: {}, // 
+				dataItem: {}, //
 				count: 0, // 人员总数
 				pageNo: 1,
 				curNodeItem: {}, //单选人员信息
@@ -302,7 +302,6 @@
 
 <style scoped lang="less">
 	@import "../assets/less/nw_tool.less";
-
 	.checkPerson {
 		// height: 100%;
 		background-color: #f5f5f5;

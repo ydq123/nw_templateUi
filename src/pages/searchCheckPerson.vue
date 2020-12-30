@@ -1,6 +1,9 @@
 <template>
 	<div class="searchCheckPerson pt88">
-		<nw-fixed-header title="搜索人员" @headBackeHandle="$router.go(-1)">
+		<nw-fixed-header title="搜索人员">
+      <div slot="left" @click="$router.go(-1)">
+        <i class="iconfont icon-houtui"></i>
+      </div>
 			<div slot="right"></div>
 			<div slot="page-bottom">
 				<div class="bg-f5 pt10 pb10 pl15 pr15">
