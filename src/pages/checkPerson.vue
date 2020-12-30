@@ -1,5 +1,5 @@
 <template>
-	<div class="checkPerson">
+	<div class="checkPerson pt140">
 		<div class="header-f bg-white">
 			<div class="h44 bg-f5 borderButtomE8 person-row al-c ju-b pl15 pr15">
 				<div class="left-btn" @click="$router.go(-1)">
@@ -38,14 +38,11 @@
 					</div>
 					<i class="iconfont f16 icon-shanchu3 text-red" @click="delPersonnelBtn(index)"></i>
 				</div>
-				<div class="person-noData" v-if="curNodeList.length <= 0">
-					<img src="../assets/images/nullData.png" />
-					<p>暂无数据</p>
-				</div>
+        <nw-null-data v-if="curNodeList.length <= 0" ></nw-null-data>
 			</div>
 		</van-popup>
 
-		<div :class="{'pb60 pt140' : taskInfo.nodeList.length > 0}">
+		<div :class="{'pb60 ' : taskInfo.nodeList.length > 0}">
 			<van-list v-model="taskInfo.loading" :finished="taskInfo.finished" :finished-text="taskInfo.nodeList.length > 0 ? '没有更多数据了' : ''"
 			 @load="onLoad">
 				<van-pull-refresh v-model="taskInfo.refreshing" @refresh="onRefresh">
@@ -55,13 +52,9 @@
 						<div class="flex-1 gray3 text-overflow text-left">{{nodeItme.dangerSubType}}</div>
 						<!-- <i class="iconfont icon-qianjin gray9 f14 ml10"></i> -->
 					</div>
+          <nw-null-data class="mt20" v-if="taskInfo.nodeList.length <= 0" ></nw-null-data>
 				</van-pull-refresh>
 			</van-list>
-			<div class="person-noData" v-if="taskInfo.nodeList.length <= 0">
-				<!-- <img :src="nullData" alt="" /> -->
-				<img src="../assets/images/nullData.png" />
-				<p>暂无数据</p>
-			</div>
 			<div class="person-bottom_button p10 bg-white person-row ju-b f16 width-100 fw boxt003" v-if="taskInfo.nodeList.length > 0 && isType == 1">
 				<div class="nw_buttom_345_44 bg-287 text-white" @click="submitCurNode">确定</div>
 			</div>

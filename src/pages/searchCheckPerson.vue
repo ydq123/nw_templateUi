@@ -29,7 +29,7 @@
 			</div>
 		</van-popup>
 
-		<div :class="{'pb60 pt100' : taskInfo.nodeList.length > 0}">
+		<div :class="{'pb60 pt20' : taskInfo.nodeList.length > 0}">
 			<van-list v-model="taskInfo.loading" @load="onLoad" :finished="taskInfo.finished" :finished-text="taskInfo.nodeList.length > 0 ? '没有更多数据了' : ''">
 				<van-pull-refresh v-model="taskInfo.refreshing" @refresh="onRefresh">
 					<div class="p15 bg-white row ju-b al-c f16 borderTopE8" @click="selectCurNode(nodeIndex)" :class="{'borderTopE8':nodeIndex!=0}"
@@ -38,9 +38,9 @@
 						<div class="flex-1 gray3 text-overflow">{{nodeItme.dangerSubType}}</div>
 						<!-- <i class="iconfont icon-qianjin gray9 f14 ml10"></i> -->
 					</div>
+          <nw-null-data v-if="taskInfo.nodeList.length <= 0" class="mt20 pb20"></nw-null-data>
 				</van-pull-refresh>
 			</van-list>
-			<nw-null-data v-if="taskInfo.nodeList.length <= 0" class="mt20 pb20"></nw-null-data>
 			<div class="bottom_button bg-white row ju-b f16 width-100 fw boxt003" v-if="taskInfo.nodeList.length > 0 && isType == 1">
 				<div class="nw_buttom_345_44 bg-287 text-white" m="click" @click="submitCurNode">确定</div>
 			</div>
@@ -101,9 +101,6 @@
 				// console.log("初始化");
 			},
 			getUserInfo: function() {
-				if (this.searchValue == '') {
-					return;
-				}
 				var data = {
 					keyword: this.searchValue,
 					pageNo: this.pageNo,
