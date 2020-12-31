@@ -72,7 +72,7 @@
 		<!-- 地图筛选弹框组件 -->
 		<nw-map-pop :isMapPop="mapPop" @checkTheme="testCheckTheme" @zdcBtnShow="testZdcBtnShow"></nw-map-pop>
 		<!-- 选择组织--组件 -->
-		<nw-unit-pop :popShow="unitPop" :popUserInfo="userInfo" @overlay="testOverlay"></nw-unit-pop>
+		<!-- <nw-unit-pop :popShow="unitPop" :popUserInfo="userInfo" @overlay="testOverlay"></nw-unit-pop> -->
 		<!-- 右侧弹出筛选组件 -->
 		<nw-PopupFilter v-model="popupState"></nw-PopupFilter>
 		<!-- 悬浮球组件 -->
@@ -208,7 +208,7 @@
 						},
 						{
 							icon: "icon-jinyongqingkuang", // icon名称
-							iconText: "选择组织", // icon文案
+							iconText: "选择单位", // icon文案
 							iconSize: "f14", // icon大小
 							textSize: "f12", // 文案大小
 							iconColor: "", // icon颜色
@@ -217,7 +217,7 @@
 						}
 					],
 					zhuyaoBtn: {
-						text: "选择单位",
+						text: "选择人员",
 						color: "white",
 						bgcolor: "#1E87F0",
 						fsize: "f14"
@@ -225,6 +225,9 @@
 				},
 				userInfo: {} // 当前登录人信息
 			};
+		},
+		destroyed() {
+			this.$across.$off("testemitunit");
 		},
 		mounted() {
 			this.fileInfo = {
@@ -265,8 +268,16 @@
 				unitCode: "030120",
 				shortOrgName: "天河"
 			};
+			
+			_this.$across.$on("testemitunit",function(data){
+				console.log("****************************************");
+				_this.testAcrossFun(data);
+			});
 		},
 		methods: {
+			testAcrossFun(data){
+				console.log("_this.$across.$on(testemit:",JSON.stringify(data));
+			},
 			menuClickTap(data) {
 				console.log("menuClickTap", JSON.stringify(data));
 			},
@@ -274,7 +285,6 @@
 				console.log("testAccectFun", JSON.stringify(data));
 			},
 			testOverlay(data) {
-				this.unitPop = false;
 				console.log("testOverlay", JSON.stringify(data));
 			},
 			testCliIconItemBtn(data) {
@@ -293,14 +303,14 @@
 					this.mapPop = true;
 				}
 				if (data.id == 3) {
-					// 选择组织
+					// 选择单位
 					// this.unitPop = true;
 					this.$router.push({
 						name: "checkUnit",
 						params: {
 							type: 1,
 							userInfo: this.userInfo,
-							exeMun: "testemit",
+							exeMun: "testemitunit",
 							isPage: true
 						}
 					});
@@ -313,7 +323,7 @@
 					params: {
 						type: 1,
 						userInfo: this.userInfo,
-						exeMun: "testemit",
+						exeMun: "testemitunit",
 						isPage: false
 					}
 				});

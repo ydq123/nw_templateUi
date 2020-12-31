@@ -58,7 +58,7 @@
 	} from "@/moduleAPI/jadp.js";
 	import {
 		NWtabMinxin
-	} from "@/mixin/NWtabMinxin.js";
+	} from "../mixin/NWtabMinxin.js";
 	export default {
 		mixins: [NWtabMinxin], //混入公共类
 		name: 'checkUnit',
@@ -97,16 +97,12 @@
 					this.$emit('openCherk');
 					var _this = this;
 					setTimeout(()=>{
-						_this.$bus.$emit('tabSrcollList');
+						_this.$across.$emit('tabSrcollList');
 					},400)
 				}
 			},
 			unitSubmit: function() {
-				if(this.isPage){
-					var name = this.param.exeMun;
-					this.$across.$emit(name, data);
-					this.$router.go(-1);
-				}else{
+				if(!this.isPage){
 					let item = {
 						curUnitItemData: this.curUnitItemData,
 						curUnitItem: this.curUnitItem,
@@ -114,7 +110,7 @@
 					this.$emit('unitSubmit', item);
 					var _this = this;
 					setTimeout(()=>{
-						_this.$bus.$emit('unitTabBus', item);
+						_this.$across.$emit('unitTabBus', item);
 					},500)
 				}
 			},
@@ -123,7 +119,7 @@
 				this.param = this.$tabPageData() || {};
 				this.userInfo = this.param.userInfo;
 				this.isPage = this.param.isPage;
-				console.log("unitpop------this.userInfo:::",JSON.stringify(this.userInfo));
+				// console.log("unitpop------this.userInfo:::",JSON.stringify(this.userInfo));
 				this.getUserUnit();
 				this.tabUnitList = [{
 					id: "",
@@ -154,7 +150,7 @@
 			},
 			// 每次打开展示当前登录人单位信息
 			initTabUnit: function() {
-				console.log('**************************************************************');
+				// console.log('**************************************************************');
 				// console.log('this.initTabUnitList::::::::::'+JSON.stringify(this.initTabUnitList));
 				// console.log('this.initUnitList::::::::::'+JSON.stringify(this.initUnitList));
 				this.tabUnitList = [];
@@ -207,7 +203,7 @@
 				// 获取当前登录人单位全路径
 				// this.userInfo = this.$store.getters.jdapUserInfo.userInfo.length > 3 ? this.$store.getters.jdapUserInfo.userInfo :
 				// 	JSON.parse(localStorage.getItem('userInfo'));
-				console.log('this.userInfo****************************' + JSON.stringify(this.userInfo));
+				// console.log('this.userInfo****************************' + JSON.stringify(this.userInfo));
 				var unitStr = this.userInfo.nameFullPath ? this.userInfo.nameFullPath : '';
 				var unitArr = unitStr.split('/');
 				// console.log('unitArr:::'+unitArr);
@@ -362,8 +358,18 @@
 						this.curUnitItemData.push(this.curUnitItem);
 					}
 					var _this = this;
+					let item = {
+						curUnitItemData: _this.curUnitItemData,
+						curUnitItem: _this.curUnitItem,
+					}
 					setTimeout(function() {
-						_this.unitSubmit();
+						if(!_this.isPage){
+							_this.unitSubmit();
+						}else{
+							var name = _this.param.exeMun;
+							_this.$across.$emit(name, item);
+							_this.$router.go(-1);
+						}
 					}, 500);
 				} else {
 					this.$textShow('请选择单位');

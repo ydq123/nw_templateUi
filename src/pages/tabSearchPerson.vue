@@ -55,17 +55,22 @@
 				this.changeTap(0);
 			},
 			testCheckSubmit: function(data){
-				console.log('testCheckSubmit:::' + JSON.stringify(data));
+				// console.log('testCheckSubmit:::' + JSON.stringify(data));
 				var name = this.param.exeMun;
-				this.$across.$emit(name, data);
-				this.$router.go(-1);
+				// console.log("name::::",name);
+				// this.$across.$emit("testemitunit", data);
+				var _this = this;
+				setTimeout(()=>{
+					_this.$across.$emit(name, data);
+				},500);
+				_this.$router.go(-1);
 			},
 			divScroll: function() {
-				console.log('divScroll********************************************');
+				// console.log('divScroll********************************************');
 				if (this.removeEvenStatus == true) {
 					this.changeArr[this.changeIndex].scrollY = this.$refs['tabItme' + this.changeIndex].$el.scrollTop;
-					console.log('**********',this.$refs['tabItme' + this.changeIndex].$el.scrollTop)
-					console.log('divScroll------------------------',this.changeArr[this.changeIndex].scrollY);
+					// console.log('**********',this.$refs['tabItme' + this.changeIndex].$el.scrollTop)
+					// console.log('divScroll------------------------',this.changeArr[this.changeIndex].scrollY);
 				}
 			},
 			changeTap: function(index) {
@@ -117,7 +122,7 @@
 	@import "../plugin/vant/icon/local.css";
 
 	.root-page {
-		height: 84vh;
+		height: 90vh;
 		overflow-y: scroll !important;
 	}
 </style>

@@ -53,7 +53,7 @@
 		</van-popup>
 
 		<div class="person-centent" :class="{'pb60 ' : taskInfo.nodeList.length > 0}">
-			<van-list v-model="taskInfo.loading" :finished="taskInfo.finished" :finished-text="taskInfo.nodeList.length > 0 ? '没有更多数据了' : ''">
+			<van-list v-model="taskInfo.loading" :finished="taskInfo.finished" :finished-text="taskInfo.nodeList.length > 0 ? '没有更多数据了' : ''" @load="onLoad" >
 				<van-pull-refresh v-model="taskInfo.refreshing" @refresh="onRefresh">
 					<div class="person-centent-box">
 						<div class="p15 bg-white person-row ju-b al-c f16 borderTopE8" @click="selectCurNode(nodeIndex)" :class="{'borderTopE8':nodeIndex!=0}"
@@ -66,15 +66,14 @@
 					<nw-null-data class="mt20" v-if="taskInfo.nodeList.length <= 0"></nw-null-data>
 				</van-pull-refresh>
 			</van-list>
-			<div class="person-bottom_button p10 bg-white person-row ju-b f16 width-100 fw boxt003" v-if="taskInfo.nodeList.length > 0 && isType == 1">
-				<div class="nw_buttom_345_44 bg-287 text-white" @click="submitCurNode">确定</div>
-			</div>
-			<div class="person-bottom_button p10 bg-white person-row ju-b f16 width-100 fw boxt003" v-if="taskInfo.nodeList.length > 0 && isType == 2">
-				<div class="gray287 person-row al-c " @click="showPicker2 = true">已选择: {{ curNodeList.length }}人</div>
-				<div class="nw_buttom_125_44 bg-287 text-white" @click="submitCurNode">确定</div>
-			</div>
 		</div>
-
+		<div class="person-bottom_button p10 bg-white person-row ju-b f16 width-100 fw boxt003" v-if="taskInfo.nodeList.length > 0 && isType == 1">
+			<div class="nw_buttom_345_44 width-100 bg-287 text-white" @click="submitCurNode">确定</div>
+		</div>
+		<div class="person-bottom_button p10 bg-white person-row ju-b f16 width-100 fw boxt003" v-if="taskInfo.nodeList.length > 0 && isType == 2">
+			<div class="gray287 person-row al-c " @click="showPicker2 = true">已选择: {{ curNodeList.length }}人</div>
+			<div class="nw_buttom_125_44 bg-287 text-white" @click="submitCurNode">确定</div>
+		</div>
 	</div>
 </template>
 
@@ -96,7 +95,7 @@
 				currentTab: 0,
 				taskInfo: {
 					nodeList: [], // 展示人员数据数组
-					loading: true,
+					loading: false,
 					finished: false,
 					refreshing: false,
 				},
@@ -119,19 +118,19 @@
 			
 		},
 		destroyed() {
-			this.$bus.$off("unitTabBus");
-			this.$bus.$off("tabSrcollList");
+			this.$across.$off("unitTabBus");
+			this.$across.$off("tabSrcollList");
 		},
 		mounted() {
 			// console.log("路由参数:this.$route.params", this.$route.params);
 			// console.log("路由参数:this.$route.query", this.$route.query);
 			this.init();
 			var _this = this;
-			_this.$bus.$on("unitTabBus",function(data){
-				console.log('------_this.$bus.$on---------------------------------------');
+			_this.$across.$on("unitTabBus",function(data){
+				console.log('------_this.$across.$on---------------------------------------');
 				_this.popOverlay(data);
 			});
-			_this.$bus.$on("tabSrcollList",function(){
+			_this.$across.$on("tabSrcollList",function(){
 				_this.initTabList();
 			});
 		},
@@ -198,6 +197,9 @@
 					pageNo: this.pageNo,
 					pageSize: 20
 				};
+				console.log("////////////////////////////////");
+				console.log("this.pageNo：：：：",this.pageNo);
+				console.log("this.count：：：：",this.count);
 				search(data)
 					.then(res => {
 						this.$textHid();
@@ -233,6 +235,9 @@
 							if (this.taskInfo.nodeList.length >= this.count) {
 								this.taskInfo.finished = true;
 							}
+							console.log("-----------------------------------------------------");
+							console.log("this.pageNo：：：：",this.pageNo);
+							console.log("this.count：：：：",this.count);
 						} else {
 							this.taskInfo.loading = false;
 							this.taskInfo.finished = true; //已加载完毕
@@ -310,7 +315,7 @@
 					}
 					data.curNodeItemlist = this.curNodeList;
 				}
-				// this.$bus.$emit('person', data);
+				// this.$across.$emit('person', data);
 				// var name = this.param.exeMun;
 				// this.$across.$emit(name, data);
 				// this.$router.go(-1);
