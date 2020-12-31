@@ -121,6 +121,8 @@
 					this.$textHid();
 					console.log(ret);
 					if(ret){
+            // @value传在则转换，不传在则获取当前，@key 时间分割符不传这默认-为分隔符
+            var retStr =this.$baseTimeStr('','');
 						// retBoolean=true(数组)，false(不是数组)
 						var retBoolean =this.$baseIsArray(ret);
 						if(retBoolean){
@@ -129,19 +131,25 @@
 								let sumMin = 0;
 								ret=this.$baseArrReverse2(ret);
 								ret=ret.filter(item => item.colTransTrackInfo.length>0);//筛选无用数据
-								ret.forEach(item => {
+								ret.forEach((item,index) => {
+                  console.log(index)
 									item['colStatus']=false;
 								  item.time = this.$baseTimeFormat("-", ":", true, item.createTime);
 								  item.diffTime = this.$baseTimeDifference(
-								    item.overTime,
-								    item.createTime
+								    item.overTime||0,
+								    item.createTime||0
 								  );
-								  sumMin += item.overTime - item.createTime;
+                  if(index==0){
+                    sumMin += (retStr||0)-(item.createTime||0);
+                  }else{
+                    sumMin += (item.overTime||0)-(item.createTime||0);
+                  }
+								  
 								});
 								console.log(sumMin)
 								this.nodeData.curNodeName = ret[0].curNodeName;//当前节点名称
-								this.nodeData.curNodeTime = this.$baseTimeDifference(ret[0].overTime,ret[0].createTime);//当前节点名称已停留
-								this.nodeData.countTime = this.$baseTimeDifference(sumMin, 0);
+								this.nodeData.curNodeTime = this.$baseTimeDifference(retStr,ret[0].createTime);//当前节点名称已停留
+								this.nodeData.countTime = this.$baseTimeDifference(sumMin, 0);//总耗时
 								this.nodeList=ret;
 							}
 						}
