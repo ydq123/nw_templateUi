@@ -109,7 +109,8 @@
 		initFun: function() {
 			this.getFlowData();
 		},
-		// 获取流程信息
+		// 获取流程信息  "transFlag": 处理标志位:1为待办，2为处理中，3为处理结束，4为他人办理，5终止，6改派，7挂起,
+    /*  "completeType": 处理完成的类型:1：启动、2：发送、3：回退、5：终止、7：挂起、8：改派、9：协作补偿下发、10：跳转下发、-1：未处理,*/
 		getFlowData: function() {
 			this.$textLoading("加载中");
 			let params = {
@@ -132,6 +133,7 @@
 								ret=this.$baseArrReverse2(ret);
 								ret=ret.filter(item => item.colTransTrackInfo.length>0);//筛选无用数据
 								ret.forEach((item,index) => {
+                  /* nodeItme.completeType==-1*/
                   console.log(index)
 									item['colStatus']=false;
 								  item.time = this.$baseTimeFormat("-", ":", true, item.createTime);
@@ -139,16 +141,21 @@
 								    item.overTime||0,
 								    item.createTime||0
 								  );
-                  if(index==0){
+                  if(index==0&&item.completeType==-1){
                     sumMin += (retStr||0)-(item.createTime||0);
                   }else{
                     sumMin += (item.overTime||0)-(item.createTime||0);
                   }
-								  
+
 								});
 								console.log(sumMin)
 								this.nodeData.curNodeName = ret[0].curNodeName;//当前节点名称
-								this.nodeData.curNodeTime = this.$baseTimeDifference(retStr,ret[0].createTime);//当前节点名称已停留
+                if(ret[0].completeType==-1){
+                  this.nodeData.curNodeTime = this.$baseTimeDifference(retStr,ret[0].createTime);//当前节点名称已停留
+                }else{
+                  this.nodeData.curNodeTime = this.$baseTimeDifference(ret[0].overTime,ret[0].createTime);//当前节点名称已停留
+                }
+
 								this.nodeData.countTime = this.$baseTimeDifference(sumMin, 0);//总耗时
 								this.nodeList=ret;
 							}
