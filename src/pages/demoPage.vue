@@ -217,7 +217,7 @@
 						}
 					],
 					zhuyaoBtn: {
-						text: "选择人员",
+						text: "选择单位",
 						color: "white",
 						bgcolor: "#1E87F0",
 						fsize: "f14"
@@ -294,17 +294,27 @@
 				}
 				if (data.id == 3) {
 					// 选择组织
-					this.unitPop = true;
+					// this.unitPop = true;
+					this.$router.push({
+						name: "checkUnit",
+						params: {
+							type: 1,
+							userInfo: this.userInfo,
+							exeMun: "testemit",
+							isPage: true
+						}
+					});
 				}
 			},
 			testCliIconRBtn() {
 				console.log("testCliIconRBtn");
 				this.$router.push({
-					name: "checkPerson",
-					query: {
+					name: "tabSearchPerson",
+					params: {
 						type: 1,
 						userInfo: this.userInfo,
-						exeMun: "testemit"
+						exeMun: "testemit",
+						isPage: false
 					}
 				});
 			},

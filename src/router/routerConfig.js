@@ -22,6 +22,16 @@ const routes = [{
   name: 'searchCheckPerson',
   component: () => import( /* webpackChunkName: "about" */ '../pages/searchCheckPerson.vue'),
 },
+{
+  path: '/tabSearchPerson',
+  name: 'tabSearchPerson',
+  component: () => import( /* webpackChunkName: "about" */ '../pages/tabSearchPerson.vue'),
+},
+{
+  path: '/checkUnit',
+  name: 'checkUnit',
+  component: () => import( /* webpackChunkName: "about" */ '../pages/checkUnit.vue'),
+},
 ];
 
 export default routes;

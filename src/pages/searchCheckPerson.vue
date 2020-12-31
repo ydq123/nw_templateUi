@@ -1,16 +1,16 @@
 <template>
 	<div class="searchCheckPerson pt88">
 		<nw-fixed-header title="搜索人员">
-      <div slot="left" @click="$router.go(-1)">
-        <i class="iconfont icon-houtui"></i>
-      </div>
+			<div slot="left" @click="openCherk">
+				<i class="iconfont icon-houtui"></i>
+			</div>
 			<div slot="right"></div>
 			<div slot="page-bottom">
 				<div class="bg-f5 pt10 pb10 pl15 pr15">
 					<div class="task-top-input flex-1 row al-c ju-c bg-white">
 						<i class="iconfont icon-sousuo f15 ml5 mr5 gray9"></i>
-						<input id="tapInput" type="text" class="flex-1 f14" v-model="searchValue" placeholder="搜索" @keypress="inputSearch(searchValue)" />
-						<i v-if="searchValue.length > 0" class="iconfont icon-shanchu3 f15 pl5 mr5 gray9" @click="cancelSearch"></i>
+						<input type="text" class="flex-1 f14" v-model="searchValuePerson" placeholder="搜索" @keypress="inputSearch(searchValuePerson)" />
+						<i v-if="searchValuePerson.length > 0" class="iconfont icon-shanchu3 f15 pl5 mr5 gray9" @click="cancelSearch"></i>
 					</div>
 				</div>
 			</div>
@@ -29,16 +29,18 @@
 			</div>
 		</van-popup>
 
-		<div :class="{'pb60 pt20' : taskInfo.nodeList.length > 0}">
+		<div class="person-centent" :class="{'pb60 pt20' : taskInfo.nodeList.length > 0}">
 			<van-list v-model="taskInfo.loading" @load="onLoad" :finished="taskInfo.finished" :finished-text="taskInfo.nodeList.length > 0 ? '没有更多数据了' : ''">
 				<van-pull-refresh v-model="taskInfo.refreshing" @refresh="onRefresh">
-					<div class="p15 bg-white row ju-b al-c f16 borderTopE8" @click="selectCurNode(nodeIndex)" :class="{'borderTopE8':nodeIndex!=0}"
-					 v-for="(nodeItme,nodeIndex) in taskInfo.nodeList" :key="nodeIndex" m="click">
-						<i class="iconfont f16 mr10" :class="[nodeItme.status ? 'icon-gou1 gray287' : 'icon-1 gray6']" @click.stop="selectCurNode(nodeIndex)"></i>
-						<div class="flex-1 gray3 text-overflow">{{nodeItme.dangerSubType}}</div>
-						<!-- <i class="iconfont icon-qianjin gray9 f14 ml10"></i> -->
+					<div class="person-centent-box">
+						<div class="p15 bg-white row ju-b al-c f16 borderTopE8" @click="selectCurNode(nodeIndex)" :class="{'borderTopE8':nodeIndex!=0}"
+						 v-for="(nodeItme,nodeIndex) in taskInfo.nodeList" :key="nodeIndex" m="click">
+							<i class="iconfont f16 mr10" :class="[nodeItme.status ? 'icon-gou1 gray287' : 'icon-1 gray6']" @click.stop="selectCurNode(nodeIndex)"></i>
+							<div class="flex-1 gray3 text-overflow">{{nodeItme.dangerSubType}}</div>
+							<!-- <i class="iconfont icon-qianjin gray9 f14 ml10"></i> -->
+						</div>
 					</div>
-          <nw-null-data v-if="taskInfo.nodeList.length <= 0" class="mt20 pb20"></nw-null-data>
+					<nw-null-data v-if="taskInfo.nodeList.length <= 0" class="mt20 pb20"></nw-null-data>
 				</van-pull-refresh>
 			</van-list>
 			<div class="bottom_button bg-white row ju-b f16 width-100 fw boxt003" v-if="taskInfo.nodeList.length > 0 && isType == 1">
@@ -73,7 +75,7 @@
 					refreshing: false,
 				},
 				showPicker: false,
-				searchValue: '',
+				searchValuePerson: '',
 				pageNo: 1,
 				curNodeItem: {}, //单选人员信息
 				curNodeList: [], //多选人员信息
@@ -100,9 +102,12 @@
 				// console.log('this.param:::::::::::::' + JSON.stringify(this.param));
 				// console.log("初始化");
 			},
+			openCherk: function(){
+				this.$emit("openCherk");
+			},
 			getUserInfo: function() {
 				var data = {
-					keyword: this.searchValue,
+					keyword: this.searchValuePerson,
 					pageNo: this.pageNo,
 					pageSize: 20
 				}
@@ -206,14 +211,15 @@
 					}
 					data.curNodeItemlist = this.curNodeList;
 				}
-				var name = this.param.exeMun;
-				this.$across.$emit(name, data);
-				this.$router.go(-2);
+				// var name = this.param.exeMun;
+				// this.$across.$emit(name, data);
+				// this.$router.go(-2);
+				this.$emit("searchSubmit", data)
 			},
 			inputSearch: function() {
 				if (event.keyCode == 13) {
 					event.preventDefault(); //阻止默认事件
-					if (this.searchValue.length > 0) {
+					if (this.searchValuePerson.length > 0) {
 						this.onRefresh();
 					} else {
 						this.$textShow('请输入搜索名称');
@@ -221,8 +227,11 @@
 				}
 			},
 			cancelSearch: function() {
-				this.searchValue = '';
+				this.searchValuePerson = '';
 
+			},
+			/* 模拟生命周期函数-每次进来一次都执行 */
+			onShow(obj) {
 			},
 			onLoad() {
 				// console.log('............................');
@@ -242,9 +251,19 @@
 
 <style scoped lang='less'>
 	.searchCheckPerson {
-		height: 100%;
+		position: relative;
+		/* height: 100%; */
 		background-color: #f5f5f5;
 		text-align: left;
+	}
+	
+	.person-centent{
+		height: 100%;
+		
+	}
+	.person-centent-box{
+		height: 100%;
+		overflow-y: auto;
 	}
 
 	/* 顶部搜索 */

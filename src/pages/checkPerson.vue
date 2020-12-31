@@ -1,34 +1,44 @@
 <template>
 	<div class="checkPerson pt140">
-		<div class="header-f bg-white">
+		<!-- <div class="header-f bg-white">
 			<div class="h44 bg-f5 borderButtomE8 person-row al-c ju-b pl15 pr15">
 				<div class="left-btn" @click="$router.go(-1)">
 					<i class="iconfont icon-houtui gray6 f18"></i>
 				</div>
-				<div class="header-txt f16">选择人员</div>
+				<div class="header-txt f16"></div>
 				<div class=""></div>
 			</div>
-			<div class="person-row al-c" @click="showPop = true">
-				<div id="tabList" class="tab-list-scrollX bg-white f16 gray6 p15 mr30 border verticle-center">
-					<div class="" v-for="(tabItem,tabIndex) in tabList" :key="tabIndex">
-						<span :class="[tabIndex==currentTab?'gray6 mr15':'gray287']" v-html="tabItem.dangerSubType"></span>
-						<i v-if="tabIndex<tabList.length-1" class="iconfont icon-qianjin ml5 mr5 f14"></i>
+			
+		</div> -->
+		
+		<nw-fixed-header title="选择人员">
+			<div slot="left" @click="$router.go(-1)">
+				<i class="iconfont icon-houtui"></i>
+			</div>
+			<div slot="right"></div>
+			<div slot="page-bottom">
+				<div class="person-row al-c bg-white borderTopE8" @click="openUnit">
+					<div id="tabPersonList" class="tab-list-scrollX bg-white f16 gray6 p15 mr30 border verticle-center">
+						<div class="" v-for="(tabItem,tabIndex) in tabPersonList" :key="tabIndex">
+							<span :class="[tabIndex==currentTab?'gray6 mr15':'gray287']" v-html="tabItem.dangerSubType"></span>
+							<i v-if="tabIndex<tabPersonList.length-1" class="iconfont icon-qianjin ml5 mr5 f14"></i>
+						</div>
+					</div>
+					<div class="topIconRight">
+						<i class="iconfont icon-xinjian ml5 mr5 f16 gray287"></i>
 					</div>
 				</div>
-				<div class="topIconRight">
-					<i class="iconfont icon-xinjian ml5 mr5 f16 gray287"></i>
+				<div class="bg-f5 pl15 pr15 pt10 pb10">
+					<div class="bg-white pt10 pb10 gray9 radius-5 f15 text-center" @click="openSearchCheckPer">
+						<i class="iconfont icon-sousuo f15 ml5 mr5 gray9"></i>
+						<span>搜索</span>
+					</div>
 				</div>
 			</div>
-			<div class="bg-f5 pl15 pr15 pt10 pb10">
-				<div class="bg-white pt10 pb10 gray9 radius-5 f15 text-center" @click="openSearchCheckPer">
-					<i class="iconfont icon-sousuo f15 ml5 mr5 gray9"></i>
-					<span>搜索</span>
-				</div>
-			</div>
-		</div>
+		</nw-fixed-header>
 
 		<!-- 选择单位弹窗 -->
-		<nw-unit-pop :popShow="showPop" :popUserInfo="userInfo" @overlay="popOverlay"></nw-unit-pop>
+		<!-- <nw-unit-pop :popShow="showPop" :popUserInfo="userInfo" @overlay="popOverlay"></nw-unit-pop> -->
 		<!-- 多选人员弹窗 -->
 		<van-popup v-model="showPicker2" round :style="{ width: '80%', height: '75%' }">
 			<div class="pt20 pb20">
@@ -38,21 +48,22 @@
 					</div>
 					<i class="iconfont f16 icon-shanchu3 text-red" @click="delPersonnelBtn(index)"></i>
 				</div>
-        <nw-null-data v-if="curNodeList.length <= 0" ></nw-null-data>
+				<nw-null-data v-if="curNodeList.length <= 0"></nw-null-data>
 			</div>
 		</van-popup>
 
-		<div :class="{'pb60 ' : taskInfo.nodeList.length > 0}">
-			<van-list v-model="taskInfo.loading" :finished="taskInfo.finished" :finished-text="taskInfo.nodeList.length > 0 ? '没有更多数据了' : ''"
-			 @load="onLoad">
+		<div class="person-centent" :class="{'pb60 ' : taskInfo.nodeList.length > 0}">
+			<van-list v-model="taskInfo.loading" :finished="taskInfo.finished" :finished-text="taskInfo.nodeList.length > 0 ? '没有更多数据了' : ''">
 				<van-pull-refresh v-model="taskInfo.refreshing" @refresh="onRefresh">
-					<div class="p15 bg-white person-row ju-b al-c f16 borderTopE8" @click="selectCurNode(nodeIndex)" :class="{'borderTopE8':nodeIndex!=0}"
-					 v-for="(nodeItme,nodeIndex) in taskInfo.nodeList" :key="nodeIndex">
-						<i class="iconfont f16 mr10" :class="[nodeItme.status ? 'icon-gou1 gray287' : 'icon-1 gray6']" @click.stop="selectCurNode(nodeIndex)"></i>
-						<div class="flex-1 gray3 text-overflow text-left">{{nodeItme.dangerSubType}}</div>
-						<!-- <i class="iconfont icon-qianjin gray9 f14 ml10"></i> -->
+					<div class="person-centent-box">
+						<div class="p15 bg-white person-row ju-b al-c f16 borderTopE8" @click="selectCurNode(nodeIndex)" :class="{'borderTopE8':nodeIndex!=0}"
+						 v-for="(nodeItme,nodeIndex) in taskInfo.nodeList" :key="nodeIndex">
+							<i class="iconfont f16 mr10" :class="[nodeItme.status ? 'icon-gou1 gray287' : 'icon-1 gray6']" @click.stop="selectCurNode(nodeIndex)"></i>
+							<div class="flex-1 gray3 text-overflow text-left">{{nodeItme.dangerSubType}}</div>
+							<!-- <i class="iconfont icon-qianjin gray9 f14 ml10"></i> -->
+						</div>
 					</div>
-          <nw-null-data class="mt20" v-if="taskInfo.nodeList.length <= 0" ></nw-null-data>
+					<nw-null-data class="mt20" v-if="taskInfo.nodeList.length <= 0"></nw-null-data>
 				</van-pull-refresh>
 			</van-list>
 			<div class="person-bottom_button p10 bg-white person-row ju-b f16 width-100 fw boxt003" v-if="taskInfo.nodeList.length > 0 && isType == 1">
@@ -85,11 +96,12 @@
 				currentTab: 0,
 				taskInfo: {
 					nodeList: [], // 展示人员数据数组
-					loading: false,
+					loading: true,
 					finished: false,
 					refreshing: false,
 				},
-				tabList: [], // 头部导航
+				tabPersonList: [], // 头部导航
+				tabSavaList: [],
 				dataItem: {}, //
 				count: 0, // 人员总数
 				pageNo: 1,
@@ -103,26 +115,53 @@
 		},
 		components: {},
 		created() {},
+		watch: {
+			
+		},
+		destroyed() {
+			this.$bus.$off("unitTabBus");
+			this.$bus.$off("tabSrcollList");
+		},
 		mounted() {
 			// console.log("路由参数:this.$route.params", this.$route.params);
 			// console.log("路由参数:this.$route.query", this.$route.query);
 			this.init();
+			var _this = this;
+			_this.$bus.$on("unitTabBus",function(data){
+				console.log('------_this.$bus.$on---------------------------------------');
+				_this.popOverlay(data);
+			});
+			_this.$bus.$on("tabSrcollList",function(){
+				_this.initTabList();
+			});
 		},
 		methods: {
+			initTabList: function(){
+				this.tabPersonList = this.tabSavaList;
+				console.log("this.tabSavaList：：：",JSON.stringify(this.tabSavaList));
+			},
 			popOverlay: function(data) {
 				this.showPop = false;
 				console.log('popOverlay::data::' + JSON.stringify(data))
 				// if(data && this.showPop == false){
-				this.tabList = data.curUnitItemData;
-				this.currentTab = this.tabList.length - 1;
+				this.tabPersonList = data.curUnitItemData;
+				this.tabSavaList = [];
+				for(var i = 0;i<this.tabPersonList.length;i++){
+					this.tabSavaList.push(this.tabPersonList[i]);
+				}
+				this.currentTab = this.tabPersonList.length - 1;
 				this.onRefresh();
 				// }
 			},
-			openSearchCheckPer: function(){
-				this.$router.push({
-					name: "searchCheckPerson",
-					params: this.param
-				});
+			openUnit:function(){
+				this.$emit("openUnit");
+			},
+			openSearchCheckPer: function() {
+				this.$emit("openSearch");
+				// this.$router.push({
+				// 	name: "searchCheckPerson",
+				// 	params: this.param
+				// });
 			},
 			// 初始化，上一页进入或者点击进入下一级或者点击导航栏的时候会重新执行
 			init: function() {
@@ -136,7 +175,7 @@
 				this.curNodeList = this.param.personalList ? this.param.personalList : [];
 				console.log("初始化");
 				this.$textLoading();
-				this.tabList = [{
+				this.tabPersonList = [{
 					id: "",
 					dangerSubType: "单位",
 					parentOrgId: "-1",
@@ -202,7 +241,7 @@
 						// 设置tab滚动到最后面
 						setTimeout(function() {
 							document.getElementById(
-								"tabList"
+								"tabPersonList"
 							).scrollLeft = 99999999999999;
 						}, 0);
 					})
@@ -272,13 +311,16 @@
 					data.curNodeItemlist = this.curNodeList;
 				}
 				// this.$bus.$emit('person', data);
-				var name = this.param.exeMun;
-				this.$across.$emit(name, data);
-				this.$router.go(-1);
+				// var name = this.param.exeMun;
+				// this.$across.$emit(name, data);
+				// this.$router.go(-1);
+				this.$emit("checkSubmit", data)
 			},
+			/* 模拟生命周期函数-每次进来一次都执行 */
+			onShow(obj) {},
 			onLoad() {
 				console.log('............................');
-				this.getData_demo(this.tabList[this.tabList.length - 1]);
+				this.getData_demo(this.tabPersonList[this.tabPersonList.length - 1]);
 			},
 			onRefresh() {
 				this.$textLoading();
@@ -295,10 +337,21 @@
 
 <style scoped lang="less">
 	@import "../assets/less/nw_tool.less";
+
 	.checkPerson {
+		position: relative;
 		// height: 100%;
 		background-color: #f5f5f5;
 		text-align: left;
+	}
+	
+	.person-centent{
+		height: 100%;
+		
+	}
+	.person-centent-box{
+		height: 100%;
+		overflow-y: auto;
 	}
 
 	.header-f {
@@ -367,41 +420,5 @@
 	.topIconRight {
 		position: fixed;
 		right: 0;
-	}
-
-	/*没有数据*/
-	.person-noData {
-		.pxToremLess(padding-top, 140px);
-		text-align: center;
-		color: #b5b5b5;
-		.pxToremLess(font-size, 15px);
-
-		img {
-			.pxToremLess(width, 200px);
-			margin: 0 auto;
-		}
-
-		.button {
-			.pxToremLess(font-size, 15px);
-			.pxToremLess(min-width, 160px);
-			.pxToremLess(height, 60px);
-			.pxToremLess(padding, 56px);
-			.pxToremLess(line-height, 60px);
-			.pxToremLess(border-radius, 60px);
-			background: #a22423;
-			color: #fff;
-			.pxToremLess(border-width, 1px);
-		}
-
-		p {
-			.pxToremLess(margin-top, 40px);
-			.pxToremLess(margin-bottom, 0);
-			.pxToremLess(margin-left, 56px);
-			.pxToremLess(margin-right, 0);
-		}
-
-		i {
-			.pxToremLess(font-size, 56px);
-		}
 	}
 </style>
