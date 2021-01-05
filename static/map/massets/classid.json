@@ -1,0 +1,956 @@
+[
+    {
+        "tcid": 2,
+        "classid": 100,
+        "name": "发电厂",
+        "type": "station"
+    },
+    {
+        "tcid": 2,
+        "classid": 110,
+        "name": "变电站",
+        "type": "station"
+    },
+    {
+        "tcid": 1,
+        "classid": 120,
+        "name": "站内母线",
+        "type": "line"
+    },
+    {
+        "tcid": 1,
+        "classid": 125,
+        "name": "站内母线段",
+        "type": "line"
+    },
+    {
+        "tcid": 1,
+        "classid": 126,
+        "name": "站内电缆",
+        "type": "line"
+    },
+    {
+        "tcid": 1,
+        "classid": 128,
+        "name": "站内电气连接线",
+        "type": "line"
+    },
+    {
+        "tcid": 1,
+        "classid": 130,
+        "name": "电缆终端头",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 135,
+        "name": "站内外连接点",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 136,
+        "name": "主变",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 137,
+        "name": "站用变",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 140,
+        "name": "断路器",
+        "type": "switch"
+    },
+    {
+        "tcid": 1,
+        "classid": 141,
+        "name": "负荷开关",
+        "type": "switch"
+    },
+    {
+        "tcid": 1,
+        "classid": 142,
+        "name": "隔离开关",
+        "type": "switch"
+    },
+    {
+        "tcid": 1,
+        "classid": 143,
+        "name": "接地刀闸",
+        "type": "switch"
+    },
+    {
+        "tcid": 1,
+        "classid": 144,
+        "name": "熔断器",
+        "type": "switch"
+    },
+    {
+        "tcid": 1,
+        "classid": 145,
+        "name": "组合开关",
+        "type": "switch"
+    },
+    {
+        "tcid": 1,
+        "classid": 150,
+        "name": "避雷器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 151,
+        "name": "电抗器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 152,
+        "name": "电容器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 153,
+        "name": "耦合电容器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 154,
+        "name": "电压互感器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 155,
+        "name": "电流互感器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 156,
+        "name": "带电显示器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 157,
+        "name": "故障指示器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 158,
+        "name": "电感器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 159,
+        "name": "消弧线圈",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 160,
+        "name": "阻波器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 161,
+        "name": "消谐器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 162,
+        "name": "穿墙套管",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 163,
+        "name": "放电间隙",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 164,
+        "name": "接地电阻",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 165,
+        "name": "继电保护装置",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 190,
+        "name": "间隔",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 191,
+        "name": "组合电器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 192,
+        "name": "组合电器气室",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 193,
+        "name": "变电站内组",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 200,
+        "name": "线路",
+        "type": "line"
+    },
+    {
+        "tcid": 2,
+        "classid": 205,
+        "name": "架空导线",
+        "type": "line"
+    },
+    {
+        "tcid": 2,
+        "classid": 206,
+        "name": "电缆",
+        "type": "line"
+    },
+    {
+        "tcid": 2,
+        "classid": 210,
+        "name": "架空线段",
+        "type": "line"
+    },
+    {
+        "tcid": 2,
+        "classid": 211,
+        "name": "电缆线段",
+        "type": "line"
+    },
+    {
+        "tcid": 2,
+        "classid": 212,
+        "name": "电气连接线",
+        "type": "line"
+    },
+    {
+        "tcid": 2,
+        "classid": 220,
+        "name": "电缆终端头",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 221,
+        "name": "电缆终端头",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 223,
+        "name": "电气连接点",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 230,
+        "name": "杆塔",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 232,
+        "name": "电缆分接箱",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 235,
+        "name": "电缆中间接头",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 236,
+        "name": "输电线路监测装置",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 250,
+        "name": "逻辑杆塔",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 274,
+        "name": "交叉跨越",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 280,
+        "name": "耐张段",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 300,
+        "name": "线路分支",
+        "type": "line"
+    },
+    {
+        "tcid": 2,
+        "classid": 305,
+        "name": "架空导线",
+        "type": "line"
+    },
+    {
+        "tcid": 2,
+        "classid": 306,
+        "name": "电缆",
+        "type": "line"
+    },
+    {
+        "tcid": 2,
+        "classid": 310,
+        "name": "架空线段",
+        "type": "line"
+    },
+    {
+        "tcid": 2,
+        "classid": 311,
+        "name": "电缆段",
+        "type": "line"
+    },
+    {
+        "tcid": 2,
+        "classid": 312,
+        "name": "电气连接线",
+        "type": "line"
+    },
+    {
+        "tcid": 2,
+        "classid": 320,
+        "name": "电缆终端头",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 321,
+        "name": "电缆终端头",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 330,
+        "name": "开关房",
+        "type": "station"
+    },
+    {
+        "tcid": 2,
+        "classid": 331,
+        "name": "户外开关箱",
+        "type": "station"
+    },
+    {
+        "tcid": 2,
+        "classid": 332,
+        "name": "电缆分接箱",
+        "type": "station"
+    },
+    {
+        "tcid": 2,
+        "classid": 333,
+        "name": "配电站",
+        "type": "station"
+    },
+    {
+        "tcid": 2,
+        "classid": 334,
+        "name": "箱变",
+        "type": "station"
+    },
+    {
+        "tcid": 2,
+        "classid": 335,
+        "name": "台变",
+        "type": "station"
+    },
+    {
+        "tcid": 2,
+        "classid": 337,
+        "name": "柱上无功补偿箱",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 338,
+        "name": "配电杆塔",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 339,
+        "name": "柱上断路器",
+        "type": "switch"
+    },
+    {
+        "tcid": 2,
+        "classid": 340,
+        "name": "柱上负荷开关",
+        "type": "switch"
+    },
+    {
+        "tcid": 2,
+        "classid": 342,
+        "name": "柱上隔离开关",
+        "type": "switch"
+    },
+    {
+        "tcid": 2,
+        "classid": 343,
+        "name": "跌落式熔断器",
+        "type": "switch"
+    },
+    {
+        "tcid": 2,
+        "classid": 344,
+        "name": "柱上故障指示器",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 345,
+        "name": "柱上计量装置",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 346,
+        "name": "电缆中间接头",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 347,
+        "name": "电气连接点",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 349,
+        "name": "柱上避雷器",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 350,
+        "name": "解断口",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 351,
+        "name": "配电断连",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 352,
+        "name": "配电柱上自动化终端",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 354,
+        "name": "串补电容器",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 356,
+        "name": "接地挂环",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 359,
+        "name": "分布式电源",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 360,
+        "name": "逻辑杆塔",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 369,
+        "name": "分布式电源",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 370,
+        "name": "站外高压电机",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 371,
+        "name": "站外高压电机",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 380,
+        "name": "交叉跨越",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 400,
+        "name": "站内母线",
+        "type": "line"
+    },
+    {
+        "tcid": 1,
+        "classid": 406,
+        "name": "中压临时站内电缆组",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 410,
+        "name": "站内母线段",
+        "type": "line"
+    },
+    {
+        "tcid": 1,
+        "classid": 411,
+        "name": "站内电缆",
+        "type": "line"
+    },
+    {
+        "tcid": 1,
+        "classid": 412,
+        "name": "站内电气连接线",
+        "type": "line"
+    },
+    {
+        "tcid": 1,
+        "classid": 420,
+        "name": "电缆终端头",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 421,
+        "name": "电缆终端头",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 430,
+        "name": "站内外连接点",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 431,
+        "name": "站内变压器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 432,
+        "name": "配电站用变",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 433,
+        "name": "站内断路器",
+        "type": "switch"
+    },
+    {
+        "tcid": 1,
+        "classid": 434,
+        "name": "站内负荷开关",
+        "type": "switch"
+    },
+    {
+        "tcid": 1,
+        "classid": 435,
+        "name": "站内隔离开关",
+        "type": "switch"
+    },
+    {
+        "tcid": 1,
+        "classid": 436,
+        "name": "站内接地刀闸",
+        "type": "switch"
+    },
+    {
+        "tcid": 1,
+        "classid": 437,
+        "name": "站内熔断器",
+        "type": "switch"
+    },
+    {
+        "tcid": 1,
+        "classid": 438,
+        "name": "组合开关",
+        "type": "switch"
+    },
+    {
+        "tcid": 1,
+        "classid": 439,
+        "name": "站内避雷器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 440,
+        "name": "站内电抗器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 441,
+        "name": "站内电容器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 442,
+        "name": "站内电压互感器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 443,
+        "name": "站内电流互感器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 444,
+        "name": "站内带电显示器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 445,
+        "name": "站内故障指示器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 446,
+        "name": "站内发电机",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 447,
+        "name": "站内高压电机",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 449,
+        "name": "继电保护装置",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 450,
+        "name": "站内电缆肘形头",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 451,
+        "name": "站内测量仪表",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 452,
+        "name": "站内计量仪表",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 453,
+        "name": "配网自动化终端设备",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 490,
+        "name": "站内中压柜",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 498,
+        "name": "站内PT柜",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 499,
+        "name": "站内计量柜",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 500,
+        "name": "低压线路分支",
+        "type": "line"
+    },
+    {
+        "tcid": 2,
+        "classid": 505,
+        "name": "低压架空导线",
+        "type": "line"
+    },
+    {
+        "tcid": 2,
+        "classid": 506,
+        "name": "低压电缆",
+        "type": "line"
+    },
+    {
+        "tcid": 2,
+        "classid": 510,
+        "name": "低压架空线段",
+        "type": "line"
+    },
+    {
+        "tcid": 2,
+        "classid": 511,
+        "name": "低压电缆段",
+        "type": "line"
+    },
+    {
+        "tcid": 2,
+        "classid": 512,
+        "name": "低压电气连接线",
+        "type": "line"
+    },
+    {
+        "tcid": 2,
+        "classid": 516,
+        "name": "低压电缆终端头",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 517,
+        "name": "低压电缆终端头",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 520,
+        "name": "低压配电箱",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 521,
+        "name": "低压落火点",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 522,
+        "name": "低压电缆中间接头",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 523,
+        "name": "低压电气连接点",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 524,
+        "name": "低压断连",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 525,
+        "name": "低压柱上断路器",
+        "type": "switch"
+    },
+    {
+        "tcid": 2,
+        "classid": 526,
+        "name": "低压柱上隔离开关",
+        "type": "switch"
+    },
+    {
+        "tcid": 2,
+        "classid": 527,
+        "name": "低压终端",
+        "type": "other"
+    },
+    {
+        "tcid": 2,
+        "classid": 528,
+        "name": "低压配电房",
+        "type": "station"
+    },
+    {
+        "tcid": 2,
+        "classid": 537,
+        "name": "低压无功补偿箱",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 540,
+        "name": "低压临时站内电缆组",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 546,
+        "name": "低压站内电缆",
+        "type": "line"
+    },
+    {
+        "tcid": 1,
+        "classid": 548,
+        "name": "低压站内架空线段",
+        "type": "line"
+    },
+    {
+        "tcid": 1,
+        "classid": 550,
+        "name": "电缆终端头",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 556,
+        "name": "低压断路器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 557,
+        "name": "低压负荷开关",
+        "type": "switch"
+    },
+    {
+        "tcid": 1,
+        "classid": 558,
+        "name": "低压隔离开关",
+        "type": "switch"
+    },
+    {
+        "tcid": 1,
+        "classid": 559,
+        "name": "低压接地刀闸",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 560,
+        "name": "低压熔断器",
+        "type": "switch"
+    },
+    {
+        "tcid": 1,
+        "classid": 561,
+        "name": "低压表箱",
+        "type": "station"
+    },
+    {
+        "tcid": 1,
+        "classid": 567,
+        "name": "低压避雷器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 568,
+        "name": "配电箱",
+        "type": "station"
+    },
+    {
+        "tcid": 1,
+        "classid": 569,
+        "name": "低压电容器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 570,
+        "name": "低压电压互感器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 571,
+        "name": "低压电流互感器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 572,
+        "name": "电抗器",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 573,
+        "name": "测量仪表",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 574,
+        "name": "计量仪表",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 575,
+        "name": "低压站内电缆终端头",
+        "type": "other"
+    },
+    {
+        "tcid": 1,
+        "classid": 590,
+        "name": "低压柜",
+        "type": "other"
+    }
+]

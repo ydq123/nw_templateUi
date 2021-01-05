@@ -52,6 +52,16 @@ const routes = [{
   	title: 'nwTemplateUI选择单位',
   },
 },
+{
+  path: '/nw_tz_map',
+  name: 'nw_tz_map',
+  component: () => import( /* webpackChunkName: "about" */ '../pages/nw_tz_map.vue'),
+  meta: {
+  	keepAlive: true,
+  	moduleName: 'nwTemplateUI',
+  	title: '台账选择地图',
+  },
+},
 ];
 
 export default routes;

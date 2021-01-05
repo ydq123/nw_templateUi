@@ -1,0 +1,132 @@
+	/* 地图圆点样式 */
+	.marker-sty-app {
+		background-size: cover;
+		width: 38px;
+		height: 38px;
+		line-height: 38px;
+		color: #fff;
+		text-align: center;
+		border-radius: 50%;
+		cursor: pointer;
+		position: relative;
+		z-index: 9;
+	}
+	
+	.marker-sty-lager-app {
+		background-size: cover;
+		width: 45px;
+		height: 45px;
+		line-height: 42px;
+		color: #fff;
+		text-align: center;
+		border-radius: 50%;
+		cursor: pointer;
+		position: relative;
+		z-index: 9;
+	}
+	
+	/* 地图正方形打点样式 */
+	.paifan {
+		height: 100px !important;
+		width: 100px !important;
+		background-color:  !important;
+	}
+	
+	.paifan-ck {
+		height: 200px !important;
+		width: 200px !important;
+		background-color: red !important;
+	}
+	
+	.myMap-ctkButtomD {
+	  position: absolute;
+	  right: 8px;
+	  top: calc(100px + 1rem);
+	  z-index: 0;
+	  width: 50px;
+	  height: 50px;
+	  border-radius: 50%;
+	  background-image: url("~@/assets/images/mapImg/controlbox/operation.png");
+	  background-size: cover;
+	}
+	.myMap-ctkButtom {
+	  position: absolute;
+	  right: 8px;
+	  top: calc(160px + 1rem);
+	  z-index: 0;
+	  width: 50px;
+	  height: 50px;
+	  border-radius: 50%;
+	  background-image: url("~@/assets/images/mapImg/controlbox/power-grid.png");
+	  &.bgStatus {
+		 background-image: url("~@/assets/images/mapImg/controlbox/power-grid-check.png");
+	  }
+	  background-size: cover;
+	}
+	.mdp-map-box{
+	  width: 100%;
+	  height: 100%;
+	}
+	.ctkButtom {
+	  position: absolute;
+	  right: 8px;
+	  top: calc(160px + 1rem);
+	  z-index: 99;
+	  width: 50px;
+	  height: 50px;
+	  border-radius: 50%;
+	  background-image: url("~@/assets/images/mapImg/controlbox/power-grid-check.png");
+	  background-size: cover;
+	}
+	.bg-white-ctkButtom {
+	  position: absolute;
+	  right: 8px;
+	  top: calc(160px + 1rem);
+	  z-index: 99;
+	  width: 50px;
+	  height: 50px;
+	  border-radius: 50%;
+	  background-size: cover;
+	  background-image: url("~@/assets/images/mapImg/controlbox/power-grid.png");
+	}
+	.mgis-app-main {
+	  position: absolute;
+	  bottom: 0;
+	  width: 100%;
+	  height: calc(100vh - 43px);
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: flex-end;
+	  pointer-events: none;
+	  > * {
+	    pointer-events: all;
+	  }
+	}
+	/deep/ .mgis-app-SvgGraph {
+	  position: fixed !important;
+	}
+	/deep/ .mgis-slide-multi {
+	  position: absolute !important;
+	  top: 20.06667vw !important;
+	  height: calc(100% - 21vw) !important;
+	  width: 100%;
+	}
+	/deep/ .place-statusbar {
+	  position: fixed !important;
+	  top: 25px !important;
+	}
+	/deep/ .has-top-header {
+	  top: 40px !important;
+	}
+	/deep/ .mgis-footer__right>.mgis-button--primary{
+	    display: none;
+	}
+	/deep/ .mgis-route{
+	    display: none;
+	}
+	/deep/ .mgis-aside-panel__content>:first-child{
+	    padding-top: 55px !important;
+	}
+	// /deep/ .nav-item-image{
+	//     background-image:url("@/assets/images/mapImg/layer_pic1.png")
+	// }

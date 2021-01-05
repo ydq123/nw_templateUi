@@ -136,7 +136,7 @@ export const NWbpmsMinxin = {
 					var bpmsUuseObj = retObj.data;
 				}
 			}
-			console.log(retObj.msg)
+			// console.log(retObj.msg)
 			Vue.prototype.$mdpWorkflowSelectPage = this.$refs.workflowSelectPage; // 保存跳转人员选择页面的ref
 			mdpWorkflow.setBpmsUserInfo(bpmsUuseObj); //动态更新工作流需要的用户信息
 		},

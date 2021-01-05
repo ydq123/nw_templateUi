@@ -17,7 +17,16 @@ import StatusLabel from './StatusLabel/StatusLabel.vue' //状态标签组件
 import topIntroduce from './topIntroduce/topIntroduce.vue' //详情页顶部简介
 import TabWidget from './TabWidget/TabWidget.vue' //多状态tab组件
 
+
+/* 地图插件 */
+import RigthMapPopup from "./mapComponents/RigthMapPopup";
+import TableList from "./mapComponents/TableList";
+import SlideIndex from "./mapComponents/slideIndex";
+
 export {
+  RigthMapPopup,
+  TableList,
+  SlideIndex,
     Button,
     ModuleTop,
     Uploader,
