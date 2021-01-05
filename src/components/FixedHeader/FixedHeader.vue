@@ -67,10 +67,10 @@ export default {
     },
     backHome() {
       // this.$emit("backHomeHandle");
-      this.$tabBackHome('root_tab');
+      this.$nwBackHome('');
     },
     headBack() {
-      this.$tabBack(-1);
+      this.$nwBack(-1);
       // this.$emit("headBackeHandle");
     }
   }

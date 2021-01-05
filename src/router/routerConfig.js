@@ -6,6 +6,11 @@ const routes = [{
   path: '/demoPage',
   name: 'demoPage',
   component: () => import( /* webpackChunkName: "about" */ '../pages/demoPage.vue'),
+  meta: {
+  	keepAlive: true,
+  	moduleName: 'nwTemplateUI',
+  	title: 'nwTemplateUI首页',
+  },
 },
 {
   path: '/checkPerson',
