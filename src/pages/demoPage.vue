@@ -228,9 +228,12 @@
     destroyed() {
       if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
         this.$across.$off("testemitunit");
+      }else if(window.NW_MODULE_TYPE == 'nwTemplateUI'){
+        
       }
     },
     mounted() {
+      window.NW_MODULE_TYPE = 'nwTemplateUI';
       console.log(123456);
       this.fileInfo = {
         jobTypeCode: "SP_SS_HID_RECORD_FIND",
@@ -276,6 +279,8 @@
           console.log("****************************************");
           _this.testAcrossFun(data);
         });
+      }else if(window.NW_MODULE_TYPE == 'nwTemplateUI'){
+        
       }
     },
     methods: {
