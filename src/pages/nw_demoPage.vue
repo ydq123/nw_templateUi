@@ -197,7 +197,7 @@
 						},
 						{
 							icon: "icon-jinyongqingkuang", // icon名称
-							iconText: "地图弹窗", // icon文案
+							iconText: "台账地图", // icon文案
 							iconSize: "f14", // icon大小
 							textSize: "f12", // 文案大小
 							iconColor: "", // icon颜色
@@ -314,8 +314,8 @@
 					});
 				}
 				if (data.id == 2) {
-					// 地图弹窗
-					this.mapPop = true;
+					// 台账地图
+					this.$nwOpenWin('nw_tz_map', '123');
 				}
 				if (data.id == 3) {
 					// 选择单位

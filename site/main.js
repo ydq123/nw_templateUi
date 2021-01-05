@@ -25,6 +25,11 @@ import bus from '@/utils/bus.js'; //跨页面通讯
 Vue.prototype.$bus = bus;
 
 
+/** 引入地图注册地图组件 */
+import mgisCombi from '../static/map/mgis'
+import '../static/map/mgis/lib/mgisCombi.css'
+Vue.use(mgisCombi)
+
 
 Vue.use(nwVue)
 new Vue({
