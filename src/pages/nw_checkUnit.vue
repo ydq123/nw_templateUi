@@ -55,7 +55,7 @@
 	import {
 		queryOrganizationDirectlyChild,
 		getAllSuperOrgIds
-	} from "@/moduleAPI/nw_jadp.js";
+	} from "../moduleAPI/nw_jadp.js";
 	import {
 		NWtabMinxin
 	} from "../mixin/NWtabMinxin.js";

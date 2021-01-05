@@ -139,7 +139,7 @@
     </nw-PopupFilter>
     -->
 <script>
-import { NWbaseMinxin } from "@/mixin/NWbaseMinxin.js";
+import { NWbaseMinxin } from "../../mixin/NWbaseMinxin.js";
 export default {
   data() {
     return {

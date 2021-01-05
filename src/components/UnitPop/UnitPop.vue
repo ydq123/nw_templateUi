@@ -70,10 +70,8 @@
 	import {
 		queryOrganizationDirectlyChild,
 		getAllSuperOrgIds
-	} from "@/moduleAPI/nw_jadp.js";
-	import {
-		NWtabMinxin
-	} from "@/mixin/NWtabMinxin.js";
+	} from "../../moduleAPI/nw_jadp.js";
+	import { NWtabMinxin } from "../../mixin/NWtabMinxin.js";
 	export default {
 		mixins: [NWtabMinxin], //混入公共类
 		name: 'UnitPop',

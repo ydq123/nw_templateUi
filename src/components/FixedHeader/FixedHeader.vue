@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { NWtabMinxin } from "@/mixin/NWtabMinxin.js";
+import { NWtabMinxin } from "../../mixin/NWtabMinxin.js";
 export default {
   props: {
     title: {

@@ -30,9 +30,7 @@
 </template>
 
 <script>
-	import {
-		NWtabMinxin
-	} from '@/mixin/NWtabMinxin.js';
+	import { NWtabMinxin } from "../../mixin/NWtabMinxin.js";
 	export default {
 		mixins: [NWtabMinxin], //混入公共类
 		props: {

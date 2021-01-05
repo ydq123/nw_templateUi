@@ -58,7 +58,7 @@
 			</slot>
 			<slot name="taskSreenSort">
 				<div class="input-row input-srot borderTopE8">
-					<div class="flex-1 text-left gray6 pl15 f16 verticle-center">共11条记录</div>
+					<div class="flex-1 text-left gray6 pl15 f16 verticle-center">共{{listNub}}条记录</div>
 					<div class="task-top-sreen-btn pl15 pr15 verticle-center" m="click" @click="changeSort" v-if="isSort">
 						<span class="f16 mr5 gray6">排序</span>
 						<i class="iconfont icon-qianjin-copy f10 gray9" :class="{'showRotate': sortData.showPop}"></i>
@@ -101,6 +101,10 @@
 			}
 		},
 		props: {
+			listNub: {// 列表数据总数
+				type: Number,
+				default: 0
+			},
 			isTopInput: { // 控制头部搜索点击事件是否显示搜索框，默认为false不显示，true显示
 				type: Boolean,
 				default: false
