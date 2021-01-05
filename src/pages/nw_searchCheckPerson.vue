@@ -1,7 +1,7 @@
 <template>
 	<div class="searchCheckPerson pt88">
 		<nw-fixed-header title="搜索人员">
-			<div slot="left" @click="openCherk">
+			<div slot="left" @click="$nwBack(-1)">
 				<i class="iconfont icon-houtui"></i>
 			</div>
 			<div slot="right"></div>
@@ -58,7 +58,7 @@
 <script>
 	import {
 		fastQueryUser
-	} from "@/moduleAPI/jadp.js";
+	} from "@/moduleAPI/nw_jadp.js";
 	import {
 		NWtabMinxin
 	} from "../mixin/NWtabMinxin.js";
@@ -92,6 +92,7 @@
 			// 初始化，上一页进入或者点击进入下一级或者点击导航栏的时候会重新执行
 			init: function() {
 				this.param = this.$tabPageData() || {};
+				console.log("this.param:",JSON.stringify(this.param));
 				this.isType = this.param.type; //type值为1：单选；值为2：多选
 				// if (this.param.status == 1 || this.param.status == 3 || this.param.status == 4) {
 				// 	// 多选
@@ -211,10 +212,18 @@
 					}
 					data.curNodeItemlist = this.curNodeList;
 				}
+				var name = this.param.exeMun;
+				if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
+					this.$across.$emit(name, data);
+				} else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
+					console.log('name:',name);
+					this.$bus.$emit(name, data);
+				}
+				this.$nwBack(-2);
 				// var name = this.param.exeMun;
 				// this.$across.$emit(name, data);
 				// this.$router.go(-2);
-				this.$emit("searchSubmit", data)
+				// this.$emit("searchSubmit", data)
 			},
 			inputSearch: function() {
 				if (event.keyCode == 13) {

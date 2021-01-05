@@ -10,9 +10,9 @@
 			</div>
 			
 		</div> -->
-		
+
 		<nw-fixed-header title="选择人员">
-			<div slot="left" @click="$router.go(-1)">
+			<div slot="left" @click="$nwBack(-1)">
 				<i class="iconfont icon-houtui"></i>
 			</div>
 			<div slot="right"></div>
@@ -53,7 +53,8 @@
 		</van-popup>
 
 		<div class="person-centent" :class="{'pb60 ' : taskInfo.nodeList.length > 0}">
-			<van-list v-model="taskInfo.loading" :finished="taskInfo.finished" :finished-text="taskInfo.nodeList.length > 0 ? '没有更多数据了' : ''" @load="onLoad" >
+			<van-list v-model="taskInfo.loading" :finished="taskInfo.finished" :finished-text="taskInfo.nodeList.length > 0 ? '没有更多数据了' : ''"
+			 @load="onLoad" :immediate-check="false">
 				<van-pull-refresh v-model="taskInfo.refreshing" @refresh="onRefresh">
 					<div class="person-centent-box">
 						<div class="p15 bg-white person-row ju-b al-c f16 borderTopE8" @click="selectCurNode(nodeIndex)" :class="{'borderTopE8':nodeIndex!=0}"
@@ -79,8 +80,9 @@
 
 <script>
 	import {
-		search
-	} from "@/moduleAPI/jadp.js";
+		search,
+		getAllSuperOrgIds
+	} from "@/moduleAPI/nw_jadp.js";
 	import {
 		NWtabMinxin
 	} from "../mixin/NWtabMinxin.js";
@@ -115,29 +117,76 @@
 		components: {},
 		created() {},
 		watch: {
-			
+
 		},
 		destroyed() {
-			this.$across.$off("unitTabBus");
-			this.$across.$off("tabSrcollList");
+			console.log('*******************destroyed**********************');
+			if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
+				this.$across.$off("unitTabBus");
+				this.$across.$off("tabSrcollList");
+			} else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
+				this.$bus.$off("unitTabBus");
+				this.$bus.$off("tabSrcollList");
+			}
+		},
+		/* 进入页面前-复原导航条   */
+		beforeRouteEnter(to, from, next) {
+			console.log('-----------nw_checkPerson----------beforeRouteEnter-------------------------');
+			next(vm => {
+				if (window.NW_MODULE_TYPE != 'scyyd_templateUI') {
+					console.log(from);
+					console.log(to);
+					if (from.name != "nw_checkUnit" && from.name != "nw_searchCheckPerson") {
+						vm.pageDataInit();
+						vm.init();
+					}
+				}
+			});
 		},
 		mounted() {
-			// console.log("路由参数:this.$route.params", this.$route.params);
-			// console.log("路由参数:this.$route.query", this.$route.query);
-			this.init();
 			var _this = this;
-			_this.$across.$on("unitTabBus",function(data){
-				console.log('------_this.$across.$on---------------------------------------');
-				_this.popOverlay(data);
-			});
-			_this.$across.$on("tabSrcollList",function(){
-				_this.initTabList();
-			});
+			if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
+				this.init();
+				_this.$across.$on("unitTabBus", function(data) {
+					_this.popOverlay(data);
+				});
+				_this.$across.$on("tabSrcollList", function() {
+					_this.initTabList();
+				});
+			} else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
+				_this.$bus.$on("unitTabBus", function(data) {
+					_this.popOverlay(data);
+				});
+				_this.$bus.$on("tabSrcollList", function() {
+					_this.initTabList();
+				});
+			}
 		},
 		methods: {
-			initTabList: function(){
+			pageDataInit: function(){
+				this.param = {};
+				this.showPicker = false;
+				this.showPicker2 = false;
+				this.currentTab = 0;
+				this.taskInfo.nodeList = []; // 展示人员数据数组
+				this.taskInfo.loading = false;
+				this.taskInfo.finished = false;
+				this.taskInfo.refreshing = false;
+				this.tabPersonList = []; // 头部导航
+				this.tabSavaList = [];
+				this.dataItem = {}; //
+				this.count = 0; // 人员总数
+				this.pageNo = 1;
+				this.curNodeItem = {}; //单选人员信息
+				this.curNodeList = []; //多选人员信息
+				this.tabNum = 0;
+				this.isType = 0; //判断人员单选或多选，1：单选；2多选
+				this.showPop = false;
+				this.userInfo = {};
+			},
+			initTabList: function() {
 				this.tabPersonList = this.tabSavaList;
-				console.log("this.tabSavaList：：：",JSON.stringify(this.tabSavaList));
+				console.log("this.tabSavaList：：：", JSON.stringify(this.tabSavaList));
 			},
 			popOverlay: function(data) {
 				this.showPop = false;
@@ -145,18 +194,24 @@
 				// if(data && this.showPop == false){
 				this.tabPersonList = data.curUnitItemData;
 				this.tabSavaList = [];
-				for(var i = 0;i<this.tabPersonList.length;i++){
+				for (var i = 0; i < this.tabPersonList.length; i++) {
 					this.tabSavaList.push(this.tabPersonList[i]);
 				}
 				this.currentTab = this.tabPersonList.length - 1;
 				this.onRefresh();
 				// }
 			},
-			openUnit:function(){
-				this.$emit("openUnit");
+			openUnit: function() {
+				// this.$emit("openUnit");
+				var param = {
+					userInfo: this.userInfo,
+					exeMun: "unitTabBus"
+				};
+				this.$nwOpenWin('nw_checkUnit', param);
 			},
 			openSearchCheckPer: function() {
-				this.$emit("openSearch");
+				this.$nwOpenWin('nw_searchCheckPerson', this.param);
+				// this.$emit("openSearch");
 				// this.$router.push({
 				// 	name: "searchCheckPerson",
 				// 	params: this.param
@@ -166,10 +221,7 @@
 			init: function() {
 				// this.param = this.$route.query || this.$route.params || {};
 				this.param = this.$tabPageData() || {};
-				this.$nextTick(() => {
-					this.userInfo = this.param.userInfo || {};
-					console.log("uuuuuuu--this.userInfo:::", this.userInfo);
-				})
+				this.userInfo = this.param.userInfo || {};
 				this.isType = this.param.type; //type值为1：单选；值为2：多选
 				this.curNodeList = this.param.personalList ? this.param.personalList : [];
 				console.log("初始化");
@@ -183,10 +235,49 @@
 					userState: 1,
 				}];
 				this.currentTab = 0;
+				this.onLoad();
 			},
 			// openSearch: function(){
 
 			// },
+			// 获取当前单位id
+			getUserUnit: function() {
+				var unitStr = this.userInfo.nameFullPath ? this.userInfo.nameFullPath : '';
+				var unitArr = unitStr.split('/');
+				var data = {
+					userId: this.userInfo.userId,
+					levelFilter: 9,
+					chooseType: 'user',
+					rootDepartmentId: this.userInfo.orgId,
+				}
+				getAllSuperOrgIds(data)
+					.then(res => {
+						var resRev = res.reverse();
+						var arr = [];
+						for (var i = 0; i < unitArr.length; i++) {
+							var item = {
+								id: resRev[i] ? resRev[i] : '',
+								dangerSubType: unitArr[i] ? unitArr[i] : '',
+								parentOrgId: resRev[(i - 1)] ? resRev[(i - 1)] : '-1',
+								orgId: resRev[i] ? resRev[i] : '',
+								state: 1,
+								userState: 1,
+							}
+							this.tabPersonList.push(item);
+						}
+						this.tabSavaList = [];
+						for (var i = 0; i < this.tabPersonList.length; i++) {
+							this.tabSavaList.push(this.tabPersonList[i]);
+						}
+						this.currentTab = this.tabPersonList.length - 1;
+						this.onRefresh();
+					})
+					.catch(err => {
+						this.$textHid();
+						console.log(err);
+					});
+
+			},
 			// 根据单位查找人员
 			getData_demo: function(item) {
 				this.dataItem = item;
@@ -197,9 +288,7 @@
 					pageNo: this.pageNo,
 					pageSize: 20
 				};
-				console.log("////////////////////////////////");
-				console.log("this.pageNo：：：：",this.pageNo);
-				console.log("this.count：：：：",this.count);
+				console.log("////////////////////////////////", JSON.stringify(data));
 				search(data)
 					.then(res => {
 						this.$textHid();
@@ -235,9 +324,6 @@
 							if (this.taskInfo.nodeList.length >= this.count) {
 								this.taskInfo.finished = true;
 							}
-							console.log("-----------------------------------------------------");
-							console.log("this.pageNo：：：：",this.pageNo);
-							console.log("this.count：：：：",this.count);
 						} else {
 							this.taskInfo.loading = false;
 							this.taskInfo.finished = true; //已加载完毕
@@ -315,20 +401,32 @@
 					}
 					data.curNodeItemlist = this.curNodeList;
 				}
+				var name = this.param.exeMun;
+				if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
+					this.$across.$emit(name, data);
+				} else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
+					console.log('name:', name);
+					this.$bus.$emit(name, data);
+				}
+				this.$nwBack(-1);
 				// this.$across.$emit('person', data);
 				// var name = this.param.exeMun;
 				// this.$across.$emit(name, data);
 				// this.$router.go(-1);
-				this.$emit("checkSubmit", data)
+				// this.$emit("checkSubmit", data)
 			},
 			/* 模拟生命周期函数-每次进来一次都执行 */
 			onShow(obj) {},
 			onLoad() {
 				console.log('............................');
-				this.getData_demo(this.tabPersonList[this.tabPersonList.length - 1]);
+				if (this.tabPersonList.length > 1) {
+					this.getData_demo(this.tabPersonList[this.tabPersonList.length - 1]);
+				} else {
+					this.getUserUnit();
+				}
 			},
 			onRefresh() {
-				this.$textLoading();
+				// this.$textLoading();
 				this.taskInfo.nodeList = [];
 				this.pageNo = 1;
 				this.count = 0;
@@ -349,12 +447,13 @@
 		background-color: #f5f5f5;
 		text-align: left;
 	}
-	
-	.person-centent{
+
+	.person-centent {
 		height: 100%;
-		
+
 	}
-	.person-centent-box{
+
+	.person-centent-box {
 		height: 100%;
 		overflow-y: auto;
 	}

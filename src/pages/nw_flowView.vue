@@ -1,9 +1,9 @@
 <template>
 	<div class="hiddenDanger_page_wrap pt44">
 		<nw-fixed-header :title="(tabPageData.pageTitle?tabPageData.pageTitle:'')+'流程视图'">
-      <div slot="left" @click="$router.go(-1)">
-        <i class="iconfont icon-houtui"></i>
-      </div>
+			<div slot="left" @click="$nwBack(-1)">
+				<i class="iconfont icon-houtui"></i>
+			</div>
 		</nw-fixed-header>
 		<div class="p10 " v-if="nodeList.length>0">
 			<div class="borderRadius_10 bg-287 p15">
@@ -28,13 +28,12 @@
 								<i v-if="nodeItme.completeType==-1" class="icon-jiedian1 iconfont f18 txt-1e8"></i>
 								<i v-else class="icon-gouxuan1 iconfont f18 txt-1e8"></i>
 							</div>
-							<div class="p15 radius-8" >
+							<div class="p15 radius-8">
 								<!-- nodeItme.colStatus -->
-								<label  v-if="nodeItme.colStatus?nodeItme.colStatus:colIndex==0"
-								 v-for="(colItme,colIndex) in nodeItme.colTransTrackInfo">
-									<div class="flex al-c" >
-										<div class="flex-1" >
-											<div class="mb20" >
+								<label v-if="nodeItme.colStatus?nodeItme.colStatus:colIndex==0" v-for="(colItme,colIndex) in nodeItme.colTransTrackInfo">
+									<div class="flex al-c">
+										<div class="flex-1">
+											<div class="mb20">
 												<div class="flex ju-b mb5">
 													<div class="f15 fw">{{nodeItme.curNodeName}}</div>
 													<div>{{colItme.actorName}}</div>
@@ -55,12 +54,11 @@
 										</div>
 									</div>
 								</label>
-								<div @click="nodeItme.colStatus=!nodeItme.colStatus" class="txt-1e8 f13 flex"
-								v-if="nodeItme.colTransTrackInfo.length>1">
+								<div @click="nodeItme.colStatus=!nodeItme.colStatus" class="txt-1e8 f13 flex" v-if="nodeItme.colTransTrackInfo.length>1">
 									<div class="mr5">
 										{{nodeItme.colStatus?'收起':'更多'}}
 									</div>
-									<i  :class="{'showRotate': !nodeItme.colStatus}" class="iconfont icontrans icon-houtui f10 txt-1e8"></i>
+									<i :class="{'showRotate': !nodeItme.colStatus}" class="iconfont icontrans icon-houtui f10 txt-1e8"></i>
 								</div>
 							</div>
 						</div>
@@ -74,7 +72,7 @@
 		</div>
 
 		<div @click="getFlowData">
-			<nw-null-data class="mt100"  v-if="nodeList.length==0"></nw-null-data>
+			<nw-null-data class="mt100" v-if="nodeList.length==0"></nw-null-data>
 		</div>
 
 	</div>
@@ -83,8 +81,10 @@
 <script>
 	import {
 		queryAllTrackByProcessInsId
-	} from "../moduleAPI/bpms.js"
-	import { NWtabMinxin } from "../mixin/NWtabMinxin.js";
+	} from "../moduleAPI/nw_bpms.js"
+	import {
+		NWtabMinxin
+	} from "../mixin/NWtabMinxin.js";
 	export default {
 		name: "flowView",
 		mixins: [NWtabMinxin],
@@ -100,86 +100,93 @@
 		},
 		components: {},
 		created() {},
+		destroyed() {
+			if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
+				
+			} else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
+				
+			}
+		},
 		mounted() {
 			console.log("路由参数", this.tabPageData);
 			this.initFun();
 		},
 		methods: {
 
-		initFun: function() {
-			this.getFlowData();
-		},
-		// 获取流程信息  "transFlag": 处理标志位:1为待办，2为处理中，3为处理结束，4为他人办理，5终止，6改派，7挂起,
-    /*  "completeType": 处理完成的类型:1：启动、2：发送、3：回退、5：终止、7：挂起、8：改派、9：协作补偿下发、10：跳转下发、-1：未处理,*/
-		getFlowData: function() {
-			this.$textLoading("加载中");
-			let params = {
-				processId: this.tabPageData.processId,
-				processInsId: this.tabPageData.processInsId
-			};
-			queryAllTrackByProcessInsId(params)
-				.then(ret => {
-					this.$textHid();
-					console.log(ret);
-					if(ret){
-            // @value传在则转换，不传在则获取当前，@key 时间分割符不传这默认-为分隔符
-            var retStr =this.$baseTimeStr('','');
-						// retBoolean=true(数组)，false(不是数组)
-						var retBoolean =this.$baseIsArray(ret);
-						if(retBoolean){
-							if(ret.length>0){
-								//将数组倒叙（反转）@arr目标数组
-								let sumMin = 0;
-								ret=this.$baseArrReverse2(ret);
-								ret=ret.filter(item => item.colTransTrackInfo.length>0);//筛选无用数据
-								ret.forEach((item,index) => {
-                  /* nodeItme.completeType==-1*/
-                  console.log(index)
-									item['colStatus']=false;
-								  item.time = this.$baseTimeFormat("-", ":", true, item.createTime);
-								  item.diffTime = this.$baseTimeDifference(
-								    item.overTime||0,
-								    item.createTime||0
-								  );
-                  if(index==0&&item.completeType==-1){
-                    sumMin += (retStr||0)-(item.createTime||0);
-                  }else{
-                    sumMin += (item.overTime||0)-(item.createTime||0);
-                  }
+			initFun: function() {
+				this.getFlowData();
+			},
+			// 获取流程信息  "transFlag": 处理标志位:1为待办，2为处理中，3为处理结束，4为他人办理，5终止，6改派，7挂起,
+			/*  "completeType": 处理完成的类型:1：启动、2：发送、3：回退、5：终止、7：挂起、8：改派、9：协作补偿下发、10：跳转下发、-1：未处理,*/
+			getFlowData: function() {
+				this.$textLoading("加载中");
+				let params = {
+					processId: this.tabPageData.processId,
+					processInsId: this.tabPageData.processInsId
+				};
+				queryAllTrackByProcessInsId(params)
+					.then(ret => {
+						this.$textHid();
+						console.log(ret);
+						if (ret) {
+							// @value传在则转换，不传在则获取当前，@key 时间分割符不传这默认-为分隔符
+							var retStr = this.$baseTimeStr('', '');
+							// retBoolean=true(数组)，false(不是数组)
+							var retBoolean = this.$baseIsArray(ret);
+							if (retBoolean) {
+								if (ret.length > 0) {
+									//将数组倒叙（反转）@arr目标数组
+									let sumMin = 0;
+									ret = this.$baseArrReverse2(ret);
+									ret = ret.filter(item => item.colTransTrackInfo.length > 0); //筛选无用数据
+									ret.forEach((item, index) => {
+										/* nodeItme.completeType==-1*/
+										console.log(index)
+										item['colStatus'] = false;
+										item.time = this.$baseTimeFormat("-", ":", true, item.createTime);
+										item.diffTime = this.$baseTimeDifference(
+											item.overTime || 0,
+											item.createTime || 0
+										);
+										if (index == 0 && item.completeType == -1) {
+											sumMin += (retStr || 0) - (item.createTime || 0);
+										} else {
+											sumMin += (item.overTime || 0) - (item.createTime || 0);
+										}
 
-								});
-								console.log(sumMin)
-								this.nodeData.curNodeName = ret[0].curNodeName;//当前节点名称
-                if(ret[0].completeType==-1){
-                  this.nodeData.curNodeTime = this.$baseTimeDifference(retStr,ret[0].createTime);//当前节点名称已停留
-                }else{
-                  this.nodeData.curNodeTime = this.$baseTimeDifference(ret[0].overTime,ret[0].createTime);//当前节点名称已停留
-                }
+									});
+									console.log(sumMin)
+									this.nodeData.curNodeName = ret[0].curNodeName; //当前节点名称
+									if (ret[0].completeType == -1) {
+										this.nodeData.curNodeTime = this.$baseTimeDifference(retStr, ret[0].createTime); //当前节点名称已停留
+									} else {
+										this.nodeData.curNodeTime = this.$baseTimeDifference(ret[0].overTime, ret[0].createTime); //当前节点名称已停留
+									}
 
-								this.nodeData.countTime = this.$baseTimeDifference(sumMin, 0);//总耗时
-								this.nodeList=ret;
+									this.nodeData.countTime = this.$baseTimeDifference(sumMin, 0); //总耗时
+									this.nodeList = ret;
+								}
 							}
 						}
-					}
-				})
-				.catch(error => {
-					console.log(error);
-					this.$textHid();
-				});
+					})
+					.catch(error => {
+						console.log(error);
+						this.$textHid();
+					});
 
-		},
-		// 拨打电话
-		callPhone: function(item) {
-			console.log(item);
-			if (item.phone) {
-				this.myJssdk.phoneCall({
-					phonedangerCode: item.phone
-				});
-			}else{
-				this.$textCatch('无号码信息')
+			},
+			// 拨打电话
+			callPhone: function(item) {
+				console.log(item);
+				if (item.phone) {
+					this.myJssdk.phoneCall({
+						phonedangerCode: item.phone
+					});
+				} else {
+					this.$textCatch('无号码信息')
+				}
 			}
 		}
-	}
 	};
 </script>
 

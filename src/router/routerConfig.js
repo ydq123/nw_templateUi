@@ -1,11 +1,11 @@
 const routes = [{
   path: '/',
-  redirect: '/demoPage',
+  redirect: '/nw_demoPage',
 },
 {
-  path: '/demoPage',
-  name: 'demoPage',
-  component: () => import( /* webpackChunkName: "about" */ '../pages/demoPage.vue'),
+  path: '/nw_demoPage',
+  name: 'nw_demoPage',
+  component: () => import( /* webpackChunkName: "about" */ '../pages/nw_demoPage.vue'),
   meta: {
   	keepAlive: true,
   	moduleName: 'nwTemplateUI',
@@ -13,29 +13,44 @@ const routes = [{
   },
 },
 {
-  path: '/checkPerson',
-  name: 'checkPerson',
-  component: () => import( /* webpackChunkName: "about" */ '../pages/checkPerson.vue'),
+  path: '/nw_checkPerson',
+  name: 'nw_checkPerson',
+  component: () => import( /* webpackChunkName: "about" */ '../pages/nw_checkPerson.vue'),
+  meta: {
+  	keepAlive: true,
+  	moduleName: 'nwTemplateUI',
+  	title: 'nwTemplateUI选择人员',
+  },
 },
 {
-  path: '/flowView',
-  name: 'flowView',
-  component: () => import( /* webpackChunkName: "about" */ '../pages/flowView.vue'),
+  path: '/nw_flowView',
+  name: 'nw_flowView',
+  component: () => import( /* webpackChunkName: "about" */ '../pages/nw_flowView.vue'),
+  meta: {
+  	keepAlive: false,
+  	moduleName: 'nwTemplateUI',
+  	title: 'nwTemplateUI流程视图',
+  },
 },
 {
-  path: '/searchCheckPerson',
-  name: 'searchCheckPerson',
-  component: () => import( /* webpackChunkName: "about" */ '../pages/searchCheckPerson.vue'),
+  path: '/nw_searchCheckPerson',
+  name: 'nw_searchCheckPerson',
+  component: () => import( /* webpackChunkName: "about" */ '../pages/nw_searchCheckPerson.vue'),
+  meta: {
+  	keepAlive: false,
+  	moduleName: 'nwTemplateUI',
+  	title: 'nwTemplateUI搜索人员',
+  },
 },
 {
-  path: '/tabSearchPerson',
-  name: 'tabSearchPerson',
-  component: () => import( /* webpackChunkName: "about" */ '../pages/tabSearchPerson.vue'),
-},
-{
-  path: '/checkUnit',
-  name: 'checkUnit',
-  component: () => import( /* webpackChunkName: "about" */ '../pages/checkUnit.vue'),
+  path: '/nw_checkUnit',
+  name: 'nw_checkUnit',
+  component: () => import( /* webpackChunkName: "about" */ '../pages/nw_checkUnit.vue'),
+  meta: {
+  	keepAlive: false,
+  	moduleName: 'nwTemplateUI',
+  	title: 'nwTemplateUI选择单位',
+  },
 },
 ];
 

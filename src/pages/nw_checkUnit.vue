@@ -55,7 +55,7 @@
 	import {
 		queryOrganizationDirectlyChild,
 		getAllSuperOrgIds
-	} from "@/moduleAPI/jadp.js";
+	} from "@/moduleAPI/nw_jadp.js";
 	import {
 		NWtabMinxin
 	} from "../mixin/NWtabMinxin.js";
@@ -65,7 +65,6 @@
 		data() {
 			return {
 				param:{},
-				isPage: true,//判断是否是页面还是组件，必传字段
 				currentUnitTab: 0,
 				tabUnitList: [], // 头部导航
 				unitList: [], //组织数据
@@ -91,34 +90,32 @@
 		},
 		methods: {
 			openCherk: function(){
-				if(this.isPage){
-					this.$router.go(-1);
-				}else{
-					this.$emit('openCherk');
-					var _this = this;
-					setTimeout(()=>{
-						_this.$across.$emit('tabSrcollList');
-					},400)
+				if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
+					this.$across.$emit('tabSrcollList');
+				} else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
+					this.$bus.$emit('tabSrcollList');
 				}
+				this.$nwBack(-1);
 			},
 			unitSubmit: function() {
-				if(!this.isPage){
-					let item = {
-						curUnitItemData: this.curUnitItemData,
-						curUnitItem: this.curUnitItem,
-					}
-					this.$emit('unitSubmit', item);
-					var _this = this;
-					setTimeout(()=>{
-						_this.$across.$emit('unitTabBus', item);
-					},500)
+				let item = {
+					curUnitItemData: this.curUnitItemData,
+					curUnitItem: this.curUnitItem,
 				}
+				var _this = this;
+				setTimeout(()=>{
+					if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
+						_this.$across.$emit('unitTabBus', item);
+					} else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
+						_this.$bus.$emit('unitTabBus', item);
+					}
+				},500)
 			},
 			// 初始化
 			init: function() {
+				this.$textLoading();
 				this.param = this.$tabPageData() || {};
 				this.userInfo = this.param.userInfo;
-				this.isPage = this.param.isPage;
 				// console.log("unitpop------this.userInfo:::",JSON.stringify(this.userInfo));
 				this.getUserUnit();
 				this.tabUnitList = [{
@@ -242,7 +239,7 @@
 							this.getDataUnit(this.tabUnitList[0]);
 						}
 						// this.overlay();
-						this.unitSubmit();
+						// this.unitSubmit();
 					})
 					.catch(err => {
 						this.$textHid();
@@ -292,7 +289,7 @@
 							document.getElementById(
 								"poptabUnitList"
 							).scrollLeft = 99999999999999;
-						}, 0);
+						}, 30);
 					})
 					.catch(err => {
 						this.$textHid();
@@ -363,13 +360,14 @@
 						curUnitItem: _this.curUnitItem,
 					}
 					setTimeout(function() {
-						if(!_this.isPage){
-							_this.unitSubmit();
-						}else{
-							var name = _this.param.exeMun;
+						var name = _this.param.exeMun;
+						if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
 							_this.$across.$emit(name, item);
-							_this.$router.go(-1);
+						} else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
+							console.log('name:::',name);
+							_this.$bus.$emit(name, item);
 						}
+						_this.$nwBack(-1);
 					}, 500);
 				} else {
 					this.$textShow('请选择单位');
