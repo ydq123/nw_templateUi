@@ -252,11 +252,19 @@
 						this.startPosition = Number(retObj.index);
 						this.showPreview = true;
 					} else {
-						this.$bus.$emit("changePreview", {
-							imageList: this.imageList.arr1,
-							showPreview: true,
-							startPosition: Number(retObj.index),
-						});
+						if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
+							this.$across.$emit("changePreview", {
+								imageList: this.imageList.arr1,
+								showPreview: true,
+								startPosition: Number(retObj.index),
+							});
+						} else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
+							this.$bus.$emit("changePreview", {
+								imageList: this.imageList.arr1,
+								showPreview: true,
+								startPosition: Number(retObj.index),
+							});
+						}
 					}
 				} else if (itme.type == 3) {
 					this.myJssdk.callMobileJsSdk(
