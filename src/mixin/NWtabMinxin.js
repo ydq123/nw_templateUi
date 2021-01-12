@@ -84,14 +84,20 @@ export const NWtabMinxin = {
         //返回上 nub 页
         pageNub = nub;
         var jdzIndex = Math.abs(nub);
-        var winName = keepNameArr[keepLeg - jdzIndex - 1].name;
+        if (keepLeg - jdzIndex - 1 < 0) {
+          this.$nwBackHome('');
+          return
+        } else {
+          var winName = keepNameArr[keepLeg - jdzIndex - 1].name;
+        }
+
       } else if (val == 'string') {
         /* keepNameArr */
         var winName = nub;
         var retObj = this.$baseArrExchange(keepNameArr, 'name', winName);
         pageNub = -(keepLeg - 1 - Number(retObj.index));
       } else {
-        this.$tabBackHome('root_tab');
+        this.$nwBackHome('');
         return
       }
       this.$store.commit('setPageUrlObj', {
@@ -107,7 +113,7 @@ export const NWtabMinxin = {
     },
     $nwBackHome: function(winName, dhType) {
       var homeName = window.NW_HOME_NAME; //项目入口的名称
-      if(!homeName){
+      if (!homeName) {
         var routes = this.$router.options.routes;
         var retObj = this.$baseArrExchange(routes || [], 'path', '/');
         if (retObj.itme) { //目标页面是否存在
@@ -120,10 +126,10 @@ export const NWtabMinxin = {
       }
       /* 判断当前使用的是生产与移动的工程模板-页面跳转-就做特殊处理*/
       if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
-        this.$tabBackHome(homeName||'root_tab' , dhType);
+        this.$tabBackHome(homeName || 'root_tab', dhType);
       } else {
         var obj = {
-          name:  homeName||'nw_demoPage', //项目入口的名称
+          name: homeName || 'nw_demoPage', //项目入口的名称
           params: '$nwBackHome'
         };
         this.$router.push(obj);
@@ -150,7 +156,7 @@ export const NWtabMinxin = {
     */
     $nwOpenWin: function(obj, pageData = {}) {
       if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
-        this.$tabOpenWin(obj, pageData = {});
+        this.$tabOpenWin(obj, pageData);
       } else {
         var retStr = this.$baseIsTypeof(obj);
         if (retStr == 'obj') {
