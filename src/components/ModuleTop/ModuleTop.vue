@@ -9,8 +9,8 @@
 	         @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @changeSreen="testChangeSreen"></nw-module-top>
 	    </div>
 	</nw-fixed-header>
-	
-	
+
+
 	2.结合nw-fixed-header使用 传空插槽隐藏（slot="topInput"：隐藏搜索，slot="taskSreenSort"：隐藏排序筛选）
 	2.1：头部tab（隐藏搜索按钮和排序筛选）
 	<nw-fixed-header title="头部标题" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
@@ -21,8 +21,8 @@
 	        </nw-module-top>
 	    </div>
 	</nw-fixed-header>
-	
-	
+
+
 	2.2：头部tab（隐藏搜索按钮和排序）；注：隐藏筛选：isSreen字段值为false
 	<nw-fixed-header title="头部标题" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
 	    <div slot="page-bottmo">
@@ -31,8 +31,8 @@
 	        </nw-module-top>
 	    </div>
 	</nw-fixed-header>
-	
-	
+
+
 	2.3：头部tab（隐藏搜索）
 	<nw-fixed-header title="头部标题" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
 	    <div slot="page-bottmo">
@@ -41,9 +41,9 @@
 	        </nw-module-top>
 	    </div>
 	</nw-fixed-header>
-	
-	
-	
+
+
+
 	2.4：头部tab（隐藏筛选排序整行）
 	<nw-fixed-header title="头部标题" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
 	    <div slot="page-bottmo">
@@ -52,8 +52,8 @@
 	        </nw-module-top>
 	    </div>
 	</nw-fixed-header>
-	
-	
+
+
 	参数说明：
 	    tabList,// 头部tab数组
 		tabList参数示例：testTabList: [
@@ -61,7 +61,7 @@
 				title: "已办",//标题
 				number: 0,//数量
 			}
-		], 
+		],
 		isSort: true, // 控制显示排序按钮，默认为true：显示
 		isSreen: true, // 控制显示筛选按钮，默认为true：显示
 		sortDataList,// 排序数组
@@ -72,7 +72,7 @@
 				sortType: "asc", //排序类型
 			},
 		],
-	
+
 	方法说明：
 	inputTopBtn//moduletop模块头部搜索按钮
 	inputTopBtn自定义方法例子：testInputTopBtn() { console.log('moduletop模块头部搜索按钮'); },
@@ -308,9 +308,13 @@
     },
     computed: {
       activeBarStyle: function() {
-        var left = this.activeBarWidth / 2 - 15; // 15是线宽度的一半
-        if (this.curTabIndex == 0 || this.curTabIndex == 2) {
-          left = this.activeBarWidth / 2 - 10;
+        var leg=this.tabList[this.curTabIndex].title.length||0;
+        if(leg==2){
+          var left = this.activeBarWidth / 2 - 15; // 15是线宽度的一半
+        }else if(leg==3){
+          var left = this.activeBarWidth / 2 - 16; // 15是线宽度的一半
+        }else{
+          var left = this.activeBarWidth / 2 - 15; // 15是线宽度的一半
         }
         return {
           transition: "all 300ms",

@@ -42,7 +42,7 @@
                 >
                   <div class="name">{{ popupItem.name }}</div>
                   <i
-                    class="iconfont icon-sanjiao1 f14"
+                    class="iconfont icon-sanjiao1 f14 "
                     :class="[popupItem.node ? '' : 'icon-sanjiao2']"
                   ></i>
                 </div>

@@ -13,11 +13,12 @@
 <template>
 	<div class="yw-folding">
 		<div class="box p15 bg-white">
-			<div class="box-title folding-row al-c">
-				<div class="flex-1 f14 fw" :class="[showBs?'borc-l-1e8 pl5':'']">标题</div>
+			<div class="box-title folding-row al-c ">
+				<div class="flex-1 f14 fw" :class="[showBs?'borc-l-1e8 pl5':'']">{{titleName}}</div>
 				<div class="icontrans" @click="showBox = !showBox" :class="[showBox?'showRotate':'']">
 					<slot name="topRIconSlot">
-						<i class="iconfont icon-sanjiao1 f12 gray9"></i>
+            <!-- :class="[showBox?'txt-1e8':'gray9']" -->
+						<i :class="[showBox?'txt-1e8':'gray9']" class="iconfont icon-sanjiao1 f12 "></i>
 					</slot>
 				</div>
 			</div>
@@ -25,10 +26,10 @@
 				<slot name="boxCenten"></slot>
 			</div>
 			<slot name="botIconSlot">
-				<div class="folding-row al-c ju-c pt15 txt-1e8">
-					<div class="mr5" @click="showBox = !showBox">{{showBox?'收起':'展开'}}</div>
+				<div :class="[showBox?'txt-1e8':'gray9']" class="folding-row al-c ju-c pt15 txt-1e8">
+					<div class="mr5"  @click="showBox = !showBox">{{showBox?'收起':'展开'}}</div>
 					<div class="icontrans" @click="showBox = !showBox" :class="[showBox?'showRotate':'']">
-						<i class="iconfont icon-qianjin-copy txt-1e8 f12"></i>
+						<i class="iconfont icon-qianjin-copy  f12"></i>
 					</div>
 				</div>
 			</slot>
@@ -47,6 +48,10 @@
 			}
 		},
 		props: {
+      titleName:{
+        type: String,
+        default: '标题'
+      },
 			foldShowBox: { //显示折叠层，默认为true显示，false隐藏
 				type: Boolean,
 				default: true
@@ -60,7 +65,7 @@
 
 		},
 		methods: {
-			
+
 		},
 	}
 </script>
@@ -81,7 +86,7 @@
 	.icontrans {
 		transition: all 0.3s;
 		transform: rotate(0deg);
-		
+
 	}
 	.showRotate {
 		transform: rotate(180deg);

@@ -14,7 +14,7 @@
 		<div slot="tabList"></div>
 		<div slot="tabIconSX"></div>
 	</nw-tab-widget>
-	
+
 	TabWidget多状态tab组件参数
 	statusY: 'gray287 fw',//选中tab样式
 	statusN:'gray3',//未选中tab样式
@@ -104,7 +104,7 @@
 					<div class="tab-list-border tabwidget-row al-c ju-a bg-white f16">
 						<div @click="changeTab(tabIndex)" class="tab-items" v-for="(tabItem,tabIndex) in tabList" :key="tabIndex" :class="[ curTabIndex === tabIndex ? statusY : statusN]">
 							<span class="lh200 f14">{{tabItem.title}}</span>
-							<span class="tab-number">({{tabList[tabIndex].number}})</span>
+							<span class="tab-number" v-if="tabList[tabIndex].status">({{tabList[tabIndex].number}})</span>
 						</div>
 						<div class="tab-border bg-287" :style="activeBarStyle" ref="activeBar"></div>
 					</div>
@@ -190,17 +190,17 @@
 				default: () => [{
 						title: "待办",
 						number: 0,
-						status: false
+						status: true
 					},
 					{
 						title: "已办1",
 						number: 0,
-						status: false
+						status: true
 					},
 					{
 						title: "已办2",
 						number: 0,
-						status: false
+						status: true
 					},
 				]
 			},
@@ -330,9 +330,13 @@
 		},
 		computed: {
 			activeBarStyle: function() {
-				var left = this.activeBarWidth / 2 - 15; // 15是线宽度的一半
-				if (this.curTabIndex == 0 || this.curTabIndex == 2) {
-					left = this.activeBarWidth / 2 - 15;
+				var leg=this.tabList[this.curTabIndex].title.length||0;
+				if(leg==2){
+				  var left = this.activeBarWidth / 2 - 15; // 15是线宽度的一半
+				}else if(leg==3){
+				  var left = this.activeBarWidth / 2 - 16; // 15是线宽度的一半
+				}else{
+				  var left = this.activeBarWidth / 2 - 15; // 15是线宽度的一半
 				}
 				return {
 					transition: "all 300ms",
