@@ -99,9 +99,9 @@
 </template>
 
 <script>
-import { NWtabMinxin } from "@/mixin/NWtabMinxin.js";
+import { NWtabMinxin } from "../mixin/NWtabMinxin.js";
 export default {
-  name: "ledgerQuery",
+  name: "nw_checkSubstation",
   mixins: [NWtabMinxin],
   data() {
     return {
@@ -128,9 +128,9 @@ export default {
   },
   mounted() {
     // this.getData();
-    document.addEventListener("scroll", function() {
-      console.log(123);
-    });
+    // document.addEventListener("scroll", function() {
+    //   console.log(123);
+    // });
   },
   methods: {
     //获取列表数据

@@ -86,7 +86,7 @@
 		NWtabMinxin
 	} from "../mixin/NWtabMinxin.js";
 	export default {
-		name: "flowView",
+		name: "nw_flowView",
 		mixins: [NWtabMinxin],
 		data() {
 			return {
@@ -102,9 +102,9 @@
 		created() {},
 		destroyed() {
 			if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
-				
+
 			} else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
-				
+
 			}
 		},
 		mounted() {

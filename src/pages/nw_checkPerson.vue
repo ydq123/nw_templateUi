@@ -87,7 +87,7 @@
 		NWtabMinxin
 	} from "../mixin/NWtabMinxin.js";
 	export default {
-		name: "checkPerson",
+		name: "nw_checkPerson",
 		mixins: [NWtabMinxin],
 		data() {
 			return {

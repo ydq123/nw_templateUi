@@ -61,7 +61,7 @@
 	} from "../mixin/NWtabMinxin.js";
 	export default {
 		mixins: [NWtabMinxin], //混入公共类
-		name: 'checkUnit',
+		name: 'nw_checkUnit',
 		data() {
 			return {
 				param:{},
