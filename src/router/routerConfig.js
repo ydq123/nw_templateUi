@@ -62,6 +62,16 @@ const routes = [{
   	title: '台账选择地图',
   },
 },
+{
+  path: '/nw_checkSubstation',
+  name: 'nw_checkSubstation',
+  component: () => import( /* webpackChunkName: "about" */ '../pages/nw_checkSubstation.vue'),
+  meta: {
+  	keepAlive: true,
+  	moduleName: 'nwTemplateUI',
+  	title: '台账组件',
+  },
+},
 ];
 
 export default routes;
