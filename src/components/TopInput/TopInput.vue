@@ -28,7 +28,7 @@
  -->
 <template>
 	<div>
-		<div class="yw-topinput bg-f5" :style="{top:mTop+'px'}">
+		<div class="yw-topinput bg-f5" >
 			<slot name="topInput">
 				<!-- 搜索框按钮 -->
 				<div class="top-input" v-if="!topInput">
@@ -79,7 +79,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="zdc zIndex9" v-show="showPop" @click.stop="zdcBtnShow"></div>
+		<div class="zdc" :style="{'z-index':mTopZindex}" v-show="showPop" @click.stop="zdcBtnShow"></div>
 	</div>
 </template>
 
@@ -101,6 +101,14 @@
 			}
 		},
 		props: {
+      mTopStatus:{// 是否需要固定布局
+				type: Boolean,
+				default: false
+			},
+      mTopZindex:{// 列表数据总数
+				type: Number,
+				default: 9
+			},
 			listNub: {// 列表数据总数
 				type: Number,
 				default: 0
@@ -220,19 +228,15 @@
 
 <style scoped lang="less">
 	@import "../../assets/less/nw_tool.less";
-
 	.yw-topinput {
-		position: fixed;
-		left: 0;
-		z-index: 999;
 		text-align: center;
 		width: 100%;
 	}
-	
+
 	.text-99{
 		color: #999999;
 	}
-	
+
 	.pos-a{
 		position: absolute;
 		.pxToremLess(right,15px);
@@ -255,17 +259,14 @@
 	}
 
 	.zdc {
-		width: 100%;
-		height: 100%;
+		width: 100vw;
+		height: 100vh;
 		background-color: rgba(0, 0, 0, 0.5);
-		position: fixed;
+		position: relative;
 		top: 0;
 		left: 0;
 	}
 
-	.zIndex9 {
-		z-index: 9 !important;
-	}
 
 	.zIndex999 {
 		z-index: 999 !important;
