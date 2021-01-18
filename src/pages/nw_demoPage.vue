@@ -18,7 +18,7 @@
     </div>
     <!-- 台账组件 -->
     <div>
-      <van-button type="primary" @click="$nwOpenWin('nw_checkSubstation')">选择变电站</van-button>
+      <van-button type="primary" @click="$nwOpenWin('nw_bd_checkSubstation')">选择变电站</van-button>
     </div>
     <div class="bg-white mt20 pb20">
       <h2 class="pt15 pb10 borderButtomE8 grayfa6470 f16 text-center">详情页顶部简介</h2>

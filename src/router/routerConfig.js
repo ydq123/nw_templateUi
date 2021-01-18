@@ -63,13 +63,32 @@ const routes = [{
   },
 },
 {
-  path: '/nw_checkSubstation',
-  name: 'nw_checkSubstation',
-  component: () => import( /* webpackChunkName: "about" */ '../pages/nw_checkSubstation.vue'),
+  path: '/nw_bd_checkSubstation',
+  name: 'nw_bd_checkSubstation',
+  component: () => import( /* webpackChunkName: "about" */ '../pages/nw_bd_checkSubstation.vue'),
   meta: {
   	keepAlive: true,
   	moduleName: 'nwTemplateUI',
-  	title: '台账组件',
+  	title: '变电站',
+  },
+},
+{
+  path: '/nw_bd_functionalLocation',
+  name: 'nw_bd_functionalLocation',
+  component: () => import( /* webpackChunkName: "about" */ '../pages/nw_bd_functionalLocation.vue'),
+  meta: {
+  	keepAlive: true,
+  	moduleName: 'nwTemplateUI',
+  	title: '变电功能位置',
+  },
+},{
+  path: '/nw_bd_equipment',
+  name: 'nw_bd_equipment',
+  component: () => import( /* webpackChunkName: "about" */ '../pages/nw_bd_equipment.vue'),
+  meta: {
+  	keepAlive: true,
+  	moduleName: 'nwTemplateUI',
+  	title: '变电设备',
   },
 },
 ];
