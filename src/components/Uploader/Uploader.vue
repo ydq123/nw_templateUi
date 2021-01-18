@@ -39,7 +39,7 @@
 			},
 			proxyIp: {
 				type: String, //开发环境代理地址（IP）
-				default: ''
+				default: 'http://172.16.68.42:80'
 			},
 			accessToken: {
 				type: String, //token

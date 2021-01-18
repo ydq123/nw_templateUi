@@ -69,7 +69,8 @@
 			</van-list>
 		</div>
 		<div class="person-bottom_button p10 bg-white person-row ju-b f16 width-100 fw boxt003" v-if="taskInfo.nodeList.length > 0 && isType == 1">
-			<div class="nw_buttom_345_44 width-100 bg-287 text-white" @click="submitCurNode">确定</div>
+			<div class="nw_buttom_125_44 width-100 cybtn" @click="qcCurNode">清除</div>
+			<div class="nw_buttom_125_44 ml10 width-100 bg-287 text-white" @click="submitCurNode">确定</div>
 		</div>
 		<div class="person-bottom_button p10 bg-white person-row ju-b f16 width-100 fw boxt003" v-if="taskInfo.nodeList.length > 0 && isType == 2">
 			<div class="gray287 person-row al-c " @click="showPicker2 = true">已选择: {{ curNodeList.length }}人</div>
@@ -371,6 +372,14 @@
 					console.log('this.curNodeList:::' + JSON.stringify(this.curNodeList));
 				}
 			},
+			// 清除选中的人员
+			qcCurNode: function(){
+				for (var i = 0; i < this.taskInfo.nodeList.length; i++) {
+					this.taskInfo.nodeList[i].status = false;
+					this.curNodeItem = {};
+				}
+				this.callbackTap();
+			},
 			// 选中当前节点
 			submitCurNode: function() {
 				this.callbackTap();
@@ -446,6 +455,12 @@
 		// height: 100%;
 		background-color: #f5f5f5;
 		text-align: left;
+	}
+	
+	// 次要按钮
+	.cybtn {
+		// color: #262626;
+		border: 1px solid #d8d8d8;
 	}
 
 	.person-centent {
