@@ -10,7 +10,7 @@
       </div>
     </nw-fixed-header>
     <!-- 头部搜索组件 -->
-    <div class="bg-white mt20 pb20">
+    <div class="bg-white mt50 pb20">
       <h2 class="pt15 pb10 borderButtomE8 grayfa6470 f16 text-center">tab切换组件（带筛选、排序）</h2>
       <nw-module-top :isSort="true" :isSreen="true" @changeSreen="topInputChangeSreen" @inputTopBtn="testInputTopBtn"
         @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen">

@@ -1,49 +1,64 @@
 <template>
-  <div class="ledger_query pt44 ">
+  <div class="ledger_query pt44">
     <nw-fixed-header title="科学城站新庄110KV">
-      <div slot="right"></div>
-      <div slot="page-bottom" class="bg-f5">
-        <div class="adress gray3 pt15 f14 text-left pl15">
-          功能位置：<span class="gray287">广州市黄埔区云升科学园</span>
-        </div>
-        <div class="row  al-c ">
-          <van-search style="width: 100%" v-model="searchValue" placeholder="间隔名称" />
-          <van-icon name="scan" class="f22 mr10 gray287" />
-        </div>
-        <div class="task-top-filtrate bg-white row ju-b">
-          <div class="task-top-txt">
-            <span class="ml15 f14">共8条记录</span>
+          <div slot="right"></div>
+          <div slot="page-bottom" class="bg-f5">
+            <div class="adress gray3 pt15 f14 text-left pl15">
+              功能位置：<span class="gray287">广州市黄埔区云升科学园</span>
+            </div>
+            <div class="row  al-c ">
+              <van-search style="width: 100%" v-model="searchValue" placeholder="间隔名称" />
+              <van-icon name="scan" class="f22 mr10 gray287" />
+            </div>
+            <div class="task-top-filtrate bg-white row ju-b">
+              <div class="task-top-txt">
+                <span class="ml15 f14">共8条记录</span>
+              </div>
+              <div class="rank-btn-r" @click="filters">
+                <span class="f14 mr5">筛选</span>
+                <i class="iconfont icon-shaixuan1 gray6 f12"></i>
+              </div>
+            </div>
           </div>
-          <div class="rank-btn-r" @click="filters">
-            <span class="f14 mr5">筛选</span>
-            <i class="iconfont icon-shaixuan1 gray6 f12"></i>
-          </div>
-        </div>
-      </div>
-    </nw-fixed-header>
+        </nw-fixed-header>
     <div class="list-content borderTopE8 pt128">
       <van-pull-refresh class="pb65" v-model="refreshing" success-text="刷新成功" @refresh="onRefresh">
         <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
           <div class="list mt10">
-            <div class="bg-white pl50 pt10">离我最近647米</div>
+            <div class="bg-white pl50 pt10 gray9">离我最近 647米</div>
             <div class="task-list borderButtomE8" m="click" @click="checkItem(value)" :key="index" v-for="(value, index) in list">
-              <div class="flex p15">
-                <div class="checkbox pr15 flex">
+              <div class="row p15">
+                <div class=" pr15 al-c row ">
                   <van-checkbox v-model="value.checked"></van-checkbox>
                 </div>
-                <div class="list flex">
+                <div class="list row" @click.stop="$nwOpenWin('nw_bd_functionalLocation')">
                   <div class="content-left mr10">
-                    <img src="~@/assets/images/mapImg/mapType2.png" />
+                    <img src="../assets/images/mapImg/mapType2.png" />
                   </div>
-                  <div class="content-right pt5 flex-1">
-                    <div class="title text-overflow f16 mb10">110kV章陂站</div>
-                    <div class="path text-overflow f14 mb10 gray6">
+                  <div class="content-right ">
+                    <div class=" f16  clamp1">110kV章陂站</div>
+                    <div class=" f14 pt5 clamp1">
                       广州供电局有限公司/变电设施/变电一所/220kV新塘巡维中心/110kV章陂站
                     </div>
-                    <div class="time f14 mb10 gray6">红星巡维中心 2008-12-27</div>
-                    <div class="status flex f12">
-                      <div class="run mr10 verticle-center">运行</div>
-                    </div>
+                    <div class="f14 pt5 clamp1">2008-12-27</div>
+                    <nw-status-label class="" :bqStaLabel="[	{
+                    staCal: '',
+                    staLabTxt: '待审核',
+                    status: 1,
+                    fsize:'f10',
+                    },{
+                    staCal: 'borc-l-1e8 border',
+                    staLabTxt: '双母接线',
+                    status: 0,
+                    staBorCol: '#1E87F0',
+                    fsize:'f10',
+                    },{
+                    staCal: 'borc-l-1e8 border',
+                    staLabTxt: '无人值守',
+                    status: 0,
+                    staBorCol: '#1E87F0',
+                    fsize:'f10',
+                    }]"></nw-status-label>
                   </div>
                 </div>
               </div>
@@ -52,20 +67,20 @@
         </van-list>
       </van-pull-refresh>
       <van-popup v-model="showPopup" round position="bottom" :style="{ height: '60%' }">
-        <div class="title line-t pb10 pt10 verticle-center ju-b pl15 pr15 f15">
-          <span>共7条记录</span>
-          <span><i class="iconfont icon-shanchu"></i> 清空</span>
-        </div>
-        <div class="list-data f16">
-          <div class="row al-c ju-b pl15  pr15 pt10 pb10 verticle-center borderTopE8" v-for="item in 5">
-            <div class="row al-c ">
-              <div class="bg-red text-white pr5 pl5 vLev mr5">110kv</div>
-              <div class="list-name">科学城新城站-11010</div>
-            </div>
-            <div class="pl15"><i class="iconfont icon-shanchu"></i></div>
-          </div>
-        </div>
-      </van-popup>
+              <div class="title line-t pb10 pt10 verticle-center ju-b pl15 pr15 f15">
+                <span>共7条记录</span>
+                <span class="row al-c "><van-icon name="delete" class="text-red f20 mr5"  /> 清空</span>
+              </div>
+              <div class="list-data f16">
+                <div class="row al-c ju-b pl15  pr15 pt10 pb10 verticle-center borderTopE8" v-for="item in 5">
+                  <div class="row al-c ">
+                    <div class="bg-red text-white pr5 pl5 vLev mr5">110kv</div>
+                    <div class="list-name">科学城新城站-11010</div>
+                  </div>
+                  <div class="pl15"><i class="iconfont icon-shanchu text-red"></i></div>
+                </div>
+              </div>
+            </van-popup>
     </div>
     <div class="p10 bg-white flex boxs">
       <div class="btn btn-width-100 cybtn mr5 bg-f5 f14 gray3 border_1_dc" @click="showPopup = true">
@@ -138,6 +153,7 @@
         }, {
           checked: false
         }],
+        hasChecked: false
       };
     },
     mounted() {
@@ -231,21 +247,16 @@
       // 重置
       resetScreen() {},
       // 确定
-      submitScreen() {
-        // .pxToremLess(background-color,red);
-      }
+      submitScreen() {}
     }
   };
 </script>
 
 <style scoped lang="less">
-  @import  '../assets/less/nw_tool.less';
-  /* .pxToremLess(padding-right, 300px);*/
+  @import '../assets/less/nw_tool.less';
+
   .ledger_query {
     height: 100%;
-    .vLev {
-      border-radius: 2px;
-    }
 
     .task-top-filtrate {
       height: 40px;
@@ -323,37 +334,16 @@
 
       .list {
         height: 100%;
-        overflow: auto;
 
         .task-list {
           position: relative;
           background-color: #fff;
 
           .list {
-            .content-left {
-              position: relative;
-              flex: 0 0 110px;
-              height: 115px;
-              border-radius: 4px;
-              overflow: hidden;
-
-              img {
-                width: 100%;
-                height: 100%;
-              }
-            }
-
-            .content-right {
-              text-align: left;
-              overflow: hidden;
-
-              .status {
-                .run {
-                  padding: 2px 7px;
-                  background-color: #ddf1d9;
-                  color: #1ca300;
-                }
-              }
+            img {
+              .pxToremLess(width, 96px);
+              // .pxToremLess(height, 96px);
+              height: 100%;
             }
           }
 

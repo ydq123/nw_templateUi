@@ -36,7 +36,7 @@
     <van-popup v-model="showPopup" round position="bottom" :style="{ height: '60%' }">
       <div class="title line-t pb10 pt10 verticle-center ju-b pl15 pr15 f15">
         <span>共7条记录</span>
-        <span><i class="iconfont icon-shanchu"></i> 清空</span>
+        <span class="row al-c "><van-icon name="delete" class="text-red f20 mr5"  /> 清空</span>
       </div>
       <div class="list-data f15">
         <div class="flex ju-b pl15 pr15 pt10 pb10 verticle-center borderTopE8" v-for="item in 5">
@@ -44,7 +44,7 @@
             <div class="listRightRed"></div>
             <span class="pl5">110kv第{{item}}窜备</span>
           </div>
-          <div class="pl15"><i class="iconfont icon-shanchu"></i></div>
+          <div class="pl15"><i class="iconfont icon-shanchu text-red"></i></div>
         </div>
       </div>
     </van-popup>

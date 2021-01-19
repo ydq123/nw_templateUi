@@ -18,10 +18,13 @@ mdpWorkflow.setBizCommonUtils({
 let that = this;
 mdpWorkflow.setPopup({
   // 消息提示
-  alert({ type, message }) {
-    if(type=='correct') {
+  alert({
+    type,
+    message
+  }) {
+    if (type == 'correct') {
       that.$toast.success(message);
-    }else {
+    } else {
       that.$toast.fail(message);
     }
   },
@@ -46,6 +49,26 @@ mdpWorkflow.setPopup({
     }).show();
   },
 });
+/* 适配新的接口返回格式 */
+mdpWorkflow.resetWorkflowAjaxSettingsByBiz(function(targetAjaxSettings) {
+  const callbacks = targetAjaxSettings.success;
+  Object.assign(targetAjaxSettings, {
+    success: (response) => {
+      console.log(7777777)
+      console.log(response);
+      if (response) {
+        if (response.msg) {
+          response = response.data;
+        }
+      }
+      console.log(88888)
+      console.log(response);
+      callbacks(response);
+    }
+  });
+  return targetAjaxSettings;
+})
+
 
 // 注册到全局使用
 Vue.prototype.$mdpWorkflow = mdpWorkflow;

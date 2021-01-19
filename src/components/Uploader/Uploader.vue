@@ -14,7 +14,7 @@
 				<div class="pathName column ju-c al-c" v-show="fileItem.pathName&&fileItem.status==3">
 					<div class="text-center clamp1 f10 text-white">{{fileItem.pathName}}</div>
 				</div>
-				<img @click.stop="dltFile(fileIndex, fileItem)" v-show="deletable" class="imgdlt" src="@/assets/images/dlt.png" />
+				<img @click.stop="dltFile(fileIndex, fileItem)" v-show="deletable" class="imgdlt" src="../../assets/images/dlt.png" />
 			</div>
 			<div v-if="showUpload" class="fill_Upimg_list_item bg-eee column al-c ju-c" m="click" @click="selectFileUpload">
 				<i class="iconfont icon-jia1 f32 graydf"></i>
@@ -87,7 +87,7 @@
 				default: () => [{
 					type: 0,
 					typeKey: 'mp4',
-					fmImg: require("@/assets/images/fileTypeImg/video.png")
+					fmImg: require("../../assets/images/fileTypeImg/video.png")
 				}]
 			},
 			imgTypeArr: {
@@ -111,47 +111,47 @@
 				default: () => [{
 						type: 3,
 						typeKey: 'doc',
-						fmImg: require("@/assets/images/fileTypeImg/word.png")
+						fmImg: require("../../assets/images/fileTypeImg/word.png")
 					}, {
 						type: 3,
 						typeKey: 'docx',
-						fmImg: require("@/assets/images/fileTypeImg/word.png")
+						fmImg: require("../../assets/images/fileTypeImg/word.png")
 					},
 					{
 						type: 3,
 						typeKey: 'xls',
-						fmImg: require("@/assets/images/fileTypeImg/xlsx.png")
+						fmImg: require("../../assets/images/fileTypeImg/xlsx.png")
 					}, {
 						type: 3,
 						typeKey: 'xlsx',
-						fmImg: require("@/assets/images/fileTypeImg/xlsx.png")
+						fmImg: require("../../assets/images/fileTypeImg/xlsx.png")
 					},
 					{
 						type: 3,
 						typeKey: 'ppt',
-						fmImg: require("@/assets/images/fileTypeImg/text.png")
+						fmImg: require("../../assets/images/fileTypeImg/text.png")
 					}, {
 						type: 3,
 						typeKey: 'pptx',
-						fmImg: require("@/assets/images/fileTypeImg/text.png")
+						fmImg: require("../../assets/images/fileTypeImg/text.png")
 					},
 					{
 						type: 3,
 						typeKey: 'pdf',
-						fmImg: require("@/assets/images/fileTypeImg/pdf.png")
+						fmImg: require("../../assets/images/fileTypeImg/pdf.png")
 					}, {
 						type: 3,
 						typeKey: 'pdfx',
-						fmImg: require("@/assets/images/fileTypeImg/pdf.png")
+						fmImg: require("../../assets/images/fileTypeImg/pdf.png")
 					},
 					{
 						type: 3,
 						typeKey: 'zip',
-						fmImg: require("@/assets/images/fileTypeImg/zip.png")
+						fmImg: require("../../assets/images/fileTypeImg/zip.png")
 					}, {
 						type: 3,
 						typeKey: 'text',
-						fmImg: require("@/assets/images/fileTypeImg/text.png")
+						fmImg: require("../../assets/images/fileTypeImg/text.png")
 					}
 				]
 			}
@@ -161,8 +161,8 @@
 				uploaderFun: null,
 				startPosition: 0,
 				showPreview: false,
-				videoPng: require("@/assets/images/fileTypeImg/video.png"),
-				dltPng: require("@/assets/images/dlt.png"),
+				videoPng: require("../../assets/images/fileTypeImg/video.png"),
+				dltPng: require("../../assets/images/dlt.png"),
 				upFileArr: [],
 				lookFileArr: [],
 			};
@@ -228,7 +228,7 @@
 			}
 		},
 		methods: {
-			// 附件预览 
+			// 附件预览
 			ylTap: function(index, itme) {
 				/* 0图片，1视频，3文档，4压缩包，未知*/
 				console.log('---');
@@ -599,7 +599,7 @@
 				return {
 					type: 5,
 					typeKey: 'null',
-					fmImg: require("@/assets/images/fileTypeImg/null.png")
+					fmImg: require("../../assets/images/fileTypeImg/null.png")
 				};
 			},
 			/* 计算base 64  */

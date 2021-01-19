@@ -26,27 +26,40 @@
       <van-pull-refresh class="pb65" v-model="refreshing" success-text="刷新成功" @refresh="onRefresh">
         <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
           <div class="list mt10">
-            <div class="bg-white pl50 pt10">离我最近647米</div>
+            <div class="bg-white pl50 pt10 gray9">离我最近 647米</div>
             <div class="task-list borderButtomE8" m="click" @click="checkItem(value)" :key="index" v-for="(value, index) in list">
-              <div class="flex p15">
-                <div class="checkbox pr15 flex">
+              <div class="row p15">
+                <div class=" pr15 al-c row ">
                   <van-checkbox v-model="value.checked"></van-checkbox>
                 </div>
-                <div class="list flex" @click.stop="$nwOpenWin('nw_bd_functionalLocation')">
+                <div class="list row" @click.stop="$nwOpenWin('nw_bd_functionalLocation')">
                   <div class="content-left mr10">
-                    <img src="~@/assets/images/mapImg/mapType2.png" />
+                    <img src="../assets/images/mapImg/mapType2.png" />
                   </div>
-                  <div class="content-right pt5 flex-1">
-                    <div class="title text-overflow f16 mb10">110kV章陂站</div>
-                    <div class="path text-overflow f14 mb10">
+                  <div class="content-right ">
+                    <div class=" f16  clamp1">110kV章陂站</div>
+                    <div class=" f14 pt5 clamp1">
                       广州供电局有限公司/变电设施/变电一所/220kV新塘巡维中心/110kV章陂站
                     </div>
-                    <div class="time f14 mb10">2008-12-27 00:00:00</div>
-                    <div class="status flex f12">
-                      <div class="run mr10 verticle-center">运行</div>
-                      <div class="double-line border mr10">双母接线</div>
-                      <div class="nobody border">无人值守</div>
-                    </div>
+                    <div class="f14 pt5 clamp1">2008-12-27</div>
+                    <nw-status-label class="" :bqStaLabel="[	{
+                    staCal: '',
+                    staLabTxt: '待审核',
+                    status: 1,
+                    fsize:'f10',
+                    },{
+                    staCal: 'borc-l-1e8 border',
+                    staLabTxt: '双母接线',
+                    status: 0,
+                    staBorCol: '#1E87F0',
+                    fsize:'f10',
+                    },{
+                    staCal: 'borc-l-1e8 border',
+                    staLabTxt: '无人值守',
+                    status: 0,
+                    staBorCol: '#1E87F0',
+                    fsize:'f10',
+                    }]"></nw-status-label>
                   </div>
                 </div>
               </div>
@@ -55,14 +68,14 @@
         </van-list>
       </van-pull-refresh>
       <van-popup v-model="showPopup" round position="bottom" :style="{ height: '60%' }">
-        <div class="title line-t pb10 pt10 verticle-center ju-b pl15 pr15 f15">
+        <div class="title line-t pb10 pt10  verticle-center ju-b pl15 pr15 f15">
           <span>共7条记录</span>
-          <span><i class="iconfont icon-shanchu"></i> 清空</span>
+          <span class="row al-c "><van-icon name="delete" class="text-red f20 mr5"  /> 清空</span>
         </div>
         <div class="list-data f15">
           <div class="flex ju-b pl15 pr15 pt10 pb10 verticle-center borderTopE8" v-for="item in 5">
             <div class="list-name">科学城新城站-11010</div>
-            <div class="pl15"><i class="iconfont icon-shanchu"></i></div>
+            <div class="pl15"><i class="iconfont icon-shanchu text-red"></i></div>
           </div>
         </div>
       </van-popup>
@@ -238,6 +251,8 @@
 </script>
 
 <style scoped lang="less">
+  @import '../assets/less/nw_tool.less';
+
   .ledger_query {
     height: 100%;
 
@@ -317,37 +332,16 @@
 
       .list {
         height: 100%;
-        overflow: auto;
 
         .task-list {
           position: relative;
           background-color: #fff;
 
           .list {
-            .content-left {
-              position: relative;
-              flex: 0 0 110px;
-              height: 115px;
-              border-radius: 4px;
-              overflow: hidden;
-
-              img {
-                width: 100%;
-                height: 100%;
-              }
-            }
-
-            .content-right {
-              text-align: left;
-              overflow: hidden;
-
-              .status {
-                .run {
-                  padding: 2px 7px;
-                  background-color: #ddf1d9;
-                  color: #1ca300;
-                }
-              }
+            img {
+              .pxToremLess(width, 96px);
+              // .pxToremLess(height, 96px);
+              height: 100%;
             }
           }
 
