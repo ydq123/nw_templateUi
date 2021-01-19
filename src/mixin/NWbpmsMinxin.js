@@ -57,6 +57,7 @@ export const NWbpmsMinxin = {
     /* 上报 -选人*/
     $bpmsReportShow: function(obj, callback) {
       // 注册参数回调函数
+      this.setDataType();
       this.$bpmsSetOpenWindow();
       /* false显示选人界面  true默认选中第一个不显示选人界面 */
       // this.$bpmsGetData(obj)为组装工作流组件需要的请求参数，
@@ -66,12 +67,14 @@ export const NWbpmsMinxin = {
     /* 上报 -静默*/
     $bpmsReportHid: function(obj, callback) {
       // 注册参数回调函数
+      this.setDataType();
       this.$bpmsSetAutoConfirm();
       mdpWorkflow.operate.report(false, () => this.$bpmsGetData(obj), callback);
     },
     /* 撤回 */
     $bpmsUndo: function(obj, callback) {
       console.log('undo')
+      this.setDataType();
       mdpWorkflow.operate.undo(false, () => this.$bpmsGetData(obj), callback);
     },
     /* 回退 */
@@ -82,16 +85,19 @@ export const NWbpmsMinxin = {
     /* 发送 -选人 */
     $bpmsSendShow: function(obj, callback) {
       // 注册参数回调函数
+      this.setDataType();
       this.$bpmsSetOpenWindow();
       mdpWorkflow.operate.send(false, () => this.$bpmsGetData(obj), callback);
     },
     /* 发送 -静默 */
     $bpmsSendHid: function(obj, callback) {
+      this.setDataType();
       this.$bpmsSetAutoConfirm();
       mdpWorkflow.operate.send(true, () => this.$bpmsGetData(obj), callback);
     },
     /* 转发 */
     $bpmsReassign: function(obj, callback) {
+      this.setDataType();
       this.$bpmsSetOpenWindow()
       mdpWorkflow.operate.reassign(false, () => this.$bpmsGetData(obj), callback);
     },
@@ -114,7 +120,7 @@ export const NWbpmsMinxin = {
           // }
           console.log(nodeinfolist, 'nodeinfolist');
           // 通过通用页面跳转
-          that.$mdpWorkflowSelectPage.show({
+          that.$refs.workflowSelectPage.show({
             data,
             nodeinfolist,
           });
@@ -129,7 +135,7 @@ export const NWbpmsMinxin = {
           console.log(data, 'data');
           console.log(nodeinfolist, 'nodeinfolist');
           // 通过通用页面跳转
-          that.$mdpWorkflowSelectPage.autoConfirm(data, nodeinfolist);
+          that.$refs.workflowSelectPage.autoConfirm(data, nodeinfolist);
         },
       });
     },
@@ -152,11 +158,27 @@ export const NWbpmsMinxin = {
       Vue.prototype.$mdpWorkflowSelectPage = this.$refs.workflowSelectPage; // 保存跳转人员选择页面的ref
       mdpWorkflow.setBpmsUserInfo(bpmsUuseObj); //动态更新工作流需要的用户信息
     },
-    /*回掉函数 */
-    // flowOperateCallback:function(ret){
-    // 	console.log(22222222222222)
-    // 	console.log(ret)
-    // }
+    /*处理网络请求数据格式 */
+    setDataType: function() {
+      mdpWorkflow.resetWorkflowAjaxSettingsByBiz(function(targetAjaxSettings) {
+        const callbacks = targetAjaxSettings.success;
+        Object.assign(targetAjaxSettings, {
+          success: (response) => {
+            console.log(7777777)
+            console.log(response);
+            if (response) {
+              if (response.msg) {
+                response = response.data;
+              }
+            }
+            console.log(88888)
+            console.log(response);
+            callbacks(response);
+          }
+        });
+        return targetAjaxSettings;
+      })
+    }
 
   }
 }
