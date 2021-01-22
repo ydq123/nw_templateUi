@@ -446,7 +446,7 @@
 				// 	}
 				// });
 				this.$nwOpenWin('nw_checkPerson', {
-					type: 1,
+					type: 1,//1：单选； 2：多选； 注：多选需要传：personalList数组为当前页面的人员
 					userInfo: this.userInfo,
 					exeMun: "testemitunit",
 				});

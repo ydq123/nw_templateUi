@@ -296,12 +296,17 @@
 						// console.log('res::::::::::' + JSON.stringify(res));
 						if (res.list && res.list.length > 0) {
 							for (var i = 0; i < res.list.length; i++) {
-								var nodeItem = {
-									dangerSubType: res.list[i].employeeName ? res.list[i].employeeName : "",
-									id: res.list[i].userId ? res.list[i].userId : "",
-									parentOrgId: res.list[i].orgId ? res.list[i].orgId : "",
-									status: false,
-								};
+								var nodeItem = res.list[i];
+								nodeItem.dangerSubType = res.list[i].employeeName ? res.list[i].employeeName : "";
+								nodeItem.id = res.list[i].userId ? res.list[i].userId : "";
+								nodeItem.parentOrgId = res.list[i].orgId ? res.list[i].orgId : "";
+								nodeItem.status = false;
+								// var nodeItem = {
+								// 	dangerSubType: res.list[i].employeeName ? res.list[i].employeeName : "",
+								// 	id: res.list[i].userId ? res.list[i].userId : "",
+								// 	parentOrgId: res.list[i].orgId ? res.list[i].orgId : "",
+								// 	status: false,
+								// };
 								this.taskInfo.nodeList.push(nodeItem);
 							}
 							// 判断多选人员选中样式

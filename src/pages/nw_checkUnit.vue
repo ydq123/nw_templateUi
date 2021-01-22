@@ -261,14 +261,21 @@
 						// console.log('res:' + JSON.stringify(res));
 						if (res.length > 0) {
 							for (var i = 0; i < res.length; i++) {
-								var nodeItem = {
-									dangerSubType: res[i].orgName ? res[i].orgName : "",
-									id: res[i].orgId ? res[i].orgId : "",
-									parentOrgId: res[i].parentOrgId ? res[i].parentOrgId : "",
-									orgId: res[i].orgId ? res[i].orgId : "",
-									state: res[i].state ? res[i].state : 1,
-									userState: res[i].userState ? res[i].userState : 1,
-								};
+								var nodeItem = res[i];
+								nodeItem.dangerSubType = res[i].orgName ? res[i].orgName : "",
+								nodeItem.id = res[i].orgId ? res[i].orgId : "",
+								nodeItem.parentOrgId = res[i].parentOrgId ? res[i].parentOrgId : "",
+								nodeItem.orgId = res[i].orgId ? res[i].orgId : "",
+								nodeItem.state = res[i].state ? res[i].state : 1,
+								nodeItem.userState = res[i].userState ? res[i].userState : 1,
+								// var nodeItem = {
+								// 	dangerSubType: res[i].orgName ? res[i].orgName : "",
+								// 	id: res[i].orgId ? res[i].orgId : "",
+								// 	parentOrgId: res[i].parentOrgId ? res[i].parentOrgId : "",
+								// 	orgId: res[i].orgId ? res[i].orgId : "",
+								// 	state: res[i].state ? res[i].state : 1,
+								// 	userState: res[i].userState ? res[i].userState : 1,
+								// };
 								this.unitList.push(nodeItem);
 								if (this.initType) {
 									this.initUnitList.push(nodeItem);
