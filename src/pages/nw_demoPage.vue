@@ -80,7 +80,7 @@
 		<!-- 选择组织--组件 -->
 		<!-- <nw-unit-pop :popShow="unitPop" :popUserInfo="userInfo" @overlay="testOverlay"></nw-unit-pop> -->
 		<!-- 右侧弹出筛选组件 -->
-		<nw-PopupFilter v-model="popupState"></nw-PopupFilter>
+		<nw-PopupFilter ref="NWPopupFilter" v-model="popupState" :popupData="testPopDataObj" @emitHandlePage="testPopEmitHand"></nw-PopupFilter>
 		<!-- 悬浮球组件 -->
 		<nw-float-menu :menuArr="menuArr" @menuClick="menuClickTap"></nw-float-menu>
 		<!-- 底部按钮组件 -->
@@ -98,7 +98,65 @@
 		mixins: [NWtabMinxin],
 		data() {
 			return {
-				testCurIndex: 0,
+				testPopDataObj: [{
+						type: "type",
+						name: "类型选择",
+						node: true,
+						isMultiple: false,
+						list: [{
+								name: "便电压1",
+								check: false
+							},
+							{
+								name: "便电压2",
+								check: false
+							},
+							{
+								name: "便电压3",
+								check: false
+							},
+							{
+								name: "便电压4",
+								check: false
+							}
+						]
+					},
+					{
+						type: "time",
+						name: "时间选择",
+						node: true,
+						list: [{
+								name: "开始时间1",
+								value: ""
+							},
+							{
+								name: "结束时间",
+								value: ""
+							},
+							{
+								name: "竣工时间",
+								value: ""
+							}
+						]
+					}, {
+						type: "goPage",
+						name: "右箭头选择",
+						node: true,
+						list: [{
+								name: "隐患类型1",
+								value: ""
+							},
+							{
+								name: "隐患类型2",
+								value: ""
+							},
+							{
+								name: "隐患类型3",
+								value: ""
+							}
+						]
+					},
+				],
 				testObjTab: [{
 						title: "待办",
 						nubStatus: true, //控制是否显示-顶部数标
@@ -263,28 +321,6 @@
 					}
 				},
 				userInfo: {}, // 当前登录人信息
-				testsortlist1: [{
-						text: "按日期降序11",
-						isSelect: false,
-						sortType: "desc", //排序类型
-					},
-					{
-						text: "按日期升序11",
-						isSelect: false,
-						sortType: "asc", //排序类型
-					},
-				],
-				testsortlist2: [{
-						text: "按日期降序22",
-						isSelect: false,
-						sortType: "desc", //排序类型
-					},
-					{
-						text: "按日期升序222",
-						isSelect: false,
-						sortType: "asc", //排序类型
-					},
-				]
 			};
 		},
 		destroyed() {
@@ -351,6 +387,11 @@
 			}
 		},
 		methods: {
+			testPopEmitHand(data) {
+				console.log("testPopEmitHand:", JSON.stringify(data));
+				// 修改value值
+				this.$refs.NWPopupFilter.setHandle(data.index1, data.index2, "11111");
+			},
 			testAcrossFun(data) {
 				console.log("_this.$across.$on(testemit:", JSON.stringify(data));
 			},
@@ -431,14 +472,6 @@
 			},
 			testChangeTab(data) {
 				console.log("testChangeTab", JSON.stringify(data));
-				// if(data.index == 0){
-				// 	// return this.testCurIndex == 0 ? this.testsortlist1 : this.testsortlist12;
-				// 	this.testsortlist = this.testsortlist1;
-				// }
-				// if(data.index == 1){
-				// 	// return this.testCurIndex == 0 ? this.testsortlist1 : this.testsortlist12;
-				// 	this.testsortlist = this.testsortlist2;
-				// }
 			},
 			testChangeSortItem(data) {
 				console.log("testChangeSortItem", JSON.stringify(data));
