@@ -378,7 +378,7 @@
 					this.taskInfo.nodeList[i].status = false;
 					this.curNodeItem = {};
 				}
-				this.callbackTap();
+				// this.callbackTap();
 			},
 			// 选中当前节点
 			submitCurNode: function() {
