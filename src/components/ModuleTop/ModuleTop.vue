@@ -422,7 +422,7 @@
 			//选择排序类型
 			changeSortItem: function(index) {
 				var data = {
-					item: this.tabList[this.curTabIndex].sortList[index]?this.tabList[this.curTabIndex].sortList[index]:this.sortDataList[index]
+					item: this.tabList[this.curTabIndex].sortList?this.tabList[this.curTabIndex].sortList[index]:this.sortDataList[index]
 				}
 				if (this.curTabIndex == 0) {
 					// 待办的点击排序

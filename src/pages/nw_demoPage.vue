@@ -12,8 +12,9 @@
 		<!-- 头部搜索组件 -->
 		<div class="bg-white mt50 pb20">
 			<h2 class="pt15 pb10 borderButtomE8 grayfa6470 f16 text-center">tab切换组件（带筛选、排序）</h2>
-			<nw-module-top :isSort="true" :isSreen="true" :tabList="testObjTab" @changeSreen="topInputChangeSreen" @inputTopBtn="testInputTopBtn"
-			 @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen">
+			<nw-module-top :isSort="true" :isSreen="true" :sortDataList="testdatalist" :tabList="testObjTab" @changeSreen="topInputChangeSreen"
+			 @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen"
+			 @resetScreen="testResetScreen">
 			</nw-module-top>
 		</div>
 		<!-- 台账组件 -->
@@ -189,6 +190,18 @@
 							},
 						]
 					},
+				],
+				testdatalist: [
+					// {
+					// 	text: "按日期降序",
+					// 	isSelect: false,
+					// 	sortType: "desc", //排序类型
+					// },
+					// {
+					// 	text: "按日期升序",
+					// 	isSelect: false,
+					// 	sortType: "asc", //排序类型
+					// },
 				],
 				txtBoxObj1: {
 					showBox: 1, // 判断文本框类型 1左右布局；2上下布局；3上下布局（有输入内容长度）
@@ -446,7 +459,7 @@
 				// 	}
 				// });
 				this.$nwOpenWin('nw_checkPerson', {
-					type: 1,//1：单选； 2：多选； 注：多选需要传：personalList数组为当前页面的人员
+					type: 1, //1：单选； 2：多选； 注：多选需要传：personalList数组为当前页面的人员
 					userInfo: this.userInfo,
 					exeMun: "testemitunit",
 				});
