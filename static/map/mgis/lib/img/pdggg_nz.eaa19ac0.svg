@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:cge="http://iec.ch/TC57/2005/SVG-schema#" width="14" height="14" >
+  <defs>
+    <symbol preserveAspectRatio="xMidYMid" viewBox="0 0 14.0 14.3" id="配电低压物理杆塔(30)@20">
+      <polygon fill="rgb(160,40,0)" points="2.0,10.0 7.0,1.0 12.0,10.0" stroke="rgb(160,40,0)" stroke-width="1"/>
+      <circle fill="none" cx="7.0" cy="7.3" stroke="rgb(160,40,0)" r="6.0" stroke-width="1"/>
+    </symbol>
+  </defs>
+  <g id="100">
+    <use class="kv10" x="0" y="0"  xlink:href="#配电低压物理杆塔(30)@20"/>
+  </g>
+</svg>

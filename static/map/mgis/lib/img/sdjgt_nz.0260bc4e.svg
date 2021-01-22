@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:cge="http://iec.ch/TC57/2005/SVG-schema#" width="42" height="32" >
+  <defs> 
+   <symbol preserveAspectRatio="xMidYMid" viewBox="-21,-16,42,32" id="角钢塔(耐张)" class_id="230">
+   	 <line stroke="red" stroke-width="1" x1="-17" x2="-17" y1="-20" y2="20"/>
+     <rect fill="none" height="30" stroke="red" stroke-width="1" width="30" x="-15" y="-15"/>
+     <line stroke="red" stroke-width="1" x1="15" x2="-15" y1="-15" y2="15"/>
+     <line stroke="red" stroke-width="1" x1="-15" x2="15" y1="-15" y2="15"/>
+     <line stroke="red" stroke-width="1" x1="17" x2="17" y1="-20" y2="20"/>
+     <line stroke="red" stroke-width="1" x1="-20" x2="20" y1="0" y2="0"/>
+   </symbol>
+
+  </defs>
+  <g id="100">
+    <use x="0" y="0"  xlink:href="#角钢塔(耐张)"/>
+  </g>
+</svg>

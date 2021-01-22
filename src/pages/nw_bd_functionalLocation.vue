@@ -52,7 +52,7 @@
       <div class="btn btn-width-100 cybtn mr5 bg-f5 f14 gray3 border_1_dc" @click="showPopup = true">
         已选({{ checkNum }})
       </div>
-      <div class="btn btn-width-100 ml5 f14 bg-287 text-white">确定</div>
+      <div @click="$nwOpenWin('nw_bd_equipment')" class="btn btn-width-100 ml5 f14 bg-287 text-white">确定</div>
     </div>
   </div>
 </template>

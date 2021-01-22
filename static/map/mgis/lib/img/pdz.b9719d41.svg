@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:cge="http://iec.ch/TC57/2005/SVG-schema#" width="32" height="32" >
+  <defs>
+    <symbol preserveAspectRatio="xMidYMid" viewBox="0,0,32,32" id="配电配电站(20)">
+       <circle cx="16" cy="16" stroke="rgb(255,0,0)" style="stroke:rgb(255,0,0); fill:rgb(255,255,255);" r="15.0" stroke-width="1"/>
+        <text fill="red" font-family="宋体" font-size="20" font-style="normal" stroke="red" x="12" y="24">P</text> 
+    </symbol>
+  </defs>
+  <g id="100">
+    <use class="kv10" x="0" y="0"  xlink:href="#配电配电站(20)"/>
+  </g>
+</svg>

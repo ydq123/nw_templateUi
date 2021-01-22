@@ -86,7 +86,7 @@ const routes = [{
   name: 'nw_bd_equipment',
   component: () => import( /* webpackChunkName: "about" */ '../pages/nw_bd_equipment.vue'),
   meta: {
-  	keepAlive: true,
+  	keepAlive: false,
   	moduleName: 'nwTemplateUI',
   	title: '变电设备',
   },

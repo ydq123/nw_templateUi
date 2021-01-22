@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:cge="http://iec.ch/TC57/2005/SVG-schema#" width="42" height="32" >
+  <defs>
+   <symbol preserveAspectRatio="xMidYMid" viewBox="0 0 42.0 32.0" id="发电厂(10)" class_id="100">
+      <path fill="none" stroke="rgb(255,0,0)" stroke-width="1" d="M3,16 C2,12 4,9 7,7 C10,5 13,5 16,7 C19,9 21,12 21,16 "/>
+      <path fill="none" stroke="rgb(255,0,0)" stroke-width="1" d="M21,16 C20,19 22,22 25,24 C28,26 31,26 34,24 C37,22 39,19 39,16 "/>
+      <polygon fill="rgb(255,255,255)" points="1.0,1.0 41.0,1.0 41.0,31.0 1.0,31.0" stroke="rgb(255,0,0)" stroke-width="1"/>
+      <polygon fill="rgb(255,255,255)" points="1.0,1.0 41.0,1.0 41.0,31.0 1.0,31.0" stroke="rgb(255,0,0)" stroke-width="1"/>
+      <path fill="none" stroke="rgb(255,0,0)" stroke-width="1" d="M3,16 C2,12 4,9 7,7 C10,5 13,5 16,7 C19,9 21,12 21,16 "/>
+      <path fill="none" stroke="rgb(255,0,0)" stroke-width="1" d="M21,16 C20,19 22,22 25,24 C28,26 31,26 34,24 C37,22 39,19 39,16 "/>
+   </symbol>
+  </defs>
+  <g id="100">
+    <use class="kv10" x="0" y="0"  xlink:href="#发电厂(10)"/>
+  </g>
+</svg>

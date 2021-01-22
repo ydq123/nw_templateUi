@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:cge="http://iec.ch/TC57/2005/SVG-schema#" width="42" height="42" >
+  <defs>
+  <pattern width="5" x="0" y="0" height="5" patternUnits="userSpaceOnUse" id="左斜条纹">
+    <line stroke="rgb(255,0,0)" y1="2.0" x1="0.0" y2="0.0" stroke-width="1" x2="2.0"/>
+    <line stroke="rgb(255,0,0)" y1="5.0" x1="2.0" y2="2.0" stroke-width="1" x2="5.0"/>
+  </pattern>
+  <symbol preserveAspectRatio="xMidYMid" viewBox="0 0 42.0 42.0" id="变电站(10)" class_id="110">
+   <circle cx="21.0" cy="21.0" stroke="rgb(255,0,0)" style="stroke:rgb(255,0,0); fill:rgb(255,255,255);" r="20.0" stroke-width="1"/>
+   <circle cx="21.0" cy="21.0" stroke="rgb(255,0,0)" style="stroke:rgb(255,0,0); fill:url(#左斜条纹);" r="20.0" stroke-width="1"/>
+  </symbol>
+  </defs>
+  <g id="110">
+    <use x="0" y="0"  xlink:href="#变电站(10)"/>
+  </g>
+</svg>

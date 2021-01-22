@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:cge="http://iec.ch/TC57/2005/SVG-schema#" width="52" height="32" >
+  <defs>
+   <symbol preserveAspectRatio="xMidYMid" viewBox="-26,-16,52,32" id="配电环网柜" class_id="331">
+      <rect fill="none" height="30" stroke="red" stroke-width="1" width="50" x="-25" y="-15"/>
+      <line stroke="red" stroke-width="1" x1="-8" x2="-8" y1="-13" y2="13"/>
+      <line stroke="red" stroke-width="1" x1="6" x2="-8" y1="-13" y2="0"/>
+      <line stroke="red" stroke-width="1" x1="-8" x2="6" y1="0" y2="13"/>
+   </symbol>
+  </defs>
+  <g id="100">
+    <use class="kv10" x="0" y="0"  xlink:href="#配电环网柜"/>
+  </g>
+</svg>

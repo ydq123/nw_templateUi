@@ -79,6 +79,7 @@ export const NWbpmsMinxin = {
     },
     /* 回退 */
     $bpmsBack: function(obj, callback) {
+      this.setDataType();
       this.$bpmsSetOpenWindow()
       mdpWorkflow.operate.back(false, () => this.$bpmsGetData(obj), callback);
     },
@@ -107,20 +108,13 @@ export const NWbpmsMinxin = {
     },
     // 跳转人员选择页面
     $bpmsSetOpenWindow() {
-      const that = this;
+      var workflowSelectPageObj=this.$refs.workflowSelectPage||window.$NW_workflowSelectPage;
       mdpWorkflow.extend({
         openBizWfWindow(data, nodeinfolist) {
           console.log(data, 'data');
-          // if(nodeinfolist){
-          //   var retStr = that.$baseIsTypeof(nodeinfolist);
-          //   if (retStr == 'obj') {
-          //     if (nodeinfolist.data && nodeinfolist.msg);
-          //       nodeinfolist = nodeinfolist.data
-          //   }
-          // }
           console.log(nodeinfolist, 'nodeinfolist');
           // 通过通用页面跳转
-          that.$refs.workflowSelectPage.show({
+          workflowSelectPageObj.show({
             data,
             nodeinfolist,
           });
@@ -129,13 +123,13 @@ export const NWbpmsMinxin = {
     },
     /* 静默发送，上报 */
     $bpmsSetAutoConfirm() {
-      const that = this;
+	  var workflowSelectPageObj=this.$refs.workflowSelectPage||window.$NW_workflowSelectPage;
       mdpWorkflow.extend({
         openBizWfWindow(data, nodeinfolist) {
           console.log(data, 'data');
           console.log(nodeinfolist, 'nodeinfolist');
           // 通过通用页面跳转
-          that.$refs.workflowSelectPage.autoConfirm(data, nodeinfolist);
+          workflowSelectPageObj.autoConfirm(data, nodeinfolist);
         },
       });
     },
@@ -155,7 +149,7 @@ export const NWbpmsMinxin = {
         }
       }
       // console.log(retObj.msg)
-      Vue.prototype.$mdpWorkflowSelectPage = this.$refs.workflowSelectPage; // 保存跳转人员选择页面的ref
+      // Vue.prototype.$mdpWorkflowSelectPage = this.$refs.workflowSelectPage||window.$NW_workflowSelectPage; // 保存跳转人员选择页面的ref
       mdpWorkflow.setBpmsUserInfo(bpmsUuseObj); //动态更新工作流需要的用户信息
     },
     /*处理网络请求数据格式 */
