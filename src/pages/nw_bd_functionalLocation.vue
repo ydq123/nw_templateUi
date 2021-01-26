@@ -1,58 +1,85 @@
 <template>
-  <div class="ledger_query pt138 ">
+  <div class="ledger_query  " :class="[(!searchValue)&&dataArr.length>0?'pt138':'pt100']">
     <nw-fixed-header title="科学城站新庄110KV">
       <div slot="right" class="gray287 f14" @click="$nwOpenWin('nw_bd_equipment')">变电站</div>
       <!-- borderButtomE8 -->
       <div slot="page-bottom" class="bg-f5 ">
         <van-search style="width: 100%" v-model="searchValue" placeholder="间隔名称" />
-        <div class="pr15 pl15 pt10 pb10 bg-white row ju-b ">
+        <!-- <div class="pr15 pl15 pt10 pb10 bg-white row ju-b ">
           <div class="row al-c">
-            <div class="mr10 pr10 pl10 pt5 pb5 vLev" :class="[vLevIndex==index?'bg-287 text-white':'bg-f5 gray6']"
-              v-for="(itme,index) in vLevList">{{itme.name}}</div>
+            <div class="mr10 mb10 pr10 pl10 pt5 pb5 vLev" :class="[vLevIndex==index?'bg-287 text-white':'bg-f5 gray6']"
+              v-for="(itme,index) in vLevList">{{itme.intervalName}}</div>
           </div>
-        </div>
+        </div> -->
+        <nw-tab-widget v-if="(!searchValue)&&vLevList.length>0" :tabSXStatu="false" :tabWSXList='vLevList'
+          @changeScrollXTab="changeScrollXTab2">
+          <span slot="tabList"></span>
+          <span slot="tabIconSX"></span>
+        </nw-tab-widget>
       </div>
     </nw-fixed-header>
-    <div class="list-content pt10">
-      <div class="row f16">
-        <div class="list-left" style="width: 40%;">
-          <div class="pr15 pl15 pt10 pb10 row" :class="[rightIndex==index?'bg-white gray287 listLeft fw':'']" v-for="(itme,index) in 6">
-            110kv第{{index}}窜备
+    <!-- 搜索 -->
+    <label v-show="(searchValue)&&dataArr.length>0">
+      <div v-show="searchArr.length>0" class="list-data f15 bg-white pb92">
+        <div @click="rightFun(item,index3)" class="flex ju-b pl20 pr15 pt15 pb15  borderButtomE8" :key="index3+'a'"
+          v-for="(item,index3) in searchArr">
+          <div class=" pr15  row">
+            <div class="listRightRed2"></div>
+            <span class="pl5">{{item.intervalName||'其他'}}</span>
+          </div>
+          <div class="pl15">
+            <van-checkbox v-model="item.status"></van-checkbox>
           </div>
         </div>
-        <div class="list-right bg-white gray3" style="width: 60%;">
-          <div class="pr15 pl15 pt10 pb10 rightIndex row" v-for="(itme,index) in 6">
-            <div class="border_1_dc p5 vLev row" style="width: 80%;">
-              <div class="listRightRed"></div>
-              <span class="pl5">110kv第{{index}}窜备</span>
+      </div>
+      <nw-null-data class="mt90" v-show="searchArr.length==0"></nw-null-data>
+    </label>
+    <!-- 列表 -->
+    <label v-show="!searchValue">
+      <div class="list-content pt20">
+        <nw-null-data class="mt50" v-show="dataArr.length==0"></nw-null-data>
+        <div class="row f16" v-show="dataArr.length>0">
+          <div class="list-left" style="width: 40%;">
+            <div @click="leftFun(itme,index)" class="pr15 pl15 pt10 pb10 row al-c" :class="[leftIndex==index?'bg-white gray287 listLeft fw':'']"
+              v-for="(itme,index) in leftArr">
+              {{itme.intervalName||'其他'}}
             </div>
-            <div class="checkbox pl15 flex">
-              <van-checkbox></van-checkbox>
+          </div>
+          <div class="list-right bg-white gray3" style="width: 60%;">
+            <div @click="rightFun(itme,index)" class="pr15 pl15 pt10 pb10 rightIndex row" v-for="(itme,index) in rightArr">
+              <div class="border_1_dc p5 vLev row al-c fl-w word" style="width: 80%;position: relative;">
+                <span class="listRightRed"></span>
+                <span class="pl10">{{itme.intervalName||'其他'}}</span>
+              </div>
+              <div class="checkbox pl15 flex">
+                <van-checkbox v-model="itme.status"></van-checkbox>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </label>
     <van-popup v-model="showPopup" round position="bottom" :style="{ height: '60%' }">
       <div class="title line-t pb10 pt10 verticle-center ju-b pl15 pr15 f15">
-        <span>共7条记录</span>
-        <span class="row al-c "><van-icon name="delete" class="text-red f20 mr5"  /> 清空</span>
+        <span>共{{checkArr.length }}条记录</span>
+        <span @click="dltcheckArr('')" class="row al-c ">
+          <van-icon name="delete" class="text-red f20 mr5" /> 清空</span>
       </div>
       <div class="list-data f15">
-        <div class="flex ju-b pl15 pr15 pt10 pb10 verticle-center borderTopE8" v-for="item in 5">
+        <div class="flex ju-b pl15 pr15 pt10 pb10 verticle-center borderTopE8" v-for="(item,index3) in checkArr">
           <div class=" p5  row" style="width: 80%;">
             <div class="listRightRed"></div>
-            <span class="pl5">110kv第{{item}}窜备</span>
+            <span class="pl5">{{item.intervalName||'其他'}}</span>
           </div>
-          <div class="pl15"><i class="iconfont icon-shanchu text-red"></i></div>
+          <div class="pl15" @click="dltcheckArr(item,index3)"><i class="iconfont icon-shanchu text-red"></i></div>
         </div>
       </div>
     </van-popup>
     <div class="p10 bg-white flex boxs">
       <div class="btn btn-width-100 cybtn mr5 bg-f5 f14 gray3 border_1_dc" @click="showPopup = true">
-        已选({{ checkNum }})
+        已选({{ checkArr.length }})
       </div>
-      <div @click="$nwOpenWin('nw_bd_equipment')" class="btn btn-width-100 ml5 f14 bg-287 text-white">确定</div>
+      <div @click="checkSub" class="btn btn-width-100 ml5 f14 bg-287 text-white">确定</div>
     </div>
   </div>
 </template>
@@ -61,130 +88,241 @@
   import {
     NWtabMinxin
   } from "../mixin/NWtabMinxin.js";
+  import {
+    querySubsIntervalById
+  } from "../moduleApi/nw_tz.js";
   export default {
     name: "nw_functionalLocation",
     mixins: [NWtabMinxin],
     data() {
       return {
+        searchValue: "",
+        searchArr: [],
+
         vLevIndex: 0,
-        vLevList: [{
-          name: '110KV'
-        }, {
-          name: '220KV'
-        }],
+        vLevList: [],
 
         leftIndex: 0,
+        leftArr: [],
         rightIndex: 0,
-
+        rightArr: [],
 
         showPopup: false,
-        checkNum: 0,
-        curTabIndex: 0,
-        searchValue: "",
-        tab_options: {
-          offsetTop: "2.6rem",
-          color: "#1e87f0",
-          titleActiveColor: "#1e87f0"
-        },
+        checkArr: [],
+        dataArr: [],
+        itmeArr: [],
       };
     },
     mounted() {
+      //接受页面参数 type  2选择 3
+      // console.log(this.tabPageData);
       // this.getData();
+      /* 172.16.106.167:8095/api/web/appTransform/querySubsIntervalById?substationId=08000000527098*/
     },
     methods: {
-      //获取列表数据
-      getData() {
-        console.log("变电站请求");
-        // let param = {
-        //   queryCondition: {
-        //     bureauCode: "0800"
-        //   },
-        //   pageIndex: this.tabList[this.curTabIndex].pageIndex,
-        //   sortFieldName: "id",
-        //   isAsc: this.tabList[this.curTabIndex].isAsc
-        // };
-        // getSubstationList(param)
-        //   .then(res => {
-        //     if (res.code == 200) {
-        //       this.onRefreshEnd();
-        //       this.onLoadSuccessEnd(res, 0);
-        //     } else {
-        //       this.onLoadFailEnd(res);
-        //     }
-        //   })
-        //   .catch(error => {
-        //     console.log(error);
-        //     this.$textHid();
-        //   });
+      //获取功能位置
+      getData: function() {
+        this.$textLoading();
+        let param = {
+          id: this.tabPageData.id || '08000000527098'
+        };
+        querySubsIntervalById(param)
+          .then(res => {
+            this.$textHid();
+            console.log(res);
+            if (res.code == 200) {
+              if (res.data.length > 0) {
+                this.initData(res.data || []);
+              } else {
+                /* 暂无数据*/
+                this.$textCatch(res.msg || '暂无数据');
+              }
+            } else {
+              /* 服务异常*/
+              this.$textCatch(res.msg || '服务异常');
+            }
+          })
+          .catch(error => {
+            console.log(error);
+            this.$textHid();
+            this.$textCatch(error.msg || '')
+          });
       },
-      // 列表排序
-      sort() {
-        console.log("列表排序");
+      changeScrollXTab2: function(data) {
+        console.log(data);
+        this.vLevIndex = data.index;
+        this.leftIndex = 0;
+        this.leftArr = data.item[0].childrenIntervals;
+        this.rightArr = data.item[0].childrenIntervals[0].childrenIntervals;
       },
-      changePage(index) {
-        this.curTabIndex = index;
+      leftFun: function(itme, index) {
+        console.log(itme)
+        this.leftIndex = index;
+        this.rightArr = itme.childrenIntervals;
       },
-      onLoad() {
-        console.log("上啦加载ing");
-        // 加载状态开启
-        this.loading = true;
-      },
-      // 加载失败业务逻辑
-      onLoadFailEnd(error) {
-        this.onRefreshEnd();
-        this.$toast(error.msg);
-        this.finished = true;
-        if (this.loading) {
-          this.loading = false;
-        }
-      },
-      // 加载成功业务逻辑
-      onLoadSuccessEnd(result, index) {
-        if (this.loading) {
-          this.loading = false;
-          this.pageIndex++;
-          for (let item of result.rows) {
-            this.list.push(item);
-          }
+      rightFun: function(itme, index) {
+        console.log(itme);
+        itme.status = !itme.status;
+        if (this.tabPageData.type == 3) {
+          this.equipmentChenck(itme, index);
         } else {
-          for (let item of result.rows) {
-            this.list.push(item);
+          setTimeout(() => {
+            this.rightIndex = index;
+            if (itme.status) {
+              var arr = this.checkArr.filter(item0 => item0.intervalId == itme.intervalId);
+              if (arr.length == 0) {
+                this.checkArr.push(itme);
+              } else {
+                this.$textCatch('已存在');
+              }
+            } else {
+              /* 去重 */
+              this.checkArr = this.checkArr.filter(item0 => item0.intervalId != itme.intervalId);
+            }
+          }, 60);
+        }
+      },
+      /* 选择设备时候的逻辑*/
+      equipmentChenck: function(data, index) {
+        /* 单选逻辑 */
+        this.itmeArr = [];
+        this.vLevList = [];
+        for (var i = 0; i < this.dataArr.length; i++) {
+          var itme = this.dataArr[i];
+          for (var j = 0; j < itme.childrenIntervals.length; j++) {
+            var itme2 = itme.childrenIntervals[j];
+            for (var k = 0; k < itme2.childrenIntervals.length; k++) {
+              var itme3 = itme2.childrenIntervals[k];
+              if (data.intervalId == itme3.intervalId) {
+                itme3['status'] = true;
+              } else {
+                itme3['status'] = false;
+              }
+              this.itmeArr.push(itme3);
+            }
+          }
+          itme['status'] = i == this.vLevIndex ? true : false;
+          itme['title'] = itme.intervalName;
+          this.vLevList.push(itme);
+        };
+        this.searchArr = this.itmeArr.filter(item0 => item0.intervalName.indexOf(this.searchValue) != -1);
+        this.searchArr.forEach((itme4, index) => {
+          if (data.intervalId == itme4.intervalId) {
+            itme4['status'] = true;
+          } else {
+            itme4['status'] = false;
+          }
+        });
+        this.leftArr = this.vLevList[this.vLevIndex].childrenIntervals;
+        this.rightArr = this.leftArr[this.leftIndex].childrenIntervals;
+        console.log(this.searchArr)
+        this.$nwOpenWin('nw_bd_equipment', {
+          itme: data,
+          id: this.tabPageData.id
+        });
+      },
+      /* 删除数据 */
+      dltcheckArr: function(data, index) {
+        if (data) {
+          data.status = !data.status;
+          this.checkArr = this.checkArr.filter(item0 => item0.intervalId != data.intervalId);
+        } else {
+          this.initData('');
+          this.checkArr = [];
+        }
+      },
+      /* 初始化数据 */
+      initData: function(data) {
+        this.itmeArr = [];
+        this.vLevList = [];
+        this.dataArr = data || this.dataArr;
+        for (var i = 0; i < this.dataArr.length; i++) {
+          var itme = this.dataArr[i];
+          for (var j = 0; j < itme.childrenIntervals.length; j++) {
+            var itme2 = itme.childrenIntervals[j];
+            for (var k = 0; k < itme2.childrenIntervals.length; k++) {
+              var itme3 = itme2.childrenIntervals[k];
+              itme3['status'] = false;
+              this.itmeArr.push(itme3);
+            }
+          }
+          itme['status'] = i == this.vLevIndex ? true : false;
+          itme['title'] = itme.intervalName;
+          this.vLevList.push(itme);
+        };
+        this.leftArr = this.vLevList[this.vLevIndex].childrenIntervals;
+        this.rightArr = this.leftArr[this.leftIndex].childrenIntervals;
+      },
+      /* 确定事件*/
+      checkSub: function() {
+        if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
+          this.$across.$emit(this.tabPageData.funName, {
+            data: this.checkArr,
+            toPage: 'nw_bd_functionalLocation'
+          });
+        } else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
+          this.$bus.$emit(this.tabPageData.funName, {
+            data: this.checkArr,
+            toPage: 'nw_bd_functionalLocation'
+          });
+        }
+        this.xiaohui();
+        this.$nwBack(-1);
+      },
+      /*this.tabPageData.type==2才执行回显逻辑*/
+      backShow:function(){
+
+      },
+      xiaohui:function(){
+        console.log('*******************销毁跨页面通讯**********************');
+        /* 销毁跨页面通讯*/
+        if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
+          this.$across.$off(this.tabPageData.funName);
+        } else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
+          this.$bus.$off(this.tabPageData.funName);
+        }
+      },
+    },
+    beforeRouteEnter(to, from, next) {
+      next(vm => {
+        if (window.NW_MODULE_TYPE != 'scyyd_templateUI') {
+          /* 前进刷新后退不刷新*/
+          if (from.name == "nw_bd_checkSubstation") {
+            vm.searchValue = "";
+            vm.searchArr = [];
+            vm.vLevIndex = 0;
+            vm.vLevList = [];
+            vm.leftIndex = 0;
+            vm.leftArr = [];
+            vm.rightIndex = 0;
+            vm.rightArr = [];
+            vm.showPopup = false;
+            vm.checkArr = [];
+            vm.dataArr = [];
+            vm.itmeArr = [];
+            vm.tabPageData = vm.$tabPageData();
+            console.log(vm.tabPageData);
+            vm.getData();
           }
         }
-        // 数据全部加载完成
-        if (this.list.length >= result.total) {
-          this.finished = true;
-        }
+      });
+    },
+    destroyed() {
+     
+    },
+    watch: {
+      searchValue: function() {
+        this.searchArr = this.itmeArr.filter(item0 => item0.intervalName.indexOf(this.searchValue) != -1);
       },
-      onRefresh() {
-        console.log("下拉刷新ing");
-        this.refreshing = true;
-      },
-      // 下拉刷新加载完成后修改状态
-      onRefreshEnd() {
-        if (this.refreshing) {
-          this.refreshing = false;
-        }
-      },
-      openVideoList() {
-        this.$tabWxOpenWin("ledgerVideoList");
-      },
-      checkItem(value) {
-        value.checked = !value.checked;
-      },
-      // 打开关闭筛选框
-      filters() {
-        this.showRight = !this.showRight;
-      },
-      // 重置
-      resetScreen() {},
-      // 确定
-      submitScreen() {}
-    }
+    },
+    computed: {}
   };
 </script>
 
 <style scoped lang="less">
+  // @import '../plugin/vant/index.css';
+  // @import '../plugin/vant/icon/local.css';
+
   .ledger_query {
     height: 100%;
 
@@ -192,14 +330,32 @@
       border-radius: 4px;
     }
 
+    .list-right {
+      height: 66vh;
+      overflow-y: scroll !important;
+      padding-bottom: 20px;
+    }
+
     .listLeft {
       border-left: solid #287DF5 2px;
     }
 
     .listRightRed {
-      height: 20px;
+      height: 80%;
       width: 3px;
       background-color: red;
+      position: absolute;
+      left: 6px;
+      top: 3px;
+    }
+
+    .listRightRed2 {
+      height: 76%;
+      width: 3px;
+      background-color: red;
+      position: absolute;
+      left: 15px;
+      top: 6px;
     }
 
     .boxs {

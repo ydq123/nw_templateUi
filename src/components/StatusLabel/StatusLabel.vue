@@ -28,11 +28,9 @@
   <div class="yw-statuslabel  fl-w row al-c">
     <!-- :style="{border: '0.5px solid '+[borVal.status == 0&&borVal.staBorCol&&val.staBorCol!=''?borVal.staBorCol:'#1E87F0']}" -->
     <label v-for="(itme,bgcIndex) in bqStaLabel">
-      <div v-if="itme.status==0" class="pl5 pr5 mt6 ptb1  mr5 border pos-r" :key="'bor'+bgcIndex"
-      :class="[itme.fsize?itme.fsize:'f6']"
-       :style="{'--borderSolide':itme.staBorCol,color:itme.staBorCol}">{{itme.staLabTxt}}</div>
-      <div v-if="itme.status!=0" class="pl5 pr5 mt6 ptb2  mr5 border pos-r" :key="'bgc'+bgcIndex" 
-      :class="[itme.staCal?itme.staCal:'',itme.status==1?'state1':'',
+      <div v-if="itme.status==0" class="pl5 pr5 mt6 ptb1  mr5 border pos-r" :key="'bor'+bgcIndex" :class="[itme.fsize?itme.fsize:'f6']"
+        :style="{'--borderSolide':itme.staBorCol,color:itme.staBorCol}">{{itme.staLabTxt}}</div>
+      <div v-if="itme.status!=0" class="pl5 pr5 mt6 ptb2  mr5 border pos-r" :key="'bgc'+bgcIndex" :class="[itme.staCal?itme.staCal:'',itme.status==1?'state1':'',
 		   itme.status==2?'state2':'',itme.status==3?'state3':'',itme.fsize?itme.fsize:'f6']">{{itme.staLabTxt}}</div>
     </label>
 
@@ -99,7 +97,7 @@
 </script>
 
 <style scoped lang="less">
-  @import "../../assets/less/nw_tool.less";
+  /* @import "../../assets/less/nw_tool.less"; */
 
   .yw-statuslabel {
     // width: 100%;
@@ -111,14 +109,18 @@
   }
 
   .ptb1 {
-    .pxToremLess(padding-top, 1px);
-    .pxToremLess(padding-bottom, 1px);
+    padding-top: 2px;
+    padding-bottom: 2px;
+    // .pxToremLess(padding-top, 4px);
+    // .pxToremLess(padding-bottom, 4px);
   }
 
   .ptb2 {
-    .pxToremLess(padding-top, 2px);
-    .pxToremLess(padding-bottom, 3px);
-    .pxToremLess(border-radius, 4px);
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 4px // .pxToremLess(padding-top, 4px);
+      // .pxToremLess(padding-bottom,4px);
+      // .pxToremLess(border-radius, 4px);
   }
 
   .textput-row {
@@ -155,7 +157,8 @@
       top: 0;
       width: 200%;
       height: 200%;
-      .pxToremLess(border-radius, 8px);
+      // .pxToremLess(border-radius, 8px);
+      border-radius: 8px;
       // border-left: 1px solid #ccc;
       // border-right: 1px solid #ccc;
       border-left: 0.0425rem solid var(--borderSolide);
@@ -173,11 +176,12 @@
       top: 0;
       width: 200%;
       height: 200%;
-      .pxToremLess(border-radius, 8px);
+      // .pxToremLess(border-radius, 8px);
+      border-radius: 8px;
       // border-bottom: 1px solid #ccc;
       // border-top: 1px solid #ccc;
-      border-bottom: 0.0425rem solid var(--borderSolide);
-      border-top: 0.0425rem solid var(--borderSolide);
+      border-bottom: 0.0125rem solid var(--borderSolide);
+      border-top: 0.0125rem solid var(--borderSolide);
       -webkit-transform-origin: 0 0;
       transform-origin: 0 0;
       -webkit-transform: scale(0.5);

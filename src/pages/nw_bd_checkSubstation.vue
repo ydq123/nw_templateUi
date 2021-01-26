@@ -32,7 +32,7 @@
                 <div class=" pr15 al-c row ">
                   <van-checkbox v-model="value.checked"></van-checkbox>
                 </div>
-                <div class="list row" @click.stop="$nwOpenWin('nw_bd_functionalLocation')">
+                <div class="list row" @click.stop="openFunctionalLocation(value, index)">
                   <div class="content-left mr10">
                     <img src="../assets/images/mapImg/mapType2.png" />
                   </div>
@@ -155,33 +155,25 @@
       };
     },
     mounted() {
-      // this.getData();
+
     },
     methods: {
+      openFunctionalLocation:function(itme,index){
+        /* 挂载跨页面通讯*/
+        if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
+        	this.$across.$on("nw_bd_checkSubstation", (obj)=>{
+        	  console.log(obj)
+        	});
+        } else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
+          this.$bus.$on("nw_bd_checkSubstation", (obj)=>{
+            console.log(obj)
+          });
+        }
+        this.$nwOpenWin('nw_bd_functionalLocation',{type:index+1,id:123,funName:'nw_bd_checkSubstation'});
+      },
       //获取列表数据
       getData() {
         console.log("变电站请求");
-        // let param = {
-        //   queryCondition: {
-        //     bureauCode: "0800"
-        //   },
-        //   pageIndex: this.tabList[this.curTabIndex].pageIndex,
-        //   sortFieldName: "id",
-        //   isAsc: this.tabList[this.curTabIndex].isAsc
-        // };
-        // getSubstationList(param)
-        //   .then(res => {
-        //     if (res.code == 200) {
-        //       this.onRefreshEnd();
-        //       this.onLoadSuccessEnd(res, 0);
-        //     } else {
-        //       this.onLoadFailEnd(res);
-        //     }
-        //   })
-        //   .catch(error => {
-        //     console.log(error);
-        //     this.$textHid();
-        //   });
       },
       // 列表排序
       sort() {
