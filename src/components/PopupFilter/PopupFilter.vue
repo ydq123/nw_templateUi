@@ -3,23 +3,23 @@
 		<van-popup v-model="showPopup" @close="hidePopup" position="right" :style="{ width: `${popupWidth}`, height: '100%' }">
 			<slot name="default">
 				<div class="pos-r text-hidden h100 pb60">
-					<div class="popup-content pb15 pl15 pr15 h100">
+					<div class="popup-content pb15 pl15 h100">
 						<slot name="popup-content">
 							<div v-for="(popupItem, popupIndex) in popupData" :key="popupIndex">
 								<div class="choiceType" v-if="popupItem.type == 'type'">
-									<div class="title f16 flex ju-b pb15 pt15" @click="showHideNode(popupItem)">
+									<div class="title f16 flex ju-b pb15 pt15 pr15" @click="showHideNode(popupItem)">
 										<div class="name">{{ popupItem.name }}</div>
 										<i class="iconfont icon-sanjiao1 f14" :class="[popupItem.node ? '' : 'icon-sanjiao2']"></i>
 									</div>
 									<div class="content flex fl-w" v-show="popupItem.node">
-										<div class="type-item border_1_dc f14 pt8 pb8 pl10 pr10 mr10 mb10" :class="[item.check ? 'text-white' : '']"
+										<div class="type-item text-center border_1_dc f14 pt8 pb8 mr15 mb10" :class="[item.check ? 'text-white' : '',popupItem.boxWidBfb == 2?'width-44':'',popupItem.boxWidBfb == 3?'width-28':'']"
 										 :style="{ background: item.check ? choiceColor : '' }" v-for="(item, index) in popupItem.list" :key="index"
 										 @click="choiceType(item, popupIndex)">
 											{{ item.name }}
 										</div>
 									</div>
 								</div>
-								<div class="choiceTime" v-if="popupItem.type == 'time'">
+								<div class="choiceTime pr15" v-if="popupItem.type == 'time'">
 									<div class="title f16 flex ju-b pb15 pt15" @click="showHideNode(popupItem)">
 										<div class="name">{{ popupItem.name }}</div>
 										<i class="iconfont icon-sanjiao1 f14 " :class="[popupItem.node ? '' : 'icon-sanjiao2']"></i>
@@ -38,7 +38,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="choicePage" v-if="popupItem.type == 'goPage'">
+								<div class="choicePage pr15" v-if="popupItem.type == 'goPage'">
 									<div class="title f16 flex ju-b pb15 pt15" @click="showHideNode(popupItem)">
 										<div class="name">{{ popupItem.name }}</div>
 										<i class="iconfont icon-sanjiao1 f14" :class="[popupItem.node ? '' : 'icon-sanjiao2']"></i>
@@ -60,12 +60,12 @@
 							</div>
 						</slot>
 					</div>
-					<div class="popup-btn bg-white flex ju-b f14 p15 pos-a line-t">
+					<div class="popup-btn bg-white flex ju-b f14 pos-a line-t">
 						<slot name="popup-btn">
-							<div class="nw_buttom_125_44 bg-f5 border_1_dc gray3" @click="resetScreen">
+							<div class="border_1_dc flex-1 pt15 pb15 text-center" @click="resetScreen">
 								重置
 							</div>
-							<div class="nw_buttom_125_44 bg-287 text-white" @click="submitScreen">
+							<div class="bg-287 text-white flex-1 pt15 pb15 text-center" @click="submitScreen">
 								确定
 							</div>
 						</slot>
@@ -127,6 +127,7 @@
 				type: Array,
 				default: () => [{
 						type: "type",
+						boxWidBfb: 2,// 筛选内容按钮：2：一排2个；3：一排3个
 						name: "类型选择",
 						node: true,
 						isMultiple: false,
@@ -252,6 +253,14 @@
 
 	.ju-e {
 		justify-content: flex-end;
+	}
+	
+	.width-44{
+		width: 44%;
+	}
+	
+	.width-28{
+		width: 28%;
 	}
 
 	.popup-container {

@@ -49,21 +49,21 @@
 <template>
 	<div class="yw-botbut">
 		<div class="p10 bg-white boxs" v-if="zhuyaoBtn.btnType">
-			<div @click="zyCliBtn" class="btn btn-width-100" :class="[zhuyaoBtn.fsize?zhuyaoBtn.fsize:'f14']"
+			<div @click="zyCliBtn" class="btn ju-c btn-width-100" :class="[zhuyaoBtn.fsize?zhuyaoBtn.fsize:'f14']"
 			 :style="{color:[zhuyaoBtn.color?zhuyaoBtn.color:'white'],backgroundColor:[zhuyaoBtn.bgcolor?zhuyaoBtn.bgcolor:'#1E87F0']}">{{ zhuyaoBtn.text?zhuyaoBtn.text:'主要按钮' }}</div>
 		</div>
 		<div class="p10 bg-white boxs" v-if="ciyaoBtn.btnType">
-			<div @click="cyCliBtn" class="btn btn-width-100 cybtn" :class="[ciyaoBtn.fsize?ciyaoBtn.fsize:'f14']"
+			<div @click="cyCliBtn" class="btn ju-c btn-width-100 cybtn" :class="[ciyaoBtn.fsize?ciyaoBtn.fsize:'f14']"
 			 :style="{color:[ciyaoBtn.color?ciyaoBtn.color:'#262626']}">{{ ciyaoBtn.text?ciyaoBtn.text:'次要按钮' }}</div>
 		</div>
 		<div class="p10 bg-white flex-d boxs" v-if="twoBtn.btnType">
-			<div @click="towCyCliBtn" class="btn btn-width-100 cybtn mr5" :class="[twoBtn.ciyaoBtn.fsize?twoBtn.ciyaoBtn.fsize:'f14']"
+			<div @click="towCyCliBtn" class="btn ju-c btn-width-100 cybtn mr5" :class="[twoBtn.ciyaoBtn.fsize?twoBtn.ciyaoBtn.fsize:'f14']"
 			 :style="{color:[twoBtn.ciyaoBtn.color?twoBtn.ciyaoBtn.color:'#262626']}">{{ twoBtn.ciyaoBtn.text?twoBtn.ciyaoBtn.text:'保存' }}</div>
-			<div @click="towZyCliBtn" class="btn btn-width-100 ml5" :class="[twoBtn.zhuyaoBtn.fsize?twoBtn.zhuyaoBtn.fsize:'f14']"
+			<div @click="towZyCliBtn" class="btn ju-c btn-width-100 ml5" :class="[twoBtn.zhuyaoBtn.fsize?twoBtn.zhuyaoBtn.fsize:'f14']"
 			 :style="{color:[twoBtn.zhuyaoBtn.color?twoBtn.zhuyaoBtn.color:'white'],backgroundColor:[twoBtn.zhuyaoBtn.bgcolor?twoBtn.zhuyaoBtn.bgcolor:'#1E87F0']}">{{ twoBtn.zhuyaoBtn.text?twoBtn.zhuyaoBtn.text:'发送' }}</div>
 		</div>
 		<div class="p10 bg-white flex-d boxs" v-if="iconBtn.btnType">
-			<div class="btn btn-width-100 mr5 btn-row btn-al-c btn-ju-a">
+			<div class="btn ju-c btn-width-100 mr5 btn-row btn-al-c btn-ju-a">
 				<div class="btn-width-100 mr5 btn-row btn-al-c btn-ju-a" v-if="iconBtn.iconList.length>3 && iconListLen.length>0">
 					<div v-for="(iItem,iIndex) in iconListLen" :key="iIndex">
 						<div @click="cliIconItemBtn(iItem)">
@@ -93,14 +93,14 @@
 					</div>
 				</div>
 			</div>
-			<div @click="cliIconRBtn" class="btn btn-width-100" :class="[iconBtn.zhuyaoBtn.fsize?iconBtn.zhuyaoBtn.fsize:'f14']"
+			<div @click="cliIconRBtn" class="btn ju-c btn-width-100" :class="[iconBtn.zhuyaoBtn.fsize?iconBtn.zhuyaoBtn.fsize:'f14']"
 			 :style="{color:[iconBtn.zhuyaoBtn.color?iconBtn.zhuyaoBtn.color:'white'],backgroundColor:[iconBtn.zhuyaoBtn.bgcolor?iconBtn.zhuyaoBtn.bgcolor:'#1E87F0']}">{{ iconBtn.zhuyaoBtn.text }}</div>
 		</div>
 		<!-- 底部弹窗 -->
-		<van-popup class="" style="width: auto;" v-model="showZdcIconBox" round position="bottom">
-			<div class="pt15">
-				<div class="btn btn-width-100 btn-hei-au btn-row flex-w">
-					<div class="ml15 pb15" @click="botPopIconBtn(iconItem)" v-for="(iconItem,iconIndex) in iconBtn.iconList" :key="iconIndex">
+		<van-popup class="" v-model="showZdcIconBox" round position="bottom">
+			<div class="">
+				<div class="btn btn-width-100 btn-hei-au btn-row" :class="[iconBtn.iconList && iconBtn.iconList.length>5?'flex-w pt15':'ju-b p15']">
+					<div class="" @click="botPopIconBtn(iconItem)" :class="[iconBtn.iconList && iconBtn.iconList.length>5?'ml15 pb15':'']" v-for="(iconItem,iconIndex) in iconBtn.iconList" :key="iconIndex">
 						<div class="">
 							<i class="iconfont" :class="[iconItem.icon,iconItem.iconSize?iconItem.iconSize:'f14']" :style="{color:iconItem.iconColor}"></i>
 						</div>
@@ -281,10 +281,10 @@
 
 	.btn {
 		.pxToremLess(height,44px);
-		.pxToremLess(border-radius,8px);
+		.pxToremLess(border-radius,4px);
 		display: flex;
 		align-items: center;
-		justify-content: center;
+		// justify-content: center;
 		white-space: nowrap;
 		/*让文字不换行*/
 		overflow: hidden;
@@ -324,10 +324,6 @@
 
 	.btn-al-c {
 		align-items: center;
-	}
-
-	.btn-ju-c {
-		justify-content: center;
 	}
 
 	.btn-ju-a {

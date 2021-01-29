@@ -99,7 +99,10 @@
 			<div class="tab-box width-100 borderButtomE8">
 				<div class="tab-list-border verticle-center bg-white f16">
 					<div @click="changeTab(tabIndex)" class="tab-item" v-for="(tabItem,tabIndex) in tabList" :key="tabIndex">
-						<span class="lh200 f14" :class="[ curTabIndex === tabIndex ? 'gray287 fw' : 'gray3']">{{tabItem.title}}</span>
+						<span class="lh200 f14" :class="[ curTabIndex === tabIndex ? 'gray287 fw' : 'gray3']">
+							{{tabItem.title}}
+							<span v-if="!tabList[tabIndex].nubStatus" :class="[ curTabIndex === tabIndex ? 'gray287 fw' : 'gray3']">({{tabList[tabIndex].number}})</span>
+						</span>
 						<span class="tab-number" v-if="tabList[tabIndex].nubStatus">{{tabList[tabIndex].number}}</span>
 					</div>
 					<div class="tab-border bg-287" :style="activeBarStyle" ref="activeBar"></div>
@@ -211,7 +214,7 @@
 				type: Array,
 				default: () => [{
 						title: "待办",
-						nubStatus: true, //控制是否显示-顶部数标
+						nubStatus: false, //控制是否显示-顶部数标
 						number: 0,
 						sortList: [{
 								text: "按日期降序",
@@ -227,7 +230,7 @@
 					},
 					{
 						title: "已办",
-						nubStatus: true, //控制是否显示-顶部数标
+						nubStatus: false, //控制是否显示-顶部数标
 						number: 0,
 						sortList: [{
 								text: "按日期降序",
@@ -705,6 +708,7 @@
 			.pxToremLess(height, 44px);
 			.pxToremLess(line-height, 44px);
 			flex: 1;
+			// position: absolute;
 		}
 
 		.tab-border {

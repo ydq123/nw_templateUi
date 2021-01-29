@@ -21,16 +21,16 @@
 		<!-- 1左右布局 -->
 		<div class="textput-row al-c textput-r p15" :class="[isBotBor?'borderButtomE8':boxObj.botBor]" v-if="boxObj.showBox == 1">
 			<div class="textput-xh" v-if="boxObj.boxBs">*</div>
-			<div class="f16 mr10 text-hc">{{boxObj.titleTxt}}</div>
+			<div class="f16 mr10 text-hc" :class="[boxObj.isDisabled?'gray9':'']">{{boxObj.titleTxt}}</div>
 			<div class="f16 flex-1 textput-row al-c">
 				<input class="flex-1" type="text" v-model="boxObj.searchValue" :disabled="boxObj.isDisabled" :placeholder="boxObj.placeholderTxt" />
-				<i class="iconfont" :class="boxObj.iconCla" @click="inputIconBtn"></i>
+				<i class="iconfont" v-if="!boxObj.isDisabled" :class="boxObj.iconCla" @click="inputIconBtn"></i>
 			</div>
 		</div>
 		<!-- 2上下布局 -->
 		<div class="textput-r p15" :class="[isBotBor?'borderButtomE8':boxObj.botBor]" v-if="boxObj.showBox == 2">
 			<div class="textput-xh" v-if="boxObj.boxBs">*</div>
-			<div class="f16 pb10">{{boxObj.titleTxt}}</div>
+			<div class="f16 pb10" :class="[boxObj.isDisabled?'gray9':'']">{{boxObj.titleTxt}}</div>
 			<div class="f16 textput-row">
 				<input class="flex-1" type="text" v-model="boxObj.searchValue" :disabled="boxObj.isDisabled" :placeholder="boxObj.placeholderTxt" />
 			</div>
@@ -38,12 +38,12 @@
 		<!-- 3上下布局（有输入内容长度）-->
 		<div class="textput-r p15 bg-white" :class="[isBotBor?'borderButtomE8':boxObj.botBor]" v-if="boxObj.showBox == 3">
 			<div class="textput-xh" v-if="boxObj.boxBs">*</div>
-			<div class="textput-row f16 pb10">
-				审批意见
+			<div class="textput-row f16 pb10" :class="[boxObj.isDisabled?'gray9':'']">
+				{{boxObj.titleTxt}}
 			</div>
 			<div class="bg-white f16">
 				<textarea v-model="boxObj.searchValue" :placeholder="boxObj.placeholderTxt" :maxlength="boxObj.valueLength" :disabled="boxObj.isDisabled" class="pb20 bg-white"></textarea>
-				<div class="text-right f12 gray9 pb10 pr15 pl15">
+				<div class="text-right f12 gray9 pb10 pr15 pl15" v-if="!boxObj.isDisabled">
 					{{boxObj.searchValue.length}}/{{boxObj.valueLength}}
 				</div>
 			</div>
@@ -51,12 +51,12 @@
 		<!-- 4右箭头布局 -->
 		<div class="textput-row textput-r p15" :class="[isBotBor?'borderButtomE8':boxObj.botBor]" v-if="boxObj.showBox == 4">
 			<div class="textput-xh" v-if="boxObj.boxBs">*</div>
-			<div class="f16 mr10 text-hc">{{boxObj.titleTxt}}</div>
+			<div class="f16 mr10 text-hc" :class="[boxObj.isDisabled?'gray9':'']">{{boxObj.titleTxt}}</div>
 			<div class="f16 flex-1 textput-row al-c" @click="boxValBtn">
 				<div class="flex-1">
 					<div :class="[boxObj.boxValue.length>0?'':'gray9']">{{boxObj.boxValue.length>0?boxObj.boxValue:'请选择'}}</div>
 				</div>
-				<i class="iconfont icon-qianjin grayc7c f13"></i>
+				<i class="iconfont icon-qianjin grayc7c f13" v-if="!boxObj.isDisabled"></i>
 			</div>
 		</div>
 	</div>
@@ -84,7 +84,7 @@
 					titleTxt:'标题标题标题标题标题',
 					searchValue: '',//输入框内容
 					valueLength: 500,//状态为3的输入框限制长度
-					isDisabled: false,//禁止输入；默认为false可输入，true禁止输入
+					isDisabled: false,//禁止输入；禁止点击，默认为false可输入可点击，true禁止输入禁止点击
 					placeholderTxt: '请输入',//输入框提示语
 					iconCla: 'icon-dingwei gray287 f15 pl5',//icon样式
 					boxValue: '',//请选择参数
@@ -133,5 +133,8 @@
 	.text-hc{
 		width: 30%;
 		.pxToremLess(line-height,18px);
+	}
+	.text-b2{
+		color: #b2b2b2;
 	}
 </style>

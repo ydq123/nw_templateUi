@@ -103,6 +103,7 @@
 						type: "type",
 						name: "类型选择",
 						node: true,
+						boxWidBfb: 3,
 						isMultiple: false,
 						list: [{
 								name: "便电压1",
@@ -114,6 +115,18 @@
 							},
 							{
 								name: "便电压3",
+								check: false
+							},
+							{
+								name: "便电压4",
+								check: false
+							},
+							{
+								name: "便电压电压",
+								check: false
+							},
+							{
+								name: "便电压4",
 								check: false
 							},
 							{
@@ -160,7 +173,7 @@
 				],
 				testObjTab: [{
 						title: "待办",
-						nubStatus: true, //控制是否显示-顶部数标
+						nubStatus: false, //控制是否显示-顶部数标
 						number: 0,
 						sortList: [{
 								text: "按日期降序待办",
@@ -176,7 +189,7 @@
 					},
 					{
 						title: "已办",
-						nubStatus: true, //控制是否显示-顶部数标
+						nubStatus: false, //控制是否显示-顶部数标
 						number: 0,
 						sortList: [{
 								text: "按日期降序已办",
@@ -324,6 +337,33 @@
 							iconColor: "", // icon颜色
 							textColor: "", // icon文案颜色
 							id: 3
+						},
+						{
+							icon: "icon-jinyongqingkuang", // icon名称
+							iconText: "选择单位1", // icon文案
+							iconSize: "f14", // icon大小
+							textSize: "f12", // 文案大小
+							iconColor: "", // icon颜色
+							textColor: "", // icon文案颜色
+							id: 4
+						},
+						{
+							icon: "icon-jinyongqingkuang", // icon名称
+							iconText: "选择单位1", // icon文案
+							iconSize: "f14", // icon大小
+							textSize: "f12", // 文案大小
+							iconColor: "", // icon颜色
+							textColor: "", // icon文案颜色
+							id: 5
+						},
+						{
+							icon: "icon-jinyongqingkuang", // icon名称
+							iconText: "选择单位1", // icon文案
+							iconSize: "f14", // icon大小
+							textSize: "f12", // 文案大小
+							iconColor: "", // icon颜色
+							textColor: "", // icon文案颜色
+							id: 6
 						}
 					],
 					zhuyaoBtn: {
