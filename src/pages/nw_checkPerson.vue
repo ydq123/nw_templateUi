@@ -122,46 +122,28 @@
 		},
 		destroyed() {
 			console.log('*******************destroyed**********************');
-			if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
-				this.$across.$off("unitTabBus");
-				this.$across.$off("tabSrcollList");
-			} else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
-				this.$bus.$off("unitTabBus");
-				this.$bus.$off("tabSrcollList");
-			}
+      this.$tabOffPageFun(["unitTabBus","tabSrcollList"]);
 		},
 		/* 进入页面前-复原导航条   */
 		beforeRouteEnter(to, from, next) {
 			console.log('-----------nw_checkPerson----------beforeRouteEnter-------------------------');
 			next(vm => {
-				if (window.NW_MODULE_TYPE != 'scyyd_templateUI') {
-					console.log(from);
-					console.log(to);
-					if (from.name != "nw_checkUnit" && from.name != "nw_searchCheckPerson") {
-						vm.pageDataInit();
-						vm.init();
-					}
+				console.log(from);
+				console.log(to);
+				if (from.name != "nw_checkUnit" && from.name != "nw_searchCheckPerson") {
+					vm.pageDataInit();
+					vm.init();
 				}
 			});
 		},
 		mounted() {
 			var _this = this;
-			if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
-				this.init();
-				_this.$across.$on("unitTabBus", function(data) {
-					_this.popOverlay(data);
-				});
-				_this.$across.$on("tabSrcollList", function() {
-					_this.initTabList();
-				});
-			} else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
-				_this.$bus.$on("unitTabBus", function(data) {
-					_this.popOverlay(data);
-				});
-				_this.$bus.$on("tabSrcollList", function() {
-					_this.initTabList();
-				});
-			}
+      this.$tabOnPageFun("unitTabBus",(data)=>{
+        _this.popOverlay(data);
+      });
+      this.$tabOnPageFun("tabSrcollList",(data)=>{
+        _this.initTabList(data);
+      });
 		},
 		methods: {
 			pageDataInit: function(){
@@ -416,18 +398,8 @@
 					data.curNodeItemlist = this.curNodeList;
 				}
 				var name = this.param.exeMun;
-				if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
-					this.$across.$emit(name, data);
-				} else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
-					console.log('name:', name);
-					this.$bus.$emit(name, data);
-				}
+        this.$tabEmitPageFun(name, data);
 				this.$nwBack(-1);
-				// this.$across.$emit('person', data);
-				// var name = this.param.exeMun;
-				// this.$across.$emit(name, data);
-				// this.$router.go(-1);
-				// this.$emit("checkSubmit", data)
 			},
 			/* 模拟生命周期函数-每次进来一次都执行 */
 			onShow(obj) {},

@@ -19,7 +19,7 @@
 		</div>
 		<!-- 台账组件 -->
 		<div>
-			<van-button type="primary" @click="$nwOpenWin('nw_bd_checkSubstation')">选择变电站</van-button>
+			<van-button type="primary" @click="$nwOpenWin('nw_bd_pd_sd')">选择变电站</van-button>
 		</div>
 		<div class="bg-white mt20 pb20">
 			<h2 class="pt15 pb10 borderButtomE8 grayfa6470 f16 text-center">详情页顶部简介</h2>
@@ -337,11 +337,8 @@
 			};
 		},
 		destroyed() {
-			if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
-				this.$across.$off("testemitunit");
-			} else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
-				this.$bus.$off("testemitunit");
-			}
+      /* 销毁*/
+      this.$tabOffPageFun(['testemitunit']);
 		},
 		computed: {},
 		mounted() {
@@ -389,15 +386,9 @@
 				shortOrgName: "天河"
 			};
 			/* 判断当前使用的是生产与移动的工程模板-跨页面通讯-就做特殊处理*/
-			if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
-				_this.$across.$on("testemitunit", function(data) {
-					_this.testAcrossFun(data);
-				});
-			} else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
-				_this.$bus.$on("testemitunit", function(data) {
-					_this.testAcrossFun(data);
-				});
-			}
+      this.$tabOnPageFun('testemitunit',(data)=>{
+        _this.testAcrossFun(data);
+      });
 		},
 		methods: {
 			testPopEmitHand(data) {

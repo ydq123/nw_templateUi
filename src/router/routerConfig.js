@@ -63,6 +63,16 @@ const routes = [{
   },
 },
 {
+  path: '/nw_bd_pd_sd',
+  name: 'nw_bd_pd_sd',
+  component: () => import( /* webpackChunkName: "about" */ '../pages/nw_bd_pd_sd.vue'),
+  meta: {
+  	keepAlive: true,
+  	moduleName: 'nwTemplateUI',
+  	title: '台账-集合',
+  },
+},
+{
   path: '/nw_bd_checkSubstation',
   name: 'nw_bd_checkSubstation',
   component: () => import( /* webpackChunkName: "about" */ '../pages/nw_bd_checkSubstation.vue'),

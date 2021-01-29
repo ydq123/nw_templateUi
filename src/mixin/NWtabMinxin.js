@@ -31,88 +31,16 @@ export const NWtabMinxin = {
     this.tabPageData = this.$tabPageData(); //接受页面参数
   },
   methods: {
-    /* 自定义网络请求*/
-    $myAjax: function(obj) {
-      let {
-        apiName = '',
-          data = '',
-          url = '',
-          method = '',
-          headers = {},
-      } = obj;
-      var $apiConfItme = apiName ? this.$apiConfigMsg[apiName] : '';
-      if (!method) {
-        if (!$apiConfItme) {
-          this.$textCatch('apiName 不存在');
-          return new Promise((reslove, reject) => {
-            reject({
-              msg: 'apiName 不存在',
-              code: 403,
-            });
-          })
-        };
-      };
-      return new Promise((reslove, reject) => {
-        this.$api[method || $apiConfItme.method](url || $apiConfItme.url, data || $apiConfItme.data, headers).then(
-          (ret) => {
-            reslove(ret)
-          }).catch((err) => {
-          reject(err)
-        });
-      });
-    },
-
     /*************************************页面内***********************************/
     //直接返回当前页的上一页，数据全部消息，是个新页面
-    $nwBack(nub, dhType) {
-      /* 判断当前使用的是生产与移动的工程模板-页面跳转-就做特殊处理*/
-      if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
-        this.$tabBack(nub, dhType);
-      } else {
-        this.$router.go(nub);
-      }
+    $nwBack(nub) {
+      this.$tabBack(nub);
     },
-    $tabBack: function(nub, dhType) {
-      var keepNameArr = this.$store.getters.pageUrlObj.keepNameArr;
-      var keepLeg = this.$store.getters.pageUrlObj.keepNameArr.length;
-      this.$store.commit('setPageDataObj', {
-        pageSlide: dhType || 'slide-right', //默认后退
-      });
-      var val = this.$baseIsTypeof(nub); //判断类型number、string、boolean、undefined、null、arr，obj、function
-      var pageNub = -1;
-      if (val == 'number') {
-        //返回上 nub 页
-        pageNub = nub;
-        var jdzIndex = Math.abs(nub);
-        if (keepLeg - jdzIndex - 1 < 0) {
-          this.$nwBackHome('');
-          return
-        } else {
-          var winName = keepNameArr[keepLeg - jdzIndex - 1].name;
-        }
-
-      } else if (val == 'string') {
-        /* keepNameArr */
-        var winName = nub;
-        var retObj = this.$baseArrExchange(keepNameArr, 'name', winName);
-        pageNub = -(keepLeg - 1 - Number(retObj.index));
-      } else {
-        this.$nwBackHome('');
-        return
-      }
-      this.$store.commit('setPageUrlObj', {
-        funType: 'keepBack', //删除缓存页面
-        pageNub: pageNub,
-      });
-      var obj = {
-        name: winName,
-        params: '$tabBack'
-      };
-      this.$router.push(obj);
-      // this.$router.go(pageNub);
+    $tabBack: function(nub) {
+      this.$router.go(nub);
     },
-    $nwBackHome: function(winName, dhType) {
-      var homeName = window.NW_HOME_NAME; //项目入口的名称
+    $nwBackHome: function(winName) {
+      var homeName = window.NW_HOME_NAME || winName; //项目入口的名称
       if (!homeName) {
         var routes = this.$router.options.routes;
         var retObj = this.$baseArrExchange(routes || [], 'path', '/');
@@ -124,26 +52,9 @@ export const NWtabMinxin = {
           }
         };
       }
-      /* 判断当前使用的是生产与移动的工程模板-页面跳转-就做特殊处理*/
-      if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
-        this.$tabBackHome(homeName || 'root_tab', dhType);
-      } else {
-        var obj = {
-          name: homeName || 'nw_demoPage', //项目入口的名称
-          params: '$nwBackHome'
-        };
-        this.$router.push(obj);
-      }
+      this.$tabBackHome(homeName || 'root_tab');
     },
-    $tabBackHome: function(winName, dhType) {
-      this.$store.commit('setPageUrlObj', {
-        funType: 'keepBackArr', //删除缓存页面
-        pageNub: 0,
-        winName: winName || 'root_tab',
-      });
-      this.$store.commit('setPageDataObj', {
-        pageSlide: 'slide-bottom', //默认前进
-      });
+    $tabBackHome: function(winName) {
       var obj = {
         name: winName || 'root_tab',
         params: '$tabBackHome'
@@ -155,42 +66,7 @@ export const NWtabMinxin = {
     pageData:要传递的参数
     */
     $nwOpenWin: function(obj, pageData = {}) {
-      if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
-        this.$tabOpenWin(obj, pageData);
-      } else {
-        var retStr = this.$baseIsTypeof(obj);
-        if (retStr == 'obj') {
-          var {
-            winName = '',
-              pageData = {},
-          } = obj;
-        } else if (retStr == 'string') {
-          var winName = obj;
-        }
-        var val = this.$baseIsTypeof(pageData); //判断类型number、string、boolean、undefined、null、arr，obj、function
-        if (val == 'number' || val == 'boolean' || val == 'string' || val == 'arr') {
-          pageData = {
-            $default_dataVal: pageData, //默认值
-            $default_dataMsg: '传的参数不是对象，方法自定义一个默认对象',
-            $default_dataKeyStatus: true, //表示存在不带key 的参数
-          };
-        } else if (val == 'null' || val == 'function') {
-          pageData = {}; //不传参数
-        }
-        var status = this.$baseIsIndexOf(winName, '/');
-        if (status) {
-          var routerObj = {
-            path: winName,
-            query: pageData
-          };
-        } else {
-          var routerObj = {
-            name: winName,
-            params: pageData
-          };
-        }
-        this.$router.push(routerObj);
-      }
+      this.$tabOpenWin(obj, pageData);
     },
     $tabOpenWin(obj, pageData = {}) {
       var retStr = this.$baseIsTypeof(obj);
@@ -201,9 +77,6 @@ export const NWtabMinxin = {
       } else if (retStr == 'string') {
         var winName = obj;
       };
-      /* 记录 */
-
-
       this.jcOpenWin(obj, pageData);
     },
     $tabSetkeepName: function(winName, moduleName) {
@@ -220,19 +93,12 @@ export const NWtabMinxin = {
         var {
           winName = '',
             pageData = {},
-            dhType = pageData.dhType || 'slide-left',
+
         } = obj;
       } else if (retStr == 'string') {
         var winName = obj;
-        var dhType = pageData.dhType || 'slide-left';
       }
-      this.$store.commit('setPageDataObj', {
-        pageSlide: dhType, //默认前进
-      });
-      this.$store.commit('setPageUrlObj', {
-        funType: 'keepPush', //新增缓存页面
-        winName: winName,
-      });
+
       var val = this.$baseIsTypeof(pageData); //判断类型number、string、boolean、undefined、null、arr，obj、function
       if (val == 'number' || val == 'boolean' || val == 'string' || val == 'arr') {
         pageData = {
@@ -260,6 +126,9 @@ export const NWtabMinxin = {
     /*
     接受页面传递过来的参数
     */
+    $nwPageData: function() {
+      return this.$tabPageData();
+    },
     $tabPageData: function(obj) {
       var query = this.$route.query;
       var queryStatus = this.$baseIsEmptyObject(query); //判断是否是空对象
@@ -301,6 +170,27 @@ export const NWtabMinxin = {
         var e = e || window.event;
         $(this).removeClass('btn-active')
       });
+    },
+    /* 挂载跨页面通讯*/
+    $tabOnPageFun: function(funName, callback) {
+      /* 销毁跨页面通讯*/
+      this.$tabOffPageFun([funName]);
+      /*跳页面前再挂载-跨页面通讯*/
+      this.$across.$on(funName, (obj) => {
+        callback(obj);
+      });
+    },
+    /* 触发跨页面通讯*/
+    $tabEmitPageFun: function(funName, obj) {
+      this.$across.$emit(funName, obj);
+    },
+    /* 销毁跨页面通讯*/
+    $tabOffPageFun(Things) {
+      /* 销毁跨页面通讯*/
+      for (var i = 0; i < Things.length; i++) {
+        var funName = Things[i];
+        this.$across.$off(funName);
+      };
     },
   },
   computed: {

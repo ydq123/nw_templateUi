@@ -180,8 +180,8 @@
       border-radius: 8px;
       // border-bottom: 1px solid #ccc;
       // border-top: 1px solid #ccc;
-      border-bottom: 0.0125rem solid var(--borderSolide);
-      border-top: 0.0125rem solid var(--borderSolide);
+      border-bottom: 0.0225rem solid var(--borderSolide);
+      border-top: 0.0225rem solid var(--borderSolide);
       -webkit-transform-origin: 0 0;
       transform-origin: 0 0;
       -webkit-transform: scale(0.5);

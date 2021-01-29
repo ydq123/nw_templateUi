@@ -50,7 +50,7 @@ proxyIp为开发环境代理地址（IP），光有代理地址没有真实ip不
       startPosition: 0,
   <!-- 在该页面挂载该监听 -->
   	  let _this =this;
-      _this.$bus.$on("changePreview", function(data) {
+      _this.$across.$on("changePreview", function(data) {
         console.log(1111111111111);
         _this.imageList = data.imageList;
         _this.showPreview = data.showPreview;
@@ -376,16 +376,16 @@ zdcBtnShow,// 遮挡层关闭地图弹窗
 <!-- 标签，存在默认值， -->
 	<nw-module-top :isSort="true" :isSreen="true" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList" @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen" @resetScreen="testResetScreen"></nw-module-top> 
 	结合nw-fixed-header使用（带搜索和排序筛选）
-	<nw-fixed-header title="头部标题" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
-		<div slot="page-bottmo">
+	<nw-fixed-header title="头部标题" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
+		<div slot="page-bottmo">
 			<nw-module-top :isSort="true" :isSreen="true" :mTop="0" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList"
 			 @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen"
 			 @resetScreen="testResetScreen"></nw-module-top>
 		</div>
 	</nw-fixed-header>
 	结合nw-fixed-header使用 插槽（slot="topInput"：隐藏搜索，slot="taskSreenSort"：隐藏排序筛选）
-	<nw-fixed-header title="头部标题" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
-		<div slot="page-bottmo">
+	<nw-fixed-header title="头部标题" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
+		<div slot="page-bottmo">
 			<nw-module-top :isSort="true" :isSreen="true" :mTop="0" :sortDataList="ListPx" :sreenDataObj="objSx" :tabList="testTabList">
 				<div slot="topInput"></div>
 				<div slot="taskSreenSort"></div>

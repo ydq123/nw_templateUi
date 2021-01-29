@@ -250,7 +250,7 @@
 						this.startPosition = Number(retObj.index);
 						this.showPreview = true;
 					} else {
-						this.$bus.$emit("changePreview", {
+						this.$across.$emit("changePreview", {
 							imageList: this.imageList.arr1,
 							showPreview: true,
 							startPosition: Number(retObj.index),
