@@ -9,15 +9,9 @@
 </template>
 
 <script>
-// import Button from '@/components/Button/Button'
-// import Modal from '@/components/Modal/Modal'
 import vConsole from "vconsole";
 export default {
   name: "app",
-  // components: {
-  //   ywButton: Button,
-  //   ywModal: Modal,
-  // },
   data() {
     return {};
   },
@@ -29,7 +23,7 @@ export default {
 </script>
 
 <style lang="less">
-  @import "~@/assets/less/all.less";
+  @import "../src/assets/less/all.less";
 /* 解决悬浮球导致页面报错 */
 html {
   height: 100%;

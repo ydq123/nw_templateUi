@@ -6,6 +6,174 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "19568791",
+      "name": "更  多",
+      "font_class": "gengduo",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "16104948",
+      "name": "审核流程",
+      "font_class": "shenheliucheng",
+      "unicode": "e6f2",
+      "unicode_decimal": 59122
+    },
+    {
+      "icon_id": "15698300",
+      "name": "上报 ",
+      "font_class": "shangbao",
+      "unicode": "e6bc",
+      "unicode_decimal": 59068
+    },
+    {
+      "icon_id": "19451707",
+      "name": "执行",
+      "font_class": "zhihang",
+      "unicode": "e901",
+      "unicode_decimal": 59649
+    },
+    {
+      "icon_id": "19443650",
+      "name": "许可",
+      "font_class": "xuke",
+      "unicode": "e6bb",
+      "unicode_decimal": 59067
+    },
+    {
+      "icon_id": "17247354",
+      "name": "Tcp接收总数据",
+      "font_class": "TCPjieshouzongshuju",
+      "unicode": "e7bb",
+      "unicode_decimal": 59323
+    },
+    {
+      "icon_id": "9861664",
+      "name": "安全措施确认维护",
+      "font_class": "anquancuoshiquerenweihu",
+      "unicode": "e903",
+      "unicode_decimal": 59651
+    },
+    {
+      "icon_id": "10742573",
+      "name": "签发_  ",
+      "font_class": "qianfa_",
+      "unicode": "e6b9",
+      "unicode_decimal": 59065
+    },
+    {
+      "icon_id": "12063708",
+      "name": "添加",
+      "font_class": "aa",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "5743255",
+      "name": "关  闭",
+      "font_class": "guanbi1",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "19234922",
+      "name": "资料",
+      "font_class": "ziliao",
+      "unicode": "e8e7",
+      "unicode_decimal": 59623
+    },
+    {
+      "icon_id": "19234923",
+      "name": "巡查单",
+      "font_class": "xunchadan",
+      "unicode": "e8e8",
+      "unicode_decimal": 59624
+    },
+    {
+      "icon_id": "19131268",
+      "name": "daiban",
+      "font_class": "daiban",
+      "unicode": "e6b8",
+      "unicode_decimal": 59064
+    },
+    {
+      "icon_id": "19131158",
+      "name": "daiban2",
+      "font_class": "daiban2",
+      "unicode": "e6b7",
+      "unicode_decimal": 59063
+    },
+    {
+      "icon_id": "19129920",
+      "name": "yingyong",
+      "font_class": "yingyong",
+      "unicode": "e6b6",
+      "unicode_decimal": 59062
+    },
+    {
+      "icon_id": "19129874",
+      "name": "yingyong2",
+      "font_class": "yingyong2",
+      "unicode": "e6b5",
+      "unicode_decimal": 59061
+    },
+    {
+      "icon_id": "18883272",
+      "name": "控制要求",
+      "font_class": "kongzhiyaoqiu",
+      "unicode": "e8e3",
+      "unicode_decimal": 59619
+    },
+    {
+      "icon_id": "18883273",
+      "name": "措施落实反馈",
+      "font_class": "cuoshilashifankui",
+      "unicode": "e8e4",
+      "unicode_decimal": 59620
+    },
+    {
+      "icon_id": "18883274",
+      "name": "评价",
+      "font_class": "pingjia",
+      "unicode": "e8e5",
+      "unicode_decimal": 59621
+    },
+    {
+      "icon_id": "18883275",
+      "name": "危险辨识与%0D风险分析",
+      "font_class": "weixianbianshiyu0Dfengxianfenxi",
+      "unicode": "e8e6",
+      "unicode_decimal": 59622
+    },
+    {
+      "icon_id": "9594351",
+      "name": "闪光灯",
+      "font_class": "shanguangdeng",
+      "unicode": "e6b4",
+      "unicode_decimal": 59060
+    },
+    {
+      "icon_id": "1426068",
+      "name": "帮助中心",
+      "font_class": "bangzhuzhongxin1",
+      "unicode": "e6b2",
+      "unicode_decimal": 59058
+    },
+    {
+      "icon_id": "1696378",
+      "name": "版本更新",
+      "font_class": "banbengengxin",
+      "unicode": "e6b3",
+      "unicode_decimal": 59059
+    },
+    {
+      "icon_id": "16361417",
+      "name": "消息提醒",
+      "font_class": "xiaoxitixing",
+      "unicode": "e820",
+      "unicode_decimal": 59424
+    },
+    {
       "icon_id": "11039824",
       "name": "其他",
       "font_class": "qita1",
@@ -1084,13 +1252,6 @@
       "unicode_decimal": 58918
     },
     {
-      "icon_id": "8965233",
-      "name": "典型工作票",
-      "font_class": "dianxinggongzuopiao",
-      "unicode": "e625",
-      "unicode_decimal": 58917
-    },
-    {
       "icon_id": "8965227",
       "name": "安全技术交底",
       "font_class": "anquanjishujiaodi",
@@ -1131,20 +1292,6 @@
       "font_class": "weixianyuan",
       "unicode": "e61e",
       "unicode_decimal": 58910
-    },
-    {
-      "icon_id": "8918096",
-      "name": "工作票",
-      "font_class": "gongzuopiao",
-      "unicode": "e61d",
-      "unicode_decimal": 58909
-    },
-    {
-      "icon_id": "8918068",
-      "name": "操作票管理",
-      "font_class": "caozuopiao",
-      "unicode": "e61c",
-      "unicode_decimal": 58908
     },
     {
       "icon_id": "8918062",

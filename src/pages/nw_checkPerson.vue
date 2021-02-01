@@ -73,7 +73,7 @@
 			<div class="nw_buttom_125_44 ml10 width-100 bg-287 text-white" @click="submitCurNode">确定</div>
 		</div>
 		<div class="person-bottom_button p10 bg-white person-row ju-b f16 width-100 fw boxt003" v-if="taskInfo.nodeList.length > 0 && isType == 2">
-			<div class="gray287 person-row al-c " @click="showPicker2 = true">已选择: {{ curNodeList.length }}人</div>
+			<div class="gray287 person-row al-c " @click="showPicker2 = true">已选择: {{ curNodeList.length }}人 <i class="rotate180 f14 ml10 iconfont icon-qianjin-copy"></i></div>
 			<div class="nw_buttom_125_44 bg-287 text-white" @click="submitCurNode">确定</div>
 		</div>
 	</div>
@@ -499,6 +499,9 @@
 	.person-row {
 		display: flex;
 		flex-direction: row;
+		.rotate180 {
+			transform: rotate(-180deg);
+		}
 	}
 
 	.person-bottom_button {

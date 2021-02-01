@@ -1,11 +1,6 @@
 /* 工作流-混入 */
 import jQuery from 'jquery';
 import Vue from 'vue';
-// import setData from "@/moduleAPI/setData";
-// import {
-// 	Toast,
-// 	Dialog
-// } from 'ares-ui';
 import mdpWorkflow from '../plugin/workFlow/mdp.workflow.umd.min.js';
 export const NWbpmsMinxin = {
   data() {

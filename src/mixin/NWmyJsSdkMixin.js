@@ -1,5 +1,4 @@
 /* 按钮-混入 */
-// import setData from '@/moduleAPI/setData';
 export const NWmyJsSdkMixin = {
 	data() {
 		return {

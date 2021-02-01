@@ -77,7 +77,7 @@
 					</div>
 					<div @click="showZdcIconBox = true">
 						<div class="">
-							<i class="iconfont icon-jiedian1 f14"></i>
+							<i class="iconfont icon-gengduo f14"></i>
 						</div>
 						<div class="mt5">
 							更多
@@ -98,13 +98,12 @@
 		</div>
 		<!-- 底部弹窗 -->
 		<van-popup class="" v-model="showZdcIconBox" round position="bottom">
-			<div class="">
-				<div class="btn btn-width-100 btn-hei-au btn-row" :class="[iconBtn.iconList && iconBtn.iconList.length>5?'flex-w pt15':'ju-b p15']">
-					<div class="" @click="botPopIconBtn(iconItem)" :class="[iconBtn.iconList && iconBtn.iconList.length>5?'ml15 pb15':'']" v-for="(iconItem,iconIndex) in iconBtn.iconList" :key="iconIndex">
-						<div class="">
-							<i class="iconfont" :class="[iconItem.icon,iconItem.iconSize?iconItem.iconSize:'f14']" :style="{color:iconItem.iconColor}"></i>
-						</div>
-						<div class="mt5" :class="[iconItem.textSize?iconItem.textSize:'f14']" :style="{color:iconItem.textColor}">
+			<div class="bg-f5">
+				<div class="title f15 verticle-center ju-b pl15 pr15 pt20 pb20 fw">更多操作<i class="iconfont icon-shanchu3 gray9 f18" @click="showZdcIconBox = false"></i></div>
+				<div class="btn btn-father btn-width-100 btn-hei-au btn-row column pl15 pr15 ju-b" :class="[iconBtn.iconList && iconBtn.iconList.length>5?'flex-w':'ju-b p15']">
+					<div class="bg-white btnItem pt10 pb10" @click="botPopIconBtn(iconItem)" :class="[iconBtn.iconList && iconBtn.iconList.length>5?'mb15':'']" v-for="(iconItem,iconIndex) in iconBtn.iconList" :key="iconIndex">
+						<i class="iconfont f22" :class="[iconItem.icon,iconItem.iconSize?iconItem.iconSize:'f14']" :style="{color:iconItem.iconColor}"></i>
+						<div class="" :class="[iconItem.textSize?iconItem.textSize:'f14']" :style="{color:iconItem.textColor}">
 							{{ iconItem.iconText }}
 						</div>
 					</div>
@@ -306,6 +305,17 @@
 
 	.btn-width-100 {
 		width: 100%;
+	}
+	.btn-father {
+		&::after {
+			content: '';
+			width: 90px;
+		}
+		.btnItem {
+		.pxToremLess(width,80px);
+		.pxToremLess(height,80px);
+		.pxToremLess(border-radius,10px);
+		}
 	}
 
 	.flex-d {

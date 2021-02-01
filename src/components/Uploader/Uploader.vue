@@ -16,7 +16,7 @@
 				</div>
 				<img @click.stop="dltFile(fileIndex, fileItem)" v-show="deletable" class="imgdlt" src="../../assets/images/dlt.png" />
 			</div>
-			<div v-if="showUpload" class="fill_Upimg_list_item bg-eee column al-c ju-c" m="click" @click="selectFileUpload">
+			<div v-if="showUpload" class="fill_Upimg_list_item column al-c ju-c" m="click" @click="selectFileUpload">
 				<i class="iconfont icon-jia1 f32 graydf"></i>
 			</div>
 		</div>
@@ -618,17 +618,18 @@
 </script>
 
 <style scoped lang="less">
+	@import "../../assets/less/nw_tool.less";
 	.fill_Upimg_list_item {
 		position: relative;
-		height: 70px;
-		width: 70px;
+		.pxToremLess(height,70px);
+		.pxToremLess(width,70px);
 		margin-right: 12px;
 		margin-top: 12px;
 		/* background-size: cover; */
 		background-size: 100% 100%;
 		background-position: center;
 		background-repeat: no-repeat;
-		border: 1px #f9f9f9 solid;
+		border: 1px #d8d8d8 solid;
 
 		.pathName {
 			width: 69px;

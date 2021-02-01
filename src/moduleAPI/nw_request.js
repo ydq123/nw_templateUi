@@ -1,6 +1,4 @@
 import axios from 'axios'
-// import store from '@/store'
-
 // create an axios instance
 const service = axios.create({
 	baseURL: '',//默认请求头

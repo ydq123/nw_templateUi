@@ -54,7 +54,7 @@
 		data() {
 			return {
 				showCancel: false,
-				centerImg: require("@/assets/images/center.png"),
+				centerImg: require("../../assets/images/center.png"),
 				flags: false,
 				moveDiv: '',
 				cancelDiv: '',

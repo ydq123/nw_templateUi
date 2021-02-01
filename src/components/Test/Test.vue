@@ -12,11 +12,11 @@ export default {
       uploaderFun: null,
       startPosition: 0,
       showPreview: false,
-      videoPng: `${require("@/assets/images/fileTypeImg/video.png")}`,
-      dltPng: `${require("@/assets/images/dlt.png")}`,
+      videoPng: `${require("../../assets/images/fileTypeImg/video.png")}`,
+      dltPng: `${require("../../assets/images/dlt.png")}`,
       dltPng2: `${require("../../assets/images/dlt.png")}`,
-      dltPng3: require("@/assets/images/dlt.png"),
-      dltPng4: require("@/assets/images/dlt.png"),
+      dltPng3: require("../../assets/images/dlt.png"),
+      dltPng4: require("../../assets/images/dlt.png"),
       upFileArr: [],
       lookFileArr: []
     };

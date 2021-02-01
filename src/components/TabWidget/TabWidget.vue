@@ -112,7 +112,7 @@
 			</slot>
 			<!-- 可多选折叠滑动tab -->
 			<slot name="tabScrollX">
-				<div class="tab-scrollX-box width-100 borderButtomE8 bg-white" :class="[showTabPop?'':'tabwidget-row al-c pb15 pt15']">
+				<div class="tab-scrollX-box width-100 bg-white" :class="[showTabPop?'':'tabwidget-row al-c pb15 pt15']">
 					<div class="tabwidget-row al-c f16 pl15" :class="[showTabPop?'tab-list-autoHeight':'tab-list-scrollX pr15']">
 						<div @click="changeScrollXTab(XIndex)" :class="[showTabPop?'mt15':'']" v-for="(XItem,XIndex) in tabScrollXList"
 						 :key="XIndex">

@@ -13,17 +13,16 @@
 					<div class="header-txt f16">{{ title }}</div>
 				</slot>
 				<!-- <div class="right-content">更多</div> -->
-				<div class="right-content">
+				<div class="right-content" @click="backHome">
 					<slot name="right">
-						<div class="right-slot-content">
+						<!-- <div class="right-slot-content" @click="backHome">
 							<slot name="right1">
-								<!--  @click="threeClock" -->
-								<div class="bg-white"></div>
+								<div></div>
 							</slot>
 							<slot name="right2">
-								<div @click="backHome"></div>
+								<div></div>
 							</slot>
-						</div>
+						</div> -->
 					</slot>
 				</div>
 			</div>
@@ -60,6 +59,10 @@
 			title: {
 				type: String,
 				default: "默认标题"
+			},
+			leftFun: {
+				type: Boolean,
+				default: false
 			}
 		},
 		mixins: [NWtabMinxin], //混入公共类
@@ -69,11 +72,19 @@
 				this.$emit("threeClockHandle");
 			},
 			backHome() {
+				if (this.leftFun) {
+          this.$emit("backHomeHandle");
+        } else {
+					this.$nwBackHome('');
+        }
 				// this.$emit("backHomeHandle");
-				this.$nwBackHome('');
 			},
 			headBack() {
-				this.$nwBack(-1);
+				if (this.leftFun) {
+          this.$emit("headBackeHandle");
+        } else {
+          this.$nwBack(-1);
+        }
 				// this.$emit("headBackeHandle");
 			}
 		}
@@ -201,7 +212,7 @@
 
 	/* 顶部分享 */
 	.right-content {
-		.pxToremLess(width, 86px);
+		.pxToremLess(width, 44px);
 		.pxToremLess(height, 44px);
 		.pxToremLess(line-height, 44px);
 		position: absolute;
@@ -211,15 +222,19 @@
 		-webkit-transform: translateY(-50%);
 		transform-origin: 0 0;
 		-webkit-transform-origin: 0 0;
+			background-size: 70%;
+			background-position: center center;
+			background-repeat: no-repeat;
+		background-image: url("../../assets/images/yuandian.png");
 
 		.right-slot-content {
 			.pxToremLess(width, 86px);
 			.pxToremLess(height, 44px);
 			.pxToremLess(line-height, 44px);
-			background-size: contain;
-			background-position: center center;
+			background-size: 40%;
+			background-position: center right;
 			background-repeat: no-repeat;
-			background-image: url("../../assets/images/top_rigth.png");
+			background-image: url("../../assets/images/yuandian.png");
 
 			div {
 				float: left;

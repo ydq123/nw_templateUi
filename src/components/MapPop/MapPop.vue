@@ -108,19 +108,19 @@
 				default: () => [{
 						label: "标准地图",
 						value: "1",
-						key: require('@/assets/images/mapImg/layer_pic1.png'),
+						key: require('../../assets/images/mapImg/layer_pic1.png'),
 						isChecked: true,
 					},
 					{
 						label: "影像地图",
 						value: "1",
-						key: require('@/assets/images/mapImg/layer_pic2.png'),
+						key: require('../../assets/images/mapImg/layer_pic2.png'),
 						isChecked: false,
 					},
 					{
 						label: "栅格地图",
 						value: "1",
-						key: require('@/assets/images/mapImg/layer_pic3.png'),
+						key: require('../../assets/images/mapImg/layer_pic3.png'),
 						isChecked: false,
 					},
 				]
