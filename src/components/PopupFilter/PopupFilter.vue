@@ -12,7 +12,7 @@
 										<i class="iconfont icon-sanjiao1 f14" :class="[popupItem.node ? '' : 'icon-sanjiao2']"></i>
 									</div>
 									<div class="content flex fl-w" v-show="popupItem.node">
-										<div class="type-item text-center border_1_dc f14 pt8 pb8 mr15 mb10" :class="[item.check ? 'text-white' : '',popupItem.boxWidBfb == 2?'width-44':'',popupItem.boxWidBfb == 3?'width-28':'']"
+										<div class="type-item text-center border_1_dc f14 pt8 pb8 mr15 mb10" :class="[item.check ? 'text-white' : '',popupItem.boxWidBfb?'':'pl10 pr10',popupItem.boxWidBfb == 2?'width-44':'',popupItem.boxWidBfb == 3?'width-28':'']"
 										 :style="{ background: item.check ? choiceColor : '' }" v-for="(item, index) in popupItem.list" :key="index"
 										 @click="choiceType(item, popupIndex)">
 											{{ item.name }}

@@ -103,14 +103,14 @@
 						type: "type",
 						name: "类型选择",
 						node: true,
-						boxWidBfb: 3,
+						// boxWidBfb: 3,
 						isMultiple: false,
 						list: [{
-								name: "便电压1",
+								name: "电压1",
 								check: false
 							},
 							{
-								name: "便电压2",
+								name: "电压2",
 								check: false
 							},
 							{
@@ -135,6 +135,42 @@
 							}
 						]
 					},
+					{
+							type: "type",
+							name: "类型选择001",
+							node: true,
+							boxWidBfb: 3,
+							isMultiple: false,
+							list: [{
+									name: "便电压1",
+									check: false
+								},
+								{
+									name: "便电压2",
+									check: false
+								},
+								{
+									name: "便电压3",
+									check: false
+								},
+								{
+									name: "便电压4",
+									check: false
+								},
+								{
+									name: "便电压电压",
+									check: false
+								},
+								{
+									name: "便电压4",
+									check: false
+								},
+								{
+									name: "便电压4",
+									check: false
+								}
+							]
+						},
 					{
 						type: "time",
 						name: "时间选择",

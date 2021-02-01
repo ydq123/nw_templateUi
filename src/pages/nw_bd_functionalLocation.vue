@@ -90,7 +90,7 @@
   } from "../mixin/NWtabMinxin.js";
   import {
     querySubsIntervalById
-  } from "../moduleApi/nw_tz.js";
+  } from "../moduleAPI/nw_tz.js";
   export default {
     name: "nw_functionalLocation",
     mixins: [NWtabMinxin],
