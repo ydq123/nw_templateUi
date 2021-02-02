@@ -262,14 +262,15 @@
 				dbTwoZCyBtn: {
 					btnType: true,
 					zhuyaoBtn: {
-						text: '发送',
+						text: '发送1',
 						color: 'white',
 						bgcolor: '#1E87F0',
 						fsize: 'f14'
 					},
 					ciyaoBtn: {
-						text: '保存',
+						text: '保存1',
 						color: '#262626',
+            bgcolor: '#f5f5f5',
 						fsize: 'f14'
 					},
 				},

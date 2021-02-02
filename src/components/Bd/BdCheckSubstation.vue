@@ -1,15 +1,15 @@
 <template>
   <div class="ledger_query pt44">
     <nw-fixed-header class="bg-f5" title="选择变电站">
-      <div slot="right"></div>
+      <!-- <div slot="right"></div> -->
       <div slot="page-bottom">
-        <div class="adress gray3 pt15 f14 text-left pl15">
-          我的位置：<span class="gray287">广州市黄埔区云升科学园</span>
+        <div class="adress gray3 pt15 f14 text-left pl15" @click="noAddressFun">
+          我的位置：<span class="gray287">{{addressObj.address||'点击定位'}}</span>
         </div>
         <van-search @search="searchFun" v-model="searchValue" placeholder="变电站名称" />
         <div class="task-top-filtrate bg-white">
           <div class="task-top-txt">
-            <span class="ml15 f14">共 {{totalPage}} 条记录</span>
+            <span class="ml15 f14">共 {{zjbdObj.bdzType==1?totalPage+1:totalPage}} 条记录</span>
           </div>
           <div class="filtrate-btn" @click="hasCheckedFun">
             <van-checkbox v-model="hasChecked" icon-size="14px" shape="square" class="f14">管辖内</van-checkbox>
@@ -22,13 +22,13 @@
         </div>
       </div>
     </nw-fixed-header>
-    <div class="list-content borderTopE8 pt128">
+    <div class="list-content borderTopE8 pt128 mt10">
       <van-pull-refresh class="pb65" v-model="refreshing" success-text="刷新成功" @refresh="onRefresh">
         <van-list :immediate-check="false" v-model="loading" :offset="30" :finished="finished" finished-text="没有更多了"
           @load="onLoad">
           <!-- mt10 -->
           <div class="list ">
-            <!-- <div class="bg-white pl50 pt10 gray9">离我最近 647米</div> -->
+            <!-- <div class="bg-white  pt10 gray9">离我最近 647米</div> -->
 
             <!-- 变电站ID			id
 							变电站名称			flName
@@ -38,12 +38,58 @@
 							运行状态			runningState
 							主接线方式			connectionMode
 							变电站类型			subType -->
+            <!-- 变电站ID			id
+              	变电站名称			flName
+              	变电站的全路径		fullPath
+              	投运日期			plantTransferDate
+              	值守方式			dutyType
+              	运行状态			runningState
+              	主接线方式			connectionMode
+              	变电站类型			subType -->
+            <!--离我最近 -->
+            <div class="task-list borderButtomE8" m="click" v-if="zjbdObj.bdzType==1">
+              <div class="pr15 pl15 pt15 f12 gray9">离我最近 {{zjbdObj.distance|setDistance }}</div>
+              <div class="row p15">
+                <van-checkbox class=" pr15 " @click="checkFun" v-if="pageData.type==1" v-model="zjbdObj.checked"></van-checkbox>
+                <div class=" row al-c " @click="openFunctionalLocation(zjbdObj, index)">
+                  <div class=" divImg mr10">
+                    <!-- <img src="../../assets/images/mapImg/mapType2.png" /> -->
+                  </div>
+                  <div class="content-right">
+                    <div class=" f16  clamp1 jrh">{{zjbdObj.flName}}</div>
+                    <div class=" f14  clamp1 jrh">
+                      {{zjbdObj.address||zjbdObj.fullPath}}
+                    </div>
+                    <div class="f14  clamp1 jrh">{{$baseTimeFormat("-", ":", false, zjbdObj.plantTransferDate)}}</div>
+                    <nw-status-label class="" :bqStaLabel="[	{
+              				staCal: '',
+              				staLabTxt: zjbdObj.runningState,
+              				status: 1,
+              				fsize:'f10',
+              				},{
+              				staCal: 'borc-l-1e8 border',
+              				staLabTxt:  zjbdObj.connectionMode,
+              				status: 0,
+              				staBorCol: '#1E87F0',
+              				fsize:'f10',
+              				},{
+              				staCal: 'borc-l-1e8 border',
+              				staLabTxt:  zjbdObj.dutyType,
+              				status: 0,
+              				staBorCol: '#1E87F0',
+              				fsize:'f10',
+              				}]"></nw-status-label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 列表 -->
             <div class="task-list borderButtomE8" m="click" :key="index" v-for="(itme, index) in bdList">
               <div class="row p15">
-                <van-checkbox class=" pr15 " v-if="tabPageData.type==1" @change="checkFun" v-model="itme.checked"></van-checkbox>
-                <div class=" row al-c " @click.stop="openFunctionalLocation(itme, index)">
+                <van-checkbox class=" pr15 " @click="checkFun" v-if="pageData.type==1" v-model="itme.checked"></van-checkbox>
+                <div class=" row al-c " @click="openFunctionalLocation(itme, index)">
                   <div class=" divImg mr10">
-                    <!-- <img src="../assets/images/mapImg/mapType2.png" /> -->
+                    <!-- <img src="../../assets/images/mapImg/mapType2.png" /> -->
                   </div>
                   <div class="content-right">
                     <div class=" f16  clamp1 jrh">{{itme.flName}}</div>
@@ -75,27 +121,9 @@
             </div>
           </div>
         </van-list>
-        <nw-null-data class="mt100" v-if="bdList.length==0"></nw-null-data>
+        <nw-null-data class="mt100" v-if="bdList.length==0&&zjbdObj.bdzType!=1"></nw-null-data>
       </van-pull-refresh>
-      <van-popup v-model="showPopup" round position="bottom" :style="{ height: '60%' }">
-        <div class="title line-t pb10 pt10  verticle-center ju-b pl15 pr15 f15" @click="dltArrFun">
-          <span>共 {{this.chenckArr.length}} 条记录</span>
-          <span class="row al-c ">
-            <van-icon name="delete" class="text-red f20 mr5" /> 清空</span>
-        </div>
-        <div class="list-data f15">
-          <div class="flex ju-b pl15 pr15 pt10 pb10 verticle-center borderTopE8" v-for="(item,index) in chenckArr">
-            <div class="list-name">{{item.flName}}</div>
-            <div class="pl15" @click="dltItmeFun(item.id,index)"><i class="iconfont icon-shanchu text-red"></i></div>
-          </div>
-        </div>
-      </van-popup>
-    </div>
-    <div class="p10 bg-white flex boxs">
-      <div class="btn btn-width-100 cybtn mr5 bg-f5 f14 gray3 border_1_dc" @click="showPopup = true">
-        已选({{ this.chenckArr.length }})
-      </div>
-      <div @click="submitScreen" class="btn btn-width-100 ml5 f14 bg-287 text-white">确定</div>
+
     </div>
     <!-- 侧面弹框 -->
     <van-popup @close="closePOP" v-model="showRight" position="right" style="width: 70%; height: 100%">
@@ -118,14 +146,16 @@
 <script>
   import {
     querySubstationList,
-    querySubstationGroupByVoltage
-  } from "../moduleAPI/nw_tz";
+    querySubstationGroupByVoltage,
+    queryNearestSubstation
+  } from "../../moduleAPI/nw_tz";
   import {
     NWtabMinxin
-  } from "../mixin/NWtabMinxin.js";
+  } from "../../mixin/NWtabMinxin.js";
   export default {
     name: "nw_bd_checkSubstation",
     mixins: [NWtabMinxin],
+    props: {},
     data() {
       return {
         showRight: false,
@@ -143,46 +173,69 @@
         bdList: [],
         hasChecked: true,
         totalPage: 0,
-        chenckArr: [],
+        checkArr: [],
+        pageData: {},
+        addressObj:{},
+        zjbdObj:  {'bdzType':0}, //最近变电站
       };
     },
     created() {
       console.log('created');
     },
-    beforeRouteEnter(to, from, next) {
-      console.log(from.name )
-    	next(vm => {
-    		/* 前进刷新后退不刷新*/
-    		if (from.name != "nw_bd_functionalLocation"&&from.name != "nw_bd_equipment") {
-    			vm.showRight=false;
-    			vm.vLevStatus=false;
-    			vm.vLevArr1=[]; //辖区内的电压等级
-    			vm.vLevArr2=[]; //所有的电压等级
-    			vm.showPopup=false;
-    			vm.checkNum=0;
-    			vm.searchValue="";
-    			vm.refreshing=false; //下拉刷新
-    			vm.loading=false; //加载中状态
-    			vm.finished=false; //没有更多数据了
-    			vm.myLoading=false;
-    			vm.pageIndex=1; //当前页数
-    			vm.bdList=[];
-    			vm.hasChecked=true;
-    			vm.totalPage=0;
-    			vm.chenckArr=[];
-    			vm.tabPageData = vm.$tabPageData();
-    			console.log(vm.tabPageData);
-    			vm.hasChecked = vm.tabPageData.vindicateOid ? true : false;
-    			vm.pageIndex = 1;
-    			vm.querySubstationGroupByVoltageFun();
-    			vm.getData();
-    		}
-    	});
-    },
     mounted() {
 
     },
     methods: {
+      /* 获取离我最近的变电站*/
+      queryNearestSubstationFun: function(obj={}) {
+        console.log('获取离我最近的变电站')
+        if(obj.address){
+          this.addressObj=obj;
+        }
+        var param = {
+          "queryCondition": {
+            "bureauCode": this.pageData.bureauCode,
+            "lon": obj.longitude,
+            "lat":  obj.latitude,
+          }
+        };
+        console.log(param)
+        queryNearestSubstation(param).then((ret) => {
+          console.log(ret)
+          if (ret) {
+            if (ret.code == 200) {
+              if (ret.data) {
+                ret.data['bdzType'] = 1;//1表示是距离我最近的变电站
+                this.zjbdObj = ret.data || {'bdzType':0};
+              }
+            } else {
+              this.$textCatch(err.msg || '服务异常');
+            }
+          }
+        }).catch((err) => {
+          console.log(err);
+          this.$textHid();
+          this.$textCatch(err.msg || '服务异常');
+
+        })
+      },
+      noAddressFun: function() {
+        this.zjbdObj = {bdzType:0};
+        this.$emit('pageCallback', {
+          funType: 'newAddress'
+        });
+      },
+      initPageFun: function(data) {
+        console.log(1111111);
+        this.pageData = data;
+        console.log(this.pageData);
+        this.pageIndex = 1;
+        this.querySubstationGroupByVoltageFun();
+        this.getData();
+      },
+      showPageFun: function() {
+
+      },
       switchFun: function() {
         console.log('开关事件');
         this.vLevStatus = true;
@@ -195,6 +248,7 @@
         this.vLevStatus = false;
       },
       initFun: function() {
+        this.totalPage= 0;
         this.finished = false; //是否加载完
         this.myLoading = false; //关闭加载中
         this.loading = false;
@@ -215,16 +269,31 @@
           this.querySubstationGroupByVoltageFun();
         }, 100);
       },
-      openFunctionalLocation: function(itme, index) {
-        if (this.tabPageData.type == 1) return
-        this.$nwOpenWin('nw_bd_functionalLocation', {
-          title:itme.flName,
-          type: this.tabPageData.type, //类型
-          bureauCode: this.tabPageData.bureauCode, //局编码
-          SubstationID: itme.id, //变电站id
-          funName: this.tabPageData.funName ,//跨页面通信函数名字-必传
-          vindicateOid: this.tabPageData.vindicateOid ,//运维班组-非必传
-        });
+      openFunctionalLocation: function(data, index) {
+        if (this.pageData.type != 1) {
+          this.bdList.forEach((itme, index) => {
+            if (itme.id == data.id) {
+              itme.checked = true;
+            } else {
+              itme.checked = false;
+            }
+          })
+          this.checkArr = this.bdList.filter(item => item.checked == true);
+          console.log(11111)
+          this.$emit('pageCallback', {
+            type: this.pageData.type,
+            showType: 2,
+            data: {
+              title: data.flName,
+              type: this.pageData.type, //类型
+              bureauCode: this.pageData.bureauCode, //局编码
+              SubstationID: data.id, //变电站id
+              funName: this.pageData.funName, //跨页面通信函数名字-必传
+              vindicateOid: this.pageData.vindicateOid, //运维班组-非必传
+            },
+            funType: 'openItme'
+          });
+        }
       },
       baseVoltageIdFun: function() {
         var baseVoltageIdS = '';
@@ -250,8 +319,8 @@
         }
         var param = {
           "queryCondition": {
-            "bureauCode": this.tabPageData.bureauCode, //局编码，多选以逗号隔开-必传
-            "vindicateOid": this.hasChecked ? this.tabPageData.vindicateOid : '', // 运维班组ID,单选,
+            "bureauCode": this.pageData.bureauCode, //局编码，多选以逗号隔开-必传
+            "vindicateOid": this.hasChecked ? this.pageData.vindicateOid : '', // 运维班组ID,单选,
           }
         }
         console.log(param)
@@ -291,7 +360,7 @@
         let param = {
           "queryCondition": {
             "flName": this.searchValue, //变电站名称，单选，模糊查询
-            "vindicateOid": this.hasChecked ? this.tabPageData.vindicateOid : '', // 运维班组ID,单选,
+            "vindicateOid": this.hasChecked ? this.pageData.vindicateOid : '', // 运维班组ID,单选,
             "baseVoltageId": this.baseVoltageIdFun(), // 电压等级id，多选以逗号隔开
           },
           pageIndex: this.pageIndex,
@@ -354,6 +423,7 @@
       onRefresh() {
         console.log("下拉刷新ing");
         this.refreshing = true;
+        this.noAddressFun(); //重新定位-获取离我最近
         this.initFun();
       },
       // 打开关闭筛选框
@@ -362,69 +432,89 @@
       },
       /* 选择事件*/
       checkFun: function(val) {
-        this.chenckArr = this.bdList.filter(item => item.checked == true);
+        this.checkArr = this.bdList.filter(item => item.checked == true);
+        console.log(1111111)
+        this.setCheckArr();
       },
       /* 删除某一个*/
-      dltItmeFun: function(id, index) {
+      dltItmeFun: function(data, index) {
         this.bdList.forEach((itme, index) => {
-          if (itme.id == id) {
+          if (itme.id == data.id) {
             itme.checked = false;
           }
         });
-        this.chenckArr = this.bdList.filter(item => item.checked == true);
+        this.checkArr = this.bdList.filter(item => item.checked == true);
+        this.setCheckArr();
       },
       /* 清空所有*/
       dltArrFun: function() {
         this.bdList.forEach((itme, index) => {
           itme.checked = false;
         });
-        this.chenckArr = this.bdList.filter(item => item.checked == false);
+        this.checkArr = this.bdList.filter(item => item.checked == true);
+        this.setCheckArr();
       },
-      // 确定
-      submitScreen() {
-        this.$tabEmitPageFun(this.tabPageData.funName, {
-          data: this.chenckArr,
-          type: this.tabPageData.type,
-          pagename: 'nw_bd_checkSubstation'
+      setCheckArr: function(val) {
+        console.log(val)
+        this.$emit('pageCallback', {
+          type: this.pageData.type,
+          data: this.checkArr,
+          funType: 'setCheckArr'
         });
-        this.$nwBack(-1);
       },
     },
-    // //前进刷新后退不刷新-页面离开之前会执行
-    // beforeRouteLeave(to, from, next) {
-    //   if (to.name == 'nw_bd_functionalLocation' || to.name == "nw_bd_equipment") {
-    //     from.meta.keepAlive = true; //缓存
-    //   }
-    //   next();
-    // },
-    // /* 进入页面*/
-    // beforeRouteEnter(to, from, next) {
-    //   next(vm => {
-    //     if (from.name == "nw_bd_functionalLocation" || from.name == "nw_bd_equipment") {
-    //       to.meta.keepAlive = false; //不缓存
-    //     }
-    //   });
-    // },
+    watch: {
+    },
+    filters: {
+      //缺陷等级
+      setDistance: function(value) {
+        if (value > 1000) {
+          value = value / 1000;
+          var dw = '公里';
+        } else {
+          var dw = '米';
+        }
+        /* 保留两位小数*/
+        if (value) {
+          var key = Math.pow(10, 2); //10的若干次方
+          if (value < 0) {
+            var newVal = Math.abs(value); //取绝对值
+            return -Math.floor(newVal * key) / key + dw;
+          } else if (value == 0) {
+            return 0 + dw;
+          } else if (value > 0) {
+            return Math.floor(value * key) / key + dw;
+          }
+        } else {
+          return 0 + dw;
+        };
+
+      },
+    },
   };
 </script>
 
 <style scoped lang="less">
-  @import '../assets/less/nw_tool.less';
-  @import '../plugin/vant/index.css';
-  @import '../plugin/vant/icon/local.css';
+  @import '../../assets/less/nw_tool.less';
+  @import '../../plugin/vant/index.css';
+  @import '../../plugin/vant/icon/local.css';
+
   .ledger_query {
     height: 100%;
+
     .jrh {
       line-height: 24px;
       // .pxToremLess(width,200px);
     }
+
     .content-right {
       width: 65%;
     }
+
     .divImg {
       .pxToremLess(width, 96px);
       .pxToremLess(height, 96px);
-      background-image: url('~../assets/images/mapImg/mapType2.png');
+      background-image: url('~./../../../assets/images/mapImg/mapType2.png');
       background-size: 100% 100%;
       background-position: center;
       background-repeat: no-repeat;
