@@ -1,5 +1,5 @@
 <template>
-  <div class="ledger_query  " :class="[(!searchValue)&&dataArr.length>0?'pt138':'pt100']">
+  <div class="ledger_query  f14" :class="[(!searchValue)&&dataArr.length>0?'pt138':'pt100']">
     <nw-fixed-header :title="pageData.title" :leftFun="true" @headBackeHandle='headBackeHandle2'>
       <!-- <div slot="right" class="gray287 f14" @click="$tabBack(-1)">变电站</div> -->
 
@@ -21,7 +21,7 @@
     </nw-fixed-header>
     <!-- 搜索 -->
     <label v-show="(searchValue)&&dataArr.length>0">
-      <div v-show="searchArr.length>0" class="list-data f15  pb92">
+      <div v-show="searchArr.length>0" class="list-data f14  pb92">
         <div @click="rightFun(item,index3)" class="flex ju-b bg-white pl20 pr15 pt15 pb15  borderButtomE8" :key="index3+'a'"
           v-for="(item,index3) in searchArr">
           <div class=" pr15  row">
@@ -41,7 +41,7 @@
         <nw-null-data class="mt50" v-show="dataArr.length==0"></nw-null-data>
         <div class="row f16" v-show="dataArr.length>0">
           <div class="list-left" style="width: 40%;">
-            <div @click="leftFun(itme,index)" class="pr15 pl15 pt10 pb10 row al-c" :class="[leftIndex==index?'bg-white gray287 listLeft fw':'']"
+            <div @click="leftFun(itme,index)" class="pr15 pl15 pt10 pb10 row al-c f14" :class="[leftIndex==index?'bg-white gray287 listLeft fw':'']"
               v-for="(itme,index) in leftArr">
               {{itme.intervalName||'其他'}}
             </div>
@@ -50,7 +50,7 @@
             <div @click="rightFun(itme,index)" class="pr15 pl15 pt10 pb10 rightIndex row" v-for="(itme,index) in rightArr">
               <div class="border_1_dc p5 vLev row al-c fl-w word" style="width: 100%;position: relative;">
                 <span class="listRightRed"></span>
-                <span class="pl10">{{itme.intervalName||'其他'}}</span>
+                <span class="pl10 f14">{{itme.intervalName||'其他'}}</span>
               </div>
               <div class="checkbox pl15 flex">
                 <van-checkbox v-if="pageData.type==2" v-model="itme.status"></van-checkbox>

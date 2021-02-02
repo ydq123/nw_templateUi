@@ -359,6 +359,7 @@
         console.log("变电站请求");
         let param = {
           "queryCondition": {
+            "bureauCode": this.pageData.bureauCode, //局编码，多选以逗号隔开-必传
             "flName": this.searchValue, //变电站名称，单选，模糊查询
             "vindicateOid": this.hasChecked ? this.pageData.vindicateOid : '', // 运维班组ID,单选,
             "baseVoltageId": this.baseVoltageIdFun(), // 电压等级id，多选以逗号隔开
