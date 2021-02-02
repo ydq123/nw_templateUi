@@ -1,346 +1,325 @@
-<!-- BotButton模块底部按钮组件使用方法
-	<nw-bot-button :zyBtn="dbZyBtn" :cyBtn="dbCyBtn" :twoZCyBtn="dbTwoZCyBtn" :zIconBtn="dbZIconBtn" @zyCliBtn="testZyCliBtn" @cyCliBtn="testCyCliBtn" @towZyCliBtn="testTowZyCliBtn" @towCyCliBtn="testTowCyCliBtn" @cliIconItemBtn="testCliIconItemBtn" @cliIconRBtn="testCliIconRBtn" />
-	zyBtn: { // 主要按钮配置项
-		btnType: true, // 判断按钮是否显示
-		text: '主要按钮', //  按钮文案
-		color: 'white', // 按钮文案颜色
-		bgcolor: '#1E87F0',//  按钮背景颜色
-		fsize: 'f14' // 字体大小
-	},
-	cyBtn: { // 次要按钮配置项
-		btnType: true,
-		text: '次要按钮',
-		color: '#262626',
-		fsize: 'f14'
-	},
-	twoZCyBtn: { // 等分要按钮配置项
-		btnType: true,
-		zhuyaoBtn: {
-			text: '发送',
-			color: 'white',
-			bgcolor: '#1E87F0',
-			fsize: 'f14'
-		},
-		ciyaoBtn: {
-			text: '保存',
-			color: '#262626',
-			fsize: 'f14'
-		},
-	},
-	zIconBtn: { // icon按钮配置项
-		btnType: true,
-		iconList: [{
-				icon: 'icon-jinyongqingkuang', // icon名称
-				iconText: '哈哈1', // icon文案
-				iconSize: 'f14', // icon大小
-				textSize: 'f14', // 文案大小
-				iconColor: '', // icon颜色
-				textColor: '' // icon文案颜色
-			},
-		],
-		zhuyaoBtn: {
-			text: '终结',
-			color: 'white',
-			bgcolor: '#1E87F0',
-			fsize: 'f14'
-		},
-	},
- -->
 <template>
-	<div class="yw-botbut">
-		<div class="p10 bg-white boxs" v-if="zhuyaoBtn.btnType">
-			<div @click="zyCliBtn" class="btn ju-c btn-width-100" :class="[zhuyaoBtn.fsize?zhuyaoBtn.fsize:'f14']"
-			 :style="{color:[zhuyaoBtn.color?zhuyaoBtn.color:'white'],backgroundColor:[zhuyaoBtn.bgcolor?zhuyaoBtn.bgcolor:'#1E87F0']}">{{ zhuyaoBtn.text?zhuyaoBtn.text:'主要按钮' }}</div>
-		</div>
-		<div class="p10 bg-white boxs" v-if="ciyaoBtn.btnType">
-			<div @click="cyCliBtn" class="btn ju-c btn-width-100 cybtn" :class="[ciyaoBtn.fsize?ciyaoBtn.fsize:'f14']"
-			 :style="{color:[ciyaoBtn.color?ciyaoBtn.color:'#262626']}">{{ ciyaoBtn.text?ciyaoBtn.text:'次要按钮' }}</div>
-		</div>
-		<div class="p10 bg-white flex-d boxs" v-if="twoBtn.btnType">
-			<div @click="towCyCliBtn" class="btn ju-c btn-width-100 cybtn mr5" :class="[twoBtn.ciyaoBtn.fsize?twoBtn.ciyaoBtn.fsize:'f14']"
-			 :style="{color:[twoBtn.ciyaoBtn.color?twoBtn.ciyaoBtn.color:'#262626']}">{{ twoBtn.ciyaoBtn.text?twoBtn.ciyaoBtn.text:'保存' }}</div>
-			<div @click="towZyCliBtn" class="btn ju-c btn-width-100 ml5" :class="[twoBtn.zhuyaoBtn.fsize?twoBtn.zhuyaoBtn.fsize:'f14']"
-			 :style="{color:[twoBtn.zhuyaoBtn.color?twoBtn.zhuyaoBtn.color:'white'],backgroundColor:[twoBtn.zhuyaoBtn.bgcolor?twoBtn.zhuyaoBtn.bgcolor:'#1E87F0']}">{{ twoBtn.zhuyaoBtn.text?twoBtn.zhuyaoBtn.text:'发送' }}</div>
-		</div>
-		<div class="p10 bg-white flex-d boxs" v-if="iconBtn.btnType">
-			<div class="btn ju-c btn-width-100 mr5 btn-row btn-al-c btn-ju-a">
-				<div class="btn-width-100 mr5 btn-row btn-al-c btn-ju-a" v-if="iconBtn.iconList.length>3 && iconListLen.length>0">
-					<div v-for="(iItem,iIndex) in iconListLen" :key="iIndex">
-						<div @click="cliIconItemBtn(iItem)">
-							<div class="">
-								<i class="iconfont" :class="[iItem.icon,iItem.iconSize?iItem.iconSize:'f14']" :style="{color:iItem.iconColor}"></i>
-							</div>
-							<div class="mt5" :class="[iItem.textSize?iItem.textSize:'f14']" :style="{color:iItem.textColor}">
-								{{ iItem.iconText }}
-							</div>
-						</div>
-					</div>
-					<div @click="showZdcIconBox = true">
-						<div class="">
-							<i class="iconfont icon-gengduo f14"></i>
-						</div>
-						<div class="mt5">
-							更多
-						</div>
-					</div>
-				</div>
-				<div @click="cliIconItemBtn(item)" class="" v-for="(item,index) in iconBtn.iconList" :key="index" v-if="iconBtn.iconList.length<=3">
-					<div class="">
-						<i class="iconfont" :class="[item.icon,item.iconSize?item.iconSize:'f14']" :style="{color:item.iconColor}"></i>
-					</div>
-					<div class="mt5" :class="[item.textSize?item.textSize:'f14']" :style="{color:item.textColor}">
-						{{ item.iconText }}
-					</div>
-				</div>
-			</div>
-			<div @click="cliIconRBtn" class="btn ju-c btn-width-100" :class="[iconBtn.zhuyaoBtn.fsize?iconBtn.zhuyaoBtn.fsize:'f14']"
-			 :style="{color:[iconBtn.zhuyaoBtn.color?iconBtn.zhuyaoBtn.color:'white'],backgroundColor:[iconBtn.zhuyaoBtn.bgcolor?iconBtn.zhuyaoBtn.bgcolor:'#1E87F0']}">{{ iconBtn.zhuyaoBtn.text }}</div>
-		</div>
-		<!-- 底部弹窗 -->
-		<van-popup class="" v-model="showZdcIconBox" round position="bottom">
-			<div class="bg-f5">
-				<div class="title f15 verticle-center ju-b pl15 pr15 pt20 pb20 fw">更多操作<i class="iconfont icon-shanchu3 gray9 f18" @click="showZdcIconBox = false"></i></div>
-				<div class="btn btn-father btn-width-100 btn-hei-au btn-row column pl15 pr15 ju-b" :class="[iconBtn.iconList && iconBtn.iconList.length>5?'flex-w':'ju-b p15']">
-					<div class="bg-white btnItem pt10 pb10" @click="botPopIconBtn(iconItem)" :class="[iconBtn.iconList && iconBtn.iconList.length>5?'mb15':'']" v-for="(iconItem,iconIndex) in iconBtn.iconList" :key="iconIndex">
-						<i class="iconfont f22" :class="[iconItem.icon,iconItem.iconSize?iconItem.iconSize:'f14']" :style="{color:iconItem.iconColor}"></i>
-						<div class="" :class="[iconItem.textSize?iconItem.textSize:'f14']" :style="{color:iconItem.textColor}">
-							{{ iconItem.iconText }}
-						</div>
-					</div>
-				</div>
-			</div>
-		</van-popup>
-	</div>
+  <div class="yw-botbut">
+    <!-- 大按钮 -->
+    <div class="p10 bg-white boxs" v-if="btnInfo.btnType == 1">
+      <div
+        @click="bigBtnHandle"
+        class="btn ju-c btn-width-100 cybtn"
+        :class="[btnInfo.fontSize, btnInfo.bgColor, btnInfo.fontColor]"
+      >
+        <slot name="default">{{ btnInfo.fontText }}</slot>
+      </div>
+    </div>
+    <!-- 左右等分按钮 -->
+    <div class="p10 bg-white flex-d boxs" v-if="btnInfo.btnType == 2">
+      <div
+        @click="leftBtnHandle"
+        class="btn ju-c btn-width-100 cybtn mr5"
+        :class="[
+          btnInfo.leftFontSize,
+          btnInfo.leftBgColor,
+          btnInfo.leftFontColor
+        ]"
+      >
+        <slot name="leftBtnText">{{ btnInfo.leftBtnText }}</slot>
+      </div>
+      <div
+        @click="rightBtnHandle"
+        class="btn ju-c btn-width-100 ml5"
+        :class="[
+          btnInfo.rightFontSize,
+          btnInfo.rightBgColor,
+          btnInfo.rightFontColor
+        ]"
+      >
+        <slot name="rightBtnText">{{ btnInfo.rightBtnText }}</slot>
+      </div>
+    </div>
+    <!-- 底部固定按钮 -->
+    <div class="p10 bg-white boxs" v-if="btnInfo.btnType == 3">
+      <div class="btn ju-c btn-width-100 mr5 btn-row btn-al-c btn-ju-a">
+        <div class="btn-width-100 flex ju-b">
+          <div
+            v-for="(iItem, iIndex) in btnInfo.fixedButtonList"
+            :key="iIndex"
+            @click="bottomClickHandle(iItem, iIndex)"
+            :class="[
+              iIndex == btnInfo.fixedButtonList.length - 1
+                ? 'btn-width-50'
+                : 'flex-1'
+            ]"
+          >
+            <!-- 左侧小按钮 -->
+            <div v-if="iIndex != btnInfo.fixedButtonList.length - 1">
+              <div class="">
+                <i
+                  class="iconfont"
+                  :class="[iItem.iconName, iItem.iconSize]"
+                ></i>
+              </div>
+              <div class="mt5" :class="[iItem.fontSize, iItem.fontColor]">
+                {{ iItem.fontText }}
+              </div>
+            </div>
+            <!-- 右侧主要按钮 -->
+            <div
+              v-else
+              class="btn ju-c"
+              :class="[iItem.fontSize, iItem.fontColor, iItem.bgColor]"
+            >
+              {{ iItem.fontText }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 底部弹窗 -->
+    <van-popup v-model="showZdcIconBox" round position="bottom">
+      <div class="bg-f5 pb10">
+        <div class="title f15 verticle-center ju-b pl15 pr15 pt20 pb20 fw">
+          更多操作<i
+            class="iconfont icon-shanchu3 gray9 f18"
+            @click="showZdcIconBox = false"
+          ></i>
+        </div>
+        <div
+          class="btn-father btn-width-100 btn-hei-au btn-row pl15 pr15 ju-b fl-w"
+        >
+          <div
+            class="bg-white btnItem pt10 pb10 mb15"
+            @click="botPopIconBtn(item)"
+            v-for="(item, index) in btnInfo.moreOperation"
+            :key="index"
+          >
+            <i
+              class="iconfont f22"
+              :class="[item.iconName, item.iconSize, item.iconColor]"
+            ></i>
+            <div :class="[item.fontSize, item.fontColor]">
+              {{ item.fontText }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </van-popup>
+  </div>
 </template>
 
 <script>
-	export default {
-		name: 'BotButton',
-		display: 'BotButton模块底部按钮',
-		data() {
-			return {
-				iconListLen: [],
-				showZdcIconBox: false,
-				zhuyaoBtn: this.zyBtn,
-				ciyaoBtn: this.cyBtn,
-				twoBtn: this.twoZCyBtn,
-				iconBtn: this.zIconBtn
-			}
-		},
-		props: {
-			zyBtn: { // 主要按钮配置项
-				type: Object,
-				default: () => ({
-					btnType: false,
-					text: '主要按钮',
-					color: 'white',
-					bgcolor: '#1E87F0',
-					fsize: 'f14'
-				})
-			},
-			cyBtn: { // 次要按钮配置项
-				type: Object,
-				default: () => ({
-					btnType: false,
-					text: '次要按钮',
-					color: '#262626',
-					fsize: 'f14'
-				})
-			},
-			twoZCyBtn: { // 等分要按钮配置项
-				type: Object,
-				default: () => ({
-					btnType: false,
-					zhuyaoBtn: {
-						text: '发送',
-						color: 'white',
-						bgcolor: '#1E87F0',
-						fsize: 'f14'
-					},
-					ciyaoBtn: {
-						text: '保存',
-						color: '#262626',
-						fsize: 'f14'
-					},
-				})
-			},
-			zIconBtn: { // icon按钮配置项
-				type: Object,
-				default: () => ({
-					btnType: false,
-					iconList: [{
-							icon: 'icon-jinyongqingkuang',
-							iconText: '哈哈1',
-							iconSize: 'f14',
-							textSize: 'f14',
-							iconColor: '',
-							textColor: '',
-						},
-						{
-							icon: 'icon-jinyongqingkuang',
-							iconText: '哈哈2',
-							iconSize: 'f14',
-							textSize: 'f14',
-							iconColor: '',
-							textColor: '',
-						},
-						{
-							icon: 'icon-jinyongqingkuang',
-							iconText: '哈哈3',
-							iconSize: 'f14',
-							textSize: 'f14',
-							iconColor: '',
-							textColor: '',
-						},
-						{
-							icon: 'icon-jinyongqingkuang',
-							iconText: '哈哈4',
-							iconSize: 'f14',
-							textSize: 'f14',
-							iconColor: '',
-							textColor: '',
-						},
-						{
-							icon: 'icon-jinyongqingkuang',
-							iconText: '哈哈5',
-							iconSize: 'f14',
-							textSize: 'f14',
-							iconColor: '',
-							textColor: '',
-						}
-					],
-					zhuyaoBtn: {
-						text: '终结',
-						color: 'white',
-						bgcolor: '#1E87F0',
-						fsize: 'f14'
-					},
-				})
-			},
-		},
-		computed: {
-
-		},
-		mounted() {
-			this.initIconList();
-		},
-		methods: {
-			initIconList: function() {
-				if (this.iconBtn.iconList.length > 3) {
-					this.iconListLen = this.iconBtn.iconList.slice(0, 2);
-				}
-			},
-			// 主要按钮点击事件
-			zyCliBtn: function() {
-				this.$emit("zyCliBtn");
-			},
-			// 次要按钮点击事件
-			cyCliBtn: function() {
-				this.$emit("cyCliBtn");
-			},
-			// 等分主要按钮点击事件
-			towZyCliBtn: function() {
-				this.$emit("towZyCliBtn");
-			},
-			// 等分次要按钮点击事件
-			towCyCliBtn: function() {
-				this.$emit("towCyCliBtn");
-			},
-			// icon按钮点击事件
-			cliIconItemBtn: function(item) {
-				this.$emit("cliIconItemBtn", item);
-			},
-			// icon右边按钮点击事件
-			cliIconRBtn: function() {
-				this.$emit("cliIconRBtn");
-			},
-			// 底部更多按钮显示更多icon
-			botPopIconBtn: function(iconItem) {
-				this.$emit("botPopIconBtn", iconItem);
-			},
-		},
-	}
+export default {
+  name: "BotButton",
+  display: "BotButton模块底部按钮",
+  data() {
+    return {
+      iconListLen: [],
+      showZdcIconBox: false, //底部弹窗控制
+    };
+  },
+  props: {
+    // 按钮类型btnType 1-大按钮， 2-等分双按钮， 3-底部多按钮
+    btnInfo: {
+      type: Object,
+      default: () => ({
+        btnType: 2,
+        fontSize: "f14",
+        fontText: "主要按钮",
+        fontColor: "text-white",
+        bgColor: "bg-287",
+        leftBtnText: "保存",
+        rightBtnText: "发送",
+        leftFontSize: "f14",
+        rightFontSize: "f14",
+        leftBgColor: "bg-white",
+        rightBgColor: "bg-287",
+        leftFontColor: "text-black",
+        rightFontColor: "text-white",
+        fixedButtonList: [
+          {
+            fontSize: "f12",
+            fontText: "流程页面",
+            fontColor: "text-black",
+            bgColor: "bg-white",
+            iconName: "icon-jinyongqingkuang",
+            iconSize: "f14",
+						id: 1,
+          },
+          {
+            fontSize: "f12",
+            fontText: "台账地图",
+            fontColor: "text-black",
+            bgColor: "bg-white",
+            iconName: "icon-jinyongqingkuang",
+            iconSize: "f14",
+						id: 2,
+          },
+          {
+            fontSize: "f12",
+            fontText: "更多",
+            fontColor: "text-black",
+            bgColor: "bg-white",
+            iconName: "icon-gengduo",
+            iconSize: "f14"
+          },
+          {
+            fontSize: "f12",
+            fontText: "选择人员",
+            fontColor: "text-white",
+            bgColor: "bg-287",
+            iconName: "icon-jinyongqingkuang",
+            iconSize: "f14",
+						id: 3,
+          }
+        ], //底部多个固定按钮
+        moreOperation: [{
+            fontSize: "f12",
+            fontText: "选择人员",
+            fontColor: "text-black",
+						bgColor: "bg-287",
+						iconColor: 'text-black',
+            iconName: "icon-jinyongqingkuang",
+						iconSize: "f14"
+          },{
+            fontSize: "f12",
+            fontText: "选择人员",
+            fontColor: "text-black",
+						bgColor: "bg-287",
+						iconColor: 'text-black',
+            iconName: "icon-jinyongqingkuang",
+            iconSize: "f14"
+          },{
+            fontSize: "f12",
+            fontText: "选择人员",
+            fontColor: "text-black",
+						bgColor: "bg-287",
+						iconColor: 'text-black',
+            iconName: "icon-jinyongqingkuang",
+            iconSize: "f14"
+          },{
+            fontSize: "f12",
+            fontText: "选择人员",
+            fontColor: "text-black",
+						bgColor: "bg-287",
+						iconColor: 'text-black',
+            iconName: "icon-jinyongqingkuang",
+            iconSize: "f14"
+          }
+        ] //更多操作
+      })
+    }
+  },
+  computed: {},
+  mounted() {},
+  methods: {
+    // 大按钮点击事件
+    bigBtnHandle: function() {
+      this.$emit("bigBtnHandle");
+    },
+    // 等分按钮-右边按钮点击事件
+    rightBtnHandle: function() {
+      this.$emit("rightBtnHandle");
+    },
+    // 等分按钮-左边按钮点击事件
+    leftBtnHandle: function() {
+      this.$emit("leftBtnHandle");
+    },
+    // 底部按钮点击事件
+    bottomClickHandle: function(item, index) {
+      if (index == 2) {
+        this.showZdcIconBox = true;
+      } else {
+        this.$emit("bottomClickHandle", item);
+      }
+    },
+    // 点击底部更多按钮事件
+    botPopIconBtn: function(iconItem) {
+      this.$emit("botPopIconBtn", iconItem);
+    }
+  }
+};
 </script>
 
 <style scoped lang="less">
-	@import "../../assets/less/nw_tool.less";
+@import "../../assets/less/nw_tool.less";
 
-	.yw-botbut {
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		z-index: 8;
-		text-align: center;
-		width: 100%;
-	}
+.yw-botbut {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 8;
+  text-align: center;
+  width: 100%;
+}
 
-	.boxs {
-		box-shadow: 0.7rem 0.7rem 0.7rem 0.7rem rgba(0, 0, 0, 0.2);
-	}
+.boxs {
+  box-shadow: 0.7rem 0.7rem 0.7rem 0.7rem rgba(0, 0, 0, 0.2);
+}
 
-	.btn {
-		.pxToremLess(height,44px);
-		.pxToremLess(border-radius,4px);
-		display: flex;
-		align-items: center;
-		// justify-content: center;
-		white-space: nowrap;
-		/*让文字不换行*/
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-	}
+.btn {
+  .pxToremLess(height, 44px);
+  .pxToremLess(border-radius, 4px);
+  display: flex;
+  align-items: center;
+  // justify-content: center;
+  white-space: nowrap;
+  /*让文字不换行*/
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
-	// 主要按钮
-	.zybtn {
-		color: white;
-		background-color: #1E87F0;
-	}
+// 主要按钮
+.zybtn {
+  color: white;
+  background-color: #1e87f0;
+}
 
-	// 次要按钮
-	.cybtn {
-		// color: #262626;
-		border: 1px solid #d8d8d8;
-	}
+// 次要按钮
+.cybtn {
+  // color: #262626;
+  border: 1px solid #d8d8d8;
+}
 
-	.btn-width-100 {
-		width: 100%;
-	}
-	.btn-father {
-		&::after {
-			content: '';
-			width: 90px;
-		}
-		.btnItem {
-		.pxToremLess(width,80px);
-		.pxToremLess(height,80px);
-		.pxToremLess(border-radius,10px);
-		}
-	}
+.btn-width-100 {
+  width: 100%;
+}
+.btn-width-50 {
+  width: 50%;
+}
+.btn-father {
+  &::after {
+    content: "";
+    width: 80px;
+  }
+  .btnItem {
+    .pxToremLess(width, 80px);
+    .pxToremLess(height, 80px);
+    .pxToremLess(border-radius, 10px);
+  }
+}
 
-	.flex-d {
-		display: flex;
-		justify-content: space-around;
-	}
+.flex-d {
+  display: flex;
+  justify-content: space-around;
+}
 
-	.flex-w {
-		flex-wrap: wrap;
-	}
+.flex-w {
+  flex-wrap: wrap;
+}
 
-	.btn-row {
-		display: flex;
-		flex-direction: row;
-	}
+.btn-row {
+  display: flex;
+  flex-direction: row;
+}
 
-	.btn-al-c {
-		align-items: center;
-	}
+.btn-al-c {
+  align-items: center;
+}
 
-	.btn-ju-a {
-		justify-content: space-around;
-	}
+.btn-ju-a {
+  justify-content: space-around;
+}
 
-	.btn-hei-au {
-		height: auto;
-	}
+.btn-hei-au {
+  height: auto;
+}
 </style>
