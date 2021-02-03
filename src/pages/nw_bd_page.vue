@@ -94,8 +94,8 @@
           scrollY: 0,
         }], //记录子组件的生命周期的
         addressObj: {
-          "latitude": '', //22.22
-          "longitude": '', //132.33
+          "latitude": '22.22', //22.22
+          "longitude": '132.33', //132.33
           "province": "", //广东省
           "city": "", //深圳市
           "district": "", //南山区
@@ -107,8 +107,8 @@
     },
     mounted() {
       console.log(this.tabPageData);
-      this.newAddressFun();
       this.$refs['tabItme' + this.showType].initPageFun(this.tabPageData); //拟生命周期函数
+      this.newAddressFun();
     },
     methods: {
       tabItmeCallback: function(obj) {
@@ -145,6 +145,7 @@
         // this.addressObj.address ='广东省深圳市福田区莲花路';
         // this.$refs['tabItme'+ this.showType].queryNearestSubstationFun(this.addressObj); //获取离我最近
         this.$sdkGetLocation((ret) => {
+          console.log(ret)
           if (ret.status) {
             this.addressObj = ret.json;
             this.$refs['tabItme'+ this.showType].queryNearestSubstationFun(ret.json); //获取离我最近

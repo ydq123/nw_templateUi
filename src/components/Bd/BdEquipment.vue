@@ -141,6 +141,7 @@
       /* 扫一扫事件 */
       noSysFun() {
         this.$sdkScanQRCode(1, (ret) => {
+          console.log(ret)
           this.sysFun(ret);
         });
       },
@@ -205,6 +206,7 @@
         this.eqTypeStatus = false;
       },
       initFun: function() {
+        this.totalPage = 0;
         this.finished = false; //是否加载完
         this.myLoading = false; //关闭加载中
         this.loading = false;
@@ -305,7 +307,6 @@
 
                 });
                 this.eqList.push.apply(this.eqList, ret.rows);
-                this.totalPage = ret.total;
                 if (ret.total == 0) {
                   /* 暂无数据 */
                   this.$textCatch('暂无数据');

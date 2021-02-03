@@ -50,7 +50,7 @@
             <div class="task-list borderButtomE8" m="click" v-if="zjbdObj.bdzType==1">
               <div class="pr15 pl15 pt15 f12 gray9">离我最近 {{zjbdObj.distance|setDistance }}</div>
               <div class="row p15">
-                <van-checkbox class=" pr15 " @click="checkFun" v-if="pageData.type==1" v-model="zjbdObj.checked"></van-checkbox>
+                <van-checkbox class=" pr15 " @click="checkFun(1)" v-if="pageData.type==1" v-model="zjbdObj.checked"></van-checkbox>
                 <div class=" row al-c " @click="openFunctionalLocation(zjbdObj, index)">
                   <div class=" divImg mr10">
                     <!-- <img src="../../assets/images/mapImg/mapType2.png" /> -->
@@ -86,7 +86,7 @@
             <!-- 列表 -->
             <div class="task-list borderButtomE8" m="click" :key="index" v-for="(itme, index) in bdList">
               <div class="row p15">
-                <van-checkbox class=" pr15 " @click="checkFun" v-if="pageData.type==1" v-model="itme.checked"></van-checkbox>
+                <van-checkbox class=" pr15 " @click="checkFun(0)" v-if="pageData.type==1" v-model="itme.checked"></van-checkbox>
                 <div class=" row al-c " @click="openFunctionalLocation(itme, index)">
                   <div class=" divImg mr10">
                     <!-- <img src="../../assets/images/mapImg/mapType2.png" /> -->
@@ -94,7 +94,7 @@
                   <div class="content-right">
                     <div class=" f16  clamp1 jrh">{{itme.flName}}</div>
                     <div class=" f14  clamp1 jrh">
-                      {{itme.fullPath}}
+                      {{itme.fullPath|setFullPath}}
                     </div>
                     <div class="f14  clamp1 jrh">{{$baseTimeFormat("-", ":", false, itme.plantTransferDate)}}</div>
                     <nw-status-label class="" :bqStaLabel="[	{
@@ -175,8 +175,10 @@
         totalPage: 0,
         checkArr: [],
         pageData: {},
-        addressObj:{},
-        zjbdObj:  {'bdzType':0}, //最近变电站
+        addressObj: {},
+        zjbdObj: {
+          'bdzType': 0
+        }, //最近变电站
       };
     },
     created() {
@@ -187,16 +189,16 @@
     },
     methods: {
       /* 获取离我最近的变电站*/
-      queryNearestSubstationFun: function(obj={}) {
+      queryNearestSubstationFun: function(obj = {}) {
         console.log('获取离我最近的变电站')
-        if(obj.address){
-          this.addressObj=obj;
+        if (obj.address) {
+          this.addressObj = obj;
         }
         var param = {
           "queryCondition": {
             "bureauCode": this.pageData.bureauCode,
             "lon": obj.longitude,
-            "lat":  obj.latitude,
+            "lat": obj.latitude,
           }
         };
         console.log(param)
@@ -205,8 +207,10 @@
           if (ret) {
             if (ret.code == 200) {
               if (ret.data) {
-                ret.data['bdzType'] = 1;//1表示是距离我最近的变电站
-                this.zjbdObj = ret.data || {'bdzType':0};
+                ret.data['bdzType'] = 1; //1表示是距离我最近的变电站
+                this.zjbdObj = ret.data || {
+                  'bdzType': 0
+                };
               }
             } else {
               this.$textCatch(err.msg || '服务异常');
@@ -220,7 +224,9 @@
         })
       },
       noAddressFun: function() {
-        this.zjbdObj = {bdzType:0};
+        this.zjbdObj = {
+          bdzType: 0
+        };
         this.$emit('pageCallback', {
           funType: 'newAddress'
         });
@@ -248,7 +254,7 @@
         this.vLevStatus = false;
       },
       initFun: function() {
-        this.totalPage= 0;
+        this.totalPage = 0;
         this.finished = false; //是否加载完
         this.myLoading = false; //关闭加载中
         this.loading = false;
@@ -269,9 +275,9 @@
           this.querySubstationGroupByVoltageFun();
         }, 100);
       },
-      openFunctionalLocation: function(data, index) {
+      openFunctionalLocation: function(data) {
         if (this.pageData.type != 1) {
-          this.bdList.forEach((itme, index) => {
+          this.bdList.forEach((itme) => {
             if (itme.id == data.id) {
               itme.checked = true;
             } else {
@@ -359,7 +365,7 @@
         console.log("变电站请求");
         let param = {
           "queryCondition": {
-            bureauCode:this.pageData.bureauCode,
+            bureauCode: this.pageData.bureauCode,
             "flName": this.searchValue, //变电站名称，单选，模糊查询
             "vindicateOid": this.hasChecked ? this.pageData.vindicateOid : '', // 运维班组ID,单选,
             "baseVoltageId": this.baseVoltageIdFun(), // 电压等级id，多选以逗号隔开
@@ -433,18 +439,27 @@
       },
       /* 选择事件*/
       checkFun: function(val) {
-        this.checkArr = this.bdList.filter(item => item.checked == true);
+        if (val == 1) {
+          this.checkArr.push(this.zjbdObj);
+        } else {
+          this.checkArr = this.bdList.filter(item => item.checked == true);
+        }
         console.log(1111111)
         this.setCheckArr();
       },
-      /* 删除某一个*/
+      /* 删除某一个 */
       dltItmeFun: function(data, index) {
-        this.bdList.forEach((itme, index) => {
-          if (itme.id == data.id) {
-            itme.checked = false;
-          }
-        });
-        this.checkArr = this.bdList.filter(item => item.checked == true);
+        if (data.bdzType == 1) {
+          this.zjbdObj.checked = false;
+          this.checkArr = this.checkArr.filter(item => item.id != data.id);
+        } else {
+          this.bdList.forEach((itme, index) => {
+            if (itme.id == data.id) {
+              itme.checked = false;
+            }
+          });
+          this.checkArr = this.bdList.filter(item => item.checked == true);
+        }
         this.setCheckArr();
       },
       /* 清空所有*/
@@ -452,6 +467,7 @@
         this.bdList.forEach((itme, index) => {
           itme.checked = false;
         });
+        this.zjbdObj.checked = false;
         this.checkArr = this.bdList.filter(item => item.checked == true);
         this.setCheckArr();
       },
@@ -464,8 +480,7 @@
         });
       },
     },
-    watch: {
-    },
+    watch: {},
     filters: {
       //缺陷等级
       setDistance: function(value) {
@@ -491,6 +506,19 @@
         };
 
       },
+      setFullPath: function(val) {
+        if (!val) {
+          return '无'
+        } else {
+          // @str 目标字符串 @key 用什么去分割字符串
+          var retArr = val.split('/');
+          if (retArr.length == 1 || retArr.length == 2) {
+            return val;
+          } else if (retArr.length > 2) {
+            return retArr[retArr.length - 2] + '/' + retArr[retArr.length - 1]
+          }
+        }
+      }
     },
   };
 </script>
