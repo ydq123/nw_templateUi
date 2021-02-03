@@ -133,7 +133,10 @@
     <!-- 悬浮球组件 -->
     <nw-float-menu :menuArr="menuArr" @menuClick="menuClickTap"></nw-float-menu>
     <!-- 底部按钮组件 -->
-    <nw-bot-button @bottomClickHandle="bottomClickHandle"></nw-bot-button>
+    <nw-bot-button
+      @bottomClickHandle="bottomClickHandle"
+      @botPopIconBtn="botPopIconBtn"
+    ></nw-bot-button>
   </div>
 </template>
 
@@ -404,7 +407,7 @@ export default {
   },
   destroyed() {
     /* 销毁跨页面通讯*/
-    this.$tabOffPageFun(['testemitunit']);
+    this.$tabOffPageFun(["testemitunit"]);
   },
   computed: {},
   mounted() {
@@ -453,7 +456,7 @@ export default {
       shortOrgName: "天河"
     };
     /* 挂载跨页面通讯*/
-    this.$tabOnPageFun('testemitunit', (data)=>{
+    this.$tabOnPageFun("testemitunit", data => {
       _this.testAcrossFun(data);
     });
   },
@@ -474,6 +477,21 @@ export default {
     },
     testOverlay(data) {
       console.log("testOverlay", JSON.stringify(data));
+    },
+    botPopIconBtn(data) {
+      if (data.id == 1) {
+        this.$nwOpenWin("nw_checkPerson", {
+          type: 1, //1：单选； 2：多选； 注：多选需要传：personalList数组为当前页面的人员
+          userInfo: this.userInfo,
+          exeMun: "testemitunit"
+        });
+      } else if (data.id == 2) {
+        this.$nwOpenWin("nw_checkPerson", {
+          type: 2, //1：单选； 2：多选； 注：多选需要传：personalList数组为当前页面的人员
+          userInfo: this.userInfo,
+          exeMun: "testemitunit"
+        });
+      }
     },
     bottomClickHandle(data) {
       console.log("bottomClickHandle", data);

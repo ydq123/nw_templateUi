@@ -90,9 +90,8 @@
 		},
 		methods: {
 			openCherk: function(){
-        
         /* 触发跨页面通讯*/
-        _this.$tabEmitPageFun('tabSrcollList');
+        this.$tabEmitPageFun('tabSrcollList');
 				this.$nwBack(-1);
 			},
 			unitSubmit: function() {

@@ -157,7 +157,7 @@ export default {
           },
           {
             fontSize: "f12",
-            fontText: "选择人员",
+            fontText: "选择单位",
             fontColor: "text-white",
             bgColor: "bg-287",
             iconName: "icon-jinyongqingkuang",
@@ -168,19 +168,21 @@ export default {
         moreOperation: [
           {
             fontSize: "f12",
-            fontText: "选择人员",
+            fontText: "人员单选",
             fontColor: "text-black",
             bgColor: "bg-white",
             iconName: "icon-jinyongqingkuang",
-            iconSize: "f14"
+            iconSize: "f14",
+            id: 1
           },
           {
             fontSize: "f12",
-            fontText: "选择人员",
+            fontText: "人员多选",
             fontColor: "text-black",
             bgColor: "bg-white",
             iconName: "icon-jinyongqingkuang",
-            iconSize: "f14"
+            iconSize: "f14",
+            id: 2
           },
           {
             fontSize: "f12",
@@ -204,6 +206,9 @@ export default {
   },
   computed: {},
   mounted() {},
+  activated() {
+    this.showZdcIconBox = false;
+  },
   methods: {
     // 大按钮点击事件
     bigBtnHandle: function() {
