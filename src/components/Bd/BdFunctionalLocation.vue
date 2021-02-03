@@ -49,7 +49,7 @@
           <div class="list-right bg-white gray3 " style="width: 60%;">
             <div class="pb20">
               <div @click="rightFun(itme,index)" class="pr15 pl15 pt10  rightIndex row" v-for="(itme,index) in rightArr">
-                <div class="border_1_dc p5 vLev row al-c fl-w word f14" style="width: 100%;position: relative;">
+                <div class="border_1_dc plr5 pr5 pt10 pb5 vLev row al-c fl-w word f14" style="width: 100%;position: relative;">
                   <span class="listRightRed"></span>
                   <span class="pl10">{{itme.intervalName||'其他'}}</span>
                 </div>
