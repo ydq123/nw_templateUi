@@ -86,16 +86,14 @@
           class="btn-father btn-width-100 btn-hei-au btn-row pl15 pr15 ju-b fl-w"
         >
           <div
-            class="bg-white btnItem pt10 pb10 mb15"
+            class="btnItem pt10 pb10 mb15"
+            :class="[item.fontColor, item.bgColor]"
             @click="botPopIconBtn(item)"
             v-for="(item, index) in btnInfo.moreOperation"
             :key="index"
           >
-            <i
-              class="iconfont f22"
-              :class="[item.iconName, item.iconSize, item.iconColor]"
-            ></i>
-            <div :class="[item.fontSize, item.fontColor]">
+            <i class="iconfont f22" :class="[item.iconName, item.iconSize]"></i>
+            <div :class="[item.fontSize]">
               {{ item.fontText }}
             </div>
           </div>
@@ -112,7 +110,7 @@ export default {
   data() {
     return {
       iconListLen: [],
-      showZdcIconBox: false, //底部弹窗控制
+      showZdcIconBox: false //底部弹窗控制
     };
   },
   props: {
@@ -138,25 +136,22 @@ export default {
             fontSize: "f12",
             fontText: "流程页面",
             fontColor: "text-black",
-            bgColor: "bg-white",
             iconName: "icon-jinyongqingkuang",
             iconSize: "f14",
-						id: 1,
+            id: 1
           },
           {
             fontSize: "f12",
             fontText: "台账地图",
             fontColor: "text-black",
-            bgColor: "bg-white",
             iconName: "icon-jinyongqingkuang",
             iconSize: "f14",
-						id: 2,
+            id: 2
           },
           {
             fontSize: "f12",
             fontText: "更多",
             fontColor: "text-black",
-            bgColor: "bg-white",
             iconName: "icon-gengduo",
             iconSize: "f14"
           },
@@ -167,39 +162,39 @@ export default {
             bgColor: "bg-287",
             iconName: "icon-jinyongqingkuang",
             iconSize: "f14",
-						id: 3,
+            id: 3
           }
         ], //底部多个固定按钮
-        moreOperation: [{
+        moreOperation: [
+          {
             fontSize: "f12",
             fontText: "选择人员",
             fontColor: "text-black",
-						bgColor: "bg-287",
-						iconColor: 'text-black',
-            iconName: "icon-jinyongqingkuang",
-						iconSize: "f14"
-          },{
-            fontSize: "f12",
-            fontText: "选择人员",
-            fontColor: "text-black",
-						bgColor: "bg-287",
-						iconColor: 'text-black',
+            bgColor: "bg-white",
             iconName: "icon-jinyongqingkuang",
             iconSize: "f14"
-          },{
+          },
+          {
             fontSize: "f12",
             fontText: "选择人员",
             fontColor: "text-black",
-						bgColor: "bg-287",
-						iconColor: 'text-black',
+            bgColor: "bg-white",
             iconName: "icon-jinyongqingkuang",
             iconSize: "f14"
-          },{
+          },
+          {
             fontSize: "f12",
             fontText: "选择人员",
             fontColor: "text-black",
-						bgColor: "bg-287",
-						iconColor: 'text-black',
+            bgColor: "bg-white",
+            iconName: "icon-jinyongqingkuang",
+            iconSize: "f14"
+          },
+          {
+            fontSize: "f12",
+            fontText: "选择人员",
+            fontColor: "text-black",
+            bgColor: "bg-white",
             iconName: "icon-jinyongqingkuang",
             iconSize: "f14"
           }
