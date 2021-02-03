@@ -252,19 +252,12 @@
 						this.startPosition = Number(retObj.index);
 						this.showPreview = true;
 					} else {
-						if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
-							this.$across.$emit("changePreview", {
+            /* 触发跨页面通讯*/
+            this.$tabEmitPageFun('changePreview', {
 								imageList: this.imageList.arr1,
 								showPreview: true,
 								startPosition: Number(retObj.index),
-							});
-						} else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
-							this.$bus.$emit("changePreview", {
-								imageList: this.imageList.arr1,
-								showPreview: true,
-								startPosition: Number(retObj.index),
-							});
-						}
+							},true);
 					}
 				} else if (itme.type == 3) {
 					this.myJssdk.callMobileJsSdk(

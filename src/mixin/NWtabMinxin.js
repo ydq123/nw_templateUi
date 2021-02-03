@@ -302,6 +302,31 @@ export const NWtabMinxin = {
         $(this).removeClass('btn-active')
       });
     },
+	  /* 挂载跨页面通讯*/
+	    $tabOnPageFun: function(funName, callback) {
+	      /* 销毁跨页面通讯*/
+	      this.$tabOffPageFun([funName]);
+	      /*跳页面前再挂载-跨页面通讯*/
+	      this.$across.$on(funName, (obj) => {
+	        callback(obj);
+	      });
+	    },
+	    /* 触发跨页面通讯*/
+	    $tabEmitPageFun: function(funName, obj,isdlt=false) {
+	      this.$across.$emit(funName, obj);
+        /* 销毁跨页面通讯*/
+        if(!isdlt){
+          this.$tabOffPageFun([funName]);
+        }
+	    },
+	    /* 销毁跨页面通讯*/
+	    $tabOffPageFun(nameArr) {
+	      /* 销毁跨页面通讯*/
+	      for (var i = 0; i < nameArr.length; i++) {
+	        var funName = nameArr[i];
+	        this.$across.$off(funName);
+	      };
+	    },
   },
   computed: {
 

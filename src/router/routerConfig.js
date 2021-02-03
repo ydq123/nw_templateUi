@@ -63,33 +63,52 @@ const routes = [{
   },
 },
 {
-  path: '/nw_bd_checkSubstation',
-  name: 'nw_bd_checkSubstation',
-  component: () => import( /* webpackChunkName: "about" */ '../pages/nw_bd_checkSubstation.vue'),
+  path: '/nw_bd_pd_sd',
+  name: 'nw_bd_pd_sd',
+  component: () => import( /* webpackChunkName: "about" */ '../pages/nw_bd_pd_sd.vue'),
   meta: {
   	keepAlive: true,
   	moduleName: 'nwTemplateUI',
-  	title: '变电站',
+  	title: '台账-集合',
   },
 },
 {
-  path: '/nw_bd_functionalLocation',
-  name: 'nw_bd_functionalLocation',
-  component: () => import( /* webpackChunkName: "about" */ '../pages/nw_bd_functionalLocation.vue'),
-  meta: {
-  	keepAlive: true,
-  	moduleName: 'nwTemplateUI',
-  	title: '变电功能位置',
-  },
-},{
-  path: '/nw_bd_equipment',
-  name: 'nw_bd_equipment',
-  component: () => import( /* webpackChunkName: "about" */ '../pages/nw_bd_equipment.vue'),
+  path: '/nw_bd_page',
+  name: 'nw_bd_page',
+  component: () => import( /* webpackChunkName: "about" */ '../pages/nw_bd_page.vue'),
   meta: {
   	keepAlive: false,
   	moduleName: 'nwTemplateUI',
-  	title: '变电设备',
+  	title: '台账-itme',
   },
+// {
+//   path: '/nw_bd_checkSubstation',
+//   name: 'nw_bd_checkSubstation',
+//   component: () => import( /* webpackChunkName: "about" */ '../pages/nw_bd_checkSubstation.vue'),
+//   meta: {
+//   	keepAlive: true,
+//   	moduleName: 'nwTemplateUI',
+//   	title: '变电站',
+//   },
+// },
+// {
+//   path: '/nw_bd_functionalLocation',
+//   name: 'nw_bd_functionalLocation',
+//   component: () => import( /* webpackChunkName: "about" */ '../pages/nw_bd_functionalLocation.vue'),
+//   meta: {
+//   	keepAlive: true,
+//   	moduleName: 'nwTemplateUI',
+//   	title: '变电功能位置',
+//   },
+// },{
+//   path: '/nw_bd_equipment',
+//   name: 'nw_bd_equipment',
+//   component: () => import( /* webpackChunkName: "about" */ '../pages/nw_bd_equipment.vue'),
+//   meta: {
+//   	keepAlive: false,
+//   	moduleName: 'nwTemplateUI',
+//   	title: '变电设备',
+//   },
 },
 ];
 

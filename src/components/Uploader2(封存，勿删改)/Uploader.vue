@@ -250,11 +250,12 @@
 						this.startPosition = Number(retObj.index);
 						this.showPreview = true;
 					} else {
-						this.$bus.$emit("changePreview", {
+					/* 触发跨页面通讯*/
+					this.$tabEmitPageFun('changePreview', {
 							imageList: this.imageList.arr1,
 							showPreview: true,
 							startPosition: Number(retObj.index),
-						});
+						},true);
 					}
 				} else if (itme.type == 3) {
 					this.myJssdk.callMobileJsSdk(

@@ -213,12 +213,9 @@
 					data.curNodeItemlist = this.curNodeList;
 				}
 				var name = this.param.exeMun;
-				if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
-					this.$across.$emit(name, data);
-				} else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
-					console.log('name:',name);
-					this.$bus.$emit(name, data);
-				}
+        
+        /* 触发跨页面通讯*/
+        this.$tabEmitPageFun(name, data);
 				this.$nwBack(-2);
 				// var name = this.param.exeMun;
 				// this.$across.$emit(name, data);

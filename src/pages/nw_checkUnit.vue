@@ -90,11 +90,9 @@
 		},
 		methods: {
 			openCherk: function(){
-				if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
-					this.$across.$emit('tabSrcollList');
-				} else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
-					this.$bus.$emit('tabSrcollList');
-				}
+        
+        /* 触发跨页面通讯*/
+        _this.$tabEmitPageFun('tabSrcollList');
 				this.$nwBack(-1);
 			},
 			unitSubmit: function() {
@@ -104,12 +102,9 @@
 				}
 				var _this = this;
 				setTimeout(()=>{
-					if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
-						_this.$across.$emit('unitTabBus', item);
-					} else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
-						_this.$bus.$emit('unitTabBus', item);
-					}
-				},500)
+          /* 触发跨页面通讯*/
+          _this.$tabEmitPageFun('unitTabBus', item);
+        },500)
 			},
 			// 初始化
 			init: function() {
@@ -368,12 +363,9 @@
 					}
 					setTimeout(function() {
 						var name = _this.param.exeMun;
-						if (window.NW_MODULE_TYPE == 'scyyd_templateUI') {
-							_this.$across.$emit(name, item);
-						} else if (window.NW_MODULE_TYPE == 'nwTemplateUI') {
-							console.log('name:::',name);
-							_this.$bus.$emit(name, item);
-						}
+            
+            /* 触发跨页面通讯*/
+            _this.$tabEmitPageFun(name, item);
 						_this.$nwBack(-1);
 					}, 500);
 				} else {

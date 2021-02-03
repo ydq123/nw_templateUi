@@ -323,7 +323,55 @@ export const NWmyJsSdkMixin = {
 			    }
 			  }
 			);
-		}
+		}, /* 扫一扫 */
+    $sdkScanQRCode: function(type = 1, callback) {
+      this.myJssdk.scanQRCode({
+        needResult: type ? 1 : 0, // 0 企信发生扫描结果跳转 1 返回扫描结果，不发生页面跳转
+        success(qRData) {
+          callback({
+            status: true,
+            data: qRData
+          })
+        },
+        fail(data) {
+          callback({
+            status: false,
+            data: data
+          })
+        }
+      })
+    },
+    /* 获取经纬度
+    第一个参数的格式为以英文逗号分隔字符串：113.988165,22.556328,中国广东省深圳市南山区侨香路辅路
+    第二个参数的格式为JSON格式字符串：
+    {
+      "latitude": 22.22,
+      "longitude": 132.33,
+      "province": "广东省",
+      "city": "深圳市",
+      "district": "南山区",
+      "street": "侨香路",
+      "street_number": "4068号",
+      "address": "广东省深圳市福田区莲花路2075号"
+    }
+    */
+    $sdkGetLocation: function(callback) {
+      this.myJssdk.getLocation({
+        success: (value, json) => {
+          callback({
+            status: true,
+            data: value,
+            json: json
+          });
+        },
+        fail: (err) => {
+          callback({
+            status: false,
+            data: err
+          });
+        }
+      });
+    },
 
 
 

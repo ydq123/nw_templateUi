@@ -17,6 +17,10 @@ import StatusLabel from './StatusLabel/StatusLabel.vue' //状态标签组件
 import topIntroduce from './topIntroduce/topIntroduce.vue' //详情页顶部简介
 import TabWidget from './TabWidget/TabWidget.vue' //多状态tab组件
 
+import BdCheckSubstation from './Bd/BdCheckSubstation.vue' //变电-变电选择
+import BdFunctionalLocation from './Bd/BdFunctionalLocation.vue' //变电-功能位置选择
+import BdEquipment from './Bd/BdEquipment.vue' //变电-设备选择
+
 
 /* 地图插件 */
 import RigthMapPopup from "./mapComponents/RigthMapPopup";
@@ -45,4 +49,7 @@ export {
 	StatusLabel,
 	topIntroduce,
     TabWidget,
+    BdCheckSubstation,
+    BdFunctionalLocation,
+    BdEquipment,
 }

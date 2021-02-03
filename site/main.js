@@ -22,7 +22,7 @@ import '@/plugin/vant/vant_init.js'; //初始化
 
 /* 跨页面通讯 */
 import bus from '@/utils/bus.js'; //跨页面通讯
-Vue.prototype.$bus = bus;
+Vue.prototype.$across = bus;
 
 
 /** 引入地图注册地图组件 */
