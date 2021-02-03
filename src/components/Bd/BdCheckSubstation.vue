@@ -50,12 +50,12 @@
             <div class="task-list borderButtomE8" m="click" v-if="zjbdObj.bdzType==1">
               <div class="pr15 pl15 pt15 f12 gray9">离我最近 {{zjbdObj.distance|setDistance }}</div>
               <div class="row p15">
-                <van-checkbox class=" pr15 " @click="checkFun(1)" v-if="pageData.type==1" v-model="zjbdObj.checked"></van-checkbox>
+                <van-checkbox class=" pr10 " @click="checkFun(1)" v-if="pageData.type==1" v-model="zjbdObj.checked"></van-checkbox>
                 <div class=" row al-c " @click="openFunctionalLocation(zjbdObj, index)">
                   <div class=" divImg mr10">
                     <!-- <img src="../../assets/images/mapImg/mapType2.png" /> -->
                   </div>
-                  <div class="content-right">
+                  <div class="content-right" :class="[pageData.type==1?'vw1':'vw2']">
                     <div class=" f16  clamp1 jrh">{{zjbdObj.flName}}</div>
                     <div class=" f14  clamp1 jrh">
                       {{zjbdObj.address||zjbdObj.fullPath}}
@@ -91,7 +91,7 @@
                   <div class=" divImg mr10">
                     <!-- <img src="../../assets/images/mapImg/mapType2.png" /> -->
                   </div>
-                  <div class="content-right">
+                  <div class="content-right"  :class="[pageData.type==1?'vw1':'vw2']" >
                     <div class=" f16  clamp1 jrh">{{itme.flName}}</div>
                     <div class=" f14  clamp1 jrh">
                       {{itme.fullPath|setFullPath}}
@@ -535,14 +535,20 @@
       line-height: 24px;
       // .pxToremLess(width,200px);
     }
-
+    .vw1{
+      width: 49vw;
+    }
+    .vw2{
+      width: 56vw;
+    }
     .content-right {
-      width: 65%;
+
     }
 
     .divImg {
-      .pxToremLess(width, 96px);
-      .pxToremLess(height, 96px);
+      .pxToremLess(width, 90px);
+      height: 100%;
+      // .pxToremLess(height, 96px);
       background-image: url('~./../../../assets/images/mapImg/mapType2.png');
       background-size: 100% 100%;
       background-position: center;

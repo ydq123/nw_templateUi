@@ -361,7 +361,7 @@ export const NWmyJsSdkMixin = {
           callback({
             status: true,
             data: value,
-            json: json
+            json: json?JSON.parse(json):{},
           });
         },
         fail: (err) => {

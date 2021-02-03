@@ -36,7 +36,7 @@
 						投运日期			plantTransferDate -->
             <div class="task-list borderButtomE8" m="click" :key="index" v-for="(itme, index) in eqList">
               <div class="row p15">
-                <div class=" pr15 al-c row ">
+                <div class=" pr10 al-c row ">
                   <van-checkbox v-model="itme.checked" @click="checkFun"></van-checkbox>
                 </div>
                 <div class="row al-c">
@@ -45,10 +45,10 @@
                   </div>
                   <div class="content-right ">
                     <div class=" f16  clamp1">{{itme.baseInfoData.deviceName}}</div>
-                    <div class=" f14 pt5 clamp1 jrh">
+                    <div class=" f14  clamp1 jrh">
                       {{itme.baseInfoData.manufacturer}}{{itme.baseInfoData.deviceModel?'-'+itme.baseInfoData.deviceModel:''}}
                     </div>
-                    <div class="f14 pt5 clamp1">{{$baseTimeFormat("-", ":", false, itme.baseInfoData.plantTransferDate)}}</div>
+                    <div class="f14  clamp1">{{$baseTimeFormat("-", ":", false, itme.baseInfoData.plantTransferDate)}}</div>
                     <nw-status-label class="" :bqStaLabel="[	{
 										staCal: '',
 										staLabTxt: itme.baseInfoData.assetState,
@@ -142,7 +142,15 @@
       noSysFun() {
         this.$sdkScanQRCode(1, (ret) => {
           console.log(ret)
-          this.sysFun(ret);
+          if (ret.status) {
+            this.sysFun(ret.data);
+          } else {
+            if (ret.data == 'user cancel') {
+              this.$textCatch('取消');
+            } else {
+              this.$textCatch(ret.data);
+            }
+          }
         });
       },
       sysFun: function(scanerId) {
@@ -427,12 +435,13 @@
     }
 
     .content-right {
-      width: 65%;
+      width: 49vw;
     }
 
     .divImg {
-      .pxToremLess(width, 96px);
-      .pxToremLess(height, 96px);
+      .pxToremLess(width, 90px);
+      height: 100%;
+      // .pxToremLess(height, 96px);
       background-image: url('~./../../../assets/images/mapImg/mapType2.png');
       background-size: 100% 100%;
       background-position: center;

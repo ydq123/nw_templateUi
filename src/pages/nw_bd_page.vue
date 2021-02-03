@@ -93,15 +93,25 @@
           status: false,
           scrollY: 0,
         }], //记录子组件的生命周期的
+        // addressObj: {
+        //   "latitude": '', //23.166323
+        //   "longitude": '', //132.33
+        //   "province": "", //广东省
+        //   "city": "", //深圳市
+        //   "district": "", //南山区
+        //   "street": "", //侨香路
+        //   "street_number": "", //4068号
+        //   "address": "", //广东省深圳市福田区莲花路2075号
+        // },
         addressObj: {
-          "latitude": '22.22', //22.22
-          "longitude": '132.33', //132.33
-          "province": "", //广东省
-          "city": "", //深圳市
-          "district": "", //南山区
-          "street": "", //侨香路
+          "latitude": '23.166323', //23.166323
+          "longitude": '113.450516', //132.33
+          "province": "广东省", //广东省
+          "city": "广州市", //深圳市
+          "district": "天河区", //南山区
+          "street": "华光路", //侨香路
           "street_number": "", //4068号
-          "address": "广东省深圳市福田区莲花路2075号", //广东省深圳市福田区莲花路2075号
+          "address": "广东省广州市天河区华光路", //广东省深圳市福田区莲花路2075号
         },
       };
     },
@@ -143,11 +153,12 @@
         console.log(888888);
         /* 临时写死*/
         // this.addressObj.address ='广东省深圳市福田区莲花路';
-        // this.$refs['tabItme'+ this.showType].queryNearestSubstationFun(this.addressObj); //获取离我最近
+        this.$refs['tabItme'+ this.showType].queryNearestSubstationFun(this.addressObj); //获取离我最近
         this.$sdkGetLocation((ret) => {
           console.log(ret)
           if (ret.status) {
             this.addressObj = ret.json;
+            console.log(this.addressObj)
             this.$refs['tabItme'+ this.showType].queryNearestSubstationFun(ret.json); //获取离我最近
           }
         });

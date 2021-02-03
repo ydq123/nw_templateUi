@@ -46,14 +46,16 @@
               {{itme.intervalName||'其他'}}
             </div>
           </div>
-          <div class="list-right bg-white gray3" style="width: 60%;">
-            <div @click="rightFun(itme,index)" class="pr15 pl15 pt10 pb10 rightIndex row" v-for="(itme,index) in rightArr">
-              <div class="border_1_dc p5 vLev row al-c fl-w word f14" style="width: 100%;position: relative;">
-                <span class="listRightRed"></span>
-                <span class="pl10">{{itme.intervalName||'其他'}}</span>
-              </div>
-              <div class="checkbox pl15 flex">
-                <van-checkbox v-if="pageData.type==2" v-model="itme.status"></van-checkbox>
+          <div class="list-right bg-white gray3 " style="width: 60%;">
+            <div class="pb20">
+              <div @click="rightFun(itme,index)" class="pr15 pl15 pt10  rightIndex row" v-for="(itme,index) in rightArr">
+                <div class="border_1_dc p5 vLev row al-c fl-w word f14" style="width: 100%;position: relative;">
+                  <span class="listRightRed"></span>
+                  <span class="pl10">{{itme.intervalName||'其他'}}</span>
+                </div>
+                <div class="checkbox pl15 flex">
+                  <van-checkbox v-if="pageData.type==2" v-model="itme.status"></van-checkbox>
+                </div>
               </div>
             </div>
           </div>
@@ -271,7 +273,7 @@
     .list-right {
       height: 66vh;
       overflow-y: scroll !important;
-      padding-bottom: 20px;
+      // padding-bottom: 20px;
     }
 
     .listLeft {
