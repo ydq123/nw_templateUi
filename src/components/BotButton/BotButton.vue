@@ -120,7 +120,7 @@ export default {
     btnInfo: {
       type: Object,
       default: () => ({
-        btnType: 2,
+        btnType: 3,
         fontSize: "f14",
         fontText: "主要按钮",
         fontColor: "text-white",
@@ -231,8 +231,8 @@ export default {
       }
     },
     // 点击底部更多按钮事件
-    botPopIconBtn: function(iconItem) {
-      this.$emit("botPopIconBtn", iconItem);
+    botPopIconBtn: function(item) {
+      this.$emit("botPopIconBtn", item);
     }
   }
 };

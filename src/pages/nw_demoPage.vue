@@ -133,10 +133,7 @@
     <!-- 悬浮球组件 -->
     <nw-float-menu :menuArr="menuArr" @menuClick="menuClickTap"></nw-float-menu>
     <!-- 底部按钮组件 -->
-    <nw-bot-button>
-			<p slot="leftBtnText">保存噢</p>
-			<p slot="rightBtnText">发送噢</p>
-		</nw-bot-button>
+    <nw-bot-button @bottomClickHandle="bottomClickHandle"></nw-bot-button>
   </div>
 </template>
 
@@ -488,7 +485,7 @@ export default {
       console.log("testOverlay", JSON.stringify(data));
     },
     bottomClickHandle(data) {
-      console.log("bottomClickHandle", JSON.stringify(data));
+      console.log("bottomClickHandle", data);
       if (data.id == 1) {
         // this.$router.push({
         // 	name: "flowView",
