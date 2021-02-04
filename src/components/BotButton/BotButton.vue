@@ -153,7 +153,8 @@ export default {
             fontText: "更多",
             fontColor: "text-black",
             iconName: "icon-gengduo",
-            iconSize: "f14"
+            iconSize: "f14",
+            isMore: true,
           },
           {
             fontSize: "f12",
@@ -224,7 +225,7 @@ export default {
     },
     // 底部按钮点击事件
     bottomClickHandle: function(item, index) {
-      if (index == 2) {
+      if (item.isMore) {
         this.showZdcIconBox = true;
       } else {
         this.$emit("bottomClickHandle", item);
