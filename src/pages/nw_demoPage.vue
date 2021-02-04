@@ -133,7 +133,9 @@
     <!-- 悬浮球组件 -->
     <nw-float-menu :menuArr="menuArr" @menuClick="menuClickTap"></nw-float-menu>
     <!-- 底部按钮组件 -->
-    <nw-bot-button></nw-bot-button>
+    <nw-bot-button 
+      @bottomClickHandle="bottomClickHandle"
+      @botPopIconBtn="botPopIconBtn"></nw-bot-button>
   </div>
 </template>
 
