@@ -109,14 +109,14 @@
   }
 
   .ptb1 {
-    padding-top: 2px;
+    padding-top: 4px;
     padding-bottom: 2px;
     // .pxToremLess(padding-top, 4px);
     // .pxToremLess(padding-bottom, 4px);
   }
 
   .ptb2 {
-    padding-top: 2px;
+    padding-top: 4px;
     padding-bottom: 2px;
     border-radius: 4px // .pxToremLess(padding-top, 4px);
       // .pxToremLess(padding-bottom,4px);
