@@ -20,7 +20,7 @@
         v-if="introduceData.statusValue.length"
       >
         <div
-          class="danger-mark mr5"
+          class="danger-mark mr5 f10"
           :class="item.state | stateClass"
           v-for="(item, index) in introduceData.statusValue"
           :key="index"
@@ -69,6 +69,7 @@ export default {
         showCopy: true,
         statusValue: [
           {
+            state: 1,
             text: "待处理"
           },
           {
@@ -80,6 +81,7 @@ export default {
             text: "已处理"
           }
         ],
+        statusFontSize: 'f10',
         statusColor: "#fff",
         statusBg: "#1e87f0",
         keyValues: [
@@ -117,12 +119,15 @@ export default {
 </script>
 
 <style scoped lang="less">
+	@import "../../assets/less/nw_tool.less";
 // 标签
 .danger-mark {
-  padding: 4px 6px;
-  border-radius: 2px;
+  .pxToremLess(padding-top, 4px);
+  .pxToremLess(padding-bottom, 4px);
+  .pxToremLess(padding-left, 6px);
+  .pxToremLess(padding-right, 6px);
+  .pxToremLess(border-radius, 2px);
   color: #1e87f0;
-  font-size: 10px;
   text-align: center;
   &.state1 {
     color: #1ca300 !important;
