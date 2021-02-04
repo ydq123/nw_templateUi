@@ -161,8 +161,8 @@
       border-radius: 8px;
       // border-left: 1px solid #ccc;
       // border-right: 1px solid #ccc;
-      border-left: 0.0425rem solid var(--borderSolide);
-      border-right: 0.0425rem solid var(--borderSolide);
+      border-left: 0.0355rem solid var(--borderSolide);
+      border-right: 0.04rem solid var(--borderSolide);
       -webkit-transform-origin: 0 0;
       transform-origin: 0 0;
       -webkit-transform: scale(0.5);

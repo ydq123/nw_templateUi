@@ -51,7 +51,7 @@
               <div class="pr15 pl15 pt15 f12 gray9">离我最近 {{zjbdObj.distance|setDistance }}</div>
               <div class="row p15">
                 <van-checkbox class=" pr10 " @click="checkFun(1)" v-if="pageData.type==1" v-model="zjbdObj.checked"></van-checkbox>
-                <div class=" row al-c " @click="openFunctionalLocation(zjbdObj, index)">
+                <div class=" row al-c " @click="openFunctionalLocation(zjbdObj)">
                   <div class=" divImg mr10">
                     <!-- <img src="../../assets/images/mapImg/mapType2.png" /> -->
                   </div>
@@ -84,14 +84,14 @@
               </div>
             </div>
             <!-- 列表 -->
-            <div class="task-list borderButtomE8" m="click" :key="index" v-for="(itme, index) in bdList">
+            <div class="task-list borderButtomE8" m="click" v-if="itme.bdzType!=1" :key="index" v-for="(itme, index) in bdList">
               <div class="row p15">
-                <van-checkbox class=" pr15 " @click="checkFun(0)" v-if="pageData.type==1" v-model="itme.checked"></van-checkbox>
-                <div class=" row al-c " @click="openFunctionalLocation(itme, index)">
+                <van-checkbox class=" pr10 " @click="checkFun(0)" v-if="pageData.type==1" v-model="itme.checked"></van-checkbox>
+                <div class=" row al-c " @click="openFunctionalLocation(itme)">
                   <div class=" divImg mr10">
                     <!-- <img src="../../assets/images/mapImg/mapType2.png" /> -->
                   </div>
-                  <div class="content-right"  :class="[pageData.type==1?'vw1':'vw2']" >
+                  <div class="content-right" :class="[pageData.type==1?'vw1':'vw2']">
                     <div class=" f16  clamp1 jrh">{{itme.flName}}</div>
                     <div class=" f14  clamp1 jrh">
                       {{itme.fullPath|setFullPath}}
@@ -211,6 +211,7 @@
                 this.zjbdObj = ret.data || {
                   'bdzType': 0
                 };
+                this.bdList.push(this.zjbdObj);
               }
             } else {
               this.$textCatch(err.msg || '服务异常');
@@ -277,15 +278,6 @@
       },
       openFunctionalLocation: function(data) {
         if (this.pageData.type != 1) {
-          this.bdList.forEach((itme) => {
-            if (itme.id == data.id) {
-              itme.checked = true;
-            } else {
-              itme.checked = false;
-            }
-          })
-          this.checkArr = this.bdList.filter(item => item.checked == true);
-          console.log(11111)
           this.$emit('pageCallback', {
             type: this.pageData.type,
             showType: 2,
@@ -440,26 +432,31 @@
       /* 选择事件*/
       checkFun: function(val) {
         if (val == 1) {
-          this.checkArr.push(this.zjbdObj);
-        } else {
-          this.checkArr = this.bdList.filter(item => item.checked == true);
+          this.bdList.forEach((item, index) => {
+            if (item.id == this.zjbdObj.id) {
+              item.checked = this.zjbdObj.checked;
+            }
+          });
         }
-        console.log(1111111)
+        this.checkArr = this.bdList.filter(item => item.checked == true) || [];
         this.setCheckArr();
       },
       /* 删除某一个 */
       dltItmeFun: function(data, index) {
         if (data.bdzType == 1) {
           this.zjbdObj.checked = false;
-          this.checkArr = this.checkArr.filter(item => item.id != data.id);
-        } else {
-          this.bdList.forEach((itme, index) => {
-            if (itme.id == data.id) {
-              itme.checked = false;
-            }
-          });
-          this.checkArr = this.bdList.filter(item => item.checked == true);
         }
+        this.bdList.forEach((itme, index) => {
+          if (itme.id == data.id) {
+            itme.checked = false;
+          }
+        });
+        this.checkArr = this.bdList.filter(item => item.checked == true);
+        if (this.zjbdObj.checked == true) {
+          this.checkArr = this.checkArr.filter(item => item.id != this.zjbdObj.id);
+          this.checkArr = this.checkArr.unshift(this.zjbdObj);
+        }
+
         this.setCheckArr();
       },
       /* 清空所有*/
@@ -468,7 +465,7 @@
           itme.checked = false;
         });
         this.zjbdObj.checked = false;
-        this.checkArr = this.bdList.filter(item => item.checked == true);
+        this.checkArr = [];
         this.setCheckArr();
       },
       setCheckArr: function(val) {
@@ -532,18 +529,20 @@
     height: 100%;
 
     .jrh {
-      line-height: 24px;
+      // padding-bottom: 6px;
+      line-height: 20px;
       // .pxToremLess(width,200px);
     }
-    .vw1{
+
+    .vw1 {
       width: 49vw;
     }
-    .vw2{
+
+    .vw2 {
       width: 56vw;
     }
-    .content-right {
 
-    }
+    .content-right {}
 
     .divImg {
       .pxToremLess(width, 90px);

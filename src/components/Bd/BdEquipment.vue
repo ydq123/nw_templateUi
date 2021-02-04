@@ -44,11 +44,11 @@
                     <!-- <img src="../../assets/images/mapImg/mapType2.png" /> -->
                   </div>
                   <div class="content-right ">
-                    <div class=" f16  clamp1">{{itme.baseInfoData.deviceName}}</div>
+                    <div class=" f16  clamp1 jrh">{{itme.baseInfoData.deviceName}}</div>
                     <div class=" f14  clamp1 jrh">
                       {{itme.baseInfoData.manufacturer}}{{itme.baseInfoData.deviceModel?'-'+itme.baseInfoData.deviceModel:''}}
                     </div>
-                    <div class="f14  clamp1">{{$baseTimeFormat("-", ":", false, itme.baseInfoData.plantTransferDate)}}</div>
+                    <div class="f14  clamp1 jrh">{{$baseTimeFormat("-", ":", false, itme.baseInfoData.plantTransferDate)}}</div>
                     <nw-status-label class="" :bqStaLabel="[	{
 										staCal: '',
 										staLabTxt: itme.baseInfoData.assetState,
@@ -148,7 +148,9 @@
             if (ret.data == 'user cancel') {
               this.$textCatch('取消');
             } else {
-              this.$textCatch(ret.data);
+              if(ret.data){
+                this.$textCatch(ret.data);
+              }
             }
           }
         });
@@ -170,11 +172,11 @@
             if (ret.code == 200) {
               var retBoolean = this.$baseIsArray(ret.rows);
               if (retBoolean) {
-                this.totalPage = ret.total;
                 ret.rows.forEach((itme, index) => {
                   itme['checked'] = true;
                   itme['itmeType'] = 'sys';
                 });
+                this.$textThen('扫描成功');
                 this.checkArr.push.apply(this.checkArr, ret.rows);
                 this.setCheckArr();
               }
@@ -430,7 +432,8 @@
     height: 100%;
 
     .jrh {
-      line-height: 24px;
+      // padding-top: 6px;
+      line-height: 20px;
       // .pxToremLess(width,200px);
     }
 

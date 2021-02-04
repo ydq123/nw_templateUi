@@ -327,6 +327,20 @@ export const NWtabMinxin = {
 	        this.$across.$off(funName);
 	      };
 	    },
+      /* 台账-变电 */
+      $tabGetTransformBD:function(obj,callback){
+        /* 挂载跨页面通讯*/
+        this.$tabOnPageFun(obj.funName||'$nwTzDdFun',(res)=>{
+          callback(res)
+        });
+        this.$nwOpenWin('nw_bd_page', {
+          type: obj.type,//1变电站 2功能位置 3设备-必传
+          bureauCode:obj.bureauCode,//局编码，多选以逗号隔开-必传
+          vindicateOid:obj.vindicateOid ,//运维班组-非必传
+          funName: obj.funName||'$nwTzDdFun',//跨页面通信函数名字-必传
+        });
+      },
+      
   },
   computed: {
 

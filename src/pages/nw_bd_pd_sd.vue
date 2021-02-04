@@ -33,15 +33,14 @@
     methods: {
       /* 选择变电站*/
       openCheckSubstation: function(type) {
-        /* 挂载跨页面通讯*/
-        this.$tabOnPageFun('$nwTzDdFun',(res)=>{
+        var obj = {
+          type: type, //1变电站 2功能位置 3设备-必传
+          bureauCode: '0800', //局编码，多选以逗号隔开-必传
+          vindicateOid: '1589BAA87A27BD64E053380F0A0A54B2', //运维班组-非必传
+          funName: '$nwTzDdFun', //跨页面通信函数名字-必传
+        };
+        this.$tabGetTransformBD(obj,(res) => {
           console.log(res);
-        });
-        this.$nwOpenWin('nw_bd_page', {
-          type: type,//1变电站 2功能位置 3设备-必传
-          bureauCode: '0800',//局编码，多选以逗号隔开-必传
-          vindicateOid: '1589BAA87A27BD64E053380F0A0A54B2',//运维班组-非必传
-          funName: '$nwTzDdFun',//跨页面通信函数名字-必传
         });
       },
 
