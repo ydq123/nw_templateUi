@@ -46,7 +46,7 @@
             :class="[
               iIndex == btnInfo.fixedButtonList.length - 1
                 ? 'btn-width-50'
-                : 'flex-1'
+                : 'flex-1 verticle-center ju-c'
             ]"
           >
             <!-- 左侧小按钮 -->
@@ -86,7 +86,7 @@
           class="btn-father btn-width-100 btn-hei-au btn-row pl15 pr15 ju-b fl-w"
         >
           <div
-            class="btnItem pt10 pb10 mb15"
+            class="btnItem pt10 pb10 mb15 column ju-a"
             :class="[item.fontColor, item.bgColor]"
             @click="botPopIconBtn(item)"
             v-for="(item, index) in btnInfo.moreOperation"
