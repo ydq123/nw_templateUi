@@ -39,7 +39,7 @@
         <div class="flex ju-b pl15 pr15 pt10 pb10 verticle-center borderTopE8" v-for="(item,index3) in itmeArr">
           <div class=" p5  row" style="width: 80%;">
             <div class="listRightRed"></div>
-            <span class="pl5">{{item.intervalName||'其他'}}</span>
+            <span class="pl10">{{item.intervalName||'其他'}}</span>
           </div>
           <div class="pl15" @click="dltItmeFun(item,index3)"><i class="iconfont icon-shanchu text-red"></i></div>
         </div>
@@ -151,8 +151,20 @@
       },
       newAddressFun: function() {
         console.log(888888);
-        /* 临时写死*/
-        // this.$refs['tabItme'+ this.showType].queryNearestSubstationFun(this.addressObj); //获取离我最近
+        /* 是否开启测试*/
+        if(this.tabPageData.isCs){
+          this.addressObj= {
+            "latitude": '23.166323', //23.166323
+            "longitude": '113.450516', //132.33
+            "province": "广东省", //广东省
+            "city": "广州市", //深圳市
+            "district": "天河区", //南山区
+            "street": "华光路", //侨香路
+            "street_number": "", //4068号
+            "address": "广东省广州市天河区华光路", //广东省深圳市福田区莲花路2075号
+          };
+          this.$refs['tabItme'+ this.showType].queryNearestSubstationFun(this.addressObj); //获取离我最近
+        }
         this.$sdkGetLocation((ret) => {
           console.log(ret)
           if (ret.status&&ret.json) {
@@ -235,7 +247,7 @@
 
   .btn {
     height: 44px;
-    border-radius: 8px;
+    border-radius: 6px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -252,7 +264,7 @@
     width: 3px;
     background-color: red;
     position: absolute;
-    left: 6px;
+    left: 15px;
     top: 3px;
   }
 </style>

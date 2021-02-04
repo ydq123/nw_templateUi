@@ -49,9 +49,13 @@
             <!--离我最近 -->
             <div class="task-list borderButtomE8" m="click" v-if="zjbdObj.bdzType==1">
               <div class="pr15 pl15 pt15 f12 gray9">离我最近 {{zjbdObj.distance|setDistance }}</div>
-              <div class="row p15">
-                <van-checkbox class=" pr10 " @click="checkFun(1)" v-if="pageData.type==1" v-model="zjbdObj.checked"></van-checkbox>
-                <div class=" row al-c " @click="openFunctionalLocation(zjbdObj)">
+              <div class="row p15" @click="checkFun(1,zjbdObj)">
+                <label v-if="pageData.type==1" class="column al-c ju-c pr10" >
+                  <van-icon v-show="zjbdObj.checked" name="checked" class="gray287 f22" />
+                  <van-icon v-show="!zjbdObj.checked" name="circle" class="graya5 f22" />
+                </label>
+                <!-- <van-checkbox class=" pr10 " @click="checkFun(1)" v-if="pageData.type==1" v-model="zjbdObj.checked"></van-checkbox> -->
+                <div class=" row al-c " >
                   <div class=" divImg mr10">
                     <!-- <img src="../../assets/images/mapImg/mapType2.png" /> -->
                   </div>
@@ -85,9 +89,13 @@
             </div>
             <!-- 列表 -->
             <div class="task-list borderButtomE8" m="click" v-if="itme.bdzType!=1" :key="index" v-for="(itme, index) in bdList">
-              <div class="row p15">
-                <van-checkbox class=" pr10 " @click="checkFun(0)" v-if="pageData.type==1" v-model="itme.checked"></van-checkbox>
-                <div class=" row al-c " @click="openFunctionalLocation(itme)">
+              <div class="row p15" @click="checkFun(0,itme)">
+                <label v-if="pageData.type==1" class="column al-c ju-c pr10" >
+                  <van-icon v-show="itme.checked" name="checked" class="gray287 f22" />
+                  <van-icon v-show="!itme.checked" name="circle" class="graya5 f22" />
+                </label>
+                <!-- <van-checkbox class=" pr10 "  v-if="pageData.type==1" v-model="itme.checked"></van-checkbox> -->
+                <div class=" row al-c " >
                   <div class=" divImg mr10">
                     <!-- <img src="../../assets/images/mapImg/mapType2.png" /> -->
                   </div>
@@ -177,7 +185,9 @@
         pageData: {},
         addressObj: {},
         zjbdObj: {
-          'bdzType': 0
+          bdzType: 0,
+          checked:false,
+
         }, //最近变电站
       };
     },
@@ -207,9 +217,11 @@
           if (ret) {
             if (ret.code == 200) {
               if (ret.data) {
+                ret.data['checked'] = false;
                 ret.data['bdzType'] = 1; //1表示是距离我最近的变电站
                 this.zjbdObj = ret.data || {
-                  'bdzType': 0
+                  bdzType: 0,
+                  checked:false,
                 };
                 this.bdList.push(this.zjbdObj);
               }
@@ -226,7 +238,8 @@
       },
       noAddressFun: function() {
         this.zjbdObj = {
-          bdzType: 0
+          bdzType: 0,
+          checked:false,
         };
         this.$emit('pageCallback', {
           funType: 'newAddress'
@@ -277,7 +290,6 @@
         }, 100);
       },
       openFunctionalLocation: function(data) {
-        if (this.pageData.type != 1) {
           this.$emit('pageCallback', {
             type: this.pageData.type,
             showType: 2,
@@ -291,7 +303,6 @@
             },
             funType: 'openItme'
           });
-        }
       },
       baseVoltageIdFun: function() {
         var baseVoltageIdS = '';
@@ -429,17 +440,24 @@
       filters() {
         this.showRight = !this.showRight;
       },
-      /* 选择事件*/
-      checkFun: function(val) {
-        if (val == 1) {
-          this.bdList.forEach((item, index) => {
-            if (item.id == this.zjbdObj.id) {
-              item.checked = this.zjbdObj.checked;
-            }
-          });
+      /* 选择事件  */
+      checkFun: function(type,data) {
+        if (this.pageData.type != 1) {
+          this.openFunctionalLocation(data);
+        }else{
+          if (type == 1) {
+            this.zjbdObj.checked=!this.zjbdObj.checked;
+            this.bdList.forEach((item, index) => {
+              if (item.id == this.zjbdObj.id) {
+                item.checked = this.zjbdObj.checked;
+              }
+            });
+          }else{
+            data.checked=!data.checked;
+          }
+          this.checkArr = this.bdList.filter(item => item.checked == true) || [];
+          this.setCheckArr();
         }
-        this.checkArr = this.bdList.filter(item => item.checked == true) || [];
-        this.setCheckArr();
       },
       /* 删除某一个 */
       dltItmeFun: function(data, index) {
@@ -509,10 +527,10 @@
         } else {
           // @str 目标字符串 @key 用什么去分割字符串
           var retArr = val.split('/');
-          if (retArr.length == 1 || retArr.length == 2) {
+          if (retArr.length == 1 ) {
             return val;
-          } else if (retArr.length > 2) {
-            return retArr[retArr.length - 2] + '/' + retArr[retArr.length - 1]
+          } else if (retArr.length > 1) {
+            return retArr[retArr.length - 1];
           }
         }
       }
