@@ -63,7 +63,12 @@
 			leftFun: {
 				type: Boolean,
 				default: false
-			}
+			},
+      rightFun: {
+      	type: Boolean,
+      	default: false
+      },
+      
 		},
 		mixins: [NWtabMinxin], //混入公共类
 		name: "fixed-header",
@@ -72,7 +77,7 @@
 				this.$emit("threeClockHandle");
 			},
 			backHome() {
-				if (this.leftFun) {
+				if (this.rightFun) {
           this.$emit("backHomeHandle");
         } else {
 					this.$nwBackHome('');

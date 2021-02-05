@@ -22,18 +22,17 @@
     <!-- 搜索 -->
     <label v-show="(searchValue)&&dataArr.length>0">
       <div v-show="searchArr.length>0" class="list-data f15  pb92">
-        <div @click="searchFun(item,index3)" class="flex ju-b bg-white pl20 pr15 pt20 pb15  borderButtomE8" :key="index3+'a'"
-          v-for="(item,index3) in searchArr">
-          <div class=" pr15 f14 row">
+        <div class="flex ju-b bg-white pl20 pr15 pt20 pb15  borderButtomE8" :key="index3+'a'" v-for="(item,index3) in searchArr">
+          <div @click="searchOpenFun(item,index3)" class=" pr15 f14 row" style="min-width: 80%;">
             <div class="listRightRed2"></div>
             <span class="pl5">{{item.intervalName||'其他'}}</span>
           </div>
           <div class="pl15 ">
-            <label v-if="pageData.type==2" class="column al-c ju-c">
+            <!-- <label v-if="pageData.type==2" class="column al-c ju-c">
               <van-icon v-show="item.status" name="checked" class="gray287 f22" />
               <van-icon v-show="!item.status" name="circle" class="graya5 f22" />
-            </label>
-            <!-- <van-checkbox v-if="pageData.type==2" v-model="item.status"></van-checkbox> -->
+            </label> -->
+            <van-checkbox @click="searchFun(item,index3)" v-if="pageData.type==2" v-model="item.status"></van-checkbox>
           </div>
         </div>
       </div>
@@ -52,17 +51,18 @@
           </div>
           <div class="list-right bg-white gray3 " style="width: 60%;">
             <div class="pb20">
-              <div @click="rightFun(itme,index)" class="pr15 pl15 pt20  rightIndex row" v-for="(itme,index) in rightArr">
-                <div class="border_1_dc pl5 pr5 pt7 pb5 vLev row al-c fl-w word f14" style="width: 100%;position: relative;">
+              <div class="pr15 pl15 pt20  rightIndex row" v-for="(itme,index) in rightArr">
+                <div @click="openItmeSb(itme,index)" class="border_1_dc pl5 pr5 pt7 pb5 vLev row al-c fl-w word f14"
+                  style="width: 100%;position: relative;">
                   <span class="listRightRed"></span>
                   <span class="pl10 line_h_22">{{itme.intervalName||'其他'}}</span>
                 </div>
                 <div class="checkbox pl15 flex">
-                  <label v-if="pageData.type==2" class="column al-c ju-c">
+                  <!-- <label v-if="pageData.type==2" class="column al-c ju-c">
                     <van-icon v-show="itme.status" name="checked" class="gray287 f22" />
                     <van-icon v-show="!itme.status" name="circle" class="graya5 f22" />
-                  </label>
-                  <!-- <van-checkbox v-if="pageData.type==2" v-model="itme.status"></van-checkbox> -->
+                  </label> -->
+                  <van-checkbox @click="rightFun(itme,index)" v-if="pageData.type==2" v-model="itme.status"></van-checkbox>
                 </div>
               </div>
             </div>
@@ -169,60 +169,76 @@
       searchFun: function(data, dataIndex) {
         console.log(1111);
         console.log(data);
+
+        this.searchArr[dataIndex].status = !this.searchArr[dataIndex].status;
+        this.itmeArr.forEach((itme, index) => {
+          if (itme.intervalId == data.intervalId) {
+            console.log(1111)
+            itme.status = this.searchArr[dataIndex].status
+          }
+        });
+        this.rightArr.forEach((itme, index) => {
+          if (itme.intervalId == data.intervalId) {
+            console.log(2222)
+            itme.status = this.searchArr[dataIndex].status
+          }
+        });
+        this.$set(this.searchArr, dataIndex, this.searchArr[dataIndex]);
+        this.checkArr = this.itmeArr.filter(item0 => item0.status == true);
+        this.setCheckArr();
+
+      },
+      searchOpenFun: function(data, dataIndex) {
         if (this.pageData.type == 3) {
           this.openItmeSb(data);
         } else {
-          this.searchArr[dataIndex].status = !this.searchArr[dataIndex].status;
-          this.itmeArr.forEach((itme, index) => {
-            if (itme.intervalId == data.intervalId) {
-              console.log(1111)
-              itme.status = this.searchArr[dataIndex].status
-            }
-          });
+          this.searchFun(data, dataIndex);
+        }
+      },
+      rightFun: function(data, dataIndex) {
+        setTimeout(() => {
+          console.log(data)
+          // data.status = !data.status;
+          this.$set(this.rightArr, dataIndex, data);
+          this.rightIndex = dataIndex;
           this.rightArr.forEach((itme, index) => {
             if (itme.intervalId == data.intervalId) {
-              console.log(2222)
-              itme.status = this.searchArr[dataIndex].status
+              itme.status = data.status
             }
           });
-          this.$set(this.searchArr, dataIndex, this.searchArr[dataIndex]);
-          this.checkArr = this.itmeArr.filter(item0 => item0.status == true);
-          this.setCheckArr();
-        }
-      },
-      rightFun: function(data, index) {
-        console.log(data);
-        if (this.pageData.type == 3) {
-          this.openItmeSb(data);
-        } else {
-          this.rightArr[index].status = !this.rightArr[index].status;
-          var obj = this.rightArr[index];
-          this.$set(this.rightArr, index, obj);
-          this.rightIndex = index;
           this.itmeArr.forEach((itme, index) => {
             if (itme.intervalId == data.intervalId) {
-              itme.status = this.rightArr[index].status;
+              itme.status = data.status;
             }
           });
-          this.checkArr = this.rightArr.filter(item0 => item0.status == true);
+          console.log(data)
+          this.$set(this.rightArr, dataIndex, data);
+          this.checkArr = this.itmeArr.filter(item0 => item0.status == true);
           this.setCheckArr();
-        }
+        }, 100)
       },
-      openItmeSb: function(data) {
-        this.$emit('pageCallback', {
-          type: this.pageData.type,
-          showType: 3,
-          data: {
-            title: data.intervalName,
-            intervalId: data.intervalId, //功能位置id
-            type: this.pageData.type, //类型
-            bureauCode: this.pageData.bureauCode, //局编码
-            SubstationID: this.pageData.SubstationID, //变电站id
-            funName: this.pageData.funName, //跨页面通信函数名字-必传
-            vindicateOid: this.pageData.vindicateOid, //运维班组-非必传
-          },
-          funType: 'openItme'
-        });
+      openItmeSb: function(data, index) {
+        if (this.pageData.type == 3) {
+          this.$emit('pageCallback', {
+            type: this.pageData.type,
+            showType: 3,
+            data: {
+              title: data.intervalName,
+              intervalId: data.intervalId, //功能位置id
+              type: this.pageData.type, //类型
+              bureauCode: this.pageData.bureauCode, //局编码
+              SubstationID: this.pageData.SubstationID, //变电站id
+              funName: this.pageData.funName, //跨页面通信函数名字-必传
+              vindicateOid: this.pageData.vindicateOid, //运维班组-非必传
+            },
+            funType: 'openItme'
+          });
+        } else {
+          data.status = !data.status;
+          this.rightFun(data, index);
+        }
+
+
       },
       headBackeHandle2: function() {
         this.$emit('pageCallback', {

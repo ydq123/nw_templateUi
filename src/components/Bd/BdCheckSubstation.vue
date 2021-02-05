@@ -49,13 +49,13 @@
             <!--离我最近 -->
             <div class="task-list borderButtomE8" m="click" v-if="zjbdObj.bdzType==1">
               <div class="pr15 pl15 pt15 f12 gray9">离我最近 {{zjbdObj.distance|setDistance }}</div>
-              <div class="row p15" @click="checkFun(1,zjbdObj)">
-                <label v-if="pageData.type==1" class="column al-c ju-c pr10" >
+              <div class="row p15">
+                <!-- <label v-if="pageData.type==1" class="column al-c ju-c pr10" >
                   <van-icon v-show="zjbdObj.checked" name="checked" class="gray287 f22" />
                   <van-icon v-show="!zjbdObj.checked" name="circle" class="graya5 f22" />
-                </label>
-                <!-- <van-checkbox class=" pr10 " @click="checkFun(1)" v-if="pageData.type==1" v-model="zjbdObj.checked"></van-checkbox> -->
-                <div class=" row al-c " >
+                </label> -->
+                <van-checkbox class=" pr10 " @click="checkFun(1,zjbdObj)" v-if="pageData.type==1" v-model="zjbdObj.checked"></van-checkbox>
+                <div class=" row al-c " @click="openFunctionalLocation(1,zjbdObj)">
                   <div class=" divImg mr10">
                     <!-- <img src="../../assets/images/mapImg/mapType2.png" /> -->
                   </div>
@@ -89,13 +89,13 @@
             </div>
             <!-- 列表 -->
             <div class="task-list borderButtomE8" m="click" v-if="itme.bdzType!=1" :key="index" v-for="(itme, index) in bdList">
-              <div class="row p15" @click="checkFun(0,itme)">
-                <label v-if="pageData.type==1" class="column al-c ju-c pr10" >
+              <div class="row p15">
+                <!-- <label v-if="pageData.type==1" class="column al-c ju-c pr10" >
                   <van-icon v-show="itme.checked" name="checked" class="gray287 f22" />
                   <van-icon v-show="!itme.checked" name="circle" class="graya5 f22" />
-                </label>
-                <!-- <van-checkbox class=" pr10 "  v-if="pageData.type==1" v-model="itme.checked"></van-checkbox> -->
-                <div class=" row al-c " >
+                </label> -->
+                <van-checkbox class=" pr10 " @click="checkFun(0,itme)" v-if="pageData.type==1" v-model="itme.checked"></van-checkbox>
+                <div class=" row al-c " @click="openFunctionalLocation(0,itme)">
                   <div class=" divImg mr10">
                     <!-- <img src="../../assets/images/mapImg/mapType2.png" /> -->
                   </div>
@@ -186,7 +186,7 @@
         addressObj: {},
         zjbdObj: {
           bdzType: 0,
-          checked:false,
+          checked: false,
 
         }, //最近变电站
       };
@@ -221,7 +221,7 @@
                 ret.data['bdzType'] = 1; //1表示是距离我最近的变电站
                 this.zjbdObj = ret.data || {
                   bdzType: 0,
-                  checked:false,
+                  checked: false,
                 };
                 this.bdList.push(this.zjbdObj);
               }
@@ -239,7 +239,7 @@
       noAddressFun: function() {
         this.zjbdObj = {
           bdzType: 0,
-          checked:false,
+          checked: false,
         };
         this.$emit('pageCallback', {
           funType: 'newAddress'
@@ -289,21 +289,7 @@
           this.querySubstationGroupByVoltageFun();
         }, 100);
       },
-      openFunctionalLocation: function(data) {
-          this.$emit('pageCallback', {
-            type: this.pageData.type,
-            showType: 2,
-            data: {
-              title: data.flName,
-              type: this.pageData.type, //类型
-              bureauCode: this.pageData.bureauCode, //局编码
-              SubstationID: data.id, //变电站id
-              funName: this.pageData.funName, //跨页面通信函数名字-必传
-              vindicateOid: this.pageData.vindicateOid, //运维班组-非必传
-            },
-            funType: 'openItme'
-          });
-      },
+
       baseVoltageIdFun: function() {
         var baseVoltageIdS = '';
         var arr = this.hasChecked ? this.vLevArr1 : this.vLevArr2;
@@ -440,24 +426,39 @@
       filters() {
         this.showRight = !this.showRight;
       },
-      /* 选择事件  */
-      checkFun: function(type,data) {
+      openFunctionalLocation: function(type, data) {
         if (this.pageData.type != 1) {
-          this.openFunctionalLocation(data);
-        }else{
+          this.$emit('pageCallback', {
+            type: this.pageData.type,
+            showType: 2,
+            data: {
+              title: data.flName,
+              type: this.pageData.type, //类型
+              bureauCode: this.pageData.bureauCode, //局编码
+              SubstationID: data.id, //变电站id
+              funName: this.pageData.funName, //跨页面通信函数名字-必传
+              vindicateOid: this.pageData.vindicateOid, //运维班组-非必传
+            },
+            funType: 'openItme'
+          });
+        } else {
+          data.checked = !data.checked;
+          this.checkFun(type, data);
+        }
+      },
+      /* 选择事件  */
+      checkFun: function(type, data) {
+        setTimeout(() => {
           if (type == 1) {
-            this.zjbdObj.checked=!this.zjbdObj.checked;
             this.bdList.forEach((item, index) => {
               if (item.id == this.zjbdObj.id) {
-                item.checked = this.zjbdObj.checked;
+                item.checked = data.checked;
               }
             });
-          }else{
-            data.checked=!data.checked;
           }
           this.checkArr = this.bdList.filter(item => item.checked == true) || [];
           this.setCheckArr();
-        }
+        }, 80);
       },
       /* 删除某一个 */
       dltItmeFun: function(data, index) {
@@ -470,11 +471,6 @@
           }
         });
         this.checkArr = this.bdList.filter(item => item.checked == true);
-        if (this.zjbdObj.checked == true) {
-          this.checkArr = this.checkArr.filter(item => item.id != this.zjbdObj.id);
-          this.checkArr = this.checkArr.unshift(this.zjbdObj);
-        }
-
         this.setCheckArr();
       },
       /* 清空所有*/
@@ -527,7 +523,7 @@
         } else {
           // @str 目标字符串 @key 用什么去分割字符串
           var retArr = val.split('/');
-          if (retArr.length == 1 ) {
+          if (retArr.length == 1) {
             return val;
           } else if (retArr.length > 1) {
             return retArr[retArr.length - 1];
