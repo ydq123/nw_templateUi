@@ -13,8 +13,8 @@
 					<div class="header-txt f16">{{ title }}</div>
 				</slot>
 				<!-- <div class="right-content">更多</div> -->
-				<div class="right-content" @click="backHome">
 					<slot name="right">
+						<div class="right-content" @click="backHome">
 						<!-- <div class="right-slot-content" @click="backHome">
 							<slot name="right1">
 								<div></div>
@@ -23,8 +23,8 @@
 								<div></div>
 							</slot>
 						</div> -->
+						</div>
 					</slot>
-				</div>
 			</div>
 		</slot>
 		<slot name="page-bottom"></slot>
