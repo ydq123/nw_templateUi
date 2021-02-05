@@ -344,7 +344,7 @@ export const NWtabMinxin = {
     /* 单位选择 */
     $tabNwCheckUnit:function(obj, callback){
       /* 挂载跨页面通讯*/
-      this.$tabOnPageFun(obj.exeMun || 'testemitunit', (res) => {
+      this.$tabOnPageFun(obj.exeMun || 'nwCheckUnitFun', (res) => {
         callback(res)
       });
       this.$nwOpenWin("nw_checkUnit", {

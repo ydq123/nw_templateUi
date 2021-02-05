@@ -1,9 +1,9 @@
 const routes = [{
   path: '/',
-  redirect: '/nw_demoPage',
+  redirect: '/nwtemplate/nw_demoPage',
 },
 {
-  path: '/nw_demoPage',
+  path: '/nwtemplate/nw_demoPage',
   name: 'nw_demoPage',
   component: () => import( /* webpackChunkName: "about" */ '../pages/nw_demoPage.vue'),
   meta: {
@@ -13,7 +13,7 @@ const routes = [{
   },
 },
 {
-  path: '/nw_checkPerson',
+  path: '/nwtemplate/nw_checkPerson',
   name: 'nw_checkPerson',
   component: () => import( /* webpackChunkName: "about" */ '../pages/nw_checkPerson.vue'),
   meta: {
@@ -23,7 +23,7 @@ const routes = [{
   },
 },
 {
-  path: '/nw_flowView',
+  path: '/nwtemplate/nw_flowView',
   name: 'nw_flowView',
   component: () => import( /* webpackChunkName: "about" */ '../pages/nw_flowView.vue'),
   meta: {
@@ -33,7 +33,7 @@ const routes = [{
   },
 },
 {
-  path: '/nw_searchCheckPerson',
+  path: '/nwtemplate/nw_searchCheckPerson',
   name: 'nw_searchCheckPerson',
   component: () => import( /* webpackChunkName: "about" */ '../pages/nw_searchCheckPerson.vue'),
   meta: {
@@ -43,7 +43,7 @@ const routes = [{
   },
 },
 {
-  path: '/nw_checkUnit',
+  path: '/nwtemplate/nw_checkUnit',
   name: 'nw_checkUnit',
   component: () => import( /* webpackChunkName: "about" */ '../pages/nw_checkUnit.vue'),
   meta: {
@@ -53,7 +53,7 @@ const routes = [{
   },
 },
 {
-  path: '/nw_tz_map',
+  path: '/nwtemplate/nw_tz_map',
   name: 'nw_tz_map',
   component: () => import( /* webpackChunkName: "about" */ '../pages/nw_tz_map.vue'),
   meta: {
@@ -63,7 +63,7 @@ const routes = [{
   },
 },
 {
-  path: '/nw_bd_pd_sd',
+  path: '/nwtemplate/nw_bd_pd_sd',
   name: 'nw_bd_pd_sd',
   component: () => import( /* webpackChunkName: "about" */ '../pages/nw_bd_pd_sd.vue'),
   meta: {
@@ -73,7 +73,7 @@ const routes = [{
   },
 },
 {
-  path: '/nw_bd_page',
+  path: '/nwtemplate/nw_bd_page',
   name: 'nw_bd_page',
   component: () => import( /* webpackChunkName: "about" */ '../pages/nw_bd_page.vue'),
   meta: {

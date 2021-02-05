@@ -117,7 +117,8 @@
       };
     },
     components: {},
-    created() {},
+    created() {
+    },
     watch: {
 
     },
@@ -186,6 +187,7 @@
         // }
       },
       openUnit: function() {
+        var _this=this;
         // this.$emit("openUnit");
         var param = {
           userInfo: this.userInfo,
