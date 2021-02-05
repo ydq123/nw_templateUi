@@ -1,5 +1,6 @@
 <template>
   <div class="ledger_query pt44">
+    <nw-ball ref="ball" ballColor='red' :ballNub="sysArr.length" @pageAfterEnter="pageAfterEnter2"></nw-ball>
     <nw-fixed-header :title="pageData.title" :leftFun="true" @headBackeHandle='headBackeHandle2'>
       <div slot="right"></div>
       <div slot="page-bottom" class="bg-f5">
@@ -8,7 +9,7 @@
         </div>
         <div class="row  al-c ">
           <van-search @search="searchFun" style="width: 100%" v-model="searchValue" placeholder="间隔名称" />
-          <van-icon name="scan" @click="noSysFun" class="f22 mr10 gray287" />
+          <van-icon name="scan" @click="noSysFun($event)" id="scanID" class="f22 mr10 gray287" />
         </div>
         <div class="task-top-filtrate bg-white row ju-b">
           <div class="task-top-txt">
@@ -121,6 +122,8 @@
         totalPage: 0,
         checkArr: [],
         pageData: {},
+        sysArr:[],
+        sysEvent:{},
       };
     },
     mounted() {
@@ -138,11 +141,30 @@
       showPageFun: function() {
 
       },
+      // 触发小球动画
+      doBallAnimate:function (event) {
+        console.log("触发小球动画");
+        for (let i = 0; i < this.$refs.ball.balls.length; i++) {
+          if (!this.$refs.ball.balls[i].show) {
+            this.$refs.ball.changeShow(i, true,event.target)
+            this.$refs.ball.changeDropBall(this.$refs.ball.balls[i])
+            return
+          }
+        };
+      },
+      /* 动画结束 */
+      pageAfterEnter2:function(){
+        this.checkArr.push.apply(this.checkArr,this.sysArr);
+        this.setCheckArr();
+        /* 这里有问题   */
+        // this.$sdkAudioPlay('./../../../assets/mp3/ball_bgm.mp3');
+      },
       /* 扫一扫事件 */
-      noSysFun() {
+      noSysFun:function($event) {
         this.$sdkScanQRCode(1, (ret) => {
           console.log(ret)
           if (ret.status) {
+            this.sysEvent=$event;
             this.sysFun(ret.data);
           } else {
             if (ret.data == 'user cancel') {
@@ -176,9 +198,9 @@
                   itme['checked'] = true;
                   itme['itmeType'] = 'sys';
                 });
-                this.$textThen('扫描成功');
-                this.checkArr.push.apply(this.checkArr, ret.rows);
-                this.setCheckArr();
+                // this.$textThen('扫描成功');
+               this.doBallAnimate( this.sysEvent);//触发小球
+                this.sysArr= ret.rows;
               }
             } else {
               this.$textCatch(err.msg || '服务异常');
