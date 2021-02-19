@@ -396,5 +396,116 @@ export const NWmyJsSdkMixin = {
         }
       })
     },
+    
+    /*
+    success	function	成功回调
+    fail	function	失败回调
+    action	字符串	操作类型（new 创建新窗口，close 关闭窗口，check 切换窗口，floating 悬浮）
+    url	字符串	创建窗口时必须传递，窗口加载的url
+    windowid	字符串	窗口id （创建新窗口时 不需要；悬浮以及关闭窗口时，如果不传windowId则默认对最上层的window进行操作）
+    logo	字符串	窗口的logo，缩虐图的base64
+    title	字符串	窗口的标题
+    */
+    /* 创建窗口 */
+    $sdkNewWxView: function(obj, callback) {
+    	this.jcNewWxView(obj, callback);
+    },
+    /* 基础创建 */
+    jcNewWxView: function(obj, callback) {
+    	var that = this;
+    	if (obj.jsonStr) {
+    		var winUrl = obj.url + '?jsonStr=' + obj.jsonStr + '&&suiji=' + this.$jsdkNubRandom(32);
+    	} else {
+    		var winUrl = obj.url + '?suiji=' + this.$jsdkNubRandom(32);
+    	}
+    
+    	this.myJssdk.callMobileJsSdk('system/mutablewindow', {
+    		url: winUrl,
+    		action: 'new',
+    		windowid: '',
+    		logo: obj.logo,
+    		title: obj.title,
+    		success(ret) {
+    			// 创建窗口成功会跳转页面，如果弹框看不到弹窗消息。
+    			// 返回值是创建窗口的windowid
+    			console.log(`创建窗口成功: ${ret}`)
+    			var data = {
+    				winName: obj.winName,
+    				windowid: ret,
+    			};
+    			that.DQWinName = obj.winName;
+    			that.nwWindowidArr.push(data);
+    			callback({
+    				status: true,
+    				data: data,
+    				type: 'new'
+    			});
+    		},
+    		fail(err) {
+    			console.log(`创建窗口失败: ${err}`)
+    			callback({
+    				status: false,
+    				data: err,
+    				type: 'new'
+    			});
+    		}
+    	})
+    },
+    // 悬浮窗口
+    $sdkFloatingWxView: function(winName, callback) {
+    
+    },
+    // 关闭窗口
+    $sdkCloseWxView: function(winName, callback) {
+    	this.myJssdk.callMobileJsSdk('system/mutablewindow', {
+    		action: 'close',
+    		windowid: '',
+    		success(ret) {
+    			console.log(3332222)
+    			console.log(`关闭窗口: ${ret}`);
+    			callback({
+    				status: true,
+    				data: ret,
+    				type: 'close'
+    			});
+    		},
+    		fail(err) {
+    			console.log(3332222111)
+    			callback({
+    				status: false,
+    				data: err,
+    				type: 'close'
+    			});
+    		}
+    	})
+    },
+    // 切换窗口
+    $sdkCheckWxView: function(winName, callback) {},
+    //获取指定长度的随机数
+    $jsdkNubRandom: function(val) {
+    	var number = val || 32;
+    	var date = new Date();
+    	var timeStr = new Date().toLocaleString() + ''; //获取时间戳
+    	var timeLeg = timeStr.length;
+    	var newNub = 0;
+    	if (number > timeLeg) {
+    		newNub = number - timeLeg;
+    	} else {
+    		newNub = number;
+    	}
+    	var _basechars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'; /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+    	var maxPos = _basechars.length;
+    	var pwd = '';
+    	for (var i = 0; i < newNub; i++) {
+    		pwd += _basechars.charAt(Math.floor(Math.random() * maxPos));
+    	}
+    	if (number > timeLeg) {
+    		return pwd + timeStr;
+    	} else {
+    		return pwd;
+    	}
+    
+    },
+    
   }
 }

@@ -98,12 +98,24 @@ export const NWbpmsMinxin = {
       mdpWorkflow.operate.reassign(false, () => this.$bpmsGetData(obj), callback);
     },
     $bpmsGetData: function(obj) {
+      /* 解决有些流程没有用户id问题*/
+      var retObj = this.$baseGetData('bpmsUuseObj');
+      if (this.$refs.workflowSelectPage) {
+        if (this.$refs.workflowSelectPage.orgId) {
+          this.$refs.workflowSelectPage.orgId = retObj.orgId;
+        }
+      } else {
+        this.$refs.workflowSelectPage = window.$NW_workflowSelectPage;
+        this.$refs.workflowSelectPage.orgId = retObj.orgId;
+      }
+
+
       mdpWorkflow.config.subSystemRoot = obj.bpmsSubSystemRoot;
       return [obj];;
     },
     // 跳转人员选择页面
     $bpmsSetOpenWindow() {
-      var workflowSelectPageObj=this.$refs.workflowSelectPage||window.$NW_workflowSelectPage;
+      var workflowSelectPageObj = this.$refs.workflowSelectPage || window.$NW_workflowSelectPage;
       mdpWorkflow.extend({
         openBizWfWindow(data, nodeinfolist) {
           console.log(data, 'data');
@@ -118,7 +130,7 @@ export const NWbpmsMinxin = {
     },
     /* 静默发送，上报 */
     $bpmsSetAutoConfirm() {
-	  var workflowSelectPageObj=this.$refs.workflowSelectPage||window.$NW_workflowSelectPage;
+      var workflowSelectPageObj = this.$refs.workflowSelectPage || window.$NW_workflowSelectPage;
       mdpWorkflow.extend({
         openBizWfWindow(data, nodeinfolist) {
           console.log(data, 'data');

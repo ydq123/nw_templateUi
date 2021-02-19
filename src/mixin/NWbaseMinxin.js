@@ -196,8 +196,20 @@ export const NWbaseMinxin = {
 			} else {
 				return '参数不能为空'
 			}
-
 		},
+    /* 获取今天星期几 time-2015-7-12*/
+    $baseTimeGetMyDay:function(time){
+      var data=time?new Date(time):new Date();
+      var week;
+      if(date.getDay()==0) week="周日"
+      if(date.getDay()==1) week="周一"
+      if(date.getDay()==2) week="周二bai"
+      if(date.getDay()==3) week="周三du"
+      if(date.getDay()==4) week="周四"
+      if(date.getDay()==5) week="周五"
+      if(date.getDay()==6) week="周六"
+      return week;
+    },
 		// 转换时间日期格式
 		$baseTimeAddNum(m) {
 			return m < 10 ? '0' + m : m

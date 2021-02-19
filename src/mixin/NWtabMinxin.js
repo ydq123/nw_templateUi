@@ -112,6 +112,11 @@ export const NWtabMinxin = {
       // this.$router.go(pageNub);
     },
     $nwBackHome: function(winName, dhType) {
+      /* window.NW_BASEURL*/
+      if (window.NW_BASEURL) {
+        this.$sdkCloseWxView(winName); //关闭当前模块
+        return
+      }
       var homeName = window.NW_HOME_NAME; //项目入口的名称
       if (!homeName) {
         var routes = this.$router.options.routes;
@@ -303,7 +308,7 @@ export const NWtabMinxin = {
       });
     },
     /* 挂载跨页面通讯*/
-    $tabOnPageFun: function(funName, callback) {
+    $tabOnPageFun: function(funName = 'funName', callback) {
       /* 销毁跨页面通讯*/
       this.$tabOffPageFun([funName]);
       /*跳页面前再挂载-跨页面通讯*/
@@ -312,7 +317,7 @@ export const NWtabMinxin = {
       });
     },
     /* 触发跨页面通讯*/
-    $tabEmitPageFun: function(funName, obj, isdlt = false) {
+    $tabEmitPageFun: function(funName = 'funName', obj, isdlt = false) {
       this.$across.$emit(funName, obj);
       /* 销毁跨页面通讯*/
       if (!isdlt) {
@@ -342,28 +347,28 @@ export const NWtabMinxin = {
       });
     },
     /* 单位选择 */
-    $tabNwCheckUnit:function(obj, callback){
+    $tabNwCheckUnit: function(obj, callback) {
       /* 挂载跨页面通讯*/
       this.$tabOnPageFun(obj.exeMun || 'nwCheckUnitFun', (res) => {
         callback(res)
       });
       this.$nwOpenWin("nw_checkUnit", {
-        type:obj.type,//1单选，2多选
-        userInfo: obj.userInfo,//用户基本信息
-        exeMun:obj.exeMun,//跨页面通讯name
+        type: obj.type, //1单选，2多选
+        userInfo: obj.userInfo, //用户基本信息
+        exeMun: obj.exeMun, //跨页面通讯name
       });
     },
     /* 人员选择*/
-    $tabNwCheckPerson:function(obj, callback){
+    $tabNwCheckPerson: function(obj, callback) {
       /* 挂载跨页面通讯*/
       this.$tabOnPageFun(obj.exeMun || 'nwcheckPersonFun', (res) => {
         callback(res)
       });
       this.$nwOpenWin("nw_checkPerson", {
-        type:obj.type, //1：单选； 2：多选； 注：多选需要传：personalList数组为当前页面的人员-必传
-        userInfo: obj.userInfo,//用户基本信息-必传
-        exeMun:obj.exeMun,//跨页面通讯name-必传
-        personalList:obj.personalList||[],//数据复现数据-非必传
+        type: obj.type, //1：单选； 2：多选； 注：多选需要传：personalList数组为当前页面的人员-必传
+        userInfo: obj.userInfo, //用户基本信息-必传
+        exeMun: obj.exeMun, //跨页面通讯name-必传
+        personalList: obj.personalList || [], //数据复现数据-非必传
       });
     },
 
