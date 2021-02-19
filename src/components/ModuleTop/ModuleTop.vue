@@ -126,7 +126,7 @@
 				<div v-for="(sortItem, sortIndex) in tabList[curTabIndex].sortList ? tabList[curTabIndex].sortList : sortDataList" :key="sortIndex">
 					<div class="f16 p15 gray3 borderTopE8 module-row" @click="changeSortItem(sortIndex)">
 						<div class="flex-1 text-left">{{sortItem.text}}</div>
-						<i class="iconfont pos-a gray287 icon-gou" v-if="curTabIndex==0&&sortIndex==sortData.dbIndex||curTabIndex==1&&sortIndex==sortData.ybIndex"></i>
+						<i class="iconfont pos-a gray287 icon-gou" v-if="sortItem.isSelect"></i>
 					</div>
 				</div>
 			</div>
@@ -439,6 +439,10 @@
 					data.index = this.sortData.ybIndex;
 					data.qfItem = 'done';
 				}
+				this.tabList[this.curTabIndex].sortList.forEach(function(item) {
+					item.isSelect = false;
+				})
+				this.tabList[this.curTabIndex].sortList[index].isSelect = true;
 				this.$emit('changeSortItem', data);
 				this.changeSort();
 			},

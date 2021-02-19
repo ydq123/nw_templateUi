@@ -8,7 +8,7 @@
 							<div v-for="(popupItem, popupIndex) in popupData" :key="popupIndex">
 								<div class="choiceType" v-if="popupItem.type == 'type'">
 									<div class="title f16 flex ju-b pb15 pt15 pr15" @click="showHideNode(popupItem)">
-										<div class="name">{{ popupItem.name }}</div>
+										<div class="name fw">{{ popupItem.name }}</div>
 										<i class="iconfont icon-sanjiao1 f14" :class="[popupItem.node ? '' : 'icon-sanjiao2']"></i>
 									</div>
 									<div class="content flex fl-w" v-show="popupItem.node">
@@ -21,7 +21,7 @@
 								</div>
 								<div class="choiceTime pr15" v-if="popupItem.type == 'time'">
 									<div class="title f16 flex ju-b pb15 pt15" @click="showHideNode(popupItem)">
-										<div class="name">{{ popupItem.name }}</div>
+										<div class="name fw">{{ popupItem.name }}</div>
 										<i class="iconfont icon-sanjiao1 f14 " :class="[popupItem.node ? '' : 'icon-sanjiao2']"></i>
 									</div>
 									<div class="content" v-show="popupItem.node">
@@ -40,7 +40,7 @@
 								</div>
 								<div class="choicePage pr15" v-if="popupItem.type == 'goPage'">
 									<div class="title f16 flex ju-b pb15 pt15" @click="showHideNode(popupItem)">
-										<div class="name">{{ popupItem.name }}</div>
+										<div class="name fw">{{ popupItem.name }}</div>
 										<i class="iconfont icon-sanjiao1 f14" :class="[popupItem.node ? '' : 'icon-sanjiao2']"></i>
 									</div>
 									<div class="content" v-show="popupItem.node">
