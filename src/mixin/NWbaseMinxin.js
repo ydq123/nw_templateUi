@@ -203,8 +203,8 @@ export const NWbaseMinxin = {
       var week;
       if(date.getDay()==0) week="周日"
       if(date.getDay()==1) week="周一"
-      if(date.getDay()==2) week="周二bai"
-      if(date.getDay()==3) week="周三du"
+      if(date.getDay()==2) week="周二"
+      if(date.getDay()==3) week="周三"
       if(date.getDay()==4) week="周四"
       if(date.getDay()==5) week="周五"
       if(date.getDay()==6) week="周六"

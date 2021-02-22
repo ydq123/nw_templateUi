@@ -396,7 +396,7 @@ export const NWmyJsSdkMixin = {
         }
       })
     },
-    
+
     /*
     success	function	成功回调
     fail	function	失败回调
@@ -414,11 +414,11 @@ export const NWmyJsSdkMixin = {
     jcNewWxView: function(obj, callback) {
     	var that = this;
     	if (obj.jsonStr) {
-    		var winUrl = obj.url + '?jsonStr=' + obj.jsonStr + '&&suiji=' + this.$jsdkNubRandom(32);
+    		var winUrl = obj.url + '?aa=11&jsonStr=' + obj.jsonStr + '&suiji=' + this.$jsdkNubRandom(32);
     	} else {
-    		var winUrl = obj.url + '?suiji=' + this.$jsdkNubRandom(32);
+    		var winUrl = obj.url + '?aa=11&suiji=' + this.$jsdkNubRandom(32);
     	}
-    
+
     	this.myJssdk.callMobileJsSdk('system/mutablewindow', {
     		url: winUrl,
     		action: 'new',
@@ -453,7 +453,7 @@ export const NWmyJsSdkMixin = {
     },
     // 悬浮窗口
     $sdkFloatingWxView: function(winName, callback) {
-    
+
     },
     // 关闭窗口
     $sdkCloseWxView: function(winName, callback) {
@@ -504,8 +504,8 @@ export const NWmyJsSdkMixin = {
     	} else {
     		return pwd;
     	}
-    
+
     },
-    
+
   }
 }
