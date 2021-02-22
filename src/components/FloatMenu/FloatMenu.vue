@@ -211,8 +211,8 @@
 		position: fixed;
 		.pxToremLess(width,48px);
   	.pxToremLess(height,48px);
-		right: 0;
-  	.pxToremLess(bottom,30px);
+  	.pxToremLess(right,20px);
+  	.pxToremLess(bottom,50px);
 		border-radius: 50%;
 
 		.xuanfuImg {
