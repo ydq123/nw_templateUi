@@ -1,3 +1,28 @@
+import EimMobileJsSdk from 'eimjssdk';
+var myJssdk = new EimMobileJsSdk()
+const NativeService = (params) => {
+	console.log(params);
+	var header = {
+		'Content-Type': 'application/json'
+	};
+	return new Promise((resolve, reject) => {
+		myJssdk.ajax2({
+			url: params.baseURL + params.url,
+			method: params.method,
+			data: params.data,
+			header: Object.assign(header, params.header),
+			success: function(body, header)  {
+				var body = typeof body == 'string' ? JSON.parse(body) : body;
+				resolve(body)
+			},
+			fail:function(error)  {
+				reject(error)
+			}
+		})
+	})
+}
+
+
 import axios from 'axios'
 // create an axios instance
 const service = axios.create({
@@ -42,4 +67,10 @@ service.interceptors.response.use(
 	}
 )
 
-export default service
+let curService = null;
+if(window.NW_BASEURL) {
+	curService = NativeService
+}else {
+	curService = service
+}
+export default curService;
