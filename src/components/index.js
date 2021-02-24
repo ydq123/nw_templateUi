@@ -23,15 +23,9 @@ import BdEquipment from './Bd/BdEquipment.vue' //变电-设备选择
 import Ball from './Ball/Ball.vue' //加入购物车小球动画
 
 
-/* 地图插件 */
-import RigthMapPopup from "./mapComponents/RigthMapPopup";
-import TableList from "./mapComponents/TableList";
-import SlideIndex from "./mapComponents/slideIndex";
+
 
 export {
-  RigthMapPopup,
-  TableList,
-  SlideIndex,
     Button,
     ModuleTop,
     Uploader,

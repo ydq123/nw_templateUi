@@ -31,38 +31,29 @@ export const NWtabMinxin = {
     this.tabPageData = this.$tabPageData(); //接受页面参数
   },
   methods: {
-    /* 自定义网络请求*/
-    $myAjax: function(obj) {
-      let {
-        apiName = '',
-          data = '',
-          url = '',
-          method = '',
-          headers = {},
-      } = obj;
-      var $apiConfItme = apiName ? this.$apiConfigMsg[apiName] : '';
-      if (!method) {
-        if (!$apiConfItme) {
-          this.$textCatch('apiName 不存在');
-          return new Promise((reslove, reject) => {
-            reject({
-              msg: 'apiName 不存在',
-              code: 403,
-            });
-          })
-        };
-      };
-      return new Promise((reslove, reject) => {
-        this.$api[method || $apiConfItme.method](url || $apiConfItme.url, data || $apiConfItme.data, headers).then(
-          (ret) => {
-            reslove(ret)
-          }).catch((err) => {
-          reject(err)
-        });
-      });
-    },
-
     /*************************************页面内***********************************/
+    $tabInitDataFun: function(obj = {}, callback) {
+      this.tabPageData = this.$tabPageData();
+      var data = {};
+      if (this.tabPageData.jsonStr) {
+        var data = JSON.parse(this.tabPageData.jsonStr)； //解析
+        if (data.jdapUserInfo) {
+          window.NW_ACCESS_TOKEN = data.jdapUserInfo.token; //挂载token
+          this.$store.commit("setJdapUserInfo", data.jdapUserInfo); //挂载到全局
+        }
+        /* 如果一个工程里面存在两个以上的模块的需要重定向本模块入口 */
+        this.$store.commit('setwxPageUrlObj', {
+          keepNameArr: [{
+            name: obj.homeName,
+            scrollY: 0
+          }],
+        });
+        window.NW_HOME_NAME = obj.homeName; //项目入口的名称
+      }
+      console.log(this.tabPageData);
+      console.log(this.$store.getters.jdapUserInfo) //读取用户信息			
+      callback(data);
+    },
     //直接返回当前页的上一页，数据全部消息，是个新页面
     $nwBack(nub, dhType) {
       /* 判断当前使用的是生产与移动的工程模板-页面跳转-就做特殊处理*/
