@@ -14,6 +14,8 @@
 		<div slot="taskSreenSort"></div>
 	</nw-top-input>
 	参数说明
+	isShowCancelBtn --是否显示取消按钮 默认为显示
+	placeholderText -- 输入框默认内容  默认为’搜索‘
 	mTop:0,// 距离头部高度
 	TopInput模块头部组件参数
 	isSort: true, // 控制显示排序按钮，默认为true：显示
@@ -40,7 +42,7 @@
 				<div class="top-input input-row al-c" v-show="topInput">
 					<div class="input-box flex-1 input-row">
 						<i class="iconfont icon-sousuo f14 text-99 ml10 mr5" @click="inputTopBtn"></i>
-						<input id="tapInput" type="text" class="input flex-1 f14" v-model="searchValue" placeholder="搜索" @keypress="inputSearch()" />
+						<input id="tapInput" type="text" class="input flex-1 f14" v-model="searchValue" :placeholder="placeholderText" @keypress="inputSearch()" />
 						<i v-if="searchValue.length > 0" class="iconfont icon-shanchu3 f15 pl5 mr5 gray9" @click="cancelSearch"></i>
 					</div>
 				</div>
@@ -48,12 +50,12 @@
 			<slot name="fousInput">
 				<!-- 搜索框 -->
 				<div class="top-input input-row al-c">
-					<div class="input-box flex-1 mr15 input-row">
+					<div class="input-box flex-1 input-row">
 						<i class="iconfont icon-sousuo f14 text-99 ml10 mr5" @click="inputTopBtn"></i>
-						<input type="text" class="input flex-1 f14" v-model="searchValue" placeholder="搜索" @keypress="inputSearch()" />
+						<input type="text" class="input flex-1 f14" v-model="searchValue" :placeholder="placeholderText" @keypress="inputSearch()" />
 						<i v-if="searchValue.length > 0" class="iconfont icon-shanchu3 f15 pl5 mr5 gray9" @click="cancelSearch"></i>
 					</div>
-					<div class="txt-1e8 f14" @click="cancellBtn">取消</div>
+					<div class="txt-1e8 f14 pl10" @click="cancellBtn" v-if="isShowCancelBtn">取消</div>
 				</div>
 			</slot>
 			<slot name="taskSreenSort">
@@ -101,6 +103,16 @@
 			}
 		},
 		props: {
+			// 是否显示取消按钮
+			placeholderText: {
+				type: String,
+				default: '搜索'
+			},
+			// 是否显示取消按钮
+			isShowCancelBtn: {
+				type: Boolean,
+				default: true
+			},
       mTopStatus:{// 是否需要固定布局
 				type: Boolean,
 				default: false
