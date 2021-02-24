@@ -5,7 +5,7 @@ const NativeService = (params) => {
   var header = {
     'Content-Type': 'application/json',
   };
-  if ((!params.header['access-token']) && window.NW_ACCESS_TOKEN) {
+  if ((!params.headers['access-token']) && window.NW_ACCESS_TOKEN) {
     header['access-token'] = window.NW_ACCESS_TOKEN
   }
   return new Promise((resolve, reject) => {
@@ -13,7 +13,7 @@ const NativeService = (params) => {
       url: params.baseURL + params.url,
       method: params.method,
       data: params.data,
-      header: Object.assign(header, params.header),
+      header: Object.assign(header, params.headers),
       success: function(body, header) {
         var body = typeof body == 'string' ? JSON.parse(body) : body;
         resolve(body)

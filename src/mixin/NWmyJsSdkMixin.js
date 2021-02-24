@@ -93,16 +93,18 @@ export const NWmyJsSdkMixin = {
       );
     },
     /* 物理返回键监听*/
-    $sdkCallMobile: function() {
+    $sdkCallMobile: function(obj = {
+      type: 'itme'
+    }, callBack) {
       let _this = this;
       this.myJssdk.callMobileJsSdk('web/eventRegister', {
         eventType: 'BackPressEvent',
         eventcallback(res) {
-          console.log('eventcallback:' + 1)
+          console.log('eventcallback:' + _this.$store.getters.pageUrlObj.pageNameArr.length )
           // console.log(_this.$route.meta.moduleName)
           // console.log(_this.$route.name)
-          if (_this.$route.meta.moduleName == 'root') {
-            if (_this.$route.name != 'root_tab') {
+          if (obj.type == 'home') {
+            if (_this.$store.getters.pageUrlObj.pageNameArr.length > 1) {
               _this.$textHid(); //关闭加载提示框
               _this.$tabBack(-1);
             } else {
@@ -110,10 +112,18 @@ export const NWmyJsSdkMixin = {
                 _this.myJssdk.closeWindow();
               })
             }
-
-          } else {
-            _this.$textHid(); //关闭加载提示框
-            _this.$tabBack(-1);
+          } else if (obj.type == 'itme') {
+            if (_this.$store.getters.pageUrlObj.pageNameArr.length > 1) {
+              _this.$textHid(); //关闭加载提示框
+              _this.$tabBack(-1);
+            } else {
+              _this.$sdkCloseWxView(); //关闭子应用
+            }
+          } else if (obj.type == 'zdy') {
+            callBack({
+              status: true,
+              pageName: _this.$route.name,
+            })
           }
         },
         success(res2) {
@@ -408,48 +418,48 @@ export const NWmyJsSdkMixin = {
     */
     /* 创建窗口 */
     $sdkNewWxView: function(obj, callback) {
-    	this.jcNewWxView(obj, callback);
+      this.jcNewWxView(obj, callback);
     },
     /* 基础创建 */
     jcNewWxView: function(obj, callback) {
-    	var that = this;
-    	if (obj.jsonStr) {
-    		var winUrl = obj.url + '?aa=11&jsonStr=' + obj.jsonStr + '&suiji=' + this.$jsdkNubRandom(32);
-    	} else {
-    		var winUrl = obj.url + '?aa=11&suiji=' + this.$jsdkNubRandom(32);
-    	}
+      var that = this;
+      if (obj.jsonStr) {
+        var winUrl = obj.url + '?aa=11&jsonStr=' + obj.jsonStr + '&suiji=' + this.$jsdkNubRandom(32);
+      } else {
+        var winUrl = obj.url + '?aa=11&suiji=' + this.$jsdkNubRandom(32);
+      }
 
-    	this.myJssdk.callMobileJsSdk('system/mutablewindow', {
-    		url: winUrl,
-    		action: 'new',
-    		windowid: '',
-    		logo: obj.logo,
-    		title: obj.title,
-    		success(ret) {
-    			// 创建窗口成功会跳转页面，如果弹框看不到弹窗消息。
-    			// 返回值是创建窗口的windowid
-    			console.log(`创建窗口成功: ${ret}`)
-    			var data = {
-    				winName: obj.winName,
-    				windowid: ret,
-    			};
-    			that.DQWinName = obj.winName;
-    			that.nwWindowidArr.push(data);
-    			callback({
-    				status: true,
-    				data: data,
-    				type: 'new'
-    			});
-    		},
-    		fail(err) {
-    			console.log(`创建窗口失败: ${err}`)
-    			callback({
-    				status: false,
-    				data: err,
-    				type: 'new'
-    			});
-    		}
-    	})
+      this.myJssdk.callMobileJsSdk('system/mutablewindow', {
+        url: winUrl,
+        action: 'new',
+        windowid: '',
+        logo: obj.logo,
+        title: obj.title,
+        success(ret) {
+          // 创建窗口成功会跳转页面，如果弹框看不到弹窗消息。
+          // 返回值是创建窗口的windowid
+          console.log(`创建窗口成功: ${ret}`)
+          var data = {
+            winName: obj.winName,
+            windowid: ret,
+          };
+          that.DQWinName = obj.winName;
+          that.nwWindowidArr.push(data);
+          callback({
+            status: true,
+            data: data,
+            type: 'new'
+          });
+        },
+        fail(err) {
+          console.log(`创建窗口失败: ${err}`)
+          callback({
+            status: false,
+            data: err,
+            type: 'new'
+          });
+        }
+      })
     },
     // 悬浮窗口
     $sdkFloatingWxView: function(winName, callback) {
@@ -457,53 +467,53 @@ export const NWmyJsSdkMixin = {
     },
     // 关闭窗口
     $sdkCloseWxView: function(winName, callback) {
-    	this.myJssdk.callMobileJsSdk('system/mutablewindow', {
-    		action: 'close',
-    		windowid: '',
-    		success(ret) {
-    			console.log(3332222)
-    			console.log(`关闭窗口: ${ret}`);
-    			callback({
-    				status: true,
-    				data: ret,
-    				type: 'close'
-    			});
-    		},
-    		fail(err) {
-    			console.log(3332222111)
-    			callback({
-    				status: false,
-    				data: err,
-    				type: 'close'
-    			});
-    		}
-    	})
+      this.myJssdk.callMobileJsSdk('system/mutablewindow', {
+        action: 'close',
+        windowid: '',
+        success(ret) {
+          console.log(3332222)
+          console.log(`关闭窗口: ${ret}`);
+          callback({
+            status: true,
+            data: ret,
+            type: 'close'
+          });
+        },
+        fail(err) {
+          console.log(3332222111)
+          callback({
+            status: false,
+            data: err,
+            type: 'close'
+          });
+        }
+      })
     },
     // 切换窗口
     $sdkCheckWxView: function(winName, callback) {},
     //获取指定长度的随机数
     $jsdkNubRandom: function(val) {
-    	var number = val || 32;
-    	var date = new Date();
-    	var timeStr = new Date().toLocaleString() + ''; //获取时间戳
-    	var timeLeg = timeStr.length;
-    	var newNub = 0;
-    	if (number > timeLeg) {
-    		newNub = number - timeLeg;
-    	} else {
-    		newNub = number;
-    	}
-    	var _basechars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'; /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
-    	var maxPos = _basechars.length;
-    	var pwd = '';
-    	for (var i = 0; i < newNub; i++) {
-    		pwd += _basechars.charAt(Math.floor(Math.random() * maxPos));
-    	}
-    	if (number > timeLeg) {
-    		return pwd + timeStr;
-    	} else {
-    		return pwd;
-    	}
+      var number = val || 32;
+      var date = new Date();
+      var timeStr = new Date().getTime() + ''; //获取时间戳
+      var timeLeg = timeStr.length;
+      var newNub = 0;
+      if (number > timeLeg) {
+        newNub = number - timeLeg;
+      } else {
+        newNub = number;
+      }
+      var _basechars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'; /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+      var maxPos = _basechars.length;
+      var pwd = '';
+      for (var i = 0; i < newNub; i++) {
+        pwd += _basechars.charAt(Math.floor(Math.random() * maxPos));
+      }
+      if (number > timeLeg) {
+        return pwd + timeStr;
+      } else {
+        return pwd;
+      }
 
     },
 
