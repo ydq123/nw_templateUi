@@ -36,7 +36,7 @@ export const NWtabMinxin = {
       this.tabPageData = this.$tabPageData();
       var data = {};
       if (this.tabPageData.jsonStr) {
-        var data = JSON.parse(this.tabPageData.jsonStr)； //解析
+        var data = JSON.parse(this.tabPageData.jsonStr); //解析
         if (data.jdapUserInfo) {
           window.NW_ACCESS_TOKEN = data.jdapUserInfo.token; //挂载token
           this.$store.commit("setJdapUserInfo", data.jdapUserInfo); //挂载到全局
