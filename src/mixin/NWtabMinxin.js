@@ -33,7 +33,7 @@ export const NWtabMinxin = {
   methods: {
     /*************************************页面内***********************************/
     /* 获取主工程传递的信息*/
-    $tabInitDataFun: function(callback, obj = {}) {
+    $tabInitDataFun: function(callback, obj = {homeName:''}) {
       this.tabPageData = this.$tabPageData();
       var data = {};
       if (this.tabPageData.jsonStr) {
@@ -43,15 +43,15 @@ export const NWtabMinxin = {
           this.$store.commit("setJdapUserInfo", data.jdapUserInfo); //挂载到全局
         }
         /* 如果一个工程里面存在两个以上的模块的需要重定向本模块入口 */
-        if (obj.homeName) {
-          var arr = obj.arr ? obj.arr : [{
+        if (obj.homeName||obj.arr) {
+          var arr = !obj.homeName ? obj.arr : [{
             name: obj.homeName,
             scrollY: 0
           }];
           this.$store.commit('setwxPageUrlObj', {
             keepNameArr: arr,
           });
-          window.NW_HOME_NAME = obj.homeName; //项目入口的名称
+          window.NW_HOME_NAME = arr[0].name; //项目入口的名称
         }
       }
       console.log('$tabInitDataFun');
