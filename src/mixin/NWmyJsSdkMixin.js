@@ -94,17 +94,28 @@ export const NWmyJsSdkMixin = {
     },
     /* 物理返回键监听*/
     $sdkCallMobile: function(obj = {
-      type: 'itme'
+      type: 'setType'
     }, callBack) {
       let _this = this;
       this.myJssdk.callMobileJsSdk('web/eventRegister', {
         eventType: 'BackPressEvent',
         eventcallback(res) {
-          console.log('eventcallback:' + _this.$store.getters.pageUrlObj.pageNameArr.length )
           // console.log(_this.$route.meta.moduleName)
           // console.log(_this.$route.name)
-          if (obj.type == 'home') {
-            if (_this.$store.getters.pageUrlObj.pageNameArr.length > 1) {
+          var keepLength = _this.$store.getters.pageUrlObj.keepNameArr.length;
+          if (obj.type == 'setType') { //自适应写法
+            if (keepLength > 1) {
+              _this.$textHid(); //关闭加载提示框
+              _this.$tabBack(-1);
+            } else if (_this.$route.name == 'root_tab') {
+              _this.$msgThenCatch('确定要退出程序吗？', function(res) {
+                _this.myJssdk.closeWindow();
+              })
+            } else {
+              _this.$sdkCloseWxView(); //关闭子应用
+            }
+          } else if (obj.type == 'home') {
+            if (keepLength > 1) {
               _this.$textHid(); //关闭加载提示框
               _this.$tabBack(-1);
             } else {
@@ -113,7 +124,7 @@ export const NWmyJsSdkMixin = {
               })
             }
           } else if (obj.type == 'itme') {
-            if (_this.$store.getters.pageUrlObj.pageNameArr.length > 1) {
+            if (keepLength > 1) {
               _this.$textHid(); //关闭加载提示框
               _this.$tabBack(-1);
             } else {
@@ -418,6 +429,7 @@ export const NWmyJsSdkMixin = {
     */
     /* 创建窗口 */
     $sdkNewWxView: function(obj, callback) {
+      // 基础创建
       this.jcNewWxView(obj, callback);
     },
     /* 基础创建 */
@@ -428,7 +440,6 @@ export const NWmyJsSdkMixin = {
       } else {
         var winUrl = obj.url + '?aa=11&suiji=' + this.$jsdkNubRandom(32);
       }
-
       this.myJssdk.callMobileJsSdk('system/mutablewindow', {
         url: winUrl,
         action: 'new',
@@ -491,6 +502,25 @@ export const NWmyJsSdkMixin = {
     },
     // 切换窗口
     $sdkCheckWxView: function(winName, callback) {},
+    /* 删除窗口 缓存*/
+    $sdkclearWxView: function(winName, callback) {
+      this.myJssdk.callMobileJsSdk('web/cache/clear', {
+        success(ret) {
+          callback({
+            status: true,
+            data: ret,
+            type: 'clear'
+          });
+        },
+        fail(err) {
+          callback({
+            status: false,
+            data: err,
+            type: 'clear'
+          });
+        }
+      })
+    },
     //获取指定长度的随机数
     $jsdkNubRandom: function(val) {
       var number = val || 32;
