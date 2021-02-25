@@ -33,9 +33,13 @@ export const NWtabMinxin = {
   methods: {
     /*************************************页面内***********************************/
     /* 获取主工程传递的信息*/
-    $tabInitDataFun: function(callback, obj = {homeName:''}) {
-      this.tabPageData = this.$tabPageData();
+    $tabInitDataFun: function(callback, obj = {
+      homeName: '', //重置首页路由-单个
+      arr: '', //重置首页路由-多个
+      pageData: '', //重置主工程传递的参数
+    }) {
       var data = {};
+      this.tabPageData = obj.pageData || this.$tabPageData();
       if (this.tabPageData.jsonStr) {
         var data = JSON.parse(this.tabPageData.jsonStr); //解析
         if (data.jdapUserInfo) {
@@ -43,7 +47,7 @@ export const NWtabMinxin = {
           this.$store.commit("setJdapUserInfo", data.jdapUserInfo); //挂载到全局
         }
         /* 如果一个工程里面存在两个以上的模块的需要重定向本模块入口 */
-        if (obj.homeName||obj.arr) {
+        if (obj.homeName || obj.arr) {
           var arr = !obj.homeName ? obj.arr : [{
             name: obj.homeName,
             scrollY: 0
@@ -54,9 +58,6 @@ export const NWtabMinxin = {
           window.NW_HOME_NAME = arr[0].name; //项目入口的名称
         }
       }
-      console.log('$tabInitDataFun');
-      console.log(this.tabPageData);
-      console.log(this.$store.getters.jdapUserInfo) //读取用户信息
       callback(data);
     },
     //直接返回当前页的上一页，数据全部消息，是个新页面
