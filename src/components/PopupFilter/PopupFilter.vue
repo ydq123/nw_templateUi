@@ -57,8 +57,19 @@
 										</div>
 									</div>
 								</div>
+								<div class="choicePage pr15" v-if="popupItem.type == 'custom'">
+									<div class="title f16 flex ju-b pb15 pt15" @click="showHideNode(popupItem)">
+										<div class="name fw">{{ popupItem.name }}</div>
+										<i class="iconfont icon-sanjiao1 f14" :class="[popupItem.node ? '' : 'icon-sanjiao2']"></i>
+									</div>
+									<div class="content" v-show="popupItem.node">
+										<slot :name="popupItem.customName"></slot>
+									</div>
+								</div>
 							</div>
 						</slot>
+						<!-- 此插槽可自定义其他内容 -->
+						<slot name="custom-content"></slot>
 					</div>
 					<div class="popup-btn bg-white flex ju-b f14 pos-a line-t">
 						<slot name="popup-btn">
@@ -184,7 +195,13 @@
 								value: ""
 							}
 						]
-					}
+					},
+          {
+            type: "custom",
+            name: "自定义插槽内容",
+            node: true,
+            customName: 'aaa'
+          }
 				]
 			}
 		},

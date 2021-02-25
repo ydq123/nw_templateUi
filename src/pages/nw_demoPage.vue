@@ -1,14 +1,17 @@
 <template>
   <div id="demoPage" class="bg-f5" style="padding-top:75px;padding-bottom: 180px;">
     <!-- 页面头部组件 -->
-    <nw-fixed-header title="头部导航" @threeClockHandle="ClockHandle">
+    <!-- <nw-fixed-header title="头部导航" @threeClockHandle="ClockHandle">
       <div slot="page-bottom">
-        <nw-top-input :listNub="18" @changeSreen="topInputChangeSreen">
-          <div slot="topInput"></div>
-          <!-- <div slot="taskSreenSort"></div> -->
-        </nw-top-input>
+        <nw-top-input></nw-top-input>
       </div>
-    </nw-fixed-header>
+    </nw-fixed-header> -->
+    
+    
+	<nw-top-input :isShowCancelBtn="false" placeholderText="搜素水水水水">
+		<div slot="topInput"></div>
+		<div slot="taskSreenSort"></div>
+	</nw-top-input>
     <!-- 头部搜索组件 -->
     <div class="bg-white mt50 pb20">
       <h2 class="pt15 pb10 borderButtomE8 grayfa6470 f16 text-center">
@@ -99,7 +102,9 @@
     <!-- 选择组织--组件 -->
     <!-- <nw-unit-pop :popShow="unitPop" :popUserInfo="userInfo" @overlay="testOverlay"></nw-unit-pop> -->
     <!-- 右侧弹出筛选组件 -->
-    <nw-PopupFilter ref="NWPopupFilter" v-model="popupState" :popupData="testPopDataObj" @emitHandlePage="testPopEmitHand"></nw-PopupFilter>
+    <nw-PopupFilter ref="NWPopupFilter" v-model="popupState" @emitHandlePage="testPopEmitHand">
+      <div slot="aaa">嘻嘻嘻嘻哈哈哈</div>
+    </nw-PopupFilter>
     <!-- 悬浮球组件 -->
     <nw-float-menu :menuArr="menuArr" @menuClick="menuClickTap"></nw-float-menu>
     <!-- 底部按钮组件 -->
@@ -224,6 +229,12 @@
                 value: ""
               }
             ]
+          },
+          {
+            type: "custom",
+            name: "自定义内容",
+            node: true,
+            customName: 'aaa'
           }
         ],
         testObjTab: [{
