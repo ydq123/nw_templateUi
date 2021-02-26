@@ -141,7 +141,7 @@ export const NWtabMinxin = {
       this.$store.commit('setPageUrlObj', {
         funType: 'keepBackArr', //删除缓存页面
         pageNub: 0,
-        winName: winName || 'root_tab',
+        winName: winName || window.NW_HOME_NAME|| 'root_tab',
       });
       this.$store.commit('setPageDataObj', {
         pageSlide: 'slide-bottom', //默认前进
