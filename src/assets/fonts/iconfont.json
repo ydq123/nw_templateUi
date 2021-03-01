@@ -6,6 +6,48 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "13235907",
+      "name": "扫一扫",
+      "font_class": "sao",
+      "unicode": "e6c2",
+      "unicode_decimal": 59074
+    },
+    {
+      "icon_id": "19921884",
+      "name": "反馈记录",
+      "font_class": "fankuijilu",
+      "unicode": "e6c0",
+      "unicode_decimal": 59072
+    },
+    {
+      "icon_id": "19921885",
+      "name": "我要反馈",
+      "font_class": "woyaofankui",
+      "unicode": "e6c1",
+      "unicode_decimal": 59073
+    },
+    {
+      "icon_id": "19921868",
+      "name": "问题反馈",
+      "font_class": "wentifankui",
+      "unicode": "e6be",
+      "unicode_decimal": 59070
+    },
+    {
+      "icon_id": "19921869",
+      "name": "清除缓存",
+      "font_class": "qingchuhuancun",
+      "unicode": "e6bf",
+      "unicode_decimal": 59071
+    },
+    {
+      "icon_id": "7405373",
+      "name": "跳转",
+      "font_class": "Group",
+      "unicode": "e6bd",
+      "unicode_decimal": 59069
+    },
+    {
       "icon_id": "19568791",
       "name": "更  多",
       "font_class": "gengduo",
