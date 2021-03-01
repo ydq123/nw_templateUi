@@ -25,10 +25,6 @@ import { NWtabMinxin } from "../../mixin/NWtabMinxin.js";
 export default {
   mixins: [NWtabMinxin], //混入公共类
   props: {
-    result: { //必穿，否则外部无法接收扫成功后的回调内容
-      type: String,
-      default: ''
-    },
     zIndex: {
       type: Number,
       default: 101
@@ -68,7 +64,7 @@ export default {
   methods: {
     menuItmeTap() {
       if(this.isCustomScanHandle) {
-        this.$emit('customHandle');
+        this.$emit('customScanHandle');
       }else {
         let that = this;
         this.myJssdk.scanQRCode({
