@@ -9,9 +9,7 @@ export const NWbpmsMinxin = {
     }
   },
   mounted() {
-    this.$bpmsWorkflowInit('', '', '');
-    // Vue.use(Toast);
-    // Vue.use(Dialog);
+    this.$bpmsWorkflowInit('', '', '');//初始化工作流组件
   },
   methods: {
     $bpmsWorkflowInit: function(jqObj, rootPath, projectCode) {

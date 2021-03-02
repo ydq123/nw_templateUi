@@ -223,8 +223,8 @@ export const NWmyJsSdkMixin = {
       })
     },
     /* 下载附件 callMobileJsSdk*/
-    $sdkDownload: function(url, callback1, callback2) {
-      console.log(url)
+    $sdkDownload: function(obj={}, callback1, callback2) {
+      console.log(obj.url)
       /* success:文件绝对路径
       	fail：失败信息
       		progresscallback：进度值0-100  */
@@ -235,10 +235,10 @@ export const NWmyJsSdkMixin = {
             'access-token': this.$store.getters.jdapUserInfo.token
           }),
           params: JSON.stringify({
-            'url': url,
+            'url': obj.url,
           }),
-          url: url,
-          path: '', //下载地址
+          url: obj.url,
+          path: obj.path, //下载存放地址
           success(data) {
             console.log(11111);
             console.log(data);
@@ -473,11 +473,18 @@ export const NWmyJsSdkMixin = {
       })
     },
     // 悬浮窗口
-    $sdkFloatingWxView: function(winName, callback) {
-
+    $sdkFloatingWxView: function(obj, callback) {
+      this.myJssdk.callMobileJsSdk('system/mutablewindow', {
+        action: 'floating',
+        windowid: '',
+        success(data) {
+          console.log(`悬浮窗口: ${data}`)
+        },
+        fail(data) {}
+      })
     },
     // 关闭窗口
-    $sdkCloseWxView: function(winName, callback) {
+    $sdkCloseWxView: function(obj, callback) {
       this.myJssdk.callMobileJsSdk('system/mutablewindow', {
         action: 'close',
         windowid: '',
@@ -501,9 +508,18 @@ export const NWmyJsSdkMixin = {
       })
     },
     // 切换窗口
-    $sdkCheckWxView: function(winName, callback) {},
+    $sdkCheckWxView: function(obj, callback) {
+      this.myJssdk.callMobileJsSdk('system/mutablewindow', {
+        action: 'check',
+        windowid: ''obj.windowid,
+        success(data) {
+          console.log(`切换窗口: ${data}`)
+        },
+        fail(data) {}
+      })
+    },
     /* 删除窗口 缓存*/
-    $sdkclearWxView: function(winName, callback) {
+    $sdkclearWxView: function(obj, callback) {
       this.myJssdk.callMobileJsSdk('web/cache/clear', {
         success(ret) {
           callback({
