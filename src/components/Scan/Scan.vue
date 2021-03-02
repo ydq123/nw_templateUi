@@ -151,8 +151,8 @@ export default {
 @import "../../assets/less/nw_tool.less";
 .scan {
   position: fixed;
-  .pxToremLess(width, 48px);
-  .pxToremLess(height, 48px);
+  .pxToremLess(width, 65px);
+  .pxToremLess(height, 65px);
   .pxToremLess(right, 20px);
   .pxToremLess(bottom, 50px);
   border-radius: 50%;
