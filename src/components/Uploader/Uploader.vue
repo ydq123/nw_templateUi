@@ -43,7 +43,7 @@
 			},
 			accessToken: {
 				type: String, //token
-				default: window.accessToken
+				default: window.NW_ACCESS_TOKEN
 			},
 			previewCompoment: {
 				type: Boolean, //是否需要预览

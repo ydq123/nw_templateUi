@@ -22,6 +22,7 @@ import BdFunctionalLocation from './Bd/BdFunctionalLocation.vue' //变电-功能
 import BdEquipment from './Bd/BdEquipment.vue' //变电-设备选择
 import Ball from './Ball/Ball.vue' //加入购物车小球动画
 import SwiperCell from './SwiperCell/SwiperCell.vue' //左滑删除
+import Scan from './Scan/Scan.vue' //扫一扫
 
 
 
@@ -49,5 +50,6 @@ export {
     BdFunctionalLocation,
     BdEquipment,
     Ball,
-    SwiperCell
+    SwiperCell,
+    Scan
 }

@@ -13,7 +13,7 @@
   export default {
     data() {
       return {
-        nullImg: require('../../assets/images/nullData.png'), //默认暂位图
+        nullImg: require('../../assets/images/nullData2.png'), //默认暂位图
       };
     },
     props: {
