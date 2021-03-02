@@ -366,6 +366,7 @@ export const NWtabMinxin = {
         userInfo: obj.userInfo, //用户基本信息-必传
         exeMun: obj.exeMun, //跨页面通讯name-必传
         personalList: obj.personalList || [], //数据复现数据-非必传
+		zdyObj: obj.zdyObj || {},//自定义对象-非必传
       });
     },
 

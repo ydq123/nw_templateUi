@@ -394,8 +394,7 @@
       // 跨页面通讯
       callbackTap: function() {
         var data = {
-          status: this.param.status,
-          isZpw: this.param.isZpw
+          zdyObj: this.param.zdyObj,
         };
         if (this.isType == 1) { //单选
           data.curNodeItem = this.curNodeItem;

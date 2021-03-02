@@ -511,7 +511,7 @@ export const NWmyJsSdkMixin = {
     $sdkCheckWxView: function(obj, callback) {
       this.myJssdk.callMobileJsSdk('system/mutablewindow', {
         action: 'check',
-        windowid: ''obj.windowid,
+        windowid: obj.windowid,
         success(data) {
           console.log(`切换窗口: ${data}`)
         },
