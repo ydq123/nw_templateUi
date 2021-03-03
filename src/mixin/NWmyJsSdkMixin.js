@@ -262,6 +262,34 @@ export const NWmyJsSdkMixin = {
           }
         });
     },
+    /* 解压 */
+    $sdkUnZip: function(obj = {
+      url: 'file:///storage/emulated/0/dwglpt/h5/aa.zip', //解压的地址也是访问地址
+      path: '/storage/emulated/0/dwglpt/h5',
+    }, StatusCallback, ProgressCallback) {
+      console.log('解压2')
+      console.log(obj)
+      window.zip.unzip(obj.url, obj.path, (ret1) => {
+        if (ret1 == 0) {
+          StatusCallback({
+            status: true,
+            msg: '解压成功'
+          });
+        } else if (ret1 == -1) {
+          StatusCallback({
+            status: false,
+            msg: '解压失败'
+          });
+        }
+      }, (ret2) => {
+        var percent = Math.round((ret2.loaded / ret2.total) * 100);
+        ProgressCallback({
+          data: ret2,
+          percent: percent,
+          msg: '解压进度'
+        });
+      });
+    },
     /* 文件预览 */
     $sdkQuicklook: function(url, callback) {
       this.myJssdk.callMobileJsSdk(

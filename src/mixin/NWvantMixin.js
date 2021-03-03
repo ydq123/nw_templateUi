@@ -145,21 +145,21 @@ export const NWvantMixin = {
       var key = this.$baseIsTypeof(obj);
       if (key == 'obj') {
         var {
-          title = '提示', msg = '', thenText = '确定', catchText = '取消'
+          title = '提示', msg = '', thenText = '确定', catchText = '取消', showNo = true
         } = obj;
       } else {
         var newObj = {
           msg: obj || '参数异常',
         };
         var {
-          title = '提示', msg = '', thenText = '确定', catchText = '取消'
+          title = '提示', msg = '', thenText = '确定', catchText = '取消', showNo = true
         } = newObj;
       };
       this.$dialog.confirm({
         title: title, //标题
         message: msg, //文案
         confirmButtonText: thenText, //确认按钮文案
-        showCancelButton: true, //是否显示取消文案
+        showCancelButton: showNo, //是否显示取消文案
         cancelButtonText: catchText
       }).then(callback1).catch(callback2);
     },
