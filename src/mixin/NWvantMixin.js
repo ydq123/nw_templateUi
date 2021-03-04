@@ -145,19 +145,21 @@ export const NWvantMixin = {
       var key = this.$baseIsTypeof(obj);
       if (key == 'obj') {
         var {
-          title = '提示', msg = '', thenText = '确定', catchText = '取消', showNo = true
+          title = '提示', msg = '', thenText = '确定', catchText = '取消', showNo = true,yesColor="#287df5"
         } = obj;
       } else {
         var newObj = {
           msg: obj || '参数异常',
         };
         var {
-          title = '提示', msg = '', thenText = '确定', catchText = '取消', showNo = true
+          title = '提示', msg = '', thenText = '确定', catchText = '取消', showNo = true,yesColor="#287df5"
         } = newObj;
       };
+      var msgType = this.$baseIsTypeof(msg);
       this.$dialog.confirm({
+        confirmButtonColor:yesColor,//确认按钮颜色
         title: title, //标题
-        message: msg, //文案
+        message: msgType == 'obj' ? JSON.stringify(msg) : msg, //文案
         confirmButtonText: thenText, //确认按钮文案
         showCancelButton: showNo, //是否显示取消文案
         cancelButtonText: catchText

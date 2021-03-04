@@ -223,7 +223,7 @@ export const NWmyJsSdkMixin = {
       })
     },
     /* 下载附件 callMobileJsSdk*/
-    $sdkDownload: function(obj={}, callback1, callback2) {
+    $sdkDownload: function(obj = {}, callback1, callback2) {
       console.log(obj.url)
       /* success:文件绝对路径
       	fail：失败信息
@@ -258,7 +258,7 @@ export const NWmyJsSdkMixin = {
           progresscallback(progress) {
             console.log(333333);
             console.log(progress);
-            // callback2(progress);
+            callback2(progress);
           }
         });
     },
