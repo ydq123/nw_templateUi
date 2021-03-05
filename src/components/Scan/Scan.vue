@@ -70,7 +70,6 @@ export default {
         this.myJssdk.scanQRCode({
           needResult: 1,
           success(data) {
-            alert(data);
             that.$emit('result', data);
           },
           fail(error) {

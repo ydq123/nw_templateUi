@@ -28,14 +28,19 @@ export default {
       type: Array,
       default: () => [
         {
+          color: "#CDCDCD",
+          text: "收藏",
+          clickHandle: "collect"
+        },
+        {
           color: "#1E87F0",
-          text: "操作",
-          clickHandle: "aa",
+          text: "更多",
+          clickHandle: "aa"
         },
         {
           color: "#ED2C19",
           text: "删除",
-          clickHandle: "delete",
+          clickHandle: "delete"
         }
       ]
     }
