@@ -12,7 +12,7 @@ const NativeService = (params) => {
     myJssdk.ajax2({
       url: params.baseURL + params.url,
       method: params.method,
-      data: params.data,
+      data: params.params||params.data,
       header: Object.assign(header, params.headers),
       success: function(body, header) {
         var body = typeof body == 'string' ? JSON.parse(body) : body;
