@@ -394,7 +394,6 @@
       }); */
 
 
-    console.info(this.$tabGetHttpJs())
     this.testsortlist = this.testsortlist1;
     // 复制到工程模板时候把这一段屏蔽掉
     window.NW_MODULE_TYPE = "nwTemplateUI";

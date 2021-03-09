@@ -43,8 +43,12 @@ export const NWtabMinxin = {
       if (this.tabPageData.jsonStr) {
         var data = JSON.parse(this.tabPageData.jsonStr); //解析
         if (data.jdapUserInfo) {
+          window.accessToken =data.jdapUserInfo.token; //挂载token
           window.NW_ACCESS_TOKEN = data.jdapUserInfo.token; //挂载token
           this.$store.commit("setJdapUserInfo", data.jdapUserInfo); //挂载到全局
+          this.$baseSetData('jdapUserInfo', data.jdapUserInfo); //保存当前用户信息
+          /* 给工作流组件赋值-当前用户信息 */
+          this.$bpmsSetUserInfo(data.jdapUserInfo.userInfo);
         }
         /* 如果一个工程里面存在两个以上的模块的需要重定向本模块入口 */
         if (obj.homeName || obj.arr) {
@@ -141,7 +145,7 @@ export const NWtabMinxin = {
       this.$store.commit('setPageUrlObj', {
         funType: 'keepBackArr', //删除缓存页面
         pageNub: 0,
-        winName: winName || window.NW_HOME_NAME|| 'root_tab',
+        winName: winName || window.NW_HOME_NAME || 'root_tab',
       });
       this.$store.commit('setPageDataObj', {
         pageSlide: 'slide-bottom', //默认前进
@@ -366,7 +370,7 @@ export const NWtabMinxin = {
         userInfo: obj.userInfo, //用户基本信息-必传
         exeMun: obj.exeMun, //跨页面通讯name-必传
         personalList: obj.personalList || [], //数据复现数据-非必传
-		zdyObj: obj.zdyObj || {},//自定义对象-非必传
+        zdyObj: obj.zdyObj || {}, //自定义对象-非必传
       });
     },
 

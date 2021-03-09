@@ -1,5 +1,6 @@
 /* 工作流-混入 */
 import jQuery from 'jquery';
+import axiosSdk from '../moduleAPI/nw_request.js';
 import Vue from 'vue';
 import mdpWorkflow from '../plugin/workFlow/mdp.workflow.umd.min.js';
 export const NWbpmsMinxin = {
@@ -45,7 +46,7 @@ export const NWbpmsMinxin = {
         projectCode: projectCode || '/sp',
       });
       this.$bpmsSetUserInfo('');
-      mdpWorkflow.init(jqObj || jQuery); //初始化平台工作流
+      mdpWorkflow.init(jqObj || jQuery,axiosSdk); //初始化平台工作流
     },
     /* 上报 -选人*/
     $bpmsReportShow: function(obj, callback) {
