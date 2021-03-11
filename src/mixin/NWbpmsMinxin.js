@@ -1,6 +1,6 @@
 /* 工作流-混入 */
 import jQuery from 'jquery';
-import axiosSdk from '../moduleAPI/nw_request.js';
+// import axiosSdk from '../moduleAPI/nw_request.js';
 import Vue from 'vue';
 import mdpWorkflow from '../plugin/workFlow/mdp.workflow.umd.min.js';
 export const NWbpmsMinxin = {
@@ -10,7 +10,7 @@ export const NWbpmsMinxin = {
     }
   },
   mounted() {
-    this.$bpmsWorkflowInit('', '', '');//初始化工作流组件
+
   },
   methods: {
     $bpmsWorkflowInit: function(jqObj, rootPath, projectCode) {
@@ -45,8 +45,7 @@ export const NWbpmsMinxin = {
         rootPath: rootPath || 'gmp',
         projectCode: projectCode || '/sp',
       });
-      this.$bpmsSetUserInfo('');
-      mdpWorkflow.init(jqObj || jQuery,axiosSdk); //初始化平台工作流
+      mdpWorkflow.init(jqObj || jQuery); //初始化平台工作流
     },
     /* 上报 -选人*/
     $bpmsReportShow: function(obj, callback) {
@@ -98,17 +97,24 @@ export const NWbpmsMinxin = {
     },
     $bpmsGetData: function(obj) {
       /* 解决有些流程没有用户id问题*/
-      var retObj = this.$baseGetData('bpmsUuseObj');
-      if (this.$refs.workflowSelectPage) {
-        if (this.$refs.workflowSelectPage.orgId) {
-          this.$refs.workflowSelectPage.orgId = retObj.orgId;
+      var retObj = this.$baseGetData('nwBpmsUuseObj');
+      if (retObj.status) {
+        if (this.$refs.workflowSelectPage) {
+         this.$refs.workflowSelectPage.orgId = retObj.data.deptId;
+        } else {
+          this.$refs.workflowSelectPage = window.$NW_workflowSelectPage;
+          this.$refs.workflowSelectPage.orgId = retObj.data.deptId;
         }
-      } else {
-        this.$refs.workflowSelectPage = window.$NW_workflowSelectPage;
-        this.$refs.workflowSelectPage.orgId = retObj.orgId;
       }
-
-
+      var retObj2 = this.$baseGetData('jdapUserInfo');
+      if(retObj2.status){
+        this.$bpmsSetUserInfo(retObj2.data.userInfo);//给工作流组件赋值-当前用户信息
+      }
+      mdpWorkflow.setAjaxSettings({
+        headers: {
+          "access-token": window.NW_ACCESS_TOKEN,
+        }
+      });
       mdpWorkflow.config.subSystemRoot = obj.bpmsSubSystemRoot;
       return [obj];;
     },
@@ -117,8 +123,8 @@ export const NWbpmsMinxin = {
       var workflowSelectPageObj = this.$refs.workflowSelectPage || window.$NW_workflowSelectPage;
       mdpWorkflow.extend({
         openBizWfWindow(data, nodeinfolist) {
-          console.log(data, 'data');
-          console.log(nodeinfolist, 'nodeinfolist');
+          // console.log(data, 'data');
+          // console.log(nodeinfolist, 'nodeinfolist');
           // 通过通用页面跳转
           workflowSelectPageObj.show({
             data,
@@ -132,8 +138,8 @@ export const NWbpmsMinxin = {
       var workflowSelectPageObj = this.$refs.workflowSelectPage || window.$NW_workflowSelectPage;
       mdpWorkflow.extend({
         openBizWfWindow(data, nodeinfolist) {
-          console.log(data, 'data');
-          console.log(nodeinfolist, 'nodeinfolist');
+          // console.log(data, 'data');
+          // console.log(nodeinfolist, 'nodeinfolist');
           // 通过通用页面跳转
           workflowSelectPageObj.autoConfirm(data, nodeinfolist);
         },
@@ -141,20 +147,22 @@ export const NWbpmsMinxin = {
     },
     /*动态更新工作流需要的用户信息*/
     $bpmsSetUserInfo: function(ysObj) {
-      if (ysObj) {
-        var bpmsUuseObj = {};
-        bpmsUuseObj.userId = ysObj.userId;
-        bpmsUuseObj.userName = ysObj.employeeName;
-        bpmsUuseObj.deptId = ysObj.orgId;
-        bpmsUuseObj.deptPath = ysObj.orgName;
-        var retObj = this.$baseSetData('bpmsUuseObj', bpmsUuseObj); //保存工作流需要的用户信息
-      } else {
-        var retObj = this.$baseGetData('bpmsUuseObj');
-        if (retObj.status) {
-          var bpmsUuseObj = retObj.data;
-        }
-      }
-      // console.log(retObj.msg)
+      var bpmsUuseObj = {
+        userId: '',
+        userName: '',
+        deptId: '',
+        deptPath: '',
+        authorizerId: null,
+        authorizerName: null
+      };
+      bpmsUuseObj.userId = ysObj.userId;
+      bpmsUuseObj.userName = ysObj.employeeName;
+      bpmsUuseObj.deptId = ysObj.orgId;
+      bpmsUuseObj.deptPath = ysObj.orgName;
+      var retObj = this.$baseSetData('nwBpmsUuseObj', bpmsUuseObj); //保存工作流需要的用户信息
+      // console.log('nwBpmsUuseObj')
+      // console.info(ysObj)
+      // console.info(bpmsUuseObj)
       // Vue.prototype.$mdpWorkflowSelectPage = this.$refs.workflowSelectPage||window.$NW_workflowSelectPage; // 保存跳转人员选择页面的ref
       mdpWorkflow.setBpmsUserInfo(bpmsUuseObj); //动态更新工作流需要的用户信息
     },
@@ -164,15 +172,15 @@ export const NWbpmsMinxin = {
         const callbacks = targetAjaxSettings.success;
         Object.assign(targetAjaxSettings, {
           success: (response) => {
-            console.log(7777777)
-            console.log(response);
+            // console.log(7777777)
+            // console.log(response);
             if (response) {
               if (response.msg) {
                 response = response.data;
               }
             }
-            console.log(88888)
-            console.log(response);
+            // console.log(88888)
+            // console.log(response);
             callbacks(response);
           }
         });

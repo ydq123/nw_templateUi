@@ -38,17 +38,21 @@ export const NWtabMinxin = {
       arr: '', //重置首页路由-多个
       pageData: '', //重置主工程传递的参数
     }) {
-      var data = {};
+      var data = {
+        jdapUserInfo: '',
+        type:'page',
+      };
+      var isData = this.$baseGetData('jdapUserInfo'); //获取当前用户信息
+      if (isData) {
+        if (isData.status) {
+          data.jdapUserInfo = isData.data||'';
+        }
+      }
       this.tabPageData = obj.pageData || this.$tabPageData();
       if (this.tabPageData.jsonStr) {
         var data = JSON.parse(this.tabPageData.jsonStr); //解析
         if (data.jdapUserInfo) {
-          window.accessToken =data.jdapUserInfo.token; //挂载token
-          window.NW_ACCESS_TOKEN = data.jdapUserInfo.token; //挂载token
-          this.$store.commit("setJdapUserInfo", data.jdapUserInfo); //挂载到全局
-          this.$baseSetData('jdapUserInfo', data.jdapUserInfo); //保存当前用户信息
-          /* 给工作流组件赋值-当前用户信息 */
-          this.$bpmsSetUserInfo(data.jdapUserInfo.userInfo);
+          this.$tabsetJdapUserInfo(data.jdapUserInfo);
         }
         /* 如果一个工程里面存在两个以上的模块的需要重定向本模块入口 */
         if (obj.homeName || obj.arr) {
@@ -63,6 +67,14 @@ export const NWtabMinxin = {
         }
       }
       callback(data);
+    },
+    $tabsetJdapUserInfo(jdapUserInfo) {
+      window.$NW_orgId = jdapUserInfo.userInfo.orgId;
+      window.accessToken = jdapUserInfo.token;
+      window.NW_ACCESS_TOKEN = jdapUserInfo.token;
+      this.$store.commit("setJdapUserInfo", jdapUserInfo);
+      this.$baseSetData('jdapUserInfo', jdapUserInfo); //保存当前用户信息
+      this.$bpmsWorkflowInit('', '', ''); //初始化工作流组件
     },
     //直接返回当前页的上一页，数据全部消息，是个新页面
     $nwBack(nub, dhType) {
