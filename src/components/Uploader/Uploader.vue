@@ -329,31 +329,52 @@
 			/* 处理图片 */
 			clImgFun: function(item, checkObj) {
 				let _this = this;
-				this.uploaderFun.$tabDownloadAttachment(item.attachmentId, function(res) {
-					if (res) {
-						var blob = new Blob([res]);
-						var imageUrl = window.URL.createObjectURL(blob);
-						_this.lookFileArr.push({
-							path: '',
-							/* 0图片，1视频，3文档，4压缩包，未知*/
-							type: checkObj.type,
-							//base64之后的缩略图数据
-							thumbnailDataStr: blob,
-							//附件id
-							attachmentId: item.attachmentId,
-							//封面图
-							fmImg: imageUrl,
-							//文件名称
-							pathName: item.fileName,
-							//具体类型 png jgp mp4
-							fileType: item.fileType,
-							//状态 待上传0 上传中1  上传失败2 上传完成3
-							status: 3
-						});
-					} else {
-						console.log(res);
-					}
-				});
+        var baseUpUrl = this.NW_BASEURL || this.proxyIp;
+        var filePath = baseUpUrl + '/web/api/top/atm/attachment/downloadAttachment?attachmentId=' + item.attachmentId +
+        	'&.' + item.fileType;
+          console.log(filePath)
+          _this.lookFileArr.push({
+          	path: '',
+          	/* 0图片，1视频，3文档，4压缩包，未知*/
+          	type: checkObj.type,
+          	//base64之后的缩略图数据
+          	thumbnailDataStr: filePath,
+          	//附件id
+          	attachmentId: item.attachmentId,
+          	//封面图
+          	fmImg: filePath,
+          	//文件名称
+          	pathName: item.fileName,
+          	//具体类型 png jgp mp4
+          	fileType: item.fileType,
+          	//状态 待上传0 上传中1  上传失败2 上传完成3
+          	status: 3
+          });
+				// this.uploaderFun.$tabDownloadAttachment(item.attachmentId, function(res) {
+				// 	if (res) {
+				// 		var blob = new Blob([res]);
+				// 		var imageUrl = window.URL.createObjectURL(blob);
+				// 		_this.lookFileArr.push({
+				// 			path: '',
+				// 			/* 0图片，1视频，3文档，4压缩包，未知*/
+				// 			type: checkObj.type,
+				// 			//base64之后的缩略图数据
+				// 			thumbnailDataStr: blob,
+				// 			//附件id
+				// 			attachmentId: item.attachmentId,
+				// 			//封面图
+				// 			fmImg: imageUrl,
+				// 			//文件名称
+				// 			pathName: item.fileName,
+				// 			//具体类型 png jgp mp4
+				// 			fileType: item.fileType,
+				// 			//状态 待上传0 上传中1  上传失败2 上传完成3
+				// 			status: 3
+				// 		});
+				// 	} else {
+				// 		console.log(res);
+				// 	}
+				// });
 			},
 			/* 处理文档 */
 			clFlieFun: function(item, checkObj) {
