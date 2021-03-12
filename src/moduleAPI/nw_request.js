@@ -5,6 +5,9 @@ const NativeService = (params) => {
   var header = {
     'Content-Type': 'application/json',
   };
+  if(!params.headers){
+    params.headers={'access-token':''};
+  }
   if ((!params.headers['access-token']) && window.NW_ACCESS_TOKEN) {
     header['access-token'] = window.NW_ACCESS_TOKEN
   }
