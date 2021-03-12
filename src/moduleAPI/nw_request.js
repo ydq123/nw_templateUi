@@ -15,11 +15,31 @@ const NativeService = (params) => {
       data: params.params || params.data,
       header: Object.assign(header, params.headers),
       success: function(body, header) {
-        if (params.responseType=='blob'||params.responseType=='string') {
+        if (params.responseType == 'blob' || params.responseType == 'string') {
           resolve(body)
         } else {
-          var body = typeof body == 'string' ? JSON.parse(body) : body;
-          resolve(body)
+          if (typeof body == 'string') {
+            try {
+              var obj = JSON.parse(body);
+              if (obj && typeof obj == 'object') {
+                /* json字符串 */
+                resolve(obj);
+              } else {
+                /* 字符串*/
+                resolve(body);
+              }
+
+            } catch (e) {
+              /* 字符串*/
+              resolve(body);
+            }
+          } else {
+            /* 非字符串 */
+            resolve(body);
+          }
+
+          // var body = typeof body == 'string' ? JSON.parse(body) : body;
+          // resolve(body)
         }
       },
       fail: function(error) {
