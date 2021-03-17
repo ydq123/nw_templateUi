@@ -6,6 +6,32 @@ export const NWmyJsSdkMixin = {
     }
   },
   methods: {
+    /* 活体检测*/
+    $sdkSilentliveness: function(callback) {
+      this.myJssdk.extendMobileJssdk(
+        'com.comtop.silentliveness', //插件的pluginId
+        'start', //调用插件的action
+        {
+          success(data) {
+            if(typeof data =='string'){
+              data=JSON.parse(data)
+            }
+            callback({
+              data: data,
+              status: true,
+              msg: '成功'
+            });
+          },
+          fail(error) {
+            callback({
+              data: error,
+              status: false,
+              msg: '失败'
+            });
+          }
+        }, //action函数需要的参数，以字典形式提供
+      );
+    },
     /* 人脸识别 */
     $sdkjumpToFaceDetect: function(callback) {
       cordova.plugins.FaceDetectPlugin.openDetectWindow({

@@ -40,14 +40,9 @@ export const NWtabMinxin = {
     }) {
       var data = {
         jdapUserInfo: '',
-        type:'page',
+        type: 'page',
       };
-      var isData = this.$baseGetData('jdapUserInfo'); //获取当前用户信息
-      if (isData) {
-        if (isData.status) {
-          data.jdapUserInfo = isData.data||'';
-        }
-      }
+
       this.tabPageData = obj.pageData || this.$tabPageData();
       if (this.tabPageData.jsonStr) {
         var data = JSON.parse(this.tabPageData.jsonStr); //解析
@@ -64,6 +59,13 @@ export const NWtabMinxin = {
             keepNameArr: arr,
           });
           window.NW_HOME_NAME = arr[0].name; //项目入口的名称
+        }
+      } else {
+        var isData = this.$baseGetData('jdapUserInfo'); //获取当前用户信息
+        if (isData) {
+          if (isData.status) {
+            data.jdapUserInfo = isData.data || '';
+          }
         }
       }
       callback(data);

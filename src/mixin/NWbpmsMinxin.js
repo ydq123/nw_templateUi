@@ -14,7 +14,7 @@ export const NWbpmsMinxin = {
   },
   methods: {
     $bpmsWorkflowInit: function(jqObj, rootPath, projectCode) {
-      window.NW_BPMSIP = window.NW_BASEURL || '/moduleIp'; //设置平台bpms工作流接口ip
+      window.NW_BPMSIP = window.NW_BASEURL ?  window.NW_BASEURL : '/moduleIp'; //设置平台bpms工作流接口ip
       // 设置业务窗体方法
       // 业务必须自定义alert、confirm方法
       let that = this;
@@ -97,18 +97,19 @@ export const NWbpmsMinxin = {
     },
     $bpmsGetData: function(obj) {
       /* 解决有些流程没有用户id问题*/
+      /* var va1 = localStorage.getItem(keyName);*/
       var retObj = this.$baseGetData('nwBpmsUuseObj');
-      if (retObj.status) {
+      if (retObj.status && retObj.data) {
         if (this.$refs.workflowSelectPage) {
-         this.$refs.workflowSelectPage.orgId = retObj.data.deptId;
+          this.$refs.workflowSelectPage.orgId = retObj.data.deptId;
         } else {
           this.$refs.workflowSelectPage = window.$NW_workflowSelectPage;
           this.$refs.workflowSelectPage.orgId = retObj.data.deptId;
         }
       }
       var retObj2 = this.$baseGetData('jdapUserInfo');
-      if(retObj2.status){
-        this.$bpmsSetUserInfo(retObj2.data.userInfo);//给工作流组件赋值-当前用户信息
+      if (retObj2.status&&retObj2.data) {
+        this.$bpmsSetUserInfo(retObj2.data.userInfo); //给工作流组件赋值-当前用户信息
       }
       mdpWorkflow.setAjaxSettings({
         headers: {
