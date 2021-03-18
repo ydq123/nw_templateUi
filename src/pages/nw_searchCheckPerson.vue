@@ -92,7 +92,7 @@
 			// 初始化，上一页进入或者点击进入下一级或者点击导航栏的时候会重新执行
 			init: function() {
 				this.param = this.$tabPageData() || {};
-				console.log("this.param:",JSON.stringify(this.param));
+				console.log("this.param:", JSON.stringify(this.param));
 				this.isType = this.param.type; //type值为1：单选；值为2：多选
 				// if (this.param.status == 1 || this.param.status == 3 || this.param.status == 4) {
 				// 	// 多选
@@ -103,7 +103,7 @@
 				// console.log('this.param:::::::::::::' + JSON.stringify(this.param));
 				// console.log("初始化");
 			},
-			openCherk: function(){
+			openCherk: function() {
 				this.$emit("openCherk");
 			},
 			getUserInfo: function() {
@@ -117,12 +117,11 @@
 					console.log('res::::::::::::' + JSON.stringify(res));
 					if (res.list && res.list.length > 0) {
 						for (var i = 0; i < res.list.length; i++) {
-							var nodeItem = {
-								dangerSubType: res.list[i].title ? res.list[i].title : "",
-								id: res.list[i].key ? res.list[i].key : "",
-								parentOrgId: res.list[i].orgId ? res.list[i].orgId : "",
-								status: false,
-							};
+							var nodeItem = res.list[i];
+							nodeItem.dangerSubType = res.list[i].title ? res.list[i].title : "";
+							nodeItem.id = res.list[i].key ? res.list[i].key : "";
+							nodeItem.parentOrgId = res.list[i].orgId ? res.list[i].orgId : "";
+							nodeItem.status = false;
 							this.taskInfo.nodeList.push(nodeItem);
 						}
 						// 判断多选人员选中样式
@@ -198,8 +197,7 @@
 			// 跨页面通讯
 			callbackTap: function() {
 				var data = {
-					status: this.param.status,
-					isZpw: this.param.isZpw
+					zdyObj: this.param.zdyObj,
 				};
 				if (this.isType == 1) { //单选
 					data.curNodeItem = this.curNodeItem;
@@ -213,9 +211,9 @@
 					data.curNodeItemlist = this.curNodeList;
 				}
 				var name = this.param.exeMun;
-        
-        /* 触发跨页面通讯*/
-        this.$tabEmitPageFun(name, data);
+
+				/* 触发跨页面通讯*/
+				this.$tabEmitPageFun(name, data);
 				this.$nwBack(-2);
 				// var name = this.param.exeMun;
 				// this.$across.$emit(name, data);
@@ -237,8 +235,7 @@
 
 			},
 			/* 模拟生命周期函数-每次进来一次都执行 */
-			onShow(obj) {
-			},
+			onShow(obj) {},
 			onLoad() {
 				// console.log('............................');
 				this.getUserInfo();
@@ -262,12 +259,13 @@
 		background-color: #f5f5f5;
 		text-align: left;
 	}
-	
-	.person-centent{
+
+	.person-centent {
 		height: 100%;
-		
+
 	}
-	.person-centent-box{
+
+	.person-centent-box {
 		height: 100%;
 		overflow-y: auto;
 	}
