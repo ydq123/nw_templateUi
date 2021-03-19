@@ -26,7 +26,7 @@ export const NWmyJsSdkMixin = {
             callback({
               data: error,
               status: false,
-              msg: '失败'
+              msg:error=='user cancel'?'用户点击返回':'失败',
             });
           }
         }, //action函数需要的参数，以字典形式提供
