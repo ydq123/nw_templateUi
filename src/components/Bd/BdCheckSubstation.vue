@@ -54,7 +54,8 @@
                   <van-icon v-show="zjbdObj.checked" name="checked" class="gray287 f22" />
                   <van-icon v-show="!zjbdObj.checked" name="circle" class="graya5 f22" />
                 </label> -->
-                <van-checkbox class=" pr10 " @click="checkFun(1,zjbdObj)" v-if="pageData.type==1" v-model="zjbdObj.checked"></van-checkbox>
+                <van-checkbox class=" pr10 " @click="checkFun(1,zjbdObj)" v-if="pageData.type==1"
+                  v-model="zjbdObj.checked"></van-checkbox>
                 <div class=" row al-c " @click="openFunctionalLocation(1,zjbdObj)">
                   <div class=" divImg mr10">
                     <!-- <img src="../../assets/images/mapImg/mapType2.png" /> -->
@@ -88,13 +89,15 @@
               </div>
             </div>
             <!-- 列表 -->
-            <div class="task-list borderButtomE8" m="click" v-if="itme.bdzType!=1" :key="index" v-for="(itme, index) in bdList">
+            <div class="task-list borderButtomE8" m="click" v-if="itme.bdzType!=1" :key="index"
+              v-for="(itme, index) in bdList">
               <div class="row p15">
                 <!-- <label v-if="pageData.type==1" class="column al-c ju-c pr10" >
                   <van-icon v-show="itme.checked" name="checked" class="gray287 f22" />
                   <van-icon v-show="!itme.checked" name="circle" class="graya5 f22" />
                 </label> -->
-                <van-checkbox class=" pr10 " @click="checkFun(0,itme)" v-if="pageData.type==1" v-model="itme.checked"></van-checkbox>
+                <van-checkbox class=" pr10 " @click="checkFun(0,itme)" v-if="pageData.type==1" v-model="itme.checked">
+                </van-checkbox>
                 <div class=" row al-c " @click="openFunctionalLocation(0,itme)">
                   <div class=" divImg mr10">
                     <!-- <img src="../../assets/images/mapImg/mapType2.png" /> -->
@@ -209,7 +212,8 @@
             "bureauCode": this.pageData.bureauCode,
             "lon": obj.longitude,
             "lat": obj.latitude,
-          }
+          },
+          
         };
         console.log(param)
         queryNearestSubstation(param).then((ret) => {
@@ -316,7 +320,8 @@
           "queryCondition": {
             "bureauCode": this.pageData.bureauCode, //局编码，多选以逗号隔开-必传
             "vindicateOid": this.hasChecked ? this.pageData.vindicateOid : '', // 运维班组ID,单选,
-          }
+          },
+          
         }
         console.log(param)
         querySubstationGroupByVoltage(param).then((ret) => {
@@ -359,6 +364,7 @@
             "vindicateOid": this.hasChecked ? this.pageData.vindicateOid : '', // 运维班组ID,单选,
             "baseVoltageId": this.baseVoltageIdFun(), // 电压等级id，多选以逗号隔开
           },
+          
           pageIndex: this.pageIndex,
           pageSize: 5,
         };
@@ -432,6 +438,8 @@
             type: this.pageData.type,
             showType: 2,
             data: {
+              isCheckBox:this.pageData.isCheckBox,//1单选2多选
+              powerGridFlag: this.pageData.powerGridFlag||"1", //1主网标识 2配网
               title: data.flName,
               type: this.pageData.type, //类型
               bureauCode: this.pageData.bureauCode, //局编码
@@ -453,6 +461,15 @@
             this.bdList.forEach((item, index) => {
               if (item.id == this.zjbdObj.id) {
                 item.checked = data.checked;
+              }
+            });
+          }
+          if (this.pageData.isCheckBox == 1) { //单选
+            this.bdList.forEach((item, index) => {
+              if (item.id == data.id) {
+                item.checked = true;
+              } else {
+                item.checked = false;
               }
             });
           }

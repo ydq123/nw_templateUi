@@ -69,7 +69,7 @@ module.exports = {
     port: 8086,
     proxy: {
       '/moduleIp': {
-        target: 'http://172.16.68.42:80',//将defaultSettings.baseApi印射为/apiUrl
+        target: 'http://172.16.68.42',//将defaultSettings.baseApi印射为/apiUrl
         changeOrigin: true,//是否开启跨域代理
         secure: true,//https==true,http=false
         pathRewrite: {

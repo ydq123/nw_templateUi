@@ -22,7 +22,8 @@
     <!-- 搜索 -->
     <label v-show="(searchValue)&&dataArr.length>0">
       <div v-show="searchArr.length>0" class="list-data f15  pb92">
-        <div class="flex ju-b bg-white pl20 pr15 pt20 pb15  borderButtomE8" :key="index3+'a'" v-for="(item,index3) in searchArr">
+        <div class="flex ju-b bg-white pl20 pr15 pt20 pb15  borderButtomE8" :key="index3+'a'"
+          v-for="(item,index3) in searchArr">
           <div @click="searchOpenFun(item,index3)" class=" pr15 f14 row" style="min-width: 80%;">
             <div class="listRightRed2"></div>
             <span class="pl5">{{item.intervalName||'其他'}}</span>
@@ -44,8 +45,8 @@
         <nw-null-data class="mt50" v-show="dataArr.length==0"></nw-null-data>
         <div class="row f16" v-show="dataArr.length>0">
           <div class="list-left" style="width: 40%;">
-            <div @click="leftFun(itme,index)" class="pr15 pl15 pt10 pb10 row al-c f14" :class="[leftIndex==index?'bg-white gray287 listLeft fw':'']"
-              v-for="(itme,index) in leftArr">
+            <div @click="leftFun(itme,index)" class="pr15 pl15 pt10 pb10 row al-c f14"
+              :class="[leftIndex==index?'bg-white gray287 listLeft fw':'']" v-for="(itme,index) in leftArr">
               {{itme.intervalName||'其他'}}
             </div>
           </div>
@@ -62,7 +63,8 @@
                     <van-icon v-show="itme.status" name="checked" class="gray287 f22" />
                     <van-icon v-show="!itme.status" name="circle" class="graya5 f22" />
                   </label> -->
-                  <van-checkbox @click="rightFun(itme,index)" v-if="pageData.type==2" v-model="itme.status"></van-checkbox>
+                  <van-checkbox @click="rightFun(itme,index)" v-if="pageData.type==2" v-model="itme.status">
+                  </van-checkbox>
                 </div>
               </div>
             </div>
@@ -211,6 +213,22 @@
               itme.status = data.status;
             }
           });
+          if (this.pageData.isCheckBox == 1) { //单选
+            this.rightArr.forEach((itme, index) => {
+              if (itme.intervalId == data.intervalId) {
+                itme.status = true;
+              } else {
+                itme.status = false;
+              }
+            });
+            this.itmeArr.forEach((item, index) => {
+              if (item.intervalId == data.intervalId) {
+                item.status = true;
+              } else {
+                item.status = false;
+              }
+            });
+          }
           console.log(data)
           this.$set(this.rightArr, dataIndex, data);
           this.checkArr = this.itmeArr.filter(item0 => item0.status == true);
@@ -223,6 +241,8 @@
             type: this.pageData.type,
             showType: 3,
             data: {
+              isCheckBox:this.pageData.isCheckBox,//1单，2多选
+              powerGridFlag: this.pageData.powerGridFlag||"1", //1主网标识 2配网
               title: data.intervalName,
               intervalId: data.intervalId, //功能位置id
               type: this.pageData.type, //类型

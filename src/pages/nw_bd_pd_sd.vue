@@ -34,11 +34,13 @@
       /* 选择变电站*/
       openCheckSubstation: function(type) {
         var obj = {
+          isCheckBox:1,//2-多选，1，单选
           isCs:true,//是否开启测试定位
           type: type, //1变电站 2功能位置 3设备-必传
           bureauCode: '0800', //局编码，多选以逗号隔开-必传
           vindicateOid: '1589BAA87A27BD64E053380F0A0A54B2', //运维班组-非必传
           funName: '$nwTzDdFun', //跨页面通信函数名字-必传
+          powerGridFlag: "2", //1主网标识 2配网
         };
         this.$tabGetTransformBD(obj,(res) => {
           console.log(res);

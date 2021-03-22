@@ -38,7 +38,7 @@
             <div class="task-list borderButtomE8" m="click" :key="index" v-for="(itme, index) in eqList">
               <div class="row p15">
                 <div class=" pr10 al-c row ">
-                  <van-checkbox v-model="itme.checked" @click="checkFun"></van-checkbox>
+                  <van-checkbox v-model="itme.checked" @click="checkFun(itme,index)"></van-checkbox>
                 </div>
                 <div class="row al-c">
                   <div class=" divImg mr10">
@@ -49,7 +49,8 @@
                     <div class=" f14  clamp1 jrh">
                       {{itme.baseInfoData.manufacturer}}{{itme.baseInfoData.deviceModel?'-'+itme.baseInfoData.deviceModel:''}}
                     </div>
-                    <div class="f14  clamp1 jrh">{{$baseTimeFormat("-", ":", false, itme.baseInfoData.plantTransferDate)}}</div>
+                    <div class="f14  clamp1 jrh">
+                      {{$baseTimeFormat("-", ":", false, itme.baseInfoData.plantTransferDate)}}</div>
                     <nw-status-label class="" :bqStaLabel="[	{
 										staCal: '',
 										staLabTxt: itme.baseInfoData.assetState,
@@ -122,8 +123,8 @@
         totalPage: 0,
         checkArr: [],
         pageData: {},
-        sysArr:[],
-        sysEvent:{},
+        sysArr: [],
+        sysEvent: {},
       };
     },
     mounted() {
@@ -142,35 +143,39 @@
 
       },
       // 触发小球动画
-      doBallAnimate:function (event) {
+      doBallAnimate: function(event) {
         console.log("触发小球动画");
         for (let i = 0; i < this.$refs.ball.balls.length; i++) {
           if (!this.$refs.ball.balls[i].show) {
-            this.$refs.ball.changeShow(i, true,event.target)
+            this.$refs.ball.changeShow(i, true, event.target)
             this.$refs.ball.changeDropBall(this.$refs.ball.balls[i])
             return
           }
         };
       },
       /* 动画结束 */
-      pageAfterEnter2:function(){
-        this.checkArr.push.apply(this.checkArr,this.sysArr);
+      pageAfterEnter2: function() {
+        if (this.pageData.isCheckBox == 1) { //单选
+          this.checkArr=this.sysArr;
+        } else {
+          this.checkArr.push.apply(this.checkArr, this.sysArr);
+        }
         this.setCheckArr();
         /* 这里有问题   */
         // this.$sdkAudioPlay('./../../../assets/mp3/ball_bgm.mp3');
       },
       /* 扫一扫事件 */
-      noSysFun:function($event) {
+      noSysFun: function($event) {
         this.$sdkScanQRCode(1, (ret) => {
           console.log(ret)
           if (ret.status) {
-            this.sysEvent=$event;
+            this.sysEvent = $event;
             this.sysFun(ret.data);
           } else {
             if (ret.data == 'user cancel') {
               this.$textCatch('取消');
             } else {
-              if(ret.data){
+              if (ret.data) {
                 this.$textCatch(ret.data);
               }
             }
@@ -184,7 +189,7 @@
             "bureauCode": this.pageData.bureauCode, //局编码，多选以逗号隔开-必传
             scanerId: scanerId, //	"08000000895945"设备ID	-用在扫一扫按钮的
           },
-          "powerGridFlag": "1", //主网标识
+          "powerGridFlag": this.pageData.powerGridFlag||"1", //1主网标识 2配网
         };
         this.$textLoading('查找中..');
         queryDeviceList(param).then((ret) => {
@@ -199,8 +204,8 @@
                   itme['itmeType'] = 'sys';
                 });
                 // this.$textThen('扫描成功');
-               this.doBallAnimate( this.sysEvent);//触发小球
-                this.sysArr= ret.rows;
+                this.doBallAnimate(this.sysEvent); //触发小球
+                this.sysArr = ret.rows;
               }
             } else {
               this.$textCatch(err.msg || '服务异常');
@@ -273,7 +278,7 @@
             "bureauCode": this.pageData.bureauCode, //局编码，多选以逗号隔开-必传
             objectId: this.pageData.intervalId, //间隔Id
           },
-          "powerGridFlag": "1", //主网标识
+          "powerGridFlag": this.pageData.powerGridFlag||"1", //1主网标识 2配网
         }
         console.log(param)
         groupByDeviceOnClassify(param).then((ret) => {
@@ -319,7 +324,7 @@
           },
           pageIndex: this.pageIndex,
           pageSize: 10,
-          "powerGridFlag": "1", //主网标识
+          "powerGridFlag": this.pageData.powerGridFlag||"1", //1主网标识 2配网
         };
         console.log(this.pageIndex)
         this.$textLoading();
@@ -386,7 +391,16 @@
         this.showRight = !this.showRight;
       },
       /* 选择事件*/
-      checkFun: function(val) {
+      checkFun: function(data) {
+        if (this.pageData.isCheckBox == 1) { //单选
+          this.eqList.forEach((itme, index) => {
+            if (itme.baseInfoData.id == data.baseInfoData.id) {
+              itme.checked = true;
+            } else {
+              itme.checked = false;
+            }
+          });
+        }
         this.checkArr = this.eqList.filter(item => item.checked == true);
         this.setCheckArr();
       },
