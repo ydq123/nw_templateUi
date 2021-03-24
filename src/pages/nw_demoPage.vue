@@ -17,7 +17,7 @@
       <h2 class="pt15 pb10 borderButtomE8 grayfa6470 f16 text-center">
         tab切换组件（带筛选、排序）
       </h2>
-      <nw-module-top :isSort="true" :isSreen="true" :sortDataList="testdatalist" :tabList="testObjTab" @changeSreen="topInputChangeSreen"
+      <nw-module-top :isSort="true" :isTopTab="true" :isSreen="true" :sortDataList="testdatalist" :tabList="testObjTab" @changeSreen="topInputChangeSreen"
         @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @submitScreen="testSubmitScreen"
         @resetScreen="testResetScreen">
       </nw-module-top>
@@ -411,7 +411,6 @@
     var _this = this;
 
 
-
     _this.userInfo = {
       employeeId: "A9C0B502210946C5BD52494CD5442492",
       userId: "AEEEE802803749E1841C857240F0C3B5",
@@ -500,9 +499,13 @@
       if (data.id == 3) {
         // 选择单位
         this.$tabNwCheckUnit({
-          type: 1,
+          type: 2,//1：单选； 2：多选；
           userInfo: this.userInfo,
           exeMun: "nwCheckUnitFun",
+		  unitList: [{a:0}],
+		  zdyObj: {
+		    test: 'unit',
+		  }
         }, (data) => {
           console.log(data);
         });

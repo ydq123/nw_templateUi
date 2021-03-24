@@ -11,7 +11,8 @@
 			<div slot="page-bottom">
 				<div class="borderTopE8">
 					<div id="poptabUnitList" class="pop-tab-list-scrollX pos-f bg-white gray6 p15 border verticle-center f16">
-						<div @click="onTabUnitClick(tabUnitItem, tabUnitIndex)" class="" v-for="(tabUnitItem,tabUnitIndex) in tabUnitList" :key="tabUnitIndex">
+						<div @click="onTabUnitClick(tabUnitItem, tabUnitIndex)" class="" v-for="(tabUnitItem,tabUnitIndex) in tabUnitList"
+						 :key="tabUnitIndex">
 							<span :class="[tabUnitIndex==tabUnitList.length - 1?'gray6 mr15':'gray287']" v-html="tabUnitItem.dangerSubType"></span>
 							<i v-if="tabUnitIndex<tabUnitList.length-1" class="iconfont icon-qianjin ml5 mr5 f14"></i>
 						</div>
@@ -20,8 +21,7 @@
 						<div class="unit-row al-c ju-c bg-white top-w">
 							<div class="task-top-input flex-1 unit-row al-c ml10 ju-c bg-white">
 								<i class="iconfont icon-sousuo ml5 mr5 gray9 f15"></i>
-								<input type="text" class="input flex-1 f14" v-model="searchValueUnit" placeholder="搜索"
-								 @keypress="inputSearch(searchValueUnit)" />
+								<input type="text" class="input flex-1 f14" v-model="searchValueUnit" placeholder="搜索" @keypress="inputSearch(searchValueUnit)" />
 								<i v-if="searchValueUnit.length > 0" class="iconfont icon-shanchu3 pl5 mr5 f15 gray9" @click="cancelSearch"></i>
 							</div>
 						</div>
@@ -31,17 +31,16 @@
 		</nw-fixed-header>
 		<div class="pos-r pop-tab">
 			<div class="pb65 pt44 unit-pop">
-				<div class="p15 bg-white borderTopE8 unit-pop-h f16" v-for="(itme,index) in unitList" :key="index" m="click"
-				 v-if="unitList.length && isSearchBox">
-					<div class="unit-row ju-b al-c unit-pop-hs" @click="selectCurUnit(itme)">
-						<i class="iconfont mr10" :class="[curUnitItem.id == itme.id ? 'icon-gou1 gray287 f16': 'icon-1 gray6']"
-						 @click.stop="selectCurUnit(itme)"></i>
+				<div class="p15 bg-white borderTopE8 unit-pop-h f16" v-for="(itme,index) in unitList" :key="index" m="click" v-if="unitList.length && isSearchBox">
+					<div class="unit-row ju-b al-c unit-pop-hs" @click="selectCurUnit(index)">
+						<i class="iconfont mr10" :class="[itme.status ? 'icon-gou1 gray287 f16': 'icon-1 gray6']"
+						 @click.stop="selectCurUnit(index)"></i>
 						<div class="flex-1 gray3 text-overflow text-left">{{itme.dangerSubType}}</div>
 						<!-- <i class="iconfont icon-qianjin gray9 ml10 f14"></i> -->
 					</div>
 				</div>
 				<nw-null-data class="mt20" v-if="unitList.length == 0 && isSearchBox"></nw-null-data>
-				
+
 				<div class="unit-bottom_button p10 bg-white unit-row ju-b fw boxt003 pos-f-b">
 					<div class="width-50 text-center pt15 pb15 radius-8 f16 bg-287 text-white" m="click" @click="onUnitClick">下一级</div>
 					<div class="width-40 text-center pt15 pb15 radius-8 f16 bg-287 text-white" m="click" @click="submitCurUnit">选定</div>
@@ -64,12 +63,14 @@
 		name: 'nw_checkUnit',
 		data() {
 			return {
-				param:{},
+				param: {},
+				isType: 1, // 1:单选；2：多选
 				currentUnitTab: 0,
 				tabUnitList: [], // 头部导航
 				unitList: [], //组织数据
 				curUnitItem: {}, ////返回单选单位对象
-				curUnitItemData: [], //返回多选单位数组
+				curUnitList: [], //返回多选单位选择的数组
+				curUnitItemData: [], //返回头部记录单位数组
 				showPop: false, //控制显示隐藏弹窗
 				userInfo: {}, //获取当前登录人信息
 				searchValueUnit: '', //搜索内容关键字
@@ -81,7 +82,7 @@
 			}
 		},
 		watch: {
-			
+
 		},
 		components: {},
 		created() {},
@@ -89,9 +90,9 @@
 			this.init();
 		},
 		methods: {
-			openCherk: function(){
-        /* 触发跨页面通讯*/
-        this.$tabEmitPageFun('tabSrcollList');
+			openCherk: function() {
+				/* 触发跨页面通讯*/
+				this.$tabEmitPageFun('tabSrcollList');
 				this.$nwBack(-1);
 			},
 			unitSubmit: function() {
@@ -100,15 +101,16 @@
 					curUnitItem: this.curUnitItem,
 				}
 				var _this = this;
-				setTimeout(()=>{
-          /* 触发跨页面通讯*/
-          _this.$tabEmitPageFun('unitTabBus', item);
-        },500)
+				setTimeout(() => {
+					/* 触发跨页面通讯*/
+					_this.$tabEmitPageFun('unitTabBus', item);
+				}, 500)
 			},
 			// 初始化
 			init: function() {
 				this.$textLoading();
 				this.param = this.$tabPageData() || {};
+				this.isType = this.param.type; //type值为1：单选；值为2：多选
 				this.userInfo = this.param.userInfo;
 				// console.log("unitpop------this.userInfo:::",JSON.stringify(this.userInfo));
 				this.getUserUnit();
@@ -256,12 +258,13 @@
 						if (res.length > 0) {
 							for (var i = 0; i < res.length; i++) {
 								var nodeItem = res[i];
-								nodeItem.dangerSubType = res[i].orgName ? res[i].orgName : "",
-								nodeItem.id = res[i].orgId ? res[i].orgId : "",
-								nodeItem.parentOrgId = res[i].parentOrgId ? res[i].parentOrgId : "",
-								nodeItem.orgId = res[i].orgId ? res[i].orgId : "",
-								nodeItem.state = res[i].state ? res[i].state : 1,
-								nodeItem.userState = res[i].userState ? res[i].userState : 1,
+								nodeItem.dangerSubType = res[i].orgName ? res[i].orgName : "";
+								nodeItem.id = res[i].orgId ? res[i].orgId : "";
+								nodeItem.parentOrgId = res[i].parentOrgId ? res[i].parentOrgId : "";
+								nodeItem.orgId = res[i].orgId ? res[i].orgId : "";
+								nodeItem.state = res[i].state ? res[i].state : 1;
+								nodeItem.userState = res[i].userState ? res[i].userState : 1;
+								nodeItem.status = false;
 								// var nodeItem = {
 								// 	dangerSubType: res[i].orgName ? res[i].orgName : "",
 								// 	id: res[i].orgId ? res[i].orgId : "",
@@ -301,7 +304,6 @@
 			onUnitClick: function() {
 				// console.log('点击了一个节点::' + JSON.stringify(this.curUnitItem));
 				if (this.curUnitItem && this.curUnitItem.id) {
-					// console.log('1111111111111111111111111111111');
 					for (var i = 0; i < this.unitList.length; i++) {
 						if (this.tabUnitList[this.tabUnitList.length - 1].parentOrgId == this.unitList[i].parentOrgId) {
 							this.tabUnitList.splice((this.tabUnitList.length - 1), 1);
@@ -321,16 +323,39 @@
 					this.cancelSearch();
 					this.getDataUnit(this.curUnitItem);
 				} else {
-					// console.log('2222222222222222222222222222');
 					this.$textShow('请选择单位');
 				}
 			},
 			// 切换选中单位的节点
-			selectCurUnit: function(item) {
-				if (this.curUnitItem.id && item.id && this.curUnitItem.id == item.id) {
-					this.curUnitItem = {};
-				} else {
-					this.curUnitItem = item;
+			selectCurUnit: function(index) {
+				// console.log('切换选中单位的节点：：：：：：：：：：：：：：：：：：：：：：：：');
+				if (this.isType == 1) { //单选
+					this.unitList[index].status = !this.unitList[index].status;
+					// 单选赋值
+					for (var i = 0; i < this.unitList.length; i++) {
+						this.unitList[i].status = false;
+						if (index == i) {
+							this.unitList[i].status = true;
+							this.curUnitItem = this.unitList[i];
+						}
+					}
+				}
+				if (this.isType == 2) { //多选
+					this.unitList[index].status = !this.unitList[index].status;
+					// 多选赋值 增加人员
+					if (this.unitList[index].status) {
+						this.curUnitList.push(this.unitList[index]);
+					}
+					// 多选赋值 删除人员
+					if (!this.unitList[index].status) {
+						// console.log('this.unitList[index].status::',this.unitList[index].status);
+						for(var e = 0;e<this.curUnitList.length;e++){
+							if(this.curUnitList[e].id == this.unitList[index].id){
+								this.curUnitList.splice(e, 1);
+							}
+						}
+						// console.log('this.curUnitList:::' + JSON.stringify(this.curUnitList));
+					}
 				}
 			},
 			// 选择单位切换
@@ -345,7 +370,7 @@
 			},
 			// 选中单位当前节点，如果没有下级单位则关闭弹窗
 			submitCurUnit: function() {
-				if (this.curUnitItem && this.curUnitItem.id) {
+				if (this.curUnitItem || this.curUnitList.length == 0) {
 					for (var e = 0; e < this.unitList.length; e++) {
 						if (this.curUnitItemData[this.curUnitItemData.length - 1].parentOrgId == this.unitList[e].parentOrgId) {
 							this.curUnitItemData.splice((this.curUnitItemData.length - 1), 1);
@@ -358,13 +383,19 @@
 					var _this = this;
 					let item = {
 						curUnitItemData: _this.curUnitItemData,
-						curUnitItem: _this.curUnitItem,
+						zdyObj: _this.param.zdyObj
+					}
+					if (_this.isType == 1) { //单选
+					  item.curUnitItem = _this.curUnitItem;
+					}
+					if (_this.isType == 2) { //多选
+					  item.curUnitList = _this.curUnitList;
 					}
 					setTimeout(function() {
 						var name = _this.param.exeMun;
-            
-            /* 触发跨页面通讯*/
-            _this.$tabEmitPageFun(name, item);
+
+						/* 触发跨页面通讯*/
+						_this.$tabEmitPageFun(name, item);
 						_this.$nwBack(-1);
 					}, 500);
 				} else {
@@ -373,57 +404,60 @@
 				}
 			},
 			/* 模拟生命周期函数-只执行一次 */
-			onLoad(obj) {
-			},
+			onLoad(obj) {},
 			/* 模拟生命周期函数-每次进来一次都执行 */
-			onShow(obj) {
-			},
+			onShow(obj) {},
 		}
 	};
 </script>
 
 <style scoped lang="less">
 	@import "../assets/less/nw_tool.less";
-	.yw-unitpop{
+
+	.yw-unitpop {
 		position: relative;
-		
-		.unit-row{
+
+		.unit-row {
 			display: flex;
 			flex-direction: row;
 		}
-		
-		.pb65{
-			.pxToremLess(padding-bottom,65px);
+
+		.pb65 {
+			.pxToremLess(padding-bottom, 65px);
 		}
-		.pt132{
-			.pxToremLess(padding-top,132px);
+
+		.pt132 {
+			.pxToremLess(padding-top, 132px);
 		}
-		
+
 		.input-box {
 			width: 100%;
 			transition: all 0.5s;
-			
+
 			.left-btn {
 				left: -1.1rem;
 			}
-			
+
 			/* 顶部搜索 */
 			.task-top-input {
 				width: 80%;
-				.pxToremLess(height,30px);
-				.pxToremLess(border-radius,5px);
+				.pxToremLess(height, 30px);
+				.pxToremLess(border-radius, 5px);
 			}
 		}
-		.pop-top{
-			.pxToremLess(height,44px);
-			.pxToremLess(top,88px);
+
+		.pop-top {
+			.pxToremLess(height, 44px);
+			.pxToremLess(top, 88px);
 			width: 100%;
-			.top-w{
+
+			.top-w {
 				width: 90%;
-				.pxToremLess(height,30px);
-				.pxToremLess(border-radius,5px);
+				.pxToremLess(height, 30px);
+				.pxToremLess(border-radius, 5px);
 			}
 		}
+
 		.unit-bottom_button {
 			position: fixed;
 			bottom: 0;
@@ -431,27 +465,32 @@
 			right: 0;
 			width: 100%;
 		}
-		.unit-pop{
+
+		.unit-pop {
 			height: auto;
-			.unit-pop-h{
+
+			.unit-pop-h {
 				height: 100%;
-				.unit-pop-hs{
+
+				.unit-pop-hs {
 					height: 100%;
 				}
 			}
 		}
+
 		.pos-f {
 			position: fixed !important;
 			z-index: 999;
 		}
-		.pt88{
-			.pxToremLess(padding-top,88px);
+
+		.pt88 {
+			.pxToremLess(padding-top, 88px);
 		}
-		
+
 		.pop-tab {
 			height: 100%;
 			overflow: auto;
-		
+
 			.bottom_button {
 				position: fixed;
 				bottom: 0;
@@ -460,26 +499,26 @@
 				width: 100%;
 			}
 		}
-		
+
 		.pos-r {
 			position: relative;
 		}
-		
+
 		.radius-8 {
-			.pxToremLess(border-radius,8px);
+			.pxToremLess(border-radius, 8px);
 		}
-		
+
 		.pop-tab-list-scrollX {
 			position: relative;
 			width: 100%;
-			.pxToremLess(height,44px);
+			.pxToremLess(height, 44px);
 			white-space: nowrap;
 			overflow: hidden;
 			overflow-x: scroll;
 			-webkit-backface-visibility: hidden;
 			-webkit-perspective: 1000;
 			-webkit-overflow-scrolling: touch;
-		
+
 			.tab-list::-webkit-scrollbar {
 				display: none;
 			}

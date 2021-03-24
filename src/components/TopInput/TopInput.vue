@@ -337,7 +337,7 @@ export default {
 @import "../../assets/less/nw_tool.less";
 .yw-topinput {
   position: relative;
-  z-index: 9999;
+  z-index: 999;
   text-align: center;
   width: 100%;
 }

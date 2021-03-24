@@ -259,7 +259,7 @@
 	// 右侧弹框
 	.sreen-warp {
 		position: fixed;
-		z-index: 9999 !important;
+		z-index: 999 !important;
 		top: 0;
 		right: 0;
 		width: 80%;

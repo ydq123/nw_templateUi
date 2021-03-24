@@ -1,88 +1,3 @@
-<!-- ModuleTop模块头部组件使用方法
-	ModuleTop
-	组件场景描述：用于模块首页列表头部切换
-	组件基础使用描述：
-	1.结合nw-fixed-header使用（带搜索和排序筛选）
-	<nw-fixed-header title="头部标题" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
-	    <div slot="page-bottmo">
-	        <nw-module-top :isSort="true" :isSreen="true" :sortDataList="ListPx" :tabList="testTabList"
-	         @inputTopBtn="testInputTopBtn" @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @changeSreen="testChangeSreen"></nw-module-top>
-	    </div>
-	</nw-fixed-header>
-
-
-	2.结合nw-fixed-header使用 传空插槽隐藏（slot="topInput"：隐藏搜索，slot="taskSreenSort"：隐藏排序筛选）
-	2.1：头部tab（隐藏搜索按钮和排序筛选）
-	<nw-fixed-header title="头部标题" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
-	    <div slot="page-bottmo">
-	        <nw-module-top :tabList="testTabList" @changeTab="testChangeTab">
-	    	<div slot="topInput"></div>
-			<div slot="taskSreenSort"></div>
-	        </nw-module-top>
-	    </div>
-	</nw-fixed-header>
-
-
-	2.2：头部tab（隐藏搜索按钮和排序）；注：隐藏筛选：isSreen字段值为false
-	<nw-fixed-header title="头部标题" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
-	    <div slot="page-bottmo">
-	        <nw-module-top :isSort="false" :isSreen="true" :tabList="testTabList" @changeTab="testChangeTab">
-	            <div slot="topInput"></div>
-	        </nw-module-top>
-	    </div>
-	</nw-fixed-header>
-
-
-	2.3：头部tab（隐藏搜索）
-	<nw-fixed-header title="头部标题" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
-	    <div slot="page-bottmo">
-	        <nw-module-top :isSort="true" :isSreen="true" :sortDataList="ListPx" :tabList="testTabList"　 @changeTab="testChangeTab" @changeSortItem="testChangeSortItem" @changeSreen="testChangeSreen">
-	            <div slot="topInput"></div>
-	        </nw-module-top>
-	    </div>
-	</nw-fixed-header>
-
-
-
-	2.4：头部tab（隐藏筛选排序整行）
-	<nw-fixed-header title="头部标题" @headBackeHandle="backHandle" @threeClockHandle="ClockHandle" @backHomeHandle="HomeHandle">
-	    <div slot="page-bottmo">
-	        <nw-module-top :tabList="testTabList"　@inputTopBtn="testInputTopBtn" @changeTab="testChangeTab">
-	            <div slot="taskSreenSort"></div>
-	        </nw-module-top>
-	    </div>
-	</nw-fixed-header>
-
-
-	参数说明：
-	    tabList,// 头部tab数组
-		tabList参数示例：testTabList: [
-			{
-				title: "已办",//标题
-				number: 0,//数量
-			}
-		],
-		isSort: true, // 控制显示排序按钮，默认为true：显示
-		isSreen: true, // 控制显示筛选按钮，默认为true：显示
-		sortDataList,// 排序数组
-		sortDataList参数示例：ListPx: [
-			{
-				text: "按日期升序",//标题
-				isSelect: false, // 判断是否选中排序
-				sortType: "asc", //排序类型
-			},
-		],
-
-	方法说明：
-	inputTopBtn//moduletop模块头部搜索按钮
-	inputTopBtn自定义方法例子：testInputTopBtn() { console.log('moduletop模块头部搜索按钮'); },
-	changeTab// moduletop模块tab切换，返回data
-	changeTab自定义方法例子：testChangeTab(data) { console.log('moduletop模块tab切换：', data); },
-	changeSortItem// moduletop模块排序，返回data
-	changeSortItem自定义方法例子：testChangeSortItem(data) { console.log('moduletop模块排序：', data); },
-	changeSreen// moduletop模块筛选
-	changeSreen自定义方法例子：testChangeSreen() { console.log('moduletop模块筛选：'); },
- -->
 <template>
 	<div>
 		<div class="yw-moduletop nw_bag_F5">
@@ -96,7 +11,7 @@
 				</div>
 			</slot>
 			<!-- tab -->
-			<div class="tab-box width-100 borderButtomE8">
+			<div class="tab-box width-100 borderButtomE8" v-if="isTopTab">
 				<div class="tab-list-border verticle-center bg-white f16">
 					<div @click="changeTab(tabIndex)" class="tab-item" v-for="(tabItem,tabIndex) in tabList" :key="tabIndex">
 						<span class="lh200 f14" :class="[ curTabIndex === tabIndex ? 'gray287 fw' : 'gray3']">
@@ -247,6 +162,10 @@
 				]
 			},
 			isSort: { // 控制显示排序按钮，默认为true：显示
+				type: Boolean,
+				default: true
+			},
+			isTopTab: { // 控制显示头部tab，默认为true：显示
 				type: Boolean,
 				default: true
 			},
@@ -760,7 +679,7 @@
 	// 右侧弹框
 	.sreen-warp {
 		position: fixed;
-		z-index: 9999 !important;
+		z-index: 999 !important;
 		top: 0;
 		right: 0;
 		width: 80%;
