@@ -354,8 +354,7 @@ export const NWtabMinxin = {
 			this.$tabOnPageFun(obj.funName || '$nwTzDdFun', (res) => {
 				callback(res)
 			});
-			this.$nwOpenWin('nw_bd_page', { ...obj
-			});
+			this.$nwOpenWin('nw_bd_page', obj);
 		},
 		/* 单位选择 */
 		$tabNwCheckUnit: function(obj, callback) {

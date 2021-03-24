@@ -502,7 +502,6 @@
           type: 2,//1：单选； 2：多选；
           userInfo: this.userInfo,
           exeMun: "nwCheckUnitFun",
-		  unitList: [{a:0}],
 		  zdyObj: {
 		    test: 'unit',
 		  }
