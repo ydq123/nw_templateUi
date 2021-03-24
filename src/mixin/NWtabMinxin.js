@@ -67,6 +67,7 @@ export const NWtabMinxin = {
             data.jdapUserInfo = isData.data || '';
           }
         }
+        data = Object.assign(data, this.tabPageData);
       }
       callback(data);
     },

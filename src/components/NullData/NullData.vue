@@ -13,13 +13,30 @@
   export default {
     data() {
       return {
-        nullImg: require('../../assets/images/nullData2.png'), //默认暂位图
+        // nullImg: require('../../assets/images/nullData2.png'), //默认暂位图
       };
     },
     props: {
+      customState: {
+        type: String,
+        default: ''
+      },
       nullText: {
         type: String,
         default: '暂无数据'
+      }
+    },
+    computed: {
+      nullImg() {
+        if(!this.customState) {
+          return require('../../assets/images/nullData2.png')
+        }else if(this.customState == '404') {
+          return require('../../assets/images/404.png')
+        }else if(this.customState == '500') {
+          return require('../../assets/images/500.png')
+        }else if(this.customState == 'error') {
+          return require('../../assets/images/error.png')
+        }
       }
     },
     name: 'null-data',
